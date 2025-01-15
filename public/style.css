@@ -18,17 +18,18 @@
         }
     }
 }*/
+
 .container {
     max-width: 1170px;
     margin: 0 auto;
-    padding: 2rem 0;
+    padding: 1rem 2rem;
 }
 
 nav {
     display: flex;
     justify-content: space-between;
     background-color: #008DDA;
-    padding: 1rem 2rem;
+    padding: 1rem;
     align-items: center;
 
     .logo {
