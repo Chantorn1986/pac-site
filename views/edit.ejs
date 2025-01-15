@@ -10,34 +10,39 @@
 <body>
     <%- include('partials/nav'); %>
     <div class="ms-4 me-4">
-    <h1>Edit product</h1>
-    <form action="/edit/<%= product.id %>" method="POST" enctype="multipart/form-data">
-        <div>
-            <label for="name">Name:</label>
-            <input type="text" name="name" value="<%= product.name %>" required placeholder="enter product name">
+        <h1>Edit product</h1>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <form action="/edit/<%= product.id %>" method="POST" enctype="multipart/form-data">
+                    <div class="row mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" name="name" value="<%= product.name %>" required placeholder="enter product name" class="form-control">
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea name="description" required placeholder="enter product description" class="form-control"><%= product.description %></textarea>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="image" class="form-label">Image</label>
+                        <% if (product.image) { %>
+                            <img src="/uploads/<%= product.image %>" width="100" />
+                            <input type="hidden" name="oldImage" value="<%= product.image %>" class="form-control">
+                        <% } %>
+                        <input type="file" name="image" class="form-control">
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Update</button>
+                </form>
+
+                    <hr>
+                    <a href="/" class="btn btn-warning">Go back</a>
+            </div>
+            <div class="col-md-6">
+
+            </div>
         </div>
-
-        <div>
-            <label for="description">Description:</label>
-            <textarea name="description" required placeholder="enter product description">
-                <%= product.description %>
-            </textarea>
-        </div>
-
-        <div>
-            <label for="image">Image:</label>
-            <% if (product.image) { %>
-                <img src="/uploads/<%= product.image %>" width="100" />
-                <input type="hidden" name="oldImage" value="<%= product.image %>">
-            <% } %>
-            <input type="file" name="image">
-        </div>
-
-        <button type="submit">Update</button>
-    </form>
-
-    <hr>
-    <a href="/">Go back</a>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
