@@ -3,23 +3,14 @@ const app = express();
 const path = require('path');
 const mysql = require('mysql2');
 const multer = require('multer');
-const bcrypt = require('bcryptjs');
-const { v4: uuidv4 } = require("uuid");
 
+const condb = require("./db");
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'dbpac'
+    host: condb.host(),
+    user: condb.user(),
+    password: condb.password(),
+    database: condb.database()
 })
-
-/*const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'premier_sa',
-    password: 'Premier@021812299',
-    database: 'pac_system'
-})
-*/
 
 db.connect((err) => {
     if (err) {
@@ -29,6 +20,10 @@ db.connect((err) => {
 
     console.log('Connected to MySQL database successfully.');
 })
+
+app.use('/user',require('./routes/user'));
+
+app.use('/department',require('./routes/department'));
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -109,118 +104,7 @@ app.get('/about', (req, res) => {
 app.get('/contact', (req, res) => {
     res.render('contact', { title: 'Contact'});
 });
-///////////////////////////////////////////////////////////  User
-app.get('/user', (req, res) => {
-    const sql = "SELECT * FROM users";
 
-    db.query(sql, (err, results) => {
-        if (err) throw err;
-
-        res.render('user', { 
-            title: 'user',
-            users: results
-        });
-    })
-});
-
-app.get('/userAdd', (req, res) => {
-    res.render('userAdd');
-})
-
-app.post('/userAdd', (req, res) => {
-    const { userName, userEmail,userPassword,userRole }= req.body;
-    const hashedPassword =bcrypt.hashSync(userPassword, 10);
-    const sql = "INSERT INTO users (name, email,password,role ) VALUES(?, ?, ?, ?)";
-    db.query(sql, [ userName, userEmail, hashedPassword, userRole ], (err, result) => {
-        if (err) throw err;
-
-        res.redirect('/user');
-    })
-})
-
-app.get('/userEdit/:id', (req, res) => {
-    const sql = "SELECT * FROM users WHERE id = ?";
-    db.query(sql, [req.params.id], (err, result) => {
-        if (err) throw err;
-        res.render('userEdit', { user: result[0] });
-    });
-})
-
-app.post('/userEdit/:id',(req, res) => {
-    const { userNameE, userEmailE,userPasswordE,userRoleE } = req.body;
-    
-    const hashedPassword = bcrypt.hashSync(userPasswordE, 10);
-    const sql = "UPDATE users SET name = ?, email = ?, password = ? , role = ? WHERE id = ?";
-    db.query(sql, [userNameE, userEmailE, hashedPassword, userRoleE , req.params.id], (err, result) => {
-        if (err) throw err;
-        res.redirect('/user');
-    })
-})
-
-app.get('/userDel/:id', (req, res) => {
-    const sql = "DELETE FROM users WHERE id = ?";
-    db.query(sql, [req.params.id], (err, result) => {
-        if (err) throw err;
-        res.redirect('/user');
-    });
-})
-
-///////////////////////////////////////////////////////////  Department
-app.get('/department', (req, res) => {
-    const sql = "SELECT * FROM departments";
-
-    db.query(sql, (err, results) => {
-        if (err) throw err;
-
-        res.render('department', { 
-            title: 'department',
-            departments: results
-        });
-    })
-});
-
-app.get('/departmentAdd', (req, res) => {
-    res.render('departmentAdd');
-})
-
-app.post('/departmentAdd', (req, res) => {
-    const { departmentNo, departmentCode,departmentNameTH,departmentNameEN }= req.body;
-    //const uuid = uuidv4();
-    const sql = "INSERT INTO departments ( no, code, nameTH, nameEN ) VALUES(?, ?, ?, ?)";
-    db.query(sql, [ departmentNo, departmentCode,departmentNameTH,departmentNameEN ], (err, result) => {
-        if (err) throw err;
-
-        res.redirect('/department');
-    })
-})
-
-app.get('/departmentEdit/:id', (req, res) => {
-    const sql = "SELECT * FROM departments WHERE id = ?";
-    db.query(sql, [req.params.id], (err, result) => {
-        if (err) throw err;
-        res.render('departmentEdit', { department: result[0] });
-    });
-})
-
-app.post('/departmentEdit/:id',(req, res) => {
-    const { departmentNoE, departmentCodeE,departmentNameTHE,departmentNameENE } = req.body;
-    
-    const sql = "UPDATE departments SET no = ?, code = ?, nameTH = ? , nameEN = ? WHERE id = ?";
-    db.query(sql, [departmentNoE, departmentCodeE,departmentNameTHE,departmentNameENE , req.params.id], (err, result) => {
-        if (err) throw err;
-        res.redirect('/department');
-    })
-})
-
-app.get('/userDel/:id', (req, res) => {
-    const sql = "DELETE FROM departments WHERE id = ?";
-    db.query(sql, [req.params.id], (err, result) => {
-        if (err) throw err;
-        res.redirect('/department');
-    });
-})
-
-///////////////////////////////////////////////////////////  
 app.listen(3000, () => {
     console.log("Server is running...");
 });
