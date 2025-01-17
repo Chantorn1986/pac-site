@@ -1,4 +1,4 @@
-<nav>
+<!--<nav>
     <div class="logo">
         <a href="/">PAC NodeJS</a>
     </div>
@@ -8,5 +8,25 @@
     <li><a href="/department">Department</a></li>
     <li><a href="/contact">Contact</a></li>
 </ul>
+</nav>-->
+<nav>
+    <div class="logo">
+        <a href="/">PAC NodeJS</a>
+    </div>
+
+    <ul class="menu">
+        <% if (typeof user !== 'undefined') { %>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/user">User</a></li>
+            <li><a href="/department">Department</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/logout" class="logout-btn">Logout</a></li>
+        <% } else { %>
+            <li><a href="/login" class="login-btn">Login</a></li>
+            <!--<li><a href="/register">Register</a></li>-->
+        <% } %>
+        
+    </ul>
 </nav>
 

@@ -3,6 +3,7 @@ const app = express();
 const path = require('path');
 const mysql = require('mysql2');
 const multer = require('multer');
+const session = require('express-session');
 
 const condb = require("./db");
 const db = mysql.createConnection({
@@ -21,10 +22,33 @@ db.connect((err) => {
     console.log('Connected to MySQL database successfully.');
 })
 
+app.set('view engine', 'ejs');
+
+app.use(express.urlencoded({ extended: true }));
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({
+    secret: 'nodesecret',
+    resave: false,
+    saveUninitialized: true
+}))
+
+app.use('/',require('./routes/login'));
+
 app.use('/user',require('./routes/user'));
 
 app.use('/department',require('./routes/department'));
 
+
+function isAuthenticated(req, res, next) {
+    if (req.session.user) {
+        return next();
+    } else {
+        res.redirect('/login');
+    }
+}
+/*
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'public/uploads/');
@@ -35,12 +59,6 @@ const storage = multer.diskStorage({
 })
 
 const upload = multer({ storage });
-
-app.set('view engine', 'ejs');
-
-app.use(express.urlencoded({ extended: true }));
-
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
     const sql = "SELECT * FROM products";
@@ -96,13 +114,19 @@ app.get('/delete/:id', (req, res) => {
         res.redirect('/');
     });
 })
-
-app.get('/about', (req, res) => {
-    res.render('about', { title: 'About'});
+*/
+app.get('/about',isAuthenticated, (req, res) => {
+    res.render('about', { 
+        title: 'About',
+        user: req.session.user 
+    });
 });
 
-app.get('/contact', (req, res) => {
-    res.render('contact', { title: 'Contact'});
+app.get('/contact',isAuthenticated, (req, res) => {
+    res.render('contact', { 
+        title: 'Contact',
+        user: req.session.user 
+    });
 });
 
 app.listen(3000, () => {

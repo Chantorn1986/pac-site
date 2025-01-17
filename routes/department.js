@@ -13,8 +13,15 @@ const db = mysql.createConnection({
     database: condb.database()
 })
 
+function isAuthenticated(req, res, next) {
+    if (req.session.user) {
+        return next();
+    } else {
+        res.redirect('/login');
+    }
+}
 
-router.get('/', (req, res) => {
+router.get('/',isAuthenticated, (req, res) => {
     const sql = "SELECT * FROM departments ORDER BY no ASC";
 
     db.query(sql, (err, results) => {
@@ -22,49 +29,53 @@ router.get('/', (req, res) => {
 
         res.render('department', { 
             title: 'department',
-            departments: results
+            departments: results,
+            user: req.session.user
         });
     })
 });
 
-router.get('/Add', (req, res) => {
-    res.render('departmentAdd');
+router.get('/Add',isAuthenticated, (req, res) => {
+    res.render('departmentAdd',{ user: req.session.user });
 })
 
-router.post('/Add', (req, res) => {
+router.post('/Add',isAuthenticated, (req, res) => {
     const { departmentNo, departmentCode,departmentNameTH,departmentNameEN }= req.body;
     const uuid = uuidv4();
     const sql = "INSERT INTO departments ( id, no, code, nameTH, nameEN ) VALUES(?, ?, ?, ?,?)";
     db.query(sql, [ uuid,departmentNo, departmentCode,departmentNameTH,departmentNameEN ], (err, result) => {
         if (err) throw err;
 
-        res.redirect('/department');
+        res.redirect('/department',{ user: req.session.user });
     })
 })
 
-router.get('/Edit/:id', (req, res) => {
+router.get('/Edit/:id',isAuthenticated, (req, res) => {
     const sql = "SELECT * FROM departments WHERE id = ?";
     db.query(sql, [req.params.id], (err, result) => {
         if (err) throw err;
-        res.render('departmentEdit', { department: result[0] });
+        res.render('departmentEdit', { 
+            department: result[0] ,
+            user: req.session.user 
+        });
     });
 })
 
-router.post('/Edit/:id',(req, res) => {
+router.post('/Edit/:id',isAuthenticated,(req, res) => {
     const { departmentNoE, departmentCodeE,departmentNameTHE,departmentNameENE } = req.body;
     
     const sql = "UPDATE departments SET no = ?, code = ?, nameTH = ? , nameEN = ? WHERE id = ?";
     db.query(sql, [departmentNoE, departmentCodeE,departmentNameTHE,departmentNameENE , req.params.id], (err, result) => {
         if (err) throw err;
-        res.redirect('/department');
+        res.redirect('/department',{ user: req.session.user });
     })
 })
 
-router.get('/Del/:id', (req, res) => {
+router.get('/Del/:id',isAuthenticated, (req, res) => {
     const sql = "DELETE FROM departments WHERE id = ?";
     db.query(sql, [req.params.id], (err, result) => {
         if (err) throw err;
-        res.redirect('/department');
+        res.redirect('/department',{ user: req.session.user });
     });
 })
 

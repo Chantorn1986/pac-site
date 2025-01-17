@@ -14,8 +14,15 @@ const db = mysql.createConnection({
     database: condb.database()
 })
 
+function isAuthenticated(req, res, next) {
+    if (req.session.user) {
+        return next();
+    } else {
+        res.redirect('/login');
+    }
+}
 
-router.get('/', (req, res) => {
+router.get('/',isAuthenticated, (req, res) => {
     const sql = "SELECT * FROM users ORDER BY name ASC";
 
     db.query(sql, (err, results) => {
@@ -23,16 +30,17 @@ router.get('/', (req, res) => {
 
         res.render('user', { 
             title: 'user',
-            users: results
+            users: results,
+            user: req.session.user 
         });
     })
 });
 
-router.get('/Add', (req, res) => {
-    res.render('userAdd');
+router.get('/Add',isAuthenticated, (req, res) => {
+    res.render('userAdd',{ user: req.session.user });
 })
 
-router.post('/Add', (req, res) => {
+router.post('/Add',isAuthenticated, (req, res) => {
     const { userName, userEmail,userPassword,userRole }= req.body;
     const uuid = uuidv4();
     const hashedPassword =bcrypt.hashSync(userPassword, 10);
@@ -40,34 +48,37 @@ router.post('/Add', (req, res) => {
     db.query(sql, [uuid, userName, userEmail, hashedPassword, userRole ], (err, result) => {
         if (err) throw err;
 
-        res.redirect('/user');
+        res.redirect('/user',{ user: req.session.user });
     })
 })
 
-router.get('/Edit/:id', (req, res) => {
+router.get('/Edit/:id',isAuthenticated, (req, res) => {
     const sql = "SELECT * FROM users WHERE id = ?";
     db.query(sql, [req.params.id], (err, result) => {
         if (err) throw err;
-        res.render('userEdit', { user: result[0] });
+        res.render('userEdit', { 
+            user: result[0] ,
+            user: req.session.user 
+        });
     });
 })
 
-router.post('/Edit/:id',(req, res) => {
+router.post('/Edit/:id',isAuthenticated,(req, res) => {
     const { userNameE, userEmailE,userPasswordE,userRoleE } = req.body;
     
     const hashedPassword = bcrypt.hashSync(userPasswordE, 10);
     const sql = "UPDATE users SET name = ?, email = ?, password = ? , role = ? WHERE id = ?";
     db.query(sql, [userNameE, userEmailE, hashedPassword, userRoleE , req.params.id], (err, result) => {
         if (err) throw err;
-        res.redirect('/user');
+        res.redirect('/user',{ user: req.session.user });
     })
 })
 
-router.get('/Del/:id', (req, res) => {
+router.get('/Del/:id',isAuthenticated, (req, res) => {
     const sql = "DELETE FROM users WHERE id = ?";
     db.query(sql, [req.params.id], (err, result) => {
         if (err) throw err;
-        res.redirect('/user');
+        res.redirect('/user',{ user: req.session.user });
     });
 })
 
