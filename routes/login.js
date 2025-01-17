@@ -75,9 +75,9 @@ router.post('/login',(req,res)=>{
 
         if (result.length > 0) {
             const user = result[0];
-            if (bcrypt.compareSync(password, user.password)) {
+            decodedData = Buffer.from(user.password, 'base64').toString('utf8');
+            if (password === decodedData) {
                 req.session.user = user;
-                //res.redirect('/home');
 
                 const sql = "SELECT * FROM products";
                 

@@ -23,7 +23,6 @@ function isAuthenticated(req, res, next) {
 
 router.get('/',isAuthenticated, (req, res) => {
     const sql = "SELECT * FROM departments ORDER BY no ASC";
-
     db.query(sql, (err, results) => {
         if (err) throw err;
 
@@ -45,8 +44,17 @@ router.post('/Add',isAuthenticated, (req, res) => {
     const sql = "INSERT INTO departments ( id, no, code, nameTH, nameEN ) VALUES(?, ?, ?, ?,?)";
     db.query(sql, [ uuid,departmentNo, departmentCode,departmentNameTH,departmentNameEN ], (err, result) => {
         if (err) throw err;
+        const sql = "SELECT * FROM departments ORDER BY no ASC";
 
-        res.redirect('/department',{ user: req.session.user });
+        db.query(sql, (err, results) => {
+            if (err) throw err;
+    
+            res.render('department', { 
+                title: 'department',
+                departments: results,
+                user: req.session.user
+            });
+        })
     })
 })
 
@@ -67,7 +75,17 @@ router.post('/Edit/:id',isAuthenticated,(req, res) => {
     const sql = "UPDATE departments SET no = ?, code = ?, nameTH = ? , nameEN = ? WHERE id = ?";
     db.query(sql, [departmentNoE, departmentCodeE,departmentNameTHE,departmentNameENE , req.params.id], (err, result) => {
         if (err) throw err;
-        res.redirect('/department',{ user: req.session.user });
+        const sql = "SELECT * FROM departments ORDER BY no ASC";
+
+        db.query(sql, (err, results) => {
+            if (err) throw err;
+    
+            res.render('department', { 
+                title: 'department',
+                departments: results,
+                user: req.session.user
+            });
+        })
     })
 })
 
@@ -75,7 +93,17 @@ router.get('/Del/:id',isAuthenticated, (req, res) => {
     const sql = "DELETE FROM departments WHERE id = ?";
     db.query(sql, [req.params.id], (err, result) => {
         if (err) throw err;
-        res.redirect('/department',{ user: req.session.user });
+        const sql = "SELECT * FROM departments ORDER BY no ASC";
+
+        db.query(sql, (err, results) => {
+            if (err) throw err;
+    
+            res.render('department', { 
+                title: 'department',
+                departments: results,
+                user: req.session.user
+            });
+        })
     });
 })
 
