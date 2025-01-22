@@ -6,14 +6,7 @@ const { v4: uuidv4 } = require("uuid");
 router.use(express.urlencoded({ extended: true }));
 const bcrypt = require('bcryptjs');
 const { Buffer } = require('buffer');
-
-const condb = require("../db");
-const db = mysql.createConnection({
-    host: condb.host(),
-    user: condb.user(),
-    password: condb.password(),
-    database: condb.database()
-})
+const db = require("../models/db.js");
 
 function isAuthenticated(req, res, next) {
     if (req.session.user) {

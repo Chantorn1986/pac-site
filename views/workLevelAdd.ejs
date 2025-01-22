@@ -3,41 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Departments</title>
+    <title>Create Work Level</title>
     <link rel="stylesheet" href="/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
     <%- include('partials/nav'); %>
     <div class="ms-4 me-4">
-   
+    
         <div class="row mb-3">
             <div class="col-md-3">
             </div> 
             <div class="col-md-6">
-                <h1>Create new Departments</h1>
-                <form action="/department/Add" method="POST">
+                <h1>Create new Work Level</h1>
+                <form action="/workLevel/Add" method="POST">
                     <div class="row mb-3">            
-                        <label for="departmentNo" class="form-label">NO.</label>
-                        <input type="text" name="departmentNo" required placeholder="enter no" class="form-control" required>
+                        <label for="workLevelNo" class="form-label">NO.</label>
+                        <input type="text" name="workLevelNo" required placeholder="enter no" class="form-control" required>
                     </div>
                     <div class="row mb-3">            
-                        <label for="departmentCode" class="form-label">Code</label>
-                        <input type="text" name="departmentCode" required placeholder="enter department code" class="form-control" required>
+                        <label for="workLevelCode" class="form-label">Code</label>
+                        <input type="text" name="workLevelCode" required placeholder="enter work level code" class="form-control" required>
                     </div>
                     <div class="row mb-3">            
-                        <label for="departmentNameTH" class="form-label">Department name Thai</label>
-                        <input type="text" name="departmentNameTH" required placeholder="enter department name Thai" class="form-control" required>
+                        <label for="workLevelNameTH" class="form-label">Work level name Thai</label>
+                        <input type="text" name="workLevelNameTH" required placeholder="enter work level name Thai" class="form-control" required>
                     </div>
                     <div class="row mb-3">            
-                        <label for="departmentNameEN" class="form-label">Department name English</label>
-                        <input type="text" name="departmentNameEN" required placeholder="enter department name English" class="form-control" required>
+                        <label for="workLevelNameEN" class="form-label">Work level name English</label>
+                        <input type="text" name="workLevelNameEN" required placeholder="enter work level name English" class="form-control" required>
                     </div>
 
                     <button type="submit" class="btn btn-success">Create</button>
                 </form>
                 <hr>
-                    <a href="/department" class="btn btn-warning">Go back</a>
+                    <a href="/workLevel" class="btn btn-warning">Go back</a>
             </div> 
             <div class="col-md-3">
 

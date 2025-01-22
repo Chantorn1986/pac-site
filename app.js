@@ -2,25 +2,9 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const mysql = require('mysql2');
-const multer = require('multer');
 const session = require('express-session');
-
-const condb = require("./db");
-const db = mysql.createConnection({
-    host: condb.host(),
-    user: condb.user(),
-    password: condb.password(),
-    database: condb.database()
-})
-
-db.connect((err) => {
-    if (err) {
-        console.error('Error connecting to the database:', err);
-        return;
-    }
-
-    console.log('Connected to MySQL database successfully.');
-})
+//const db = require("./models/db.js");
+//const multer = require('multer');
 
 app.set('view engine', 'ejs');
 
@@ -39,6 +23,10 @@ app.use('/',require('./routes/login'));
 app.use('/user',require('./routes/user'));
 
 app.use('/department',require('./routes/department'));
+
+app.use('/workLevel',require('./routes/workLevel'));
+
+app.use('/position',require('./routes/position'));
 
 
 function isAuthenticated(req, res, next) {

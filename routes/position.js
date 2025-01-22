@@ -16,13 +16,13 @@ function isAuthenticated(req, res, next) {
 
 router.get('/',isAuthenticated,(req, res) => {
     try {
-        const sql = "SELECT * FROM departments ORDER BY no ASC";
+        const sql = "SELECT * FROM positions ORDER BY no ASC";
         db.query(sql, (err, results) => {
             if (err) throw err;
 
-            res.render('department', { 
-                title: 'department',
-                departments: results,
+            res.render('position', { 
+                title: 'position',
+                positions: results,
                 user: req.session.user
             });
         })
@@ -33,23 +33,23 @@ router.get('/',isAuthenticated,(req, res) => {
 });
 
 router.get('/Add',isAuthenticated, (req, res) => {
-    res.render('departmentAdd',{ user: req.session.user });
+    res.render('positionAdd',{ user: req.session.user });
 })
 
 router.post('/Add',isAuthenticated, (req, res) => {
-    const { departmentNo, departmentCode,departmentNameTH,departmentNameEN }= req.body;
+    const { positionNo,positionNameTH,positionNameEN }= req.body;
     const uuid = uuidv4();
-    const sql = "INSERT INTO departments ( id, no, code, nameTH, nameEN ) VALUES(?, ?, ?, ?,?)";
-    db.query(sql, [ uuid,departmentNo, departmentCode,departmentNameTH,departmentNameEN ], (err, result) => {
+    const sql = "INSERT INTO positions ( id, no, nameTH, nameEN ) VALUES(?, ?, ?, ?)";
+    db.query(sql, [ uuid,positionNo, positionNameTH,positionNameEN ], (err, result) => {
         if (err) throw err;
-        const sql = "SELECT * FROM departments ORDER BY no ASC";
+        const sql = "SELECT * FROM positions ORDER BY no ASC";
 
         db.query(sql, (err, results) => {
             if (err) throw err;
     
-            res.render('department', { 
-                title: 'department',
-                departments: results,
+            res.render('position', { 
+                title: 'position',
+                positions: results,
                 user: req.session.user
             });
         })
@@ -57,30 +57,30 @@ router.post('/Add',isAuthenticated, (req, res) => {
 })
 
 router.get('/Edit/:id',isAuthenticated, (req, res) => {
-    const sql = "SELECT * FROM departments WHERE id = ?";
+    const sql = "SELECT * FROM positions WHERE id = ?";
     db.query(sql, [req.params.id], (err, result) => {
         if (err) throw err;
-        res.render('departmentEdit', { 
-            department: result[0] ,
+        res.render('positionEdit', { 
+            position: result[0] ,
             user: req.session.user 
         });
     });
 })
 
 router.post('/Edit/:id',isAuthenticated,(req, res) => {
-    const { departmentNoE, departmentCodeE,departmentNameTHE,departmentNameENE } = req.body;
+    const { positionNoE, positionCodeE,positionNameTHE,positionNameENE } = req.body;
     
-    const sql = "UPDATE departments SET no = ?, code = ?, nameTH = ? , nameEN = ? WHERE id = ?";
-    db.query(sql, [departmentNoE, departmentCodeE,departmentNameTHE,departmentNameENE , req.params.id], (err, result) => {
+    const sql = "UPDATE positions SET no = ?, nameTH = ? , nameEN = ? WHERE id = ?";
+    db.query(sql, [positionNoE,positionNameTHE,positionNameENE , req.params.id], (err, result) => {
         if (err) throw err;
-        const sql = "SELECT * FROM departments ORDER BY no ASC";
+        const sql = "SELECT * FROM positions ORDER BY no ASC";
 
         db.query(sql, (err, results) => {
             if (err) throw err;
     
-            res.render('department', { 
-                title: 'department',
-                departments: results,
+            res.render('position', { 
+                title: 'position',
+                positions: results,
                 user: req.session.user
             });
         })
@@ -88,17 +88,17 @@ router.post('/Edit/:id',isAuthenticated,(req, res) => {
 })
 
 router.get('/Del/:id',isAuthenticated, (req, res) => {
-    const sql = "DELETE FROM departments WHERE id = ?";
+    const sql = "DELETE FROM positions WHERE id = ?";
     db.query(sql, [req.params.id], (err, result) => {
         if (err) throw err;
-        const sql = "SELECT * FROM departments ORDER BY no ASC";
+        const sql = "SELECT * FROM positions ORDER BY no ASC";
 
         db.query(sql, (err, results) => {
             if (err) throw err;
     
-            res.render('department', { 
-                title: 'department',
-                departments: results,
+            res.render('position', { 
+                title: 'position',
+                positions: results,
                 user: req.session.user
             });
         })
