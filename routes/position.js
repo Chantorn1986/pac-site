@@ -68,7 +68,7 @@ router.get('/Edit/:id',isAuthenticated, (req, res) => {
 })
 
 router.post('/Edit/:id',isAuthenticated,(req, res) => {
-    const { positionNoE, positionCodeE,positionNameTHE,positionNameENE } = req.body;
+    const { positionNoE,positionNameTHE,positionNameENE } = req.body;
     
     const sql = "UPDATE positions SET no = ?, nameTH = ? , nameEN = ? WHERE id = ?";
     db.query(sql, [positionNoE,positionNameTHE,positionNameENE , req.params.id], (err, result) => {

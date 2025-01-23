@@ -28,6 +28,8 @@ app.use('/workLevel',require('./routes/workLevel'));
 
 app.use('/position',require('./routes/position'));
 
+app.use('/positionTest',require('./routes/positionTest'));
+
 
 function isAuthenticated(req, res, next) {
     if (req.session.user) {
