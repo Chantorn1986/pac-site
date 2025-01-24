@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>PAC APP - Create data</title>
+    <title>PAC APP - Viwe Position</title>
 
     <!-- Custom fonts for this template -->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -52,33 +52,34 @@
                                 <div class="col-lg-12">
                                     <div class="p-5">
                                         <div class="text-center">
-                                            <h1 class="h4 text-gray-900 mb-4">PAC APP - Create new data</h1>
+                                            <h1 class="h4 text-gray-900 mb-4">PAC APP - View position data</h1>
                                         </div>
-                                        <form class="user" action="/positionTest/Add" method="POST">
+                                        <form class="user" action="#" method="#">
                                             <div class="form-group row">
                                                 <div class="col-sm-3 mb-3 mb-sm-0">
-                                                    <label for="positionNo" class="form-label">Position No.</label>
-                                                    <input type="text" class="form-control" name="positionNo" required>
+                                                    <label for="positionNoV" class="form-label">Position No.</label>
+                                                    <input type="text" class="form-control" 
+                                                        name="positionNoV" value="<%= position.no %>" readonly>
                                                 </div>
 
                                             </div>
                                             <div class="form-group">
-                                                <label for="positionNameTH" class="form-label">Position name thai</label>
-                                                <input type="text" class="form-control" name="positionNameTH" required>
+                                                <label for="positionNameTHV" class="form-label">Position name thai</label>
+                                                <input type="text" class="form-control" 
+                                                    name="positionNameTHV" value="<%= position.nameTH %>" readonly>
                                             </div>
                                             <div class="form-group">
-                                                <label for="positionNameTH" class="form-label">Position name english</label>
-                                                <input type="text" class="form-control" name="positionNameEN" required>
+                                                <label for="positionNameENV" class="form-label">Position name english</label>
+                                                <input type="text" class="form-control" 
+                                                    name="positionNameENV" value="<%= position.nameEN %>" readonly>
                                             </div>
 
-                                            <button type="submit" class="btn btn-success btn-block">
-                                                <i class="fas fa-save fa-fw"></i>
-                                                <span class="text">Save</span></button>
 
+                                                <!--<button type="submit" class="btn btn-success btn-user btn-block"><i class="fas fa-save fa-fw"></i>Save</button>-->
                                         </form>
                                         <hr>
                                         <div class="text-center">
-                                            <a class="small" href="/positionTest">Back to ...</a>
+                                            <a class="small" href="/position">Back to ...</a>
                                         </div>
                                     </div>
                                 </div>

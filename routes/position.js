@@ -20,7 +20,7 @@ router.get('/',isAuthenticated,(req, res) => {
         db.query(sql, (err, results) => {
             if (err) throw err;
 
-            res.render('position', { 
+            res.render('dataDDL/position', { 
                 title: 'position',
                 positions: results,
                 user: req.session.user
@@ -33,7 +33,7 @@ router.get('/',isAuthenticated,(req, res) => {
 });
 
 router.get('/Add',isAuthenticated, (req, res) => {
-    res.render('positionAdd',{ user: req.session.user });
+    res.render('dataDDL/positionAdd',{ user: req.session.user });
 })
 
 router.post('/Add',isAuthenticated, (req, res) => {
@@ -47,7 +47,7 @@ router.post('/Add',isAuthenticated, (req, res) => {
         db.query(sql, (err, results) => {
             if (err) throw err;
     
-            res.render('position', { 
+            res.render('dataDDL/position', { 
                 title: 'position',
                 positions: results,
                 user: req.session.user
@@ -60,7 +60,7 @@ router.get('/Edit/:id',isAuthenticated, (req, res) => {
     const sql = "SELECT * FROM positions WHERE id = ?";
     db.query(sql, [req.params.id], (err, result) => {
         if (err) throw err;
-        res.render('positionEdit', { 
+        res.render('dataDDL/positionEdit', { 
             position: result[0] ,
             user: req.session.user 
         });
@@ -78,7 +78,7 @@ router.post('/Edit/:id',isAuthenticated,(req, res) => {
         db.query(sql, (err, results) => {
             if (err) throw err;
     
-            res.render('position', { 
+            res.render('dataDDL/position', { 
                 title: 'position',
                 positions: results,
                 user: req.session.user
@@ -96,12 +96,24 @@ router.get('/Del/:id',isAuthenticated, (req, res) => {
         db.query(sql, (err, results) => {
             if (err) throw err;
     
-            res.render('position', { 
+            res.render('dataDDL/position', { 
                 title: 'position',
                 positions: results,
                 user: req.session.user
             });
         })
+    });
+})
+
+router.get('/View/:id',isAuthenticated,  (req, res) => {
+    const sql = "SELECT * FROM positions WHERE id = ?";
+    db.query(sql, [req.params.id], (err, result) => {
+        if (err) throw err;
+        res.render('dataDDL/positionView', {
+            title: 'position', 
+            position: result[0] ,
+            user: req.session.user 
+        });
     });
 })
 

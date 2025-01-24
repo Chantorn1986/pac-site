@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>PAC APP - Tables</title>
+    <title>PAC APP - Viwe Data</title>
 
     <!-- Custom fonts for this template -->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -52,31 +52,30 @@
                                 <div class="col-lg-12">
                                     <div class="p-5">
                                         <div class="text-center">
-                                            <h1 class="h4 text-gray-900 mb-4">View data</h1>
+                                            <h1 class="h4 text-gray-900 mb-4">PAC APP - View data</h1>
                                         </div>
                                         <form class="user" action="#" method="#">
                                             <div class="form-group row">
-                                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                                    <input type="text" class="form-control form-control-user" name="positionNoE"
-                                                        placeholder="Position No." value="<%= position.no %>" readonly>
+                                                <div class="col-sm-3 mb-3 mb-sm-0">
+                                                    <label for="positionNoV" class="form-label">Position No.</label>
+                                                    <input type="text" class="form-control" 
+                                                        name="positionNoV" value="<%= position.no %>" readonly>
                                                 </div>
-                                                <div class="col-sm-6">
-                                                   <!-- <input type="text" class="form-control form-control-user" id="exampleLastName"
-                                                        placeholder="Last Name">-->
-                                                </div>
+
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" class="form-control form-control-user" name="positionNameTHE"
-                                                    placeholder="Position name thai" value="<%= position.nameTH %>" readonly>
+                                                <label for="positionNameTHV" class="form-label">Position name thai</label>
+                                                <input type="text" class="form-control" 
+                                                    name="positionNameTHV" value="<%= position.nameTH %>" readonly>
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" class="form-control form-control-user" name="positionNameENE"
-                                                    placeholder="Position name english" value="<%= position.nameEN %>" readonly>
+                                                <label for="positionNameENV" class="form-label">Position name english</label>
+                                                <input type="text" class="form-control" 
+                                                    name="positionNameENV" value="<%= position.nameEN %>" readonly>
                                             </div>
 
 
                                                 <!--<button type="submit" class="btn btn-success btn-user btn-block"><i class="fas fa-save fa-fw"></i>Save</button>-->
-
                                         </form>
                                         <hr>
                                         <div class="text-center">
