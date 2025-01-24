@@ -56,7 +56,7 @@
                         <div class="card-header py-3 d-flex">
                             <h6 class="m-0 font-weight-bold text-primary">PAC APP - <%= title %></h6>
                             <!--<a href="/tablesAdd" class="btn btn-info btn-circle btn-sm ml-auto"><i class="fas fa-plus"></i></a>-->
-                            <a href="/tableTest/Add" class="btn btn-primary btn-icon-split ml-auto btn-sm">
+                            <a href="/department/Add" class="btn btn-primary btn-icon-split ml-auto btn-sm">
                                 <span class="icon text-white-50">
                                     <i class="fas fa-plus-circle"></i>
                                 </span>
@@ -86,18 +86,18 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <% workLevel.forEach(workLevel => { %>
+                                        <% departments.forEach(department => { %>
                                             <tr>
-                                                <td><%= workLevel.no %></td>
-                                                <td><%= workLevel.code %></td>
-                                                <td><%= workLevel.nameTH %></td>
-                                                <td><%= workLevel.nameEN %></td>
+                                                <td><%= department.no %></td>
+                                                <td><%= department.code %></td>
+                                                <td><%= department.nameTH %></td>
+                                                <td><%= department.nameEN %></td>
                                                 <td>     
-                                                    <a href="/tableTest/View/<%= workLevel.id %>" class="btn btn-info btn-circle">
+                                                    <a href="/department/View/<%= department.id %>" class="btn btn-info btn-circle">
                                                         <i class="fas fa-eye"></i></a>                              
-                                                    <a href="/tableTest/Edit/<%= workLevel.id %>" class="btn btn-warning btn-circle">
+                                                    <a href="/department/Edit/<%= department.id %>" class="btn btn-warning btn-circle">
                                                         <i class="fas fa-pen"></i></a>
-                                                    <a href="/tableTest/Del/<%= workLevel.id %>" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure ?');">
+                                                    <a href="/department/Del/<%= department.id %>" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure ?');">
                                                         <i class="fas fa-trash-alt"></i></a>
 
                                                 </td>

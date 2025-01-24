@@ -51,39 +51,49 @@
                         <div class="card-body p-0">
                             <!-- Nested Row within Card Body -->
                             <div class="row">
+                                <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
                                 <div class="col-lg-12">
                                     <div class="p-5">
-                                        <form class="user" action="/position/Add" method="POST">
+                                        <form class="user" action="/department/Edit/<%= department.id %>" method="POST">
                                             <div class="form-group row">
                                                 <div class="col-sm-3 mb-3 mb-sm-0">
-                                                    <label for="positionNo" class="form-label">Position No.</label>
-                                                    <input type="text" class="form-control" name="positionNo" required>
+                                                    <label for="departmentNoE" class="form-label">Department No.</label>
+                                                    <input type="text" class="form-control" 
+                                                        name="departmentNoE" value="<%= department.no %>" required>
+                                                </div>
+                                                <div class="col-sm-3 mb-3 mb-sm-0">
+                                                    <label for="departmentCodeE" class="form-label">Department Code</label>
+                                                    <input type="text" class="form-control" 
+                                                        name="departmentCodeE" value="<%= department.code %>" required>
                                                 </div>
 
                                             </div>
                                             <div class="form-group">
-                                                <label for="positionNameTH" class="form-label">Position name thai</label>
-                                                <input type="text" class="form-control" name="positionNameTH" required>
+                                                <label for="departmentNameTHE" class="form-label">Department name thai</label>
+                                                <input type="text" class="form-control" 
+                                                    name="departmentNameTHE" value="<%= department.nameTH %>" required>
                                             </div>
                                             <div class="form-group">
-                                                <label for="positionNameEN" class="form-label">Position name english</label>
-                                                <input type="text" class="form-control" name="positionNameEN" required>
+                                                <label for="departmentNameENE" class="form-label">Department name english</label>
+                                                <input type="text" class="form-control" 
+                                                    name="departmentNameENE" value="<%= department.nameEN %>" required>
                                             </div>
 
+                                            
                                             <button type="submit" class="btn btn-success btn-block">
                                                 <i class="fas fa-save fa-fw"></i>
                                                 <span class="text">Save</span></button>
-
                                         </form>
                                         <hr>
                                         <div class="text-center">
-                                            <a class="small" href="/position">Back to ...</a>
+                                            <a class="small" href="/department">Back to ...</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
                 </div>
                 <!-- /.container-fluid -->
 

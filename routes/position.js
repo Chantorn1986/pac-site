@@ -21,7 +21,7 @@ router.get('/',isAuthenticated,(req, res) => {
             if (err) throw err;
 
             res.render('dataDDL/position', { 
-                title: 'position',
+                title: 'Position Management',
                 positions: results,
                 user: req.session.user
             });
@@ -33,7 +33,9 @@ router.get('/',isAuthenticated,(req, res) => {
 });
 
 router.get('/Add',isAuthenticated, (req, res) => {
-    res.render('dataDDL/positionAdd',{ user: req.session.user });
+    res.render('dataDDL/positionAdd',{ 
+        title: 'Position Create',
+        user: req.session.user });
 })
 
 router.post('/Add',isAuthenticated, (req, res) => {
@@ -48,7 +50,7 @@ router.post('/Add',isAuthenticated, (req, res) => {
             if (err) throw err;
     
             res.render('dataDDL/position', { 
-                title: 'position',
+                title: 'Position Management',
                 positions: results,
                 user: req.session.user
             });
@@ -61,6 +63,7 @@ router.get('/Edit/:id',isAuthenticated, (req, res) => {
     db.query(sql, [req.params.id], (err, result) => {
         if (err) throw err;
         res.render('dataDDL/positionEdit', { 
+            title: 'Position Edit',
             position: result[0] ,
             user: req.session.user 
         });
@@ -79,7 +82,7 @@ router.post('/Edit/:id',isAuthenticated,(req, res) => {
             if (err) throw err;
     
             res.render('dataDDL/position', { 
-                title: 'position',
+                title: 'Position Management',
                 positions: results,
                 user: req.session.user
             });
@@ -97,7 +100,7 @@ router.get('/Del/:id',isAuthenticated, (req, res) => {
             if (err) throw err;
     
             res.render('dataDDL/position', { 
-                title: 'position',
+                title: 'Position Management',
                 positions: results,
                 user: req.session.user
             });
@@ -110,7 +113,7 @@ router.get('/View/:id',isAuthenticated,  (req, res) => {
     db.query(sql, [req.params.id], (err, result) => {
         if (err) throw err;
         res.render('dataDDL/positionView', {
-            title: 'position', 
+            title: 'Position View', 
             position: result[0] ,
             user: req.session.user 
         });

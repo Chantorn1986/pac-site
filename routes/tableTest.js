@@ -16,13 +16,13 @@ function isAuthenticated(req, res, next) {
 
 router.get('/',(req, res) => {
     try {
-        const sql = "SELECT * FROM positions ORDER BY no ASC";
+        const sql = "SELECT * FROM workLevel ORDER BY no ASC";
         db.query(sql, (err, results) => {
             if (err) throw err;
 
             res.render('sbAdmin/tables', { 
-                title: 'position',
-                positions: results,
+                title: 'Work Level Management',
+                workLevel: results,
                 user: req.session.user
             });
         })
@@ -33,23 +33,25 @@ router.get('/',(req, res) => {
 });
 
 router.get('/Add', (req, res) => {
-    res.render('sbAdmin/tablesAdd',{ user: req.session.user });
+    res.render('sbAdmin/tablesAdd',{ 
+        title: 'Work Level Create',
+        user: req.session.user });
 })
 
 router.post('/Add',(req, res) => {
-    const { positionNo,positionNameTH,positionNameEN }= req.body;
+    const { workLevelNo,workLevelCode,workLevelNameTH,workLevelNameEN }= req.body;
     const uuid = uuidv4();
-    const sql = "INSERT INTO positions ( id, no, nameTH, nameEN ) VALUES(?, ?, ?, ?)";
-    db.query(sql, [ uuid,positionNo, positionNameTH,positionNameEN ], (err, result) => {
+    const sql = "INSERT INTO workLevel ( id, no,code, nameTH, nameEN ) VALUES(?, ?, ?, ?, ?)";
+    db.query(sql, [ uuid,workLevelNo,workLevelCode, workLevelNameTH,workLevelNameEN ], (err, result) => {
         if (err) throw err;
-        const sql = "SELECT * FROM positions ORDER BY no ASC";
+        const sql = "SELECT * FROM workLevel ORDER BY no ASC";
 
         db.query(sql, (err, results) => {
             if (err) throw err;
     
             res.render('sbAdmin/tables', { 
-                title: 'position',
-                positions: results,
+                title: 'Work Level Management',
+                workLevel: results,
                 user: req.session.user
             });
         })
@@ -57,31 +59,31 @@ router.post('/Add',(req, res) => {
 })
 
 router.get('/Edit/:id', (req, res) => {
-    const sql = "SELECT * FROM positions WHERE id = ?";
+    const sql = "SELECT * FROM workLevel WHERE id = ?";
     db.query(sql, [req.params.id], (err, result) => {
         if (err) throw err;
         res.render('sbAdmin/tablesEdit', { 
-            title: 'position',
-            position: result[0] ,
+            title: 'Work Level Edit',
+            workLevel: result[0] ,
             user: req.session.user 
         });
     });
 })
 
 router.post('/Edit/:id',(req, res) => {
-    const { positionNoE,positionNameTHE,positionNameENE } = req.body;
+    const { workLevelNoE,workLevelCodeE,workLevelNameTHE,workLevelNameENE } = req.body;
     
-    const sql = "UPDATE positions SET no = ?, nameTH = ? , nameEN = ? WHERE id = ?";
-    db.query(sql, [positionNoE,positionNameTHE,positionNameENE , req.params.id], (err, result) => {
+    const sql = "UPDATE workLevel SET no = ?, nameCode = ?, nameTH = ? , nameEN = ? WHERE id = ?";
+    db.query(sql, [workLevelNoE,workLevelCodeE,workLevelNameTHE,workLevelNameENE , req.params.id], (err, result) => {
         if (err) throw err;
-        const sql = "SELECT * FROM positions ORDER BY no ASC";
+        const sql = "SELECT * FROM workLevel ORDER BY no ASC";
 
         db.query(sql, (err, results) => {
             if (err) throw err;
     
             res.render('sbAdmin/tables', { 
-                title: 'position',
-                positions: results,
+                title: 'Work Level Management',
+                workLevel: results,
                 user: req.session.user
             });
         })
@@ -89,17 +91,17 @@ router.post('/Edit/:id',(req, res) => {
 })
 
 router.get('/Del/:id', (req, res) => {
-    const sql = "DELETE FROM positions WHERE id = ?";
+    const sql = "DELETE FROM workLevel WHERE id = ?";
     db.query(sql, [req.params.id], (err, result) => {
         if (err) throw err;
-        const sql = "SELECT * FROM positions ORDER BY no ASC";
+        const sql = "SELECT * FROM workLevel ORDER BY no ASC";
 
         db.query(sql, (err, results) => {
             if (err) throw err;
     
             res.render('sbAdmin/tables', { 
-                title: 'position',
-                positions: results,
+                title: 'Work Level Management',
+                workLevel: results,
                 user: req.session.user
             });
         })
@@ -107,12 +109,12 @@ router.get('/Del/:id', (req, res) => {
 })
 
 router.get('/View/:id', (req, res) => {
-    const sql = "SELECT * FROM positions WHERE id = ?";
+    const sql = "SELECT * FROM workLevel WHERE id = ?";
     db.query(sql, [req.params.id], (err, result) => {
         if (err) throw err;
         res.render('sbAdmin/tablesView', {
-            title: 'position', 
-            position: result[0] ,
+            title: 'Work Level View', 
+            workLevel: result[0] ,
             user: req.session.user 
         });
     });

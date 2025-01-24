@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>PAC APP - Create data</title>
+    <title>PAC APP - <%= title %></title>
 
     <!-- Custom fonts for this template -->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -45,30 +45,190 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <div class="card o-hidden border-0 shadow-lg ">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-user fa-fw"></i> PAC APP - <%= title %></h6>
+                        </div>
+
                         <div class="card-body p-0">
                             <!-- Nested Row within Card Body -->
                             <div class="row">
                                 <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
                                 <div class="col-lg-12">
-                                    <div class="p-5">
-                                        <div class="text-center">
-                                            <h1 class="h4 text-gray-900 mb-4">PAC APP - Create new data</h1>
-                                        </div>
-                                        <form class="user" action="/positionTest/Add" method="POST">
+                                    <div class="p-4">
+                                        <form class="user" action="/tableTest/Add" method="POST">
                                             <div class="form-group row">
-                                                <div class="col-sm-3 mb-3 mb-sm-0">
-                                                    <label for="positionNo" class="form-label">Position No.</label>
-                                                    <input type="text" class="form-control" name="positionNo" required>
+                                                <div class="col-sm-3">
+                                                    <label for="employeeCode" class="form-label">Code</label>
+                                                    <input type="text" class="form-control" name="employeeCode" required>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="serialNumber" class="form-label">Serial Number</label>
+                                                    <input type="text" class="form-control" name="serialNumber" required>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="phone" class="form-label">Phone</label>
+                                                    <input type="text" class="form-control" name="phone" >
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="lineID" class="form-label">Line ID</label>
+                                                    <input type="text" class="form-control" name="lineID" >
                                                 </div>
 
                                             </div>
-                                            <div class="form-group">
-                                                <label for="positionNameTH" class="form-label">Position name thai</label>
-                                                <input type="text" class="form-control" name="positionNameTH" required>
+                                            <div class="form-group row">
+                                                <div class="col-sm-6">
+                                                    <label for="nameTH" class="form-label">Full name thai</label>
+                                                    <input type="text" class="form-control" name="nameTH" required>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label for="nameEN" class="form-label">Full name english</label>
+                                                    <input type="text" class="form-control" name="nameEN" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-3">
+                                                    <label for="departmentID" class="form-label">Department</label>
+                                                    <input type="text" class="form-control" name="departmentID" >
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="positionID" class="form-label">Position</label>
+                                                    <input type="text" class="form-control" name="positionID" >             
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="workLevelID" class="form-label">Work Level</label>
+                                                    <input type="text" class="form-control" name="workLevelID" >                                                   
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="employmentType" class="form-label">Employment Type</label>
+                                                    <input type="text" class="form-control" name="employmentType" >
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-3">
+                                                    <label for="startDate" class="form-label">Start Date</label>
+                                                    <input type="date" class="form-control" name="startDate" >
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="endDate" class="form-label">End Date</label>
+                                                    <input type="date" class="form-control" name="endDate" >
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label for="ReasonForLeaving" class="form-label">Reason for leaving</label>
+                                                    <input type="text" class="form-control" name="ReasonForLeaving" >
+                                                </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="positionNameTH" class="form-label">Position name english</label>
-                                                <input type="text" class="form-control" name="positionNameEN" required>
+                                                <label for="Address" class="form-label">Address</label>
+                                                <input type="text" class="form-control" name="Address" >
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-3">
+                                                    <label for="Subdistrict" class="form-label">Subdistrict</label>
+                                                    <input type="text" class="form-control" name="Subdistrict" >
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="District" class="form-label">District</label>
+                                                    <input type="text" class="form-control" name="District" >                                                  
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="Province" class="form-label">Province</label>
+                                                    <input type="text" class="form-control" name="Province" >    
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="Postcode" class="form-label">Postcode</label>
+                                                    <input type="text" class="form-control" name="Postcode" >   
+                                                </div>
+                                            </div>
+                                            <hr class="sidebar-divider">
+                                            <h6 class="m-0 font-weight-bold text-primary mb-3"><i class="fas fa-address-book fa-fw"></i> Personal information</h6>
+                                            <div class="form-group row">
+                                                <div class="col-sm-3">
+                                                    <label for="dateOfBirth" class="form-label">Date of birth</label>
+                                                    <input type="date" class="form-control" name="dateOfBirth" >
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="nameTitle" class="form-label">Name Title</label>
+                                                    <input type="text" class="form-control" name="nameTitle" >
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="employeeSex" class="form-label">Sex</label>
+                                                    <input type="text" class="form-control" name="employeeSex" >
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="bloodGroup" class="form-label">Blood Group</label>
+                                                    <input type="text" class="form-control" name="bloodGroup" >
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-3">
+                                                    <label for="maritalStatus" class="form-label">Marital Status</label>
+                                                    <input type="text" class="form-control" name="maritalStatus" >
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="religion" class="form-label">Religion</label>
+                                                    <input type="text" class="form-control" name="religion" >
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="nationality" class="form-label">Nationality</label>
+                                                    <input type="text" class="form-control" name="nationality" >
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="ethnicity" class="form-label">Ethnicity</label>
+                                                    <input type="text" class="form-control" name="ethnicity" >
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group row">
+                                                <div class="col-sm-6">
+                                                    <label for="taxID" class="form-label">Tax ID</label>
+                                                    <input type="text" class="form-control" name="taxID" >
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="bank" class="form-label">Bank</label>
+                                                    <input type="text" class="form-control" name="bank" >
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="bankNumber" class="form-label">Bank Number</label>
+                                                    <input type="text" class="form-control" name="bankNumber" >
+                                                </div>
+                                            </div>
+                                            <hr class="sidebar-divider">
+                                            <h6 class="m-0 font-weight-bold text-primary mb-3"><i class="fas fa-graduation-cap fa-fw"></i> Education information</h6>
+                                            <div class="form-group row">
+                                                <div class="col-sm-3">
+                                                    <label for="educationLevel" class="form-label">Education Level</label>
+                                                    <input type="text" class="form-control" name="educationLevel" >
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="university" class="form-label">University</label>
+                                                    <input type="text" class="form-control" name="university" >
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="registrationDate" class="form-label">Registration Date</label>
+                                                    <input type="date" class="form-control" name="registrationDate" >
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="graduationDate" class="form-label">Graduation Date</label>
+                                                    <input type="date" class="form-control" name="graduationDate" >
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-3">
+                                                    <label for="studyPeriod" class="form-label">Study Period</label>
+                                                    <input type="text" class="form-control" name="studyPeriod" >
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="major" class="form-label">Major</label>
+                                                    <input type="text" class="form-control" name="major" >
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="addressUniversity" class="form-label">Address University</label>
+                                                    <input type="text" class="form-control" name="addressUniversity" >
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="yearGraduation" class="form-label">Year Graduation</label>
+                                                    <input type="text" class="form-control" name="yearGraduation" >
+                                                </div>
                                             </div>
 
                                             <button type="submit" class="btn btn-success btn-block">
@@ -78,7 +238,7 @@
                                         </form>
                                         <hr>
                                         <div class="text-center">
-                                            <a class="small" href="/positionTest">Back to ...</a>
+                                            <a class="small" href="/tableTest">Back to ...</a>
                                         </div>
                                     </div>
                                 </div>

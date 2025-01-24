@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>PAC APP - Tables</title>
+    <title>PAC APP - <%= title %></title>
 
     <!-- Custom fonts for this template -->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -45,33 +45,38 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <div class="card o-hidden border-0 shadow-lg ">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">PAC APP - <%= title %></h6>
+                        </div>
                         <div class="card-body p-0">
                             <!-- Nested Row within Card Body -->
                             <div class="row">
                                 <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
                                 <div class="col-lg-12">
-                                    <div class="p-5">
-                                        <div class="text-center">
-                                            <h1 class="h4 text-gray-900 mb-4">PAC APP - Edit data</h1>
-                                        </div>
-                                        <form class="user" action="/positionTest/Edit/<%= position.id %>" method="POST">
+                                    <div class="p-4">
+                                        <form class="user" action="/tableTest/Edit/<%= workLevel.id %>" method="POST">
                                             <div class="form-group row">
                                                 <div class="col-sm-3 mb-3 mb-sm-0">
-                                                    <label for="positionNoE" class="form-label">Position No.</label>
+                                                    <label for="workLevelNoE" class="form-label">Work Level No.</label>
                                                     <input type="text" class="form-control" 
-                                                        name="positionNoE" value="<%= position.no %>" required>
+                                                        name="workLevelNoE" value="<%= workLevel.no %>" required>
+                                                </div>
+                                                <div class="col-sm-3 mb-3 mb-sm-0">
+                                                    <label for="workLevelCodeE" class="form-label">Work Level Code</label>
+                                                    <input type="text" class="form-control" 
+                                                        name="workLevelCodeE" value="<%= workLevel.code %>" required>
                                                 </div>
 
                                             </div>
                                             <div class="form-group">
-                                                <label for="positionNameTHE" class="form-label">Position name thai</label>
+                                                <label for="workLevelNameTHE" class="form-label">Work Level name thai</label>
                                                 <input type="text" class="form-control" 
-                                                    name="positionNameTHE" value="<%= position.nameTH %>" required>
+                                                    name="workLevelNameTHE" value="<%= workLevel.nameTH %>" required>
                                             </div>
                                             <div class="form-group">
-                                                <label for="positionNameENE" class="form-label">Position name english</label>
+                                                <label for="workLevelNameENE" class="form-label">Work Level name english</label>
                                                 <input type="text" class="form-control" 
-                                                    name="positionNameENE" value="<%= position.nameEN %>" required>
+                                                    name="workLevelNameENE" value="<%= workLevel.nameEN %>" required>
                                             </div>
 
                                             
@@ -81,7 +86,7 @@
                                         </form>
                                         <hr>
                                         <div class="text-center">
-                                            <a class="small" href="/positionTest">Back to ...</a>
+                                            <a class="small" href="/tableTest">Back to ...</a>
                                         </div>
                                     </div>
                                 </div>

@@ -20,9 +20,9 @@ router.get('/',isAuthenticated,(req, res) => {
         db.query(sql, (err, results) => {
             if (err) throw err;
 
-            res.render('workLevel', { 
-                title: 'workLevel',
-                workLevels: results,
+            res.render('dataDDL/workLevel', { 
+                title: 'Work Level Management',
+                workLevel: results,
                 user: req.session.user
             });
         })
@@ -33,23 +33,25 @@ router.get('/',isAuthenticated,(req, res) => {
 });
 
 router.get('/Add',isAuthenticated, (req, res) => {
-    res.render('workLevelAdd',{ user: req.session.user });
+    res.render('dataDDL/workLevelAdd',{ 
+        title: 'Work Level Create',
+        user: req.session.user });
 })
 
-router.post('/Add',isAuthenticated, (req, res) => {
-    const { workLevelNo, workLevelCode,workLevelNameTH,workLevelNameEN }= req.body;
+router.post('/Add',isAuthenticated,(req, res) => {
+    const { workLevelNo,workLevelCode,workLevelNameTH,workLevelNameEN }= req.body;
     const uuid = uuidv4();
-    const sql = "INSERT INTO workLevel ( id, no, code, nameTH, nameEN ) VALUES(?, ?, ?, ?,?)";
-    db.query(sql, [ uuid,workLevelNo, workLevelCode,workLevelNameTH,workLevelNameEN ], (err, result) => {
+    const sql = "INSERT INTO workLevel ( id, no,code, nameTH, nameEN ) VALUES(?, ?, ?, ?, ?)";
+    db.query(sql, [ uuid,workLevelNo,workLevelCode, workLevelNameTH,workLevelNameEN ], (err, result) => {
         if (err) throw err;
         const sql = "SELECT * FROM workLevel ORDER BY no ASC";
 
         db.query(sql, (err, results) => {
             if (err) throw err;
     
-            res.render('workLevel', { 
-                title: 'workLevel',
-                workLevels: results,
+            res.render('dataDDL/workLevel', { 
+                title: 'Work Level Management',
+                workLevel: results,
                 user: req.session.user
             });
         })
@@ -60,7 +62,8 @@ router.get('/Edit/:id',isAuthenticated, (req, res) => {
     const sql = "SELECT * FROM workLevel WHERE id = ?";
     db.query(sql, [req.params.id], (err, result) => {
         if (err) throw err;
-        res.render('workLevelEdit', { 
+        res.render('dataDDL/workLevelEdit', { 
+            title: 'Work Level Edit',
             workLevel: result[0] ,
             user: req.session.user 
         });
@@ -68,19 +71,19 @@ router.get('/Edit/:id',isAuthenticated, (req, res) => {
 })
 
 router.post('/Edit/:id',isAuthenticated,(req, res) => {
-    const { workLevelNoE, workLevelCodeE,workLevelNameTHE,workLevelNameENE } = req.body;
+    const { workLevelNoE,workLevelCodeE,workLevelNameTHE,workLevelNameENE } = req.body;
     
-    const sql = "UPDATE workLevel SET no = ?, code = ?, nameTH = ? , nameEN = ? WHERE id = ?";
-    db.query(sql, [workLevelNoE, workLevelCodeE,workLevelNameTHE,workLevelNameENE , req.params.id], (err, result) => {
+    const sql = "UPDATE workLevel SET no = ?, nameCode = ?, nameTH = ? , nameEN = ? WHERE id = ?";
+    db.query(sql, [workLevelNoE,workLevelCodeE,workLevelNameTHE,workLevelNameENE , req.params.id], (err, result) => {
         if (err) throw err;
         const sql = "SELECT * FROM workLevel ORDER BY no ASC";
 
         db.query(sql, (err, results) => {
             if (err) throw err;
     
-            res.render('workLevel', { 
-                title: 'workLevel',
-                workLevels: results,
+            res.render('dataDDL/workLevel', { 
+                title: 'Work Level Management',
+                workLevel: results,
                 user: req.session.user
             });
         })
@@ -96,12 +99,24 @@ router.get('/Del/:id',isAuthenticated, (req, res) => {
         db.query(sql, (err, results) => {
             if (err) throw err;
     
-            res.render('workLevel', { 
-                title: 'workLevel',
-                workLevels: results,
+            res.render('dataDDL/workLevel', { 
+                title: 'Work Level Management',
+                workLevel: results,
                 user: req.session.user
             });
         })
+    });
+})
+
+router.get('/View/:id',isAuthenticated, (req, res) => {
+    const sql = "SELECT * FROM workLevel WHERE id = ?";
+    db.query(sql, [req.params.id], (err, result) => {
+        if (err) throw err;
+        res.render('dataDDL/workLevelView', {
+            title: 'Work Level View', 
+            workLevel: result[0] ,
+            user: req.session.user 
+        });
     });
 })
 

@@ -20,8 +20,8 @@ router.get('/',isAuthenticated,(req, res) => {
         db.query(sql, (err, results) => {
             if (err) throw err;
 
-            res.render('department', { 
-                title: 'department',
+            res.render('dataDDL/department', { 
+                title: 'Department Management',
                 departments: results,
                 user: req.session.user
             });
@@ -33,22 +33,24 @@ router.get('/',isAuthenticated,(req, res) => {
 });
 
 router.get('/Add',isAuthenticated, (req, res) => {
-    res.render('departmentAdd',{ user: req.session.user });
+    res.render('dataDDL/departmentAdd',{ 
+        title: 'Department Create',
+        user: req.session.user });
 })
 
-router.post('/Add',isAuthenticated, (req, res) => {
-    const { departmentNo, departmentCode,departmentNameTH,departmentNameEN }= req.body;
+router.post('/Add',isAuthenticated,(req, res) => {
+    const { departmentNo,departmentCode,departmentNameTH,departmentNameEN }= req.body;
     const uuid = uuidv4();
-    const sql = "INSERT INTO departments ( id, no, code, nameTH, nameEN ) VALUES(?, ?, ?, ?,?)";
-    db.query(sql, [ uuid,departmentNo, departmentCode,departmentNameTH,departmentNameEN ], (err, result) => {
+    const sql = "INSERT INTO departments ( id, no,code, nameTH, nameEN ) VALUES(?, ?, ?, ?, ?)";
+    db.query(sql, [ uuid,departmentNo,departmentCode, departmentNameTH,departmentNameEN ], (err, result) => {
         if (err) throw err;
         const sql = "SELECT * FROM departments ORDER BY no ASC";
 
         db.query(sql, (err, results) => {
             if (err) throw err;
     
-            res.render('department', { 
-                title: 'department',
+            res.render('dataDDL/department', { 
+                title: 'Department Management',
                 departments: results,
                 user: req.session.user
             });
@@ -60,7 +62,8 @@ router.get('/Edit/:id',isAuthenticated, (req, res) => {
     const sql = "SELECT * FROM departments WHERE id = ?";
     db.query(sql, [req.params.id], (err, result) => {
         if (err) throw err;
-        res.render('departmentEdit', { 
+        res.render('dataDDL/departmentEdit', { 
+            title: 'Department Edit',
             department: result[0] ,
             user: req.session.user 
         });
@@ -68,18 +71,18 @@ router.get('/Edit/:id',isAuthenticated, (req, res) => {
 })
 
 router.post('/Edit/:id',isAuthenticated,(req, res) => {
-    const { departmentNoE, departmentCodeE,departmentNameTHE,departmentNameENE } = req.body;
+    const { departmentNoE,departmentCodeE,departmentNameTHE,departmentNameENE } = req.body;
     
-    const sql = "UPDATE departments SET no = ?, code = ?, nameTH = ? , nameEN = ? WHERE id = ?";
-    db.query(sql, [departmentNoE, departmentCodeE,departmentNameTHE,departmentNameENE , req.params.id], (err, result) => {
+    const sql = "UPDATE departments SET no = ?,nameCode = ? , nameTH = ? , nameEN = ? WHERE id = ?";
+    db.query(sql, [departmentNoE,departmentCodeE,departmentNameTHE,departmentNameENE , req.params.id], (err, result) => {
         if (err) throw err;
         const sql = "SELECT * FROM departments ORDER BY no ASC";
 
         db.query(sql, (err, results) => {
             if (err) throw err;
     
-            res.render('department', { 
-                title: 'department',
+            res.render('dataDDL/department', { 
+                title: 'Department Management',
                 departments: results,
                 user: req.session.user
             });
@@ -96,12 +99,24 @@ router.get('/Del/:id',isAuthenticated, (req, res) => {
         db.query(sql, (err, results) => {
             if (err) throw err;
     
-            res.render('department', { 
-                title: 'department',
+            res.render('dataDDL/department', { 
+                title: 'Department Management',
                 departments: results,
                 user: req.session.user
             });
         })
+    });
+})
+
+router.get('/View/:id',isAuthenticated, (req, res) => {
+    const sql = "SELECT * FROM departments WHERE id = ?";
+    db.query(sql, [req.params.id], (err, result) => {
+        if (err) throw err;
+        res.render('dataDDL/departmentView', {
+            title: 'Department View', 
+            department: result[0] ,
+            user: req.session.user 
+        });
     });
 })
 

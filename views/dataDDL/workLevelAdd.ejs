@@ -51,23 +51,28 @@
                         <div class="card-body p-0">
                             <!-- Nested Row within Card Body -->
                             <div class="row">
+                                <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
                                 <div class="col-lg-12">
                                     <div class="p-5">
-                                        <form class="user" action="/position/Add" method="POST">
+                                        <form class="user" action="/workLevel/Add" method="POST">
                                             <div class="form-group row">
                                                 <div class="col-sm-3 mb-3 mb-sm-0">
-                                                    <label for="positionNo" class="form-label">Position No.</label>
-                                                    <input type="text" class="form-control" name="positionNo" required>
+                                                    <label for="workLevelNo" class="form-label">Work Level No.</label>
+                                                    <input type="text" class="form-control" name="workLevelNo" required>
+                                                </div>
+                                                <div class="col-sm-3 mb-3 mb-sm-0">
+                                                    <label for="workLevelCode" class="form-label">Work Level Code</label>
+                                                    <input type="text" class="form-control" name="workLevelCode" required>
                                                 </div>
 
                                             </div>
                                             <div class="form-group">
-                                                <label for="positionNameTH" class="form-label">Position name thai</label>
-                                                <input type="text" class="form-control" name="positionNameTH" required>
+                                                <label for="workLevelNameTH" class="form-label">Work Level name thai</label>
+                                                <input type="text" class="form-control" name="workLevelNameTH" required>
                                             </div>
                                             <div class="form-group">
-                                                <label for="positionNameEN" class="form-label">Position name english</label>
-                                                <input type="text" class="form-control" name="positionNameEN" required>
+                                                <label for="workLevelNameEN" class="form-label">Work Level name english</label>
+                                                <input type="text" class="form-control" name="workLevelNameEN" required>
                                             </div>
 
                                             <button type="submit" class="btn btn-success btn-block">
@@ -77,13 +82,14 @@
                                         </form>
                                         <hr>
                                         <div class="text-center">
-                                            <a class="small" href="/position">Back to ...</a>
+                                            <a class="small" href="/workLevel">Back to ...</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
                 </div>
                 <!-- /.container-fluid -->
 

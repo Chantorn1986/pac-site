@@ -28,7 +28,7 @@ app.use('/workLevel',require('./routes/workLevel'));
 
 app.use('/position',require('./routes/position'));
 
-app.use('/positionTest',require('./routes/positionTest'));
+app.use('/tableTest',require('./routes/tableTest'));
 
 
 function isAuthenticated(req, res, next) {
