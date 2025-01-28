@@ -53,30 +53,45 @@
                             <div class="row">
                                 <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
                                 <div class="col-lg-12">
-                                    <div class="p-4">
-                                        <form class="user" action="/tableTest/Edit/<%= workLevel.id %>" method="POST">
-                                            <div class="form-group row">
-                                                <div class="col-sm-3 mb-3 mb-sm-0">
-                                                    <label for="workLevelNoE" class="form-label">Work Level No.</label>
-                                                    <input type="text" class="form-control" 
-                                                        name="workLevelNoE" value="<%= workLevel.no %>" required>
-                                                </div>
-                                                <div class="col-sm-3 mb-3 mb-sm-0">
-                                                    <label for="workLevelCodeE" class="form-label">Work Level Code</label>
-                                                    <input type="text" class="form-control" 
-                                                        name="workLevelCodeE" value="<%= workLevel.code %>" required>
-                                                </div>
+                                    <div class="p-5">
+                                        <form class="user" action="/tableTest/Edit/<%= stockCardGoods.id %>" method="POST">
 
+                                            <div class="form-group row">
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <label for="stockCardGoodsNoE" class="form-label">stockCardGoods No.</label>
+                                                    <input type="text" class="form-control" 
+                                                        name="stockCardGoodsNoE" value="<%= stockCardGoods.no %>" required>
+                                                </div>
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <label for="stockCardGoodsCodeE" class="form-label">stockCardGoods Code</label>
+                                                    <input type="text" class="form-control" 
+                                                        name="stockCardGoodsCodeE" value="<%= stockCardGoods.code %>" required>
+                                                </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="workLevelNameTHE" class="form-label">Work Level name thai</label>
-                                                <input type="text" class="form-control" 
-                                                    name="workLevelNameTHE" value="<%= workLevel.nameTH %>" required>
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-6">
+                                                    <label for="stockCardGoodsModelE" class="form-label">Model</label>
+                                                    <input type="text" class="form-control" name="stockCardGoodsModelE" 
+                                                    value="<%= stockCardGoods.model %>">
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label for="stockCardGoodsBrandE" class="form-label">Brand</label>
+                                                    <select name="stockCardGoodsBrandE" class="form-control form-select" aria-label="Default select example">
+                                                        <option value="<%= stockCardGoods.brandID %>"><%= stockCardGoods.brand %></option>
+                                                        <option value="">--- Select Brands ---</option>
+                                                        <% stockCardBrands.forEach(stockCardBrands => { %>
+                                                        <option value="<%= stockCardBrands.id %>"><%= stockCardBrands.name %></option>
+                                                        <% }) %> 
+                                                      </select> 
+                                                </div>
                                             </div>
+
+
                                             <div class="form-group">
-                                                <label for="workLevelNameENE" class="form-label">Work Level name english</label>
-                                                <input type="text" class="form-control" 
-                                                    name="workLevelNameENE" value="<%= workLevel.nameEN %>" required>
+                                                <label for="stockCardGoodsKeywordE" class="form-label">Full Keyword</label>
+                                                <input type="text" class="form-control" name="stockCardGoodsKeywordE" 
+                                                value="<%= stockCardGoods.keyword %>">
                                             </div>
 
                                             

@@ -56,7 +56,7 @@
                         <div class="card-header py-3 d-flex">
                             <h6 class="m-0 font-weight-bold text-primary">PAC APP - <%= title %></h6>
                             <!--<a href="/tablesAdd" class="btn btn-info btn-circle btn-sm ml-auto"><i class="fas fa-plus"></i></a>-->
-                            <a href="/tableTest/Add" class="btn btn-primary btn-icon-split ml-auto btn-sm">
+                            <a href="/stockCardBrands/Add" class="btn btn-primary btn-icon-split ml-auto btn-sm">
                                 <span class="icon text-white-50">
                                     <i class="fas fa-plus-circle"></i>
                                 </span>
@@ -71,9 +71,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Code</th>
-                                            <th>Model</th>
-                                            <th>Keyword</th>
-                                            <th>Brand</th>
+                                            <th>Name</th>
                                             <th>CreatedAt</th>
                                             <th>UpdatedAt</th>
                                             <th>Action</th>
@@ -83,30 +81,26 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Code</th>
-                                            <th>Model</th>
-                                            <th>Keyword</th>
-                                            <th>Brand</th>
+                                            <th>Name</th>
                                             <th>CreatedAt</th>
                                             <th>UpdatedAt</th>
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <% stockCardGoods.forEach(stockCardGoods => { %>
+                                        <% stockCardBrands.forEach(stockCardBrands => { %>
                                             <tr>
-                                                <td><%= stockCardGoods.no %></td>
-                                                <td><%= stockCardGoods.code %></td>
-                                                <td><%= stockCardGoods.model %></td>
-                                                <td><%= stockCardGoods.keyword %></td>
-                                                <td><%= stockCardGoods.brand %></td>
-                                                <td><%= stockCardGoods.createdAt %></td>
-                                                <td><%= stockCardGoods.updatedAt %></td>
+                                                <td><%= stockCardBrands.no %></td>
+                                                <td><%= stockCardBrands.code %></td>
+                                                <td><%= stockCardBrands.name %></td>
+                                                <td><%= stockCardBrands.createdAt %></td>
+                                                <td><%= stockCardBrands.updatedAt %></td>
                                                 <td>     
-                                                    <a href="/tableTest/View/<%= stockCardGoods.id %>" class="btn btn-info btn-circle">
+                                                    <a href="/stockCardBrands/View/<%= stockCardBrands.id %>" class="btn btn-info btn-circle">
                                                         <i class="fas fa-eye"></i></a>                              
-                                                    <a href="/tableTest/Edit/<%= stockCardGoods.id %>" class="btn btn-warning btn-circle">
+                                                    <a href="/stockCardBrands/Edit/<%= stockCardBrands.id %>" class="btn btn-warning btn-circle">
                                                         <i class="fas fa-pen"></i></a>
-                                                    <a href="/tableTest/Del/<%= stockCardGoods.id %>" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure ?');">
+                                                    <a href="/stockCardBrands/Del/<%= stockCardBrands.id %>" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure ?');">
                                                         <i class="fas fa-trash-alt"></i></a>
 
                                                 </td>

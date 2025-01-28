@@ -73,7 +73,7 @@ router.get('/Edit/:id',isAuthenticated, (req, res) => {
 router.post('/Edit/:id',isAuthenticated,(req, res) => {
     const { departmentNoE,departmentCodeE,departmentNameTHE,departmentNameENE } = req.body;
     
-    const sql = "UPDATE departments SET no = ?,nameCode = ? , nameTH = ? , nameEN = ? WHERE id = ?";
+    const sql = "UPDATE departments SET no = ?,Code = ? , nameTH = ? , nameEN = ? WHERE id = ?";
     db.query(sql, [departmentNoE,departmentCodeE,departmentNameTHE,departmentNameENE , req.params.id], (err, result) => {
         if (err) throw err;
         const sql = "SELECT * FROM departments ORDER BY no ASC";

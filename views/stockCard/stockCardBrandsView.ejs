@@ -46,58 +46,51 @@
                 <div class="container-fluid">
                     <div class="card o-hidden border-0 shadow-lg ">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-user fa-fw"></i> PAC APP - <%= title %></h6>
+                            <h6 class="m-0 font-weight-bold text-primary">PAC APP - <%= title %></h6>
                         </div>
-
                         <div class="card-body p-0">
                             <!-- Nested Row within Card Body -->
                             <div class="row">
                                 <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
                                 <div class="col-lg-12">
                                     <div class="p-4">
-                                        <form class="user" action="/tableTest/Add" method="POST">
+                                        <form class="user" action="#" method="#">
                                             <div class="form-group row">
                                                 <div class="col-sm-6">
-                                                    <label for="stockCardGoodsNo" class="form-label">No</label>
-                                                    <input type="text" class="form-control" name="stockCardGoodsNo" >
+                                                    <label for="stockCardBrandsNo" class="form-label">No.</label>
+                                                    <input type="text" class="form-control" 
+                                                        name="stockCardBrandsNo" value="<%= stockCardBrands.no %>" readonly>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <label for="stockCardGoodsCode" class="form-label">Code</label>
-                                                    <input type="text" class="form-control" name="stockCardGoodsCode" required>
+                                                    <label for="stockCardBrandsCode" class="form-label">Code</label>
+                                                    <input type="text" class="form-control" 
+                                                        name="stockCardBrandsCode" value="<%= stockCardBrands.code %>" readonly>
                                                 </div>
 
+                                            </div>
 
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-sm-6">
-                                                    <label for="stockCardGoodsModel" class="form-label">Model</label>
-                                                    <input type="text" class="form-control" name="stockCardGoodsModel" required>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <label for="stockCardGoodsBrand" class="form-label">Brand</label>
-                                                    <select name="stockCardGoodsBrand" class="form-control form-select" aria-label="Default select example">
-                                                        <option value="">--- Select Brands ---</option>
-                                                        <% stockCardBrands.forEach(stockCardBrands => { %>
-                                                        <option value="<%= stockCardBrands.id %>"><%= stockCardBrands.name %></option>
-                                                        <% }) %> 
-                                                      </select> 
-                                                </div>
-                                            </div>
                                             <div class="form-group">
-                                                    <label for="stockCardGoodsKeyword" class="form-label">Full Keyword</label>
-                                                    <input type="text" class="form-control" name="stockCardGoodsKeyword" required>
+                                                <label for="stockCardBrandsName" class="form-label">Full name english</label>
+                                                <input type="text" class="form-control" 
+                                                    name="stockCardBrandsName" value="<%= stockCardBrands.name %>" readonly>
                                             </div>
-                                          
-    
+                                            <div class="form-group row">
+                                                <div class="col-sm-6">
+                                                    <label for="stockCardBrandsCreatedAt" class="form-label">CreatedAt</label>
+                                                    <input type="text" class="form-control" 
+                                                        name="stockCardBrandsCreatedAt" value="<%= stockCardBrands.createdAt %>" readonly>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label for="stockCardBrandsUpdatedAt" class="form-label">Updated At</label>
+                                                    <input type="text" class="form-control" 
+                                                        name="stockCardBrandsUpdatedAt" value="<%= stockCardBrands.updatedAt %>" readonly>
+                                                </div>
 
-                                            <button type="submit" class="btn btn-success btn-block">
-                                                <i class="fas fa-save fa-fw"></i>
-                                                <span class="text">Save</span></button>
-
+                                            </div>
                                         </form>
                                         <hr>
                                         <div class="text-center">
-                                            <a class="small" href="/tableTest">Back to ...</a>
+                                            <a class="small" href="/stockCardBrands">Back to ...</a>
                                         </div>
                                     </div>
                                 </div>

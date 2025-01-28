@@ -30,6 +30,9 @@ app.use('/position',require('./routes/position'));
 
 app.use('/tableTest',require('./routes/tableTest'));
 
+app.use('/stockCardBrands',require('./routes/stockCardBrands'));
+app.use('/stockCardGoods',require('./routes/stockCardGoods'));
+
 
 function isAuthenticated(req, res, next) {
     if (req.session.user) {

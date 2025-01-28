@@ -21,7 +21,7 @@ router.get('/',(req, res) => {
         db.query(sql2t, (err, results) => {
             if (err) throw err;
 
-            res.render('sbAdmin/tables', { 
+            res.render('stockCard/stockCardGoods', { 
                 title: 'Stock Card Goods Management',
                 stockCardGoods: results,
                 user: req.session.user
@@ -40,7 +40,7 @@ router.get('/Add', (req, res) => {
         db.query(sql, (err, results) => {
             if (err) throw err;
 
-            res.render('sbAdmin/tablesAdd',{ 
+            res.render('stockCard/stockCardGoodsAdd',{ 
                 title: 'Stock Card Goods Create',
                 stockCardBrands: results,
                 user: req.session.user });
@@ -64,7 +64,7 @@ router.post('/Add',(req, res) => {
             db.query(sql2t, (err, results) => {
                 if (err) throw err;
         
-                res.render('sbAdmin/tables', { 
+                res.render('stockCard/stockCardGoods', { 
                     title: 'Stock Card Goods Management',
                     stockCardGoods : results,
                     user: req.session.user
@@ -86,7 +86,7 @@ router.get('/Edit/:id', (req, res) => {
             const sql2 = "SELECT id,name FROM stockCardBrands ORDER BY name ASC";
             db.query(sql2, (err, stockCardBrands) => {
                 if (err) throw err;
-                res.render('sbAdmin/tablesEdit', {
+                res.render('stockCard/stockCardGoodsEdit', {
                     title: 'Stock Card Goods Edit', 
                     stockCardGoods : result[0] ,
                     stockCardBrands : stockCardBrands,
@@ -116,7 +116,7 @@ router.post('/Edit/:id',(req, res) => {
             db.query(sql2t, (err, results) => {
                 if (err) throw err;
         
-                res.render('sbAdmin/tables', { 
+                res.render('stockCard/stockCardGoods', { 
                     title: 'Stock Card Goods Management',
                     stockCardGoods : results,
                     user: req.session.user
@@ -139,7 +139,7 @@ router.get('/Del/:id', (req, res) => {
             db.query(sql2t, (err, results) => {
                 if (err) throw err;
         
-                res.render('sbAdmin/tables', { 
+                res.render('stockCard/stockCardGoods', { 
                     title: 'Stock Card Goods Management',
                     stockCardGoods : results,
                     user: req.session.user
@@ -158,7 +158,7 @@ router.get('/View/:id', (req, res) => {
         db.query(sql2t, [req.params.id], (err, result) => {
             if (err) throw err;
 
-            res.render('sbAdmin/tablesView', {
+            res.render('stockCard/stockCardGoodsView', {
                 title: 'Stock Card Goods View', 
                 stockCardGoods : result[0] ,
                 user: req.session.user 
