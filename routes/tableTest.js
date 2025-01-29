@@ -4,8 +4,6 @@ const mysql = require('mysql2');
 const path = require('path');
 const { v4: uuidv4 } = require("uuid");
 router.use(express.urlencoded({ extended: true }));
-const bcrypt = require('bcryptjs');
-const { Buffer } = require('buffer');
 const db = require("../models/db.js");
 
 function isAuthenticated(req, res, next) {
@@ -16,17 +14,16 @@ function isAuthenticated(req, res, next) {
     }
 }
 
-
 router.get('/',(req, res) => {
     try {
-        const sql = "SELECT * FROM users ORDER BY name ASC";
+        const sql2t = "SELECT goods.id,goods.no,goods.brandID as brandID ,brands.name as brand,goods.code,goods.model,goods.keyword,DATE_FORMAT(goods.createdAt, '%d/%l/%Y %H:%i:%s') as createdAt,DATE_FORMAT(goods.updatedAt, '%d/%l/%Y %H:%i:%s') as updatedAt FROM stockCardGoods goods left join stockCardBrands brands on goods.brandID = brands.id ORDER BY goods.no,goods.code ASC;";
 
-        db.query(sql, (err, results) => {
+        db.query(sql2t, (err, results) => {
             if (err) throw err;
 
             res.render('sbAdmin/tables', { 
-                title: 'Users Management',
-                users : results,
+                title: 'Stock Card Goods Management',
+                stockCardGoods: results,
                 user: req.session.user
             });
         })
@@ -36,46 +33,65 @@ router.get('/',(req, res) => {
     } 
 });
 
+
 router.get('/Add', (req, res) => {
-    res.render('sbAdmin/tablesAdd',{ 
-        title: 'Users Create',
-        user: req.session.user });
+    try {
+        const sql = "SELECT id,name FROM stockCardBrands ORDER BY name ASC";
+        db.query(sql, (err, results) => {
+            if (err) throw err;
+
+            res.render('sbAdmin/tablesAdd',{ 
+                title: 'Stock Card Goods Create',
+                stockCardBrands: results,
+                user: req.session.user });
+        })
+    } catch (err) {
+        console.error('Error view data:', err);
+        res.status(500).json({ error: 'Error view data into the database.' });
+    } 
+
 })
 
-router.post('/Add', (req, res) => {
-    const { userName, userEmail,userPassword,userRole }= req.body;
-    const uuid = uuidv4();
-    //const hashedPassword =bcrypt.hashSync(userPassword, 10);
-    const encodedData = Buffer.from(userPassword).toString('base64');
-    const sql = "INSERT INTO users (id,name, email,password,role ) VALUES(?, ?, ?, ?, ?)";
+router.post('/Add',(req, res) => {
     try {
-        db.query(sql, [uuid, userName, userEmail, encodedData, userRole ], (err, result) => {
+        const { stockCardGoodsNo,stockCardGoodsBrand,stockCardGoodsCode,stockCardGoodsModel,stockCardGoodsKeyword }= req.body;
+        const uuid = uuidv4();
+        const sql = "INSERT INTO stockCardGoods ( id, no,brandID,code, model ,keyword) VALUES(?, ?, ?, ?, ?, ?)";
+        db.query(sql, [ uuid,stockCardGoodsNo,stockCardGoodsBrand,stockCardGoodsCode, stockCardGoodsModel,stockCardGoodsKeyword ], (err, result) => {
             if (err) throw err;
-            const sql = "SELECT * FROM users ORDER BY name ASC";
-            db.query(sql, (err, results) => {
+             const sql2t = "SELECT goods.id,goods.no,goods.brandID as brandID ,brands.name as brand,goods.code,goods.model,goods.keyword,DATE_FORMAT(goods.createdAt, '%d/%l/%Y %H:%i:%s') as createdAt,DATE_FORMAT(goods.updatedAt, '%d/%l/%Y %H:%i:%s') as updatedAt FROM stockCardGoods goods left join stockCardBrands brands on goods.brandID = brands.id ORDER BY goods.no,goods.code ASC;";
+
+            db.query(sql2t, (err, results) => {
                 if (err) throw err;
+        
                 res.render('sbAdmin/tables', { 
-                    title: 'Users Management',
-                    users: results,
-                    user: req.session.user 
+                    title: 'Stock Card Goods Management',
+                    stockCardGoods : results,
+                    user: req.session.user
                 });
             })
-        }) 
+        })
     } catch (err) {
         console.error('Error inserting data:', err);
         res.status(500).json({ error: 'Error inserting data into the database.' });
-    }             
+    } 
 })
 
 router.get('/Edit/:id', (req, res) => {
-    const sql = "SELECT * FROM users WHERE id = ?";
     try {
-        db.query(sql, [req.params.id], (err, result) => {
+         const sql2t = "SELECT goods.id,goods.no,goods.brandID as brandID ,brands.name as brand,goods.code,goods.model,goods.keyword,DATE_FORMAT(goods.createdAt, '%d/%l/%Y %H:%i:%s') as createdAt,DATE_FORMAT(goods.updatedAt, '%d/%l/%Y %H:%i:%s') as updatedAt FROM stockCardGoods goods left join stockCardBrands brands on goods.brandID = brands.id WHERE goods.id = ? ;"
+        db.query(sql2t, [req.params.id], (err, result) => {
             if (err) throw err;
-            res.render('sbAdmin/tablesEdit', { 
-                title: 'Users Edit',
-                users: result[0] ,
-                user: req.session.user 
+            
+            const sql2 = "SELECT id,name FROM stockCardBrands ORDER BY name ASC";
+            db.query(sql2, (err, stockCardBrands) => {
+                if (err) throw err;
+                res.render('sbAdmin/tablesEdit', {
+                    title: 'Stock Card Goods Edit', 
+                    stockCardGoods : result[0] ,
+                    stockCardBrands : stockCardBrands,
+                    user: req.session.user 
+                });
             });
         });
     } catch (err) {
@@ -85,20 +101,25 @@ router.get('/Edit/:id', (req, res) => {
 })
 
 router.post('/Edit/:id',(req, res) => {
-    const { userNameE, userEmailE,userPasswordE,userRoleE } = req.body;
-    const data = userPasswordE;
-    const encodedData = Buffer.from(userPasswordE).toString('base64');
-    const sql = "UPDATE users SET name = ?, email = ?, password = ? , role = ? WHERE id = ?";
     try {
-        db.query(sql, [userNameE, userEmailE, encodedData, userRoleE , req.params.id], (err, result) => {
+        const { stockCardGoodsNoE,stockCardGoodsCodeE,stockCardGoodsBrandE,stockCardGoodsModelE } = req.body;
+        const today = new Date();
+        const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+        const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        const dateTime = date + ' ' + time;
+        const timestamp = dateTime;
+        const sql = "UPDATE stockCardGoods SET no = ?, Code = ?,brandID = ?, model = ?, updatedAt=?  WHERE id = ?";
+        db.query(sql, [stockCardGoodsNoE,stockCardGoodsCodeE,stockCardGoodsBrandE,stockCardGoodsModelE ,timestamp, req.params.id], (err, result) => {
             if (err) throw err;
-            const sql = "SELECT * FROM users ORDER BY name ASC";
-            db.query(sql, (err, results) => {
+            const sql2t = "SELECT goods.id,goods.no,goods.brandID as brandID ,brands.name as brand,goods.code,goods.model,goods.keyword,DATE_FORMAT(goods.createdAt, '%d/%l/%Y %H:%i:%s') as createdAt,DATE_FORMAT(goods.updatedAt, '%d/%l/%Y %H:%i:%s') as updatedAt FROM stockCardGoods goods left join stockCardBrands brands on goods.brandID = brands.id ORDER BY goods.no,goods.code ASC;";
+
+            db.query(sql2t, (err, results) => {
                 if (err) throw err;
+        
                 res.render('sbAdmin/tables', { 
-                    title: 'Users Management',
-                    users: results,
-                    user: req.session.user 
+                    title: 'Stock Card Goods Management',
+                    stockCardGoods : results,
+                    user: req.session.user
                 });
             })
         })
@@ -109,17 +130,19 @@ router.post('/Edit/:id',(req, res) => {
 })
 
 router.get('/Del/:id', (req, res) => {
-    const sql = "DELETE FROM users WHERE id = ?";
     try {
+        const sql = "DELETE FROM stockCardGoods WHERE id = ?";
         db.query(sql, [req.params.id], (err, result) => {
             if (err) throw err;
-            const sql = "SELECT * FROM users ORDER BY name ASC";
-            db.query(sql, (err, results) => {
+            const sql2t = "SELECT goods.id,goods.no,goods.brandID as brandID ,brands.name as brand,goods.code,goods.model,goods.keyword,DATE_FORMAT(goods.createdAt, '%d/%l/%Y %H:%i:%s') as createdAt,DATE_FORMAT(goods.updatedAt, '%d/%l/%Y %H:%i:%s') as updatedAt FROM stockCardGoods goods left join stockCardBrands brands on goods.brandID = brands.id ORDER BY goods.no,goods.code ASC;";
+
+            db.query(sql2t, (err, results) => {
                 if (err) throw err;
+        
                 res.render('sbAdmin/tables', { 
-                    title: 'Users Management',
-                    users: results,
-                    user: req.session.user 
+                    title: 'Stock Card Goods Management',
+                    stockCardGoods : results,
+                    user: req.session.user
                 });
             })
         });
@@ -131,13 +154,13 @@ router.get('/Del/:id', (req, res) => {
 
 router.get('/View/:id', (req, res) => {
     try {
-        const sql2t = "SELECT * FROM users WHERE id = ?";
+        const sql2t = "SELECT goods.id,goods.no,goods.brandID as brandID ,brands.name as brand,goods.code,goods.model,goods.keyword,DATE_FORMAT(goods.createdAt, '%d/%l/%Y %H:%i:%s') as createdAt,DATE_FORMAT(goods.updatedAt, '%d/%l/%Y %H:%i:%s') as updatedAt FROM stockCardGoods goods left join stockCardBrands brands on goods.brandID = brands.id WHERE goods.id = ? ;"
         db.query(sql2t, [req.params.id], (err, result) => {
             if (err) throw err;
 
             res.render('sbAdmin/tablesView', {
-                title: 'Users View', 
-                users : result[0] ,
+                title: 'Stock Card Goods View', 
+                stockCardGoods : result[0] ,
                 user: req.session.user 
             });
         });

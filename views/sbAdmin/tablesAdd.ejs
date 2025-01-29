@@ -58,30 +58,36 @@
                                         <form class="user" action="/tableTest/Add" method="POST">
                                             <div class="form-group row">
                                                 <div class="col-sm-6">
-                                                    <label for="name" class="form-label">Name</label>
-                                                    <input type="text" class="form-control" name="name" required>
+                                                    <label for="stockCardGoodsNo" class="form-label">No</label>
+                                                    <input type="text" class="form-control" name="stockCardGoodsNo" >
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <label for="role" class="form-label">Role</label>
-                                                    <select name="role" class="form-control form-select" aria-label="Default select example">
-                                                        <option value="">--- Select Role ---</option>
-                                                        <option selected value="USER">USER</option>
-                                                        <option value="LEADER">LEADER</option>
-                                                        <option value="HR">HR</option>
-                                                        <option value="MANAGER">MANAGER</option>
-                                                        <option value="ADMIN">ADMIN</option>
-                                                      </select> 
+                                                    <label for="stockCardGoodsCode" class="form-label">Code</label>
+                                                    <input type="text" class="form-control" name="stockCardGoodsCode" required>
                                                 </div>
 
+
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-6">
+                                                    <label for="stockCardGoodsModel" class="form-label">Model</label>
+                                                    <input type="text" class="form-control" name="stockCardGoodsModel" required>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label for="stockCardGoodsBrand" class="form-label">Brand</label>
+                                                    <select name="stockCardGoodsBrand" class="form-control form-select" aria-label="Default select example">
+                                                        <option value="">--- Select Brands ---</option>
+                                                        <% stockCardBrands.forEach(stockCardBrands => { %>
+                                                        <option value="<%= stockCardBrands.id %>"><%= stockCardBrands.name %></option>
+                                                        <% }) %> 
+                                                      </select> 
+                                                </div>
                                             </div>
                                             <div class="form-group">
-                                                    <label for="email" class="form-label">Email</label>
-                                                    <input type="email" class="form-control" name="email" required>
+                                                    <label for="stockCardGoodsKeyword" class="form-label">Full Keyword</label>
+                                                    <input type="text" class="form-control" name="stockCardGoodsKeyword" required>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="password" class="form-label">Password</label>
-                                                <input type="password" class="form-control" name="password" required>
-                                             </div>
+                                          
     
 
                                             <button type="submit" class="btn btn-success btn-block">
