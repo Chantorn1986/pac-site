@@ -54,45 +54,37 @@
                                 <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
                                 <div class="col-lg-12">
                                     <div class="p-5">
-                                        <form class="user" action="/tableTest/Edit/<%= stockCardGoods.id %>" method="POST">
-
-                                            <div class="form-group row">
-                                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                                    <label for="stockCardGoodsNoE" class="form-label">stockCardGoods No.</label>
-                                                    <input type="text" class="form-control" 
-                                                        name="stockCardGoodsNoE" value="<%= stockCardGoods.no %>" required>
-                                                </div>
-                                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                                    <label for="stockCardGoodsCodeE" class="form-label">stockCardGoods Code</label>
-                                                    <input type="text" class="form-control" 
-                                                        name="stockCardGoodsCodeE" value="<%= stockCardGoods.code %>" required>
-                                                </div>
-                                            </div>
+                                        <form class="user" action="/tableTest/Edit/<%= users.id %>" method="POST">
 
                                             <div class="form-group row">
                                                 <div class="col-sm-6">
-                                                    <label for="stockCardGoodsModelE" class="form-label">Model</label>
-                                                    <input type="text" class="form-control" name="stockCardGoodsModelE" 
-                                                    value="<%= stockCardGoods.model %>">
+                                                    <label for="nameE" class="form-label">Name</label>
+                                                    <input type="text" class="form-control" name="nameE" 
+                                                    value="<%= users.name %>" required>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <label for="stockCardGoodsBrandE" class="form-label">Brand</label>
-                                                    <select name="stockCardGoodsBrandE" class="form-control form-select" aria-label="Default select example">
-                                                        <option value="<%= stockCardGoods.brandID %>"><%= stockCardGoods.brand %></option>
-                                                        <option value="">--- Select Brands ---</option>
-                                                        <% stockCardBrands.forEach(stockCardBrands => { %>
-                                                        <option value="<%= stockCardBrands.id %>"><%= stockCardBrands.name %></option>
-                                                        <% }) %> 
+                                                    <label for="roleE" class="form-label">Role</label>
+                                                    <select name="roleE" class="form-control form-select" aria-label="Default select example">
+                                                        <option value="<%= users.role %>"><%= users.role %></option>
+                                                        <option value="">--- Select Role ---</option>
+                                                        <option value="USER">USER</option>
+                                                        <option value="LEADER">LEADER</option>
+                                                        <option value="HR">HR</option>
+                                                        <option value="MANAGER">MANAGER</option>
+                                                        <option value="ADMIN">ADMIN</option>
                                                       </select> 
                                                 </div>
+
                                             </div>
-
-
                                             <div class="form-group">
-                                                <label for="stockCardGoodsKeywordE" class="form-label">Full Keyword</label>
-                                                <input type="text" class="form-control" name="stockCardGoodsKeywordE" 
-                                                value="<%= stockCardGoods.keyword %>">
+                                                    <label for="emailE" class="form-label">Email</label>
+                                                    <input type="email" class="form-control" name="emailE" 
+                                                    value="<%= users.email %>" required>
                                             </div>
+                                            <div class="form-group">
+                                                <label for="passwordE" class="form-label">Password</label>
+                                                <input type="password" class="form-control" name="passwordE" required>
+                                             </div>
 
                                             
                                             <button type="submit" class="btn btn-success btn-block">

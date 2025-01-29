@@ -94,7 +94,32 @@ router.post('/login',(req,res)=>{
 
         if (result.length > 0) {
             const user = result[0];
-            decodedData = Buffer.from(user.password, 'base64').toString('utf8');
+            bcrypt.compare(password, user.password, (err, data) => {
+                //if error than throw error
+                if (err) throw err
+
+                //if both match than you can do anything
+                if (data) {
+                    req.session.user = user;
+                    const sql = "SELECT * FROM products";
+                
+                    db.query(sql, (err, results) => {
+                        if (err) throw err;
+                        
+                        res.render('home', { 
+                            title: 'Home',
+                            products: results,
+                            user : user
+                        });
+                    })
+                } else {
+                    return res.render('login',{ 
+                        success: false,
+                        error_msg: "Password ไม่ถูกต้อง!!" });               
+                }
+
+            })
+            /*decodedData = Buffer.from(user.password, 'base64').toString('utf8');
             if (password === decodedData) {
                 req.session.user = user;
 
@@ -113,7 +138,7 @@ router.post('/login',(req,res)=>{
                 return res.render('login',{ 
                     success: false,
                     error_msg: "Password ไม่ถูกต้อง!!" }); 
-            }
+            }*/
         } else {
             return res.render('login',{ 
                 success: false,
