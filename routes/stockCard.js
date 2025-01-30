@@ -121,16 +121,13 @@ router.get('/Edit/:id', (req, res) => {
 router.post('/Edit/:id',(req, res) => {
     try {
         const { stockCardGoodsIDE,stockCardDateE,stockCardDocumentE,stockCardStatusIDE,stockCardQtyE,stockCardNoteE } = req.body;
-        const sql = "UPDATE `stockCard` SET `goodsID`=?,`date`=?,`document`=?,`statusID`=?,`qty`=?,`note`=?,`updatedAt`=?  WHERE id = ?";
+        const sql = "UPDATE stockCard SET goodsID=?,date=?,document=?,statusID=?,qty=?,note=?,updatedAt=?  WHERE id = ?";
         const today = new Date();
-        const date = Date().getFullYear() + '-' + (Date().getMonth() + 1) + '-' + Date().getDate();
-        const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-        const dateTime = date + ' ' + time;
-        const timestamp = dateTime;
+        const timestamp= moment(today).format();
+
         db.query(sql, [ stockCardGoodsIDE,stockCardDateE,stockCardDocumentE,stockCardStatusIDE,stockCardQtyE,stockCardNoteE,timestamp, req.params.id], (err, result) => {
             if (err) throw err;
             const sql2t = "SELECT * FROM `view_stockCard_goodsBrandsStatus` ORDER BY date DESC;";
-
             db.query(sql2t, (err, results) => {
                 if (err) throw err;
         
