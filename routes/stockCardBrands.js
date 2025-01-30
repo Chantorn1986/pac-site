@@ -16,7 +16,7 @@ function isAuthenticated(req, res, next) {
 
 router.get('/',(req, res) => {
     try {
-        const sql = "SELECT id,no,code,name,DATE_FORMAT(createdAt, '%d/%l/%Y %H:%i:%s') as createdAt,DATE_FORMAT(updatedAt, '%d/%l/%Y %H:%i:%s') as updatedAt FROM stockCardBrands ORDER BY no,code ASC";
+        const sql = "SELECT id,no,code,name,DATE_FORMAT(createdAt, '%d/%m/%Y %H:%i:%s') as createdAt,DATE_FORMAT(updatedAt, '%d/%m/%Y %H:%i:%s') as updatedAt FROM stockCardBrands ORDER BY no,code ASC";
         db.query(sql, (err, results) => {
             if (err) throw err;
 
@@ -45,7 +45,7 @@ router.post('/Add',(req, res) => {
     const sql = "INSERT INTO stockCardBrands ( id, no,code, name ) VALUES(?, ?, ?,?)";
     db.query(sql, [ uuid,stockCardBrandsNo,stockCardBrandsCode, stockCardBrandsName ], (err, result) => {
         if (err) throw err;
-        const sql = "SELECT id,no,code,name,DATE_FORMAT(createdAt, '%d/%l/%Y %H:%i:%s') as createdAt,DATE_FORMAT(updatedAt, '%d/%l/%Y %H:%i:%s') as updatedAt FROM stockCardBrands ORDER BY no,code ASC";
+        const sql = "SELECT id,no,code,name,DATE_FORMAT(createdAt, '%d/%m/%Y %H:%i:%s') as createdAt,DATE_FORMAT(updatedAt, '%d/%m/%Y %H:%i:%s') as updatedAt FROM stockCardBrands ORDER BY no,code ASC";
 
         db.query(sql, (err, results) => {
             if (err) throw err;
@@ -81,7 +81,7 @@ router.post('/Edit/:id',(req, res) => {
     const sql = "UPDATE stockCardBrands SET no = ?, Code = ?, name = ?, updatedAt=?  WHERE id = ?";
     db.query(sql, [stockCardBrandsNoE,stockCardBrandsCodeE,stockCardBrandsNameE ,timestamp, req.params.id], (err, result) => {
         if (err) throw err;
-        const sql = "SELECT id,no,code,name,DATE_FORMAT(createdAt, '%d/%l/%Y %H:%i:%s') as createdAt,DATE_FORMAT(updatedAt, '%d/%l/%Y %H:%i:%s') as updatedAt FROM stockCardBrands ORDER BY no,code ASC";
+        const sql = "SELECT id,no,code,name,DATE_FORMAT(createdAt, '%d/%m/%Y %H:%i:%s') as createdAt,DATE_FORMAT(updatedAt, '%d/%m/%Y %H:%i:%s') as updatedAt FROM stockCardBrands ORDER BY no,code ASC";
 
         db.query(sql, (err, results) => {
             if (err) throw err;
@@ -99,7 +99,7 @@ router.get('/Del/:id', (req, res) => {
     const sql = "DELETE FROM stockCardBrands WHERE id = ?";
     db.query(sql, [req.params.id], (err, result) => {
         if (err) throw err;
-        const sql = "SELECT id,no,code,name,DATE_FORMAT(createdAt, '%d/%l/%Y %H:%i:%s') as createdAt,DATE_FORMAT(updatedAt, '%d/%l/%Y %H:%i:%s') as updatedAt FROM stockCardBrands ORDER BY no ASC";
+        const sql = "SELECT id,no,code,name,DATE_FORMAT(createdAt, '%d/%m/%Y %H:%i:%s') as createdAt,DATE_FORMAT(updatedAt, '%d/%m/%Y %H:%i:%s') as updatedAt FROM stockCardBrands ORDER BY no ASC";
 
         db.query(sql, (err, results) => {
             if (err) throw err;
@@ -114,7 +114,7 @@ router.get('/Del/:id', (req, res) => {
 })
 
 router.get('/View/:id', (req, res) => {
-    const sql = "SELECT id,no,code,name,DATE_FORMAT(createdAt, '%d/%l/%Y %H:%i:%s') as createdAt,DATE_FORMAT(updatedAt, '%d/%l/%Y %H:%i:%s') as updatedAt FROM stockCardBrands WHERE id = ? ";
+    const sql = "SELECT id,no,code,name,DATE_FORMAT(createdAt, '%d/%m/%Y %H:%i:%s') as createdAt,DATE_FORMAT(updatedAt, '%d/%m/%Y %H:%i:%s') as updatedAt FROM stockCardBrands WHERE id = ? ";
     db.query(sql, [req.params.id], (err, result) => {
         if (err) throw err;
         res.render('stockCard/stockCardBrandsView', {
