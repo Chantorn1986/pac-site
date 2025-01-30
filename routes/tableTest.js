@@ -17,7 +17,7 @@ function isAuthenticated(req, res, next) {
 
 router.get('/',(req, res) => {
     try {
-        const sql2t = "SELECT * FROM `view_stockCard_goodsBrandsStatus` ORDER BY date DESC;";
+        const sql2t = "SELECT * FROM `view_stockCard_goodsBrandsStatus` ORDER BY cardDate DESC;";
 
         db.query(sql2t, (err, results) => {
             if (err) throw err;
@@ -67,7 +67,7 @@ router.post('/Add',(req, res) => {
     try {
         db.query(sqlAdd, [ uuid,stockCardGoodsID,stockCardDate,stockCardDocument,stockCardStatusID,stockCardQty,stockCardNote], (err, result) => {
             if (err) throw err;
-            const sql2t = "SELECT * FROM `view_stockCard_goodsBrandsStatus` ORDER BY date DESC;";
+            const sql2t = "SELECT * FROM `view_stockCard_goodsBrandsStatus` ORDER BY cardDate DESC;";
             
             db.query(sql2t, (err, results) => {
                 if (err) throw err;
@@ -129,7 +129,7 @@ router.post('/Edit/:id',(req, res) => {
         const timestamp = dateTime;
         db.query(sql, [ stockCardGoodsIDE,stockCardDateE,stockCardDocumentE,stockCardStatusIDE,stockCardQtyE,stockCardNoteE,timestamp, req.params.id], (err, result) => {
             if (err) throw err;
-            const sql2t = "SELECT * FROM `view_stockCard_goodsBrandsStatus` ORDER BY date DESC;";
+            const sql2t = "SELECT * FROM `view_stockCard_goodsBrandsStatus` ORDER BY cardDate DESC;";
 
             db.query(sql2t, (err, results) => {
                 if (err) throw err;
@@ -152,7 +152,7 @@ router.get('/Del/:id', (req, res) => {
         const sql = "DELETE FROM stockCardStatus WHERE id = ?";
         db.query(sql, [req.params.id], (err, result) => {
             if (err) throw err;
-            const sql2t = "SELECT * FROM `view_stockCard_goodsBrandsStatus` ORDER BY date DESC;";
+            const sql2t = "SELECT * FROM `view_stockCard_goodsBrandsStatus` ORDER BY cardDate DESC;";
 
             db.query(sql2t, (err, results) => {
                 if (err) throw err;
