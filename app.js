@@ -30,8 +30,10 @@ app.use('/position',require('./routes/position'));
 
 app.use('/tableTest',require('./routes/tableTest'));
 
-app.use('/stockCardBrands',require('./routes/stockCardBrands'));
+app.use('/stockCard',require('./routes/stockCard'));
 app.use('/stockCardGoods',require('./routes/stockCardGoods'));
+app.use('/stockCardBrands',require('./routes/stockCardBrands'));
+app.use('/stockCardStatus',require('./routes/stockCardStatus'));
 
 
 function isAuthenticated(req, res, next) {
@@ -41,73 +43,7 @@ function isAuthenticated(req, res, next) {
         res.redirect('/login');
     }
 }
-/*
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'public/uploads/');
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname));
-    }
-})
 
-const upload = multer({ storage });
-
-app.get('/', (req, res) => {
-    const sql = "SELECT * FROM products";
-
-    db.query(sql, (err, results) => {
-        if (err) throw err;
-
-        res.render('home', { 
-            title: 'Home',
-            products: results
-        });
-    })
-});
-
-app.get('/create', (req, res) => {
-    res.render('create');
-})
-
-app.post('/create', upload.single('image'), (req, res) => {
-    const { name, description } = req.body;
-    const image = req.file ? req.file.filename : null;
-
-    const sql = "INSERT INTO products (name, description, image) VALUES(?, ?, ?)";
-    db.query(sql, [name, description, image], (err, result) => {
-        if (err) throw err;
-        res.redirect('/');
-    })
-})
-
-app.get('/edit/:id', (req, res) => {
-    const sql = "SELECT * FROM products WHERE id = ?";
-    db.query(sql, [req.params.id], (err, result) => {
-        if (err) throw err;
-        res.render('edit', { product: result[0] });
-    });
-})
-
-app.post('/edit/:id', upload.single('image'), (req, res) => {
-    const { name, description } = req.body;
-    const image = req.file ? req.file.filename : req.body.oldImage;
-
-    const sql = "UPDATE products SET name = ?, description = ?, image = ? WHERE id = ?";
-    db.query(sql, [name, description, image, req.params.id], (err, result) => {
-        if (err) throw err;
-        res.redirect('/');
-    })
-})
-
-app.get('/delete/:id', (req, res) => {
-    const sql = "DELETE FROM products WHERE id = ?";
-    db.query(sql, [req.params.id], (err, result) => {
-        if (err) throw err;
-        res.redirect('/');
-    });
-})
-*/
 app.get('/about',isAuthenticated, (req, res) => {
     res.render('about', { 
         title: 'About',

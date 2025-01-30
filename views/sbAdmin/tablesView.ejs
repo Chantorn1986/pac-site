@@ -54,74 +54,43 @@
                                 <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
                                 <div class="col-lg-12">
                                     <div class="p-4">
-                                        <div class="form-group row">
-                                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                                <label for="stockCardGoodsNoE" class="form-label">stockCardGoods No.</label>
-                                                <input type="text" class="form-control" 
-                                                    name="stockCardGoodsNoE" value="<%= stockCardGoods.no %>" readonly>
-                                            </div>
-                                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                                <label for="stockCardGoodsCodeE" class="form-label">stockCardGoods Code</label>
-                                                <input type="text" class="form-control" 
-                                                    name="stockCardGoodsCodeE" value="<%= stockCardGoods.code %>" readonly>
-                                            </div>
-                                        </div>
 
-                                        <div class="form-group row">
-                                            <div class="col-sm-6">
-                                                <label for="stockCardGoodsModelE" class="form-label">Model</label>
-                                                <input type="text" class="form-control" name="stockCardGoodsModelE" 
-                                                value="<%= stockCardGoods.model %>" readonly>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <label for="stockCardGoodsBrandE" class="form-label">Brand</label>
-                                                <input type="text" class="form-control" name="stockCardGoodsBrandE" 
-                                                value="<%= stockCardGoods.brand %>" readonly>
-                                            </div>
-                                        </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-9">
+                                                    <label for="stockCardGoodsIDE" class="form-label">Goods</label>
+                                                    <input type="text" class="form-control" name="stockCardGoodsIDE" 
+                                                    value="<%= stockCard.keyword %>" readonly>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="stockCardDateE" class="form-label">Date</label>
+                                                    <input type="text" class="form-control" name="stockCardDateE" 
+                                                    value="<%= stockCard.date %>" readonly>
+                                                </div>
 
 
-                                        <div class="form-group">
-                                            <label for="stockCardGoodsKeywordE" class="form-label">Full Keyword</label>
-                                            <input type="text" class="form-control" name="stockCardGoodsKeywordE" 
-                                            value="<%= stockCardGoods.keyword %>" readonly>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <div class="col-sm-3">
-                                                <label for="stockCardGoodsPriceE" class="form-label">Price</label>
-                                                <input type="number" class="form-control" name="stockCardGoodsPriceE" 
-                                                value="<%= stockCardGoods.price %>" readonly>
                                             </div>
-                                            <div class="col-sm-3">
-                                                <label for="stockCardGoodsLimitPriceE" class="form-label">Limit Price</label>
-                                                <input type="number" class="form-control" name="stockCardGoodsLimitPriceE" 
-                                                value="<%= stockCardGoods.limitPrice %>" readonly>
+                                            <div class="form-group row">
+                                                <div class="col-sm-4">
+                                                    <label for="stockCardDocumentE" class="form-label">Document</label>
+                                                    <input type="text" class="form-control" name="stockCardDocumentE" 
+                                                    value="<%= stockCard.document %>" readonly>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label for="stockCardStatusIDE" class="form-label">Document status</label>
+                                                    <input type="text" class="form-control" name="stockCardStatusIDE" 
+                                                    value="<%= stockCard.statusName %>" readonly>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label for="stockCardQtyE" class="form-label">Qty</label>
+                                                    <input type="number" class="form-control" name="stockCardQtyE" 
+                                                    value="<%= stockCard.qty %>" readonly>
+                                                </div>
                                             </div>
-                                            <div class="col-sm-3">
-                                                <label for="stockCardGoodsRemainE" class="form-label">Remain</label>
-                                                <input type="text" class="form-control" name="stockCardGoodsRemainE" 
-                                                value="<%= stockCardGoods.remain %>" readonly>
+                                            <div class="form-group">
+                                                <label for="stockCardNoteE" class="form-label">Note</label>
+                                                <input type="text" class="form-control" name="stockCardNoteE" 
+                                                value="<%= stockCard.note %>" readonly>
                                             </div>
-                                            <div class="col-sm-3">
-                                                <label for="stockCardGoodsShelfE" class="form-label">Shelf</label>
-                                                <input type="text" class="form-control" name="stockCardGoodsShelfE" 
-                                                value="<%= stockCardGoods.shelf %>" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <div class="col-sm-6">
-                                                <label for="stockCardGoodsRemarkPurchaseE" class="form-label">Remark for Purchase</label>
-                                                <input type="text" class="form-control" name="stockCardGoodsRemarkPurchaseE" 
-                                                value="<%= stockCardGoods.remarkPurchase %>" readonly>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <label for="stockCardGoodsRemarkSaleE" class="form-label">Remark for Sale</label>
-                                                <input type="text" class="form-control" name="stockCardGoodsRemarkSaleE" 
-                                                value="<%= stockCardGoods.remarkSale %>" readonly>
-                                            </div>
-                                        </div>
-
                                             <hr>
                                             <div class="text-center">
                                                 <a class="small" href="/tableTest">Back to ...</a>
