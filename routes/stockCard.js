@@ -146,7 +146,7 @@ router.post('/Edit/:id',(req, res) => {
 
 router.get('/Del/:id', (req, res) => {
     try {
-        const sql = "DELETE FROM stockCardStatus WHERE id = ?";
+        const sql = "DELETE FROM stockCard WHERE id = ?";
         db.query(sql, [req.params.id], (err, result) => {
             if (err) throw err;
             const sql2t = "SELECT * FROM `view_stockCard_goodsBrandsStatus` ORDER BY cardDate DESC;";
@@ -185,5 +185,24 @@ router.get('/View/:id', (req, res) => {
         res.status(500).json({ error: 'Error view data into the database.' });
     }
 })
+
+router.get('/Report',(req, res) => {
+    try {
+        const sql2t = "SELECT * FROM `viewRpt_stockCard` ORDER BY code ASC;";
+
+        db.query(sql2t, (err, results) => {
+            if (err) throw err;
+
+            res.render('stockCard/stockCardReport', { 
+                title: 'Stock Card Management',
+                stockCard : results,
+                user: req.session.user
+            });
+        })
+    } catch (err) {
+        console.error('Error view data:', err);
+        res.status(500).json({ error: 'Error view data into the database.' });
+    } 
+});
 
 module.exports =  router;
