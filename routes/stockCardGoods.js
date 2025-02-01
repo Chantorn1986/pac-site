@@ -54,19 +54,20 @@ router.get('/Add', (req, res) => {
 
 router.post('/Add',(req, res) => {
     try {
-        const { stockCardGoodsNo,stockCardGoodsBrand,stockCardGoodsCode,stockCardGoodsModel,stockCardGoodsKeyword,stockCardGoodsPrice ,stockCardGoodsLimitPrice ,stockCardGoodsShelf , stockCardGoodsRemarkPurchase ,stockCardGoodsRemarkSale , stockCardGoodsRemain }= req.body;
+        const { stockCardGoodsNo,stockCardGoodsBrand,stockCardGoodsCode,stockCardGoodsModel,stockCardGoodsKeyword,stockCardGoodsPrice ,stockCardGoodsLimitPrice ,stockCardGoodsShelf , stockCardGoodsRemarkPurchase ,stockCardGoodsRemarkSale , stockCardGoodsRemain,stockCardGoodsLength }= req.body;
         const uuid = uuidv4();
-        const sql = "INSERT INTO stockCardGoods ( id, no,brandID,code, model ,keyword,price , limitPrice ,shelf , remarkPurchase ,remarkSale , remain) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        db.query(sql, [ uuid,stockCardGoodsNo,stockCardGoodsBrand,stockCardGoodsCode, stockCardGoodsModel,stockCardGoodsKeyword,stockCardGoodsPrice ,stockCardGoodsLimitPrice ,stockCardGoodsShelf , stockCardGoodsRemarkPurchase ,stockCardGoodsRemarkSale , stockCardGoodsRemain ], (err, result) => {
+        const sql = "INSERT INTO stockCardGoods ( id, no,brandID,code, model ,keyword,price , limitPrice ,shelf , remarkPurchase ,remarkSale , remain,length) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        db.query(sql, [ uuid,stockCardGoodsNo,stockCardGoodsBrand,stockCardGoodsCode, stockCardGoodsModel,stockCardGoodsKeyword,stockCardGoodsPrice ,stockCardGoodsLimitPrice ,stockCardGoodsShelf , stockCardGoodsRemarkPurchase ,stockCardGoodsRemarkSale , stockCardGoodsRemain,stockCardGoodsLength ], (err, result) => {
             if (err) throw err;
-             const sql2t = "SELECT * FROM view_goods_brands ;";
+
+            const sql2t = "SELECT * FROM `viewRpt_stockCard` ORDER BY code ASC;";
 
             db.query(sql2t, (err, results) => {
                 if (err) throw err;
-        
-                res.render('stockCard/stockCardGoods', { 
-                    title: 'Stock Card Goods Management',
-                    stockCardGoods : results,
+
+                res.render('stockCard/stockCardReportBackEnd', { 
+                    title: 'Stock Card Management',
+                    stockCard : results,
                     user: req.session.user
                 });
             })
@@ -102,14 +103,14 @@ router.get('/Edit/:id', (req, res) => {
 
 router.post('/Edit/:id',(req, res) => {
     try {
-        const { stockCardGoodsNoE,stockCardGoodsCodeE,stockCardGoodsBrandE,stockCardGoodsModelE,stockCardGoodsKeywordE,stockCardGoodsPriceE ,stockCardGoodsLimitPriceE ,stockCardGoodsShelfE , stockCardGoodsRemarkPurchaseE ,stockCardGoodsRemarkSaleE , stockCardGoodsRemainE } = req.body;
+        const { stockCardGoodsNoE,stockCardGoodsCodeE,stockCardGoodsBrandE,stockCardGoodsModelE,stockCardGoodsKeywordE,stockCardGoodsPriceE ,stockCardGoodsLimitPriceE ,stockCardGoodsShelfE , stockCardGoodsRemarkPurchaseE ,stockCardGoodsRemarkSaleE , stockCardGoodsRemainE,stockCardGoodsLengthE } = req.body;
         const today = new Date();
         const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
         const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
         const dateTime = date + ' ' + time;
         const timestamp = dateTime;
-        const sql = "UPDATE stockCardGoods SET no = ?, Code = ?,brandID = ?, model = ?,keyword = ?, updatedAt=? ,price=? , limitPrice=? ,shelf=? , remarkPurchase=? ,remarkSale=? , remain=?  WHERE id = ?";
-        db.query(sql, [stockCardGoodsNoE,stockCardGoodsCodeE,stockCardGoodsBrandE,stockCardGoodsModelE,stockCardGoodsKeywordE ,timestamp,stockCardGoodsPriceE ,stockCardGoodsLimitPriceE ,stockCardGoodsShelfE , stockCardGoodsRemarkPurchaseE ,stockCardGoodsRemarkSaleE , stockCardGoodsRemainE, req.params.id], (err, result) => {
+        const sql = "UPDATE stockCardGoods SET no = ?, Code = ?,brandID = ?, model = ?,keyword = ?, updatedAt=? ,price=? , limitPrice=? ,shelf=? , remarkPurchase=? ,remarkSale=? , remain=? ,length =?  WHERE id = ?";
+        db.query(sql, [stockCardGoodsNoE,stockCardGoodsCodeE,stockCardGoodsBrandE,stockCardGoodsModelE,stockCardGoodsKeywordE ,timestamp,stockCardGoodsPriceE ,stockCardGoodsLimitPriceE ,stockCardGoodsShelfE , stockCardGoodsRemarkPurchaseE ,stockCardGoodsRemarkSaleE , stockCardGoodsRemainE,stockCardGoodsLengthE, req.params.id], (err, result) => {
             if (err) throw err;
             const sql2t = "SELECT * FROM view_goods_brands ;";
 

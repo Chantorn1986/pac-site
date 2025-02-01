@@ -57,15 +57,20 @@
                                         <form class="user" action="/stockCardGoods/Edit/<%= stockCardGoods.id %>" method="POST">
 
                                             <div class="form-group row">
-                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                <div class="col-sm-4 mb-3 mb-sm-0">
                                                     <label for="stockCardGoodsNoE" class="form-label">stockCardGoods No.</label>
                                                     <input type="text" class="form-control" 
                                                         name="stockCardGoodsNoE" value="<%= stockCardGoods.no %>" required>
                                                 </div>
-                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                <div class="col-sm-4 mb-3 mb-sm-0">
                                                     <label for="stockCardGoodsCodeE" class="form-label">stockCardGoods Code</label>
                                                     <input type="text" class="form-control" 
                                                         name="stockCardGoodsCodeE" value="<%= stockCardGoods.code %>" required>
+                                                </div>
+                                                <div class="col-sm-4 mb-3 mb-sm-0">
+                                                    <label for="stockCardGoodsLengthE" class="form-label">Length (m.)</label>
+                                                    <input type="number" class="form-control" name="stockCardGoodsLengthE" 
+                                                    value="<%= stockCardGoods.length %>">
                                                 </div>
                                             </div>
 
@@ -134,7 +139,7 @@
                                         </form>
                                         <hr>
                                         <div class="text-center">
-                                            <a class="small" href="/stockCardGoods">Back to ...</a>
+                                            <a class="small" href="/stockCard/AddCard/<%= stockCardGoods.id %>">Back to ...</a>
                                         </div>
                                     </div>
                                 </div>

@@ -33,14 +33,39 @@ router.get('/',(req, res) => {
         res.status(500).json({ error: 'Error view data into the database.' });
     } 
 });
-
 router.get('/Add', (req, res) => {
-   const sql1 = "SELECT id,keyword FROM stockCardGoods ORDER BY keyword ASC";
+    const sql1 = "SELECT id,keyword FROM stockCardGoods ORDER BY keyword ASC";
+    const sql2 = "SELECT id,nameEN FROM stockCardStatus ORDER BY no ASC";
+    const now = new Date();
+    const dateString = moment(now).format('YYYY-MM-DD');
+    try {
+         db.query(sql1, (err, results1) => {
+             if (err) throw err;
+ 
+             db.query(sql2, (err, results2) => {
+                 if (err) throw err;
+     
+                 res.render('stockCard/stockCardAdd',{ 
+                     title: 'Stock Card Create',
+                     stockCardGoods : results1,
+                     stockCardStatus : results2,
+                     dateDefault:dateString,
+                     user: req.session.user });
+            })
+        })    
+     } catch (err) {
+         console.error('Error view data:', err);
+         res.status(500).json({ error: 'Error view data into the database.' }); stockCardStatus
+     } 
+ })
+
+router.get('/Add/:id', (req, res) => {
+   const sql1 = "SELECT id,keyword FROM stockCardGoods WHERE id = ?";
    const sql2 = "SELECT id,nameEN FROM stockCardStatus ORDER BY no ASC";
    const now = new Date();
    const dateString = moment(now).format('YYYY-MM-DD');
    try {
-        db.query(sql1, (err, results1) => {
+        db.query(sql1,[req.params.id], (err, results1) => {
             if (err) throw err;
 
             db.query(sql2, (err, results2) => {
@@ -67,8 +92,8 @@ router.post('/Add',(req, res) => {
     try {
         db.query(sqlAdd, [ uuid,stockCardGoodsID,stockCardDate,stockCardDocument,stockCardStatusID,stockCardQty,stockCardNote], (err, result) => {
             if (err) throw err;
+
             const sql2t = "SELECT * FROM `view_stockCard_goodsBrandsStatus` ORDER BY cardDate DESC;";
-            
             db.query(sql2t, (err, results) => {
                 if (err) throw err;
         
@@ -204,5 +229,56 @@ router.get('/Report',(req, res) => {
         res.status(500).json({ error: 'Error view data into the database.' });
     } 
 });
+
+router.get('/ReportBackEnd',(req, res) => {
+    try {
+        const sql2t = "SELECT * FROM `viewRpt_stockCard` ORDER BY code ASC;";
+
+        db.query(sql2t, (err, results) => {
+            if (err) throw err;
+
+            res.render('stockCard/stockCardReportBackEnd', { 
+                title: 'Stock Card Management',
+                stockCard : results,
+                user: req.session.user
+            });
+        })
+    } catch (err) {
+        console.error('Error view data:', err);
+        res.status(500).json({ error: 'Error view data into the database.' });
+    } 
+});
+
+router.get('/AddCard/:id', (req, res) => {
+    const paramsID = req.params.id ;
+    const sql1 = "SELECT * FROM view_goods_brands WHERE id = ? ;";
+    const sql2 = "SELECT id,name FROM stockCardBrands ORDER BY name ASC";
+    const sql3 = "SELECT * FROM view_stockCard_goodsBrandsStatus WHERE goodsID = ?;";
+   
+    try {
+        db.query(sql1, [paramsID], (err, result) => {
+            if (err) throw err;
+            
+            db.query(sql2, (err, stockCardBrands) => {
+                if (err) throw err;
+
+                db.query(sql3, [paramsID],  (err, results) => {
+                    if (err) throw err;
+
+                    res.render('stockCard/stockCardAddGoods', { 
+                        title: 'Stock Card Management',
+                        stockCard : results,
+                        stockCardGoods : result[0] ,
+                        stockCardBrands : stockCardBrands,
+                        user: req.session.user 
+                    });
+                })
+            });
+        });
+    } catch (err) {
+        console.error('Error view data:', err);
+        res.status(500).json({ error: 'Error view data into the database.' });
+    }
+ })
 
 module.exports =  router;

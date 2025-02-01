@@ -45,8 +45,14 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <div class="card o-hidden border-0 shadow-lg ">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">PAC APP - <%= title %></h6>
+                        <div class="card-header py-3 d-flex">
+                            <h6 class="m-0 font-weight-bold text-primary">PAC APP - Goods Management</h6>
+                            <a href="/stockCardGoods/Edit/<%= stockCardGoods.id %>" class="btn btn-warning btn-icon-split ml-auto btn-sm">
+                                <span class="icon text-white-50">
+                                    <i class="fas fa-pen"></i>
+                                </span>
+                                <span class="text">Edit Goods</span>
+                            </a>
                         </div>
                         <div class="card-body p-0">
                             <!-- Nested Row within Card Body -->
@@ -137,10 +143,7 @@
                                                     name="stockCardBrandsUpdatedAt" value="<%= stockCardGoods.updatedAt %>" readonly>
                                             </div>
                                         </div>
-                                            <hr>
-                                            <div class="text-center">
-                                                <a class="small" href="/stockCardGoods">Back to ...</a>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -149,7 +152,90 @@
                         <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
                     </div>
                     <!-- /.container-fluid -->
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
 
+                    <!-- Page Heading -->
+                   <!-- <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+                    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
+                        For more information about DataTables, please visit the <a target="_blank"
+                            href="https://datatables.net">official DataTables documentation</a>.</p>-->
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3 d-flex">
+                            <h6 class="m-0 font-weight-bold text-primary">PAC APP - <%= title %></h6>
+                            <!--<a href="/tablesAdd" class="btn btn-info btn-circle btn-sm ml-auto"><i class="fas fa-plus"></i></a>-->
+                            <a href="/stockCard/Add/<%= stockCardGoods.id %>" class="btn btn-primary btn-icon-split ml-auto btn-sm">
+                                <span class="icon text-white-50">
+                                    <i class="fas fa-plus-circle"></i>
+                                </span>
+                                <span class="text">Create Stock Card</span>
+                            </a>
+                            
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Code</th>
+                                            <th>Model</th>
+                                            <th>Document</th>
+                                            <th>Status</th>
+                                            <th>Qty</th>
+                                            <th>Note</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Code</th>
+                                            <th>Model</th>
+                                            <th>Document</th>
+                                            <th>Status</th>
+                                            <th>Qty</th>
+                                            <th>Note</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <% stockCard.forEach(stockCard => { %>
+                                            <tr>
+                                                <td><%= stockCard.cardDate %></td>
+                                                <td><%= stockCard.goodsCode %></td>
+                                                <td><%= stockCard.model %></td>
+                                                <td><%= stockCard.document %></td>
+                                                <td><%= stockCard.statusName %></td>
+                                                <td><%= stockCard.qty %></td>
+                                                <td><%= stockCard.Note %></td>
+                                                <td>     
+                                                    <a href="/stockCard/View/<%= stockCard.id %>" class="btn btn-info btn-circle">
+                                                        <i class="fas fa-eye"></i></a>                              
+                                                    <a href="/stockCard/Edit/<%= stockCard.id %>" class="btn btn-warning btn-circle">
+                                                        <i class="fas fa-pen"></i></a>
+                                                    <a href="/stockCard/Del/<%= stockCard.id %>" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure ?');">
+                                                        <i class="fas fa-trash-alt"></i></a>
+
+                                                </td>
+                                            </tr>
+                                            <% }) %>                                    
+                                    </tbody>
+                                </table>
+                            </div>
+                            <hr>
+                            <div class="text-center">
+                                <a class="small" href="/stockCard/ReportBackEnd">Back to ...</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                
             </div>
             <!-- End of Main Content -->
 

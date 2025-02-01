@@ -57,13 +57,17 @@
                                     <div class="p-4">
                                         <form class="user" action="/stockCardGoods/Add" method="POST">
                                             <div class="form-group row">
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-4">
                                                     <label for="stockCardGoodsNo" class="form-label">No</label>
                                                     <input type="text" class="form-control" name="stockCardGoodsNo" >
                                                 </div>
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-4">
                                                     <label for="stockCardGoodsCode" class="form-label">Code</label>
                                                     <input type="text" class="form-control" name="stockCardGoodsCode" required>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label for="stockCardGoodsLength" class="form-label">Length (m.)</label>
+                                                    <input type="number" class="form-control" name="stockCardGoodsLength" >
                                                 </div>
 
 
@@ -124,7 +128,7 @@
                                         </form>
                                         <hr>
                                         <div class="text-center">
-                                            <a class="small" href="/stockCardGoods">Back to ...</a>
+                                            <a class="small" href="/stockCard/ReportBackEnd">Back to ...</a>
                                         </div>
                                     </div>
                                 </div>
