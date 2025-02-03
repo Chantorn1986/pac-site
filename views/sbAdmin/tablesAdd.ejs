@@ -57,47 +57,252 @@
                                     <div class="p-4">
                                         <form class="user" action="/tableTest/Add" method="POST">
                                             <div class="form-group row">
-                                                <div class="col-sm-9">
-                                                    <label for="stockCardGoodsID" class="form-label">Goods</label>
-                                                    <select name="stockCardGoodsID" class="form-control form-select" aria-label="Default select example" required>
-                                                        <option value="">--- Select Goods ---</option>
-                                                        <% stockCardGoods.forEach(stockCardGoods => { %>
-                                                            <option value="<%= stockCardGoods.id %>"><%= stockCardGoods.keyword %></option>
-                                                        <% }) %> 
-                                                      </select> 
+                                                <div class="col-sm-3">
+                                                    <label for="employeeCode" class="form-label">Code</label>
+                                                    <input type="text" class="form-control" name="employeeCode" required>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <label for="stockCardDate" class="form-label">Date</label>
-                                                    <input type="date" class="form-control" name="stockCardDate" 
-                                                    value="<%= dateDefault %>">
+                                                    <label for="serialNumber" class="form-label">Serial Number</label>
+                                                    <input type="text" class="form-control" name="serialNumber" required>
                                                 </div>
-
+                                                <div class="col-sm-3">
+                                                    <label for="mobile" class="form-label">Mobile</label>
+                                                    <input type="text" class="form-control" name="mobile" >
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="internalTelephone" class="form-label">Internal Telephone</label>
+                                                    <input type="text" class="form-control" name="internalTelephone" >
+                                                </div>
 
                                             </div>
                                             <div class="form-group row">
-                                                <div class="col-sm-4">
-                                                    <label for="stockCardDocument" class="form-label">Document</label>
-                                                    <input type="text" class="form-control" name="stockCardDocument" >
+                                                <div class="col-sm-6">
+                                                    <label for="nameTH" class="form-label">Full name thai</label>
+                                                    <input type="text" class="form-control" name="nameTH" required>
                                                 </div>
-                                                <div class="col-sm-4">
-                                                    <label for="stockCardStatusID" class="form-label">Document status</label>
-                                                    <select name="stockCardStatusID" class="form-control form-select" aria-label="Default select example" required>
-                                                        <option value="">--- Select Document status ---</option>
-                                                        <% stockCardStatus.forEach(stockCardStatus => { %>
-                                                            <option value="<%= stockCardStatus.id %>"><%= stockCardStatus.nameEN %></option>
+                                                <div class="col-sm-6">
+                                                    <label for="nameEN" class="form-label">Full name english</label>
+                                                    <input type="text" class="form-control" name="nameEN" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-3">
+                                                    <label for="departmentID" class="form-label">Department</label>
+                                                    <select name="departmentID" class="form-control form-select" aria-label="Default select example">
+                                                        <option value="">--- Select Department ---</option>
+                                                        <% departments.forEach(departments => { %>
+                                                        <option value="<%= departments.id %>"><%= departments.nameEN %></option>
                                                         <% }) %> 
-                                                      </select> 
+                                                      </select>
                                                 </div>
-                                                <div class="col-sm-4">
-                                                    <label for="stockCardQty" class="form-label">Qty</label>
-                                                    <input type="number" class="form-control" name="stockCardQty" >
+                                                <div class="col-sm-3">
+                                                    <label for="positionID" class="form-label">Position</label> 
+                                                    <select name="positionID" class="form-control form-select" aria-label="Default select example">
+                                                        <option value="">--- Select Position ---</option>
+                                                        <% positions.forEach(positions => { %>
+                                                        <option value="<%= positions.id %>"><%= positions.nameEN %></option>
+                                                        <% }) %> 
+                                                      </select>           
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="workLevelID" class="form-label">Work Level</label>
+                                                    <select name="workLevelID" class="form-control form-select" aria-label="Default select example">
+                                                        <option value="">--- Select Work Level ---</option>
+                                                        <% workLevel.forEach(workLevel => { %>
+                                                        <option value="<%= workLevel.id %>"><%= workLevel.nameEN %></option>
+                                                        <% }) %> 
+                                                      </select>                                                   
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="employmentType" class="form-label">Employment Type</label>
+                                                    <select name="employmentType" class="form-control form-select" aria-label="Default select example">
+                                                        <option value="">--- Select Employment Type ---</option>
+                                                        <option value="Casual">Casual</option>
+                                                        <option value="Contract">Contract</option>
+                                                        <option value="Full-time">Full-time</option>
+                                                        <option value="Part-time">Part-time</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-3">
+                                                    <label for="startDate" class="form-label">Start Date</label>
+                                                    <input type="date" class="form-control" name="startDate" >
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="endDate" class="form-label">End Date</label>
+                                                    <input type="date" class="form-control" name="endDate" >
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label for="ReasonForLeaving" class="form-label">Reason for leaving</label>
+                                                    <input type="text" class="form-control" name="ReasonForLeaving" >
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="stockCardNote" class="form-label">Note</label>
-                                                <input type="text" class="form-control" name="stockCardNote" >
+                                                <label for="Address" class="form-label">Address</label>
+                                                <input type="text" class="form-control" name="Address" >
                                             </div>
-    
+                                            <div class="form-group row">
+                                                <div class="col-sm-3">
+                                                    <label for="Subdistrict" class="form-label">Subdistrict</label>
+                                                    <input type="text" class="form-control" name="Subdistrict" >
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="District" class="form-label">District</label>
+                                                    <input type="text" class="form-control" name="District" >                                                  
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="Province" class="form-label">Province</label>
+                                                    <input type="text" class="form-control" name="Province" >    
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="Postcode" class="form-label">Postcode</label>
+                                                    <input type="text" class="form-control" name="Postcode" >   
+                                                </div>
+                                            </div>
+                                            <hr class="sidebar-divider">
+                                            <h6 class="m-0 font-weight-bold text-primary mb-3"><i class="fas fa-address-book fa-fw"></i> Personal information</h6>
+                                            <div class="form-group row">
+                                                <div class="col-sm-3">
+                                                    <label for="dateOfBirth" class="form-label">Date of birth</label>
+                                                    <input type="date" class="form-control" name="dateOfBirth" >
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="nameTitle" class="form-label">Name Title</label>
+                                                    <select name="nameTitle" class="form-control form-select" aria-label="Default select example">
+                                                        <option value="">--- Select Name Title ---</option>
+                                                        <option value="Miss">Miss</option>
+                                                        <option value="Mrs.">Mrs.</option>
+                                                        <option value="MR.">MR.</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="Gender" class="form-label">Gender</label>
+                                                    <select name="Gender" class="form-control form-select" aria-label="Default select example">
+                                                        <option value="">--- Select Name Title ---</option>
+                                                        <option value="Male">Male</option>
+                                                        <option value="Female">Female</option>
+                                                        <option value="Not specified">Not specified</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="bloodGroup" class="form-label">Blood Group</label>
+                                                    <select name="bloodGroup" class="form-control form-select" aria-label="Default select example">
+                                                        <option value="">--- Select Blood Group ---</option>
+                                                        <option value="A">A</option>
+                                                        <option value="B">B</option>
+                                                        <option value="AB">AB</option>
+                                                        <option value="O">O</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-3">
+                                                    <label for="maritalStatus" class="form-label">Marital Status</label>
+                                                    <select name="maritalStatus" class="form-control form-select" aria-label="Default select example">
+                                                        <option value="">--- Select Marital Status ---</option>
+                                                        <option value="Single">Single</option>
+                                                        <option value="Married">Married</option>
+                                                        <option value="Divorced">Divorced</option>
+                                                        <option value="Widowed">Widowed</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="religion" class="form-label">Religion</label>
+                                                    <select name="religion" class="form-control form-select" aria-label="Default select example">
+                                                        <option value="">--- Select Religion ---</option>
+                                                        <option value="Buddhism">Buddhism</option>
+                                                        <option value="Islam">Islam</option>
+                                                        <option value="Christianity">Christianity</option>
+                                                        <option value="Brahmin-Hinduism">Brahmin-Hinduism</option>
+                                                        <option value="Sikhism">Sikhism</option>
+                                                        <option value="Not specified">Not specified</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="nationality" class="form-label">Nationality</label>
+                                                    <input type="text" class="form-control" name="nationality" value="Thai">
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="ethnicity" class="form-label">Ethnicity</label>
+                                                    <input type="text" class="form-control" name="ethnicity" value="Thai">
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group row">
+                                                <div class="col-sm-6">
+                                                    <label for="taxID" class="form-label">Tax ID</label>
+                                                    <input type="text" class="form-control" name="taxID" >
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="bank" class="form-label">Bank</label>
+                                                    <select name="bank" class="form-control form-select" aria-label="Default select example">
+                                                        <option value="">--- Select Bank ---</option>
+                                                        <option value="BANGKOK BANK">BANGKOK BANK</option>
+                                                        <option value="BANK OF AYUDHYA">BANK OF AYUDHYA</option>
+                                                        <option value="KASIKORNBANK">KASIKORNBANK</option>
+                                                        <option value="KRUNG THAI BANK">KRUNG THAI BANK</option>
+                                                        <option value="SIAM COMMERCIAL BANK">SIAM COMMERCIAL BANK</option>
+                                                        <option value="TMB BANK">TMB BANK</option>
+                                                        <option value="GOVERNMENT SAVINGS BANK">GOVERNMENT SAVINGS BANK</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="bankNumber" class="form-label">Bank Number</label>
+                                                    <input type="text" class="form-control" name="bankNumber" >
+                                                </div>
+                                            </div>
+                                            <hr class="sidebar-divider">
+                                            <h6 class="m-0 font-weight-bold text-primary mb-3"><i class="fas fa-graduation-cap fa-fw"></i> Education information</h6>
+                                            <div class="form-group row">
+                                                <div class="col-sm-3">
+                                                    <label for="educationLevel" class="form-label">Education Level</label>
+                                                    <select name="educationLevel" class="form-control form-select" aria-label="Default select example">
+                                                        <option value="">--- Select Education Level ---</option>
+                                                        <option value="Primary/Elementary School">Primary/Elementary School</option>
+                                                        <option value="Secondary School">Secondary School</option>
+                                                        <option value="Vocational Certificate">Vocational Certificate</option>
+                                                        <option value="High Vocational Certificate">High Vocational Certificate</option>
+                                                        <option value="Bachelor Degree">Bachelor Degree</option>
+                                                        <option value="Master Degree">Master Degree</option>
+                                                        <option value="Doctor Degree">Doctor Degree</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="university" class="form-label">University</label>
+                                                    <input type="text" class="form-control" name="university" >
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="registrationDate" class="form-label">Registration Date</label>
+                                                    <input type="date" class="form-control" name="registrationDate" >
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="graduationDate" class="form-label">Graduation Date</label>
+                                                    <input type="date" class="form-control" name="graduationDate" >
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-3">
+                                                    <label for="studyPeriod" class="form-label">Study Period</label>
+                                                    <select name="studyPeriod" class="form-control form-select" aria-label="Default select example">
+                                                        <option value="">--- Select Study Period ---</option>
+                                                        <option value="Daytime">Daytime</option>
+                                                        <option value="Nighttime">Nighttime</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="major" class="form-label">Major</label>
+                                                    <input type="text" class="form-control" name="major" >
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="addressUniversity" class="form-label">Address University</label>
+                                                    <input type="text" class="form-control" name="addressUniversity" >
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label for="yearGraduation" class="form-label">Year Graduation</label>
+                                                    <input type="text" class="form-control" name="yearGraduation" >
+                                                </div>
+                                            </div>
 
                                             <button type="submit" class="btn btn-success btn-block">
                                                 <i class="fas fa-save fa-fw"></i>

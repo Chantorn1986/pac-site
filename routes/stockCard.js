@@ -236,6 +236,25 @@ router.get('/Report',(req, res) => {
     } 
 });
 
+router.get('/Report/:id',(req, res) => {
+    try {
+        const sql2t = "SELECT * FROM `viewRpt_stockCard` WHERE brandID = ?;";
+
+        db.query(sql2t,[req.params.id], (err, results) => {
+            if (err) throw err;
+
+            res.render('stockCard/stockCardReport', { 
+                title: 'Stock Card Management',
+                stockCard : results,
+                user: req.session.user
+            });
+        })
+    } catch (err) {
+        console.error('Error view data:', err);
+        res.status(500).json({ error: 'Error view data into the database.' });
+    } 
+});
+
 router.get('/ReportBackEnd',isAuthenticated,(req, res) => {
     try {
         const sql2t = "SELECT * FROM `viewRpt_stockCard` ORDER BY code ASC;";
