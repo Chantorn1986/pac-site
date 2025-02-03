@@ -14,7 +14,7 @@ function isAuthenticated(req, res, next) {
     }
 }
 
-router.get('/',(req, res) => {
+router.get('/',isAuthenticated,(req, res) => {
     try {
         const sql = "SELECT id,no,code,name,DATE_FORMAT(createdAt, '%d/%m/%Y %H:%i:%s') as createdAt,DATE_FORMAT(updatedAt, '%d/%m/%Y %H:%i:%s') as updatedAt FROM stockCardBrands ORDER BY no,code ASC";
         db.query(sql, (err, results) => {
@@ -33,13 +33,13 @@ router.get('/',(req, res) => {
 });
 
 
-router.get('/Add', (req, res) => {
+router.get('/Add',isAuthenticated, (req, res) => {
     res.render('stockCard/stockCardBrandsAdd',{ 
         title: 'Stock Card Brands Create',
         user: req.session.user });
 })
 
-router.post('/Add',(req, res) => {
+router.post('/Add',isAuthenticated,(req, res) => {
     const { stockCardBrandsNo,stockCardBrandsCode,stockCardBrandsName }= req.body;
     const uuid = uuidv4();
     const sql = "INSERT INTO stockCardBrands ( id, no,code, name ) VALUES(?, ?, ?,?)";
@@ -59,7 +59,7 @@ router.post('/Add',(req, res) => {
     })
 })
 
-router.get('/Edit/:id', (req, res) => {
+router.get('/Edit/:id',isAuthenticated, (req, res) => {
     const sql = "SELECT * FROM stockCardBrands WHERE id = ?";
     db.query(sql, [req.params.id], (err, result) => {
         if (err) throw err;
@@ -71,7 +71,7 @@ router.get('/Edit/:id', (req, res) => {
     });
 })
 
-router.post('/Edit/:id',(req, res) => {
+router.post('/Edit/:id',isAuthenticated,(req, res) => {
     const { stockCardBrandsNoE,stockCardBrandsCodeE,stockCardBrandsNameE } = req.body;
     const today = new Date();
     const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
@@ -95,7 +95,7 @@ router.post('/Edit/:id',(req, res) => {
     })
 })
 
-router.get('/Del/:id', (req, res) => {
+router.get('/Del/:id',isAuthenticated, (req, res) => {
     const sql = "DELETE FROM stockCardBrands WHERE id = ?";
     db.query(sql, [req.params.id], (err, result) => {
         if (err) throw err;
@@ -113,7 +113,7 @@ router.get('/Del/:id', (req, res) => {
     });
 })
 
-router.get('/View/:id', (req, res) => {
+router.get('/View/:id',isAuthenticated, (req, res) => {
     const sql = "SELECT id,no,code,name,DATE_FORMAT(createdAt, '%d/%m/%Y %H:%i:%s') as createdAt,DATE_FORMAT(updatedAt, '%d/%m/%Y %H:%i:%s') as updatedAt FROM stockCardBrands WHERE id = ? ";
     db.query(sql, [req.params.id], (err, result) => {
         if (err) throw err;

@@ -14,7 +14,7 @@ function isAuthenticated(req, res, next) {
     }
 }
 
-router.get('/',(req, res) => {
+router.get('/',isAuthenticated,(req, res) => {
     try {
         const sql2t = "SELECT * FROM stockCardStatus ORDER BY no ASC;";
 
@@ -34,7 +34,7 @@ router.get('/',(req, res) => {
 });
 
 
-router.get('/Add', (req, res) => {
+router.get('/Add',isAuthenticated, (req, res) => {
    /* try {
         const sql = "SELECT id,name FROM stockCardBrands ORDER BY name ASC";
         db.query(sql, (err, results) => {
@@ -51,7 +51,7 @@ router.get('/Add', (req, res) => {
 
 })
 
-router.post('/Add',(req, res) => {
+router.post('/Add',isAuthenticated,(req, res) => {
     try {
         const { stockCardStatusNo,stockCardStatusNameTH,stockCardStatusNameEN,stockCardStatusInOut }= req.body;
         const uuid = uuidv4();
@@ -76,7 +76,7 @@ router.post('/Add',(req, res) => {
     } 
 })
 
-router.get('/Edit/:id', (req, res) => {
+router.get('/Edit/:id',isAuthenticated, (req, res) => {
     try {
          const sql2t = "SELECT * FROM stockCardStatus WHERE id = ? ;"
         db.query(sql2t, [req.params.id], (err, result) => {
@@ -94,7 +94,7 @@ router.get('/Edit/:id', (req, res) => {
     }
 })
 
-router.post('/Edit/:id',(req, res) => {
+router.post('/Edit/:id',isAuthenticated,(req, res) => {
     try {
         const { stockCardStatusNoE,stockCardStatusNameTHE,stockCardStatusNameENE,stockCardStatusInOutE } = req.body;
         const sql = "UPDATE stockCardStatus SET no = ?, nameTH = ?,nameEN = ?, ValueInOut = ?  WHERE id = ?";
@@ -118,7 +118,7 @@ router.post('/Edit/:id',(req, res) => {
     } 
 })
 
-router.get('/Del/:id', (req, res) => {
+router.get('/Del/:id',isAuthenticated, (req, res) => {
     try {
         const sql = "DELETE FROM stockCardStatus WHERE id = ?";
         db.query(sql, [req.params.id], (err, result) => {
@@ -141,7 +141,7 @@ router.get('/Del/:id', (req, res) => {
     } 
 })
 
-router.get('/View/:id', (req, res) => {
+router.get('/View/:id',isAuthenticated, (req, res) => {
     try {
         const sql2t = "SELECT * FROM stockCardStatus WHERE id = ? ;"
 

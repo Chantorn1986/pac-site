@@ -112,17 +112,18 @@ router.post('/Edit/:id',(req, res) => {
         const sql = "UPDATE stockCardGoods SET no = ?, Code = ?,brandID = ?, model = ?,keyword = ?, updatedAt=? ,price=? , limitPrice=? ,shelf=? , remarkPurchase=? ,remarkSale=? , remain=? ,length =?  WHERE id = ?";
         db.query(sql, [stockCardGoodsNoE,stockCardGoodsCodeE,stockCardGoodsBrandE,stockCardGoodsModelE,stockCardGoodsKeywordE ,timestamp,stockCardGoodsPriceE ,stockCardGoodsLimitPriceE ,stockCardGoodsShelfE , stockCardGoodsRemarkPurchaseE ,stockCardGoodsRemarkSaleE , stockCardGoodsRemainE,stockCardGoodsLengthE, req.params.id], (err, result) => {
             if (err) throw err;
-            const sql2t = "SELECT * FROM view_goods_brands ;";
-
+            
+            res.redirect('/stockCard/AddCard/'+req.params.id);
+            /*const sql2t = "SELECT * FROM view_goods_brands ;";
             db.query(sql2t, (err, results) => {
                 if (err) throw err;
-        
+            
                 res.render('stockCard/stockCardGoods', { 
                     title: 'Stock Card Goods Management',
                     stockCardGoods : results,
                     user: req.session.user
                 });
-            })
+            })*/
         })
     } catch (err) {
         console.error('Error editing data:', err);
@@ -135,7 +136,7 @@ router.get('/Del/:id', (req, res) => {
         const sql = "DELETE FROM stockCardGoods WHERE id = ?";
         db.query(sql, [req.params.id], (err, result) => {
             if (err) throw err;
-            const sql2t = "SELECT * FROM view_goods_brands ;";
+            /*const sql2t = "SELECT * FROM view_goods_brands ;";
 
             db.query(sql2t, (err, results) => {
                 if (err) throw err;
@@ -143,6 +144,17 @@ router.get('/Del/:id', (req, res) => {
                 res.render('stockCard/stockCardGoods', { 
                     title: 'Stock Card Goods Management',
                     stockCardGoods : results,
+                    user: req.session.user
+                });
+            */
+            const sql2t = "SELECT * FROM `viewRpt_stockCard` ORDER BY code ASC;";
+
+            db.query(sql2t, (err, results) => {
+                if (err) throw err;
+    
+                res.render('stockCard/stockCardReportBackEnd', { 
+                    title: 'Stock Card Management',
+                    stockCard : results,
                     user: req.session.user
                 });
             })

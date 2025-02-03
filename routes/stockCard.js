@@ -15,7 +15,7 @@ function isAuthenticated(req, res, next) {
     }
 }
 
-router.get('/',(req, res) => {
+router.get('/',isAuthenticated,(req, res) => {
     try {
         const sql2t = "SELECT * FROM `view_stockCard_goodsBrandsStatus` ORDER BY cardDate DESC;";
 
@@ -33,7 +33,7 @@ router.get('/',(req, res) => {
         res.status(500).json({ error: 'Error view data into the database.' });
     } 
 });
-router.get('/Add', (req, res) => {
+router.get('/Add',isAuthenticated, (req, res) => {
     const sql1 = "SELECT id,keyword FROM stockCardGoods ORDER BY keyword ASC";
     const sql2 = "SELECT id,nameEN FROM stockCardStatus ORDER BY no ASC";
     const now = new Date();
@@ -59,7 +59,7 @@ router.get('/Add', (req, res) => {
      } 
  })
 
-router.get('/Add/:id', (req, res) => {
+router.get('/Add/:id',isAuthenticated, (req, res) => {
    const sql1 = "SELECT id,keyword FROM stockCardGoods WHERE id = ?";
    const sql2 = "SELECT id,nameEN FROM stockCardStatus ORDER BY no ASC";
    const now = new Date();
@@ -85,7 +85,7 @@ router.get('/Add/:id', (req, res) => {
     } 
 })
 
-router.post('/Add',(req, res) => {
+router.post('/Add',isAuthenticated,(req, res) => {
     const { stockCardGoodsID,stockCardDate,stockCardDocument,stockCardStatusID,stockCardQty,stockCardNote }= req.body;
     const uuid = uuidv4();
     const sqlAdd = "INSERT INTO `stockCard`(`id`, `goodsID`, `date`, `document`, `statusID`,`qty`, `note`) VALUES (?,?,?,?,?,?,?)";
@@ -97,11 +97,12 @@ router.post('/Add',(req, res) => {
             db.query(sql2t, (err, results) => {
                 if (err) throw err;
         
-                res.render('stockCard/stockCard', { 
+                /*res.render('stockCard/stockCard', { 
                     title: 'Stock Card Management',
                     stockCard : results,
                     user: req.session.user
-                });
+                });*/
+                res.redirect('/stockCard/AddCard/'+stockCardGoodsID);
             })
         })
     } catch (err) {
@@ -110,7 +111,7 @@ router.post('/Add',(req, res) => {
     } 
 })
 
-router.get('/Edit/:id', (req, res) => {
+router.get('/Edit/:id',isAuthenticated, (req, res) => {
     const sql1 = "SELECT id,keyword FROM stockCardGoods ORDER BY keyword ASC";
     const sql2 = "SELECT id,nameEN FROM stockCardStatus ORDER BY no ASC";
     const sql2t = "SELECT * FROM `view_stockCard_goodsBrandsStatus` WHERE id = ? ;"
@@ -143,7 +144,7 @@ router.get('/Edit/:id', (req, res) => {
     }
 })
 
-router.post('/Edit/:id',(req, res) => {
+router.post('/Edit/:id',isAuthenticated,(req, res) => {
     try {
         const { stockCardGoodsIDE,stockCardDateE,stockCardDocumentE,stockCardStatusIDE,stockCardQtyE,stockCardNoteE } = req.body;
         const sql = "UPDATE stockCard SET goodsID=?,date=?,document=?,statusID=?,qty=?,note=?,updatedAt=?  WHERE id = ?";
@@ -152,16 +153,19 @@ router.post('/Edit/:id',(req, res) => {
 
         db.query(sql, [ stockCardGoodsIDE,stockCardDateE,stockCardDocumentE,stockCardStatusIDE,stockCardQtyE,stockCardNoteE,timestamp, req.params.id], (err, result) => {
             if (err) throw err;
-            const sql2t = "SELECT * FROM `view_stockCard_goodsBrandsStatus` ORDER BY cardDate DESC;";
+            
+            res.redirect('/stockCard/AddCard/'+ stockCardGoodsIDE);
+            /*const sql2t = "SELECT * FROM `view_stockCard_goodsBrandsStatus` ORDER BY cardDate DESC;";
             db.query(sql2t, (err, results) => {
                 if (err) throw err;
-        
+                
+                
                 res.render('stockCard/stockCard', { 
                     title: 'Stock Card Management',
                     stockCard : results,
                     user: req.session.user
                 });
-            })
+            })*/
         })
     } catch (err) {
         console.error('Error editing data:', err);
@@ -169,36 +173,38 @@ router.post('/Edit/:id',(req, res) => {
     } 
 })
 
-router.get('/Del/:id', (req, res) => {
-    try {
-        const sql = "DELETE FROM stockCard WHERE id = ?";
-        db.query(sql, [req.params.id], (err, result) => {
-            if (err) throw err;
-            const sql2t = "SELECT * FROM `view_stockCard_goodsBrandsStatus` ORDER BY cardDate DESC;";
-
-            db.query(sql2t, (err, results) => {
-                if (err) throw err;
-        
-                res.render('stockCard/stockCard', { 
-                    title: 'Stock Card Management',
-                    stockCard : results,
-                    user: req.session.user
-                });
-            })
-        });
-    } catch (err) {
-        console.error('Error deleting data:', err);
-        res.status(500).json({ error: 'Error deleting data into the database.' });
-    } 
-})
-
-router.get('/View/:id', (req, res) => {
+router.get('/Del/:id',isAuthenticated, (req, res) => {
     try {
         const sql2t = "SELECT * FROM `view_stockCard_goodsBrandsStatus` WHERE id = ? ;"
 
         db.query(sql2t, [req.params.id], (err, result) => {
             if (err) throw err;
 
+            const sql = "DELETE FROM stockCard WHERE id = ?";
+            db.query(sql, [req.params.id], (err, result2) => {
+                if (err) throw err;
+
+                
+                res.redirect('/stockCard/AddCard/'+result[0]['goodsID']);
+
+            })
+            
+        });
+
+    } catch (err) {
+        console.error('Error deleting data:', err);
+        res.status(500).json({ error: 'Error deleting data into the database.' });
+    } 
+})
+
+router.get('/View/:id',isAuthenticated, (req, res) => {
+    try {
+        const sql2t = "SELECT * FROM `view_stockCard_goodsBrandsStatus` WHERE id = ? ;"
+
+        db.query(sql2t, [req.params.id], (err, result) => {
+            if (err) throw err;
+
+            
             res.render('stockCard/stockCardView', {
                 title: 'Stock Card View', 
                 stockCard : result[0] ,
@@ -230,7 +236,7 @@ router.get('/Report',(req, res) => {
     } 
 });
 
-router.get('/ReportBackEnd',(req, res) => {
+router.get('/ReportBackEnd',isAuthenticated,(req, res) => {
     try {
         const sql2t = "SELECT * FROM `viewRpt_stockCard` ORDER BY code ASC;";
 
@@ -249,7 +255,7 @@ router.get('/ReportBackEnd',(req, res) => {
     } 
 });
 
-router.get('/AddCard/:id', (req, res) => {
+router.get('/AddCard/:id',isAuthenticated, (req, res) => {
     const paramsID = req.params.id ;
     const sql1 = "SELECT * FROM view_goods_brands WHERE id = ? ;";
     const sql2 = "SELECT id,name FROM stockCardBrands ORDER BY name ASC";
