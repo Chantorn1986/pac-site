@@ -78,7 +78,7 @@
                                             <th>Booking</th>
                                             <th>Remark</th>
                                             
-                                            <th>Length</th>
+                                            <th>Full/m.</th>
                                             <!--<th>Limit Price</th>
                                             <th>Shelf</th>
                                             <th>Action</th>-->
@@ -95,7 +95,7 @@
                                             <th>Booking</th>
                                             <th>Remark</th>
                                             
-                                            <th>Length</th>
+                                            <th>Full/m.</th>
                                             <!--<th>Limit Price</th>
                                             <th>Shelf</th>
                                             <th>Action</th>-->
@@ -112,8 +112,12 @@
                                                 <td class="text-right"><%= stockCard.poQty %></td>
                                                 <td class="text-right"><%= stockCard.bookingQty %></td>
                                                 <td><%= stockCard.remarkSale %></td>
+                                                <% if (stockCard.length > 0) { %>
+                                                    <td><%= stockCard.lengthQty %> (<%= stockCard.length %>)</td>
+                                                <% } else { %>
+                                                    <td></td>
+                                                <% } %>
                                                 
-                                                <td><%= stockCard.goodsLength %></td>
                                                 <!--<td><%= stockCard.limitPrice %></td>
                                                 <td><%= stockCard.shelf %></td>
                                                 <td>     
