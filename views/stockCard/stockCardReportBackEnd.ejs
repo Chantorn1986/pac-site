@@ -106,8 +106,8 @@
                                                 <td class="text-right"><%= stockCard.bookingQty %></td>
                                                 <td><%= stockCard.remarkSale %></td>
                                                 <td><%= stockCard.shelf %></td>
-                                                <% if (stockCard.length > 0) { %>
-                                                    <td><%= stockCard.lengthQty %> (<%= stockCard.length %>)</td>
+                                                <% if (stockCard.SecFull > 0) { %>
+                                                    <td class="text-right"><%= stockCard.SecFull %> (<%= stockCard.length %>)</td>
                                                 <% } else { %>
                                                     <td></td>
                                                 <% } %>

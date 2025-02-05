@@ -86,11 +86,11 @@ router.get('/Add/:id',isAuthenticated, (req, res) => {
 })
 
 router.post('/Add',isAuthenticated,(req, res) => {
-    const { stockCardGoodsID,stockCardDate,stockCardDocument,stockCardStatusID,stockCardQty,stockCardNote }= req.body;
+    const { stockCardGoodsID,stockCardDate,stockCardDocument,stockCardStatusID,stockCardQty,stockCardNote,stockCardSecFull }= req.body;
     const uuid = uuidv4();
-    const sqlAdd = "INSERT INTO `stockCard`(`id`, `goodsID`, `date`, `document`, `statusID`,`qty`, `note`) VALUES (?,?,?,?,?,?,?)";
+    const sqlAdd = "INSERT INTO `stockCard`(`id`, `goodsID`, `date`, `document`, `statusID`,`qty`, `note` ,`sectionFull`) VALUES (?,?,?,?,?,?,?,?)";
     try {
-        db.query(sqlAdd, [ uuid,stockCardGoodsID,stockCardDate,stockCardDocument,stockCardStatusID,stockCardQty,stockCardNote], (err, result) => {
+        db.query(sqlAdd, [ uuid,stockCardGoodsID,stockCardDate,stockCardDocument,stockCardStatusID,stockCardQty,stockCardNote,stockCardSecFull], (err, result) => {
             if (err) throw err;
 
             const sql2t = "SELECT * FROM `view_stockCard_goodsBrandsStatus` ORDER BY cardDate DESC;";
@@ -130,9 +130,8 @@ router.get('/Edit/:id',isAuthenticated, (req, res) => {
                             stockCard : result[0] ,
                             stockCardGoods : results1,
                             stockCardStatus : results2,
-                            dateString:dateString,
-                            
-                            user: req.session.user 
+                            dateString : dateString,                           
+                            user : req.session.user 
                         });
                 });
            })
@@ -146,14 +145,14 @@ router.get('/Edit/:id',isAuthenticated, (req, res) => {
 
 router.post('/Edit/:id',isAuthenticated,(req, res) => {
     try {
-        const { stockCardGoodsIDE,stockCardDateE,stockCardDocumentE,stockCardStatusIDE,stockCardQtyE,stockCardNoteE } = req.body;
-        const sql = "UPDATE stockCard SET goodsID=?,date=?,document=?,statusID=?,qty=?,note=?,updatedAt=?  WHERE id = ?";
+        const { stockCardGoodsIDE,stockCardDateE,stockCardDocumentE,stockCardStatusIDE,stockCardQtyE,stockCardNoteE,stockCardSecFullE } = req.body;
+        const sql = "UPDATE stockCard SET goodsID=?,date=?,document=?,statusID=?,qty=?,note=?,updatedAt=? ,sectionFull=? WHERE id = ?";
         const today = new Date();
         const timestamp= moment(today).format();
 
-        db.query(sql, [ stockCardGoodsIDE,stockCardDateE,stockCardDocumentE,stockCardStatusIDE,stockCardQtyE,stockCardNoteE,timestamp, req.params.id], (err, result) => {
+        db.query(sql, [ stockCardGoodsIDE,stockCardDateE,stockCardDocumentE,stockCardStatusIDE,stockCardQtyE,stockCardNoteE,timestamp,stockCardSecFullE, req.params.id], (err, result) => {
             if (err) throw err;
-            
+            console.log(sql);
             res.redirect('/stockCard/AddCard/'+ stockCardGoodsIDE);
             /*const sql2t = "SELECT * FROM `view_stockCard_goodsBrandsStatus` ORDER BY cardDate DESC;";
             db.query(sql2t, (err, results) => {
