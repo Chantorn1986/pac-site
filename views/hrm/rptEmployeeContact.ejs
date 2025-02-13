@@ -56,60 +56,58 @@
                         <div class="card-header py-3 d-flex">
                             <h6 class="m-0 font-weight-bold text-primary">PAC APP - <%= title %></h6>
                             <!--<a href="/tablesAdd" class="btn btn-info btn-circle btn-sm ml-auto"><i class="fas fa-plus"></i></a>-->
-                            <a href="/stockCard/Add" class="btn btn-primary btn-icon-split ml-auto btn-sm">
+                            <a href="/employee/Add" class="btn btn-primary btn-icon-split ml-auto btn-sm">
                                 <span class="icon text-white-50">
                                     <i class="fas fa-plus-circle"></i>
                                 </span>
-                                <span class="text">Create</span>
+                                <span class="text">Create Employee</span>
                             </a>
                             
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered align-middle" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Date</th>
-                                            <th>Code</th>
-                                            <th>Model</th>
-                                            <th>Document</th>
-                                            <th>Status</th>
-                                            <th>Qty</th>
-                                            <th>Note</th>
-                                            <th>Action</th>
+                                            <th class="align-middle">Image</th>
+                                            <th class="align-middle">Code</th>
+                                            <th class="align-middle">Fullname</th>
+                                            <th class="align-middle">Nickname</th>
+                                            <th class="align-middle">Mobile</th>
+                                            <th class="align-middle">Telephone</th>
+                                            <th class="align-middle">Email</th>
+                                           
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Date</th>
-                                            <th>Code</th>
-                                            <th>Model</th>
-                                            <th>Document</th>
-                                            <th>Status</th>
-                                            <th>Qty</th>
-                                            <th>Note</th>
-                                            <th>Action</th>
+                                            <th class="align-middle">Image</th>
+                                            <th class="align-middle">Code</th>
+                                            <th class="align-middle">Fullname</th>
+                                            <th class="align-middle">Nickname</th>
+                                            <th class="align-middle">Mobile</th>
+                                            <th class="align-middle">Telephone</th>
+                                            <th class="align-middle">Email</th>
+                                       
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <% stockCard.forEach(stockCard => { %>
+                                        <% employee.forEach(employee => { %>
                                             <tr>
-                                                <td><%= stockCard.cardDate %></td>
-                                                <td><%= stockCard.goodsCode %></td>
-                                                <td><%= stockCard.model %></td>
-                                                <td><%= stockCard.document %></td>
-                                                <td><%= stockCard.statusName %></td>
-                                                <td class="text-right"><%= stockCard.qty %></td>
-                                                <td><%= stockCard.Note %></td>
-                                                <td class="align-middle text-center">     
-                                                    <a href="/stockCard/View/<%= stockCard.id %>" class="btn btn-info btn-circle">
-                                                        <i class="fas fa-eye"></i></a>                              
-                                                    <a href="/stockCard/Edit/<%= stockCard.id %>" class="btn btn-warning btn-circle">
-                                                        <i class="fas fa-pen"></i></a>
-                                                    <a href="/stockCard/Del/<%= stockCard.id %>" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure ?');">
-                                                        <i class="fas fa-trash-alt"></i></a>
-
+                                                <td>
+                                                    <% if (employee.image) { %>
+                                                        <img src="/uploads/<%= employee.image %>" width="100" />
+                                                    <% } else { %>
+                                                        <p>No image</p>
+                                                    <% } %>
                                                 </td>
+                                                <td class="align-middle text-center"><%= employee.code %></td>
+                                                <td class="align-middle"><%= employee.nameTH %></td>
+                                                <td class="align-middle text-center"><%= employee.nickname %></td>
+                                                <td class="align-middle"><%= employee.mobile %></td>
+                                                <td class="align-middle text-center"><%= employee.InternalTelephone %></td>
+                                                <td class="align-middle"><%= employee.email %></td>
+           
                                             </tr>
                                             <% }) %>                                    
                                     </tbody>

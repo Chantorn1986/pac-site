@@ -47,30 +47,43 @@
         <div class="sidebar-heading">
             SETTING
         </div>
+
+        <% if ( user.role === "ADMIN") { %>
         <!-- Nav Item - Tables -->
         <li class="nav-item">
             <a class="nav-link" href="/user">
                 <i class="fas fa-fw fa-user"></i>
                 <span>User login</span></a>
         </li>
+        <% } %>
 
+        <% if ( user.role === "ADMIN" || user.role === "HR") { %>
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#companyRole"
                 aria-expanded="true" aria-controls="companyRole">
                 <i class="fas fa-solid fa-sitemap"></i>
-                <span>Company role</span>
+                <span>HR Management</span>
             </a>
             <div id="companyRole" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <!--<h6 class="collapse-header">Login Screens:</h6>-->
+                    <a class="collapse-item" href="/employee">Employee</a>
+                    <div class="collapse-divider"></div>
                     <a class="collapse-item" href="/workLevel">Work level</a>
                     <a class="collapse-item" href="/position">Position</a>
                     <a class="collapse-item" href="/department">Department</a>
+                    <h6 class="collapse-header">:::::: Report ::::::</h6>
+                    <a class="collapse-item" href="/employee/rptContact">Contact report</a>
+                    <a class="collapse-item" href="/employee/rptInformation">Information report</a>
+                    <a class="collapse-item" href="/employee/rptEducation">Education report</a>
+                    <a class="collapse-item" href="/employee/rptWorkPeriod">Work period report</a>
+                    <a class="collapse-item" href="/employee//rptVehicle">Vehicle report</a>
+                    <a class="collapse-item" href="/employee/rptCards">Cards report</a>
 
                     <!--<a class="collapse-item" href="blank.html">Blank Page</a>-->
                 </div>
             </div>
         </li>
+        <% } %>
 
         <!-- Nav Item - Tables -->
         <li class="nav-item">
@@ -179,9 +192,9 @@
                 <span>Charts</span></a>
         </li>
 
-        <!-- Nav Item - Tables -->
+        <!-- Nav Item - Tables             <a class="nav-link" href="/tableTest">               -->
         <li class="nav-item">
-            <a class="nav-link" href="/tableTest/Add">
+            <a class="nav-link" href="#">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Tables</span></a>
         </li>

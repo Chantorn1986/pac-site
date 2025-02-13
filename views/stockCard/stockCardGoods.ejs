@@ -101,11 +101,11 @@
                                                 <td><%= stockCardGoods.remarkSale %></td>
                                                 <td><%= stockCardGoods.shelf %></td>
                                                 <% if (stockCardGoods.length > 0) { %>
-                                                    <td><%= stockCardGoods.length %></td>
+                                                    <td class="align-middle text-right"><%= stockCardGoods.length %></td>
                                                 <% } else { %>
                                                     <td></td>
                                                 <% } %>
-                                                <td>     
+                                                <td class="align-middle text-center">     
                                                     <a href="/stockCardGoods/View/<%= stockCardGoods.id %>" class="btn btn-info btn-circle">
                                                         <i class="fas fa-eye"></i></a>                              
                                                     <a href="/stockCardGoods/Edit/<%= stockCardGoods.id %>" class="btn btn-warning btn-circle">

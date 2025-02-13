@@ -46,7 +46,10 @@
                 <div class="container-fluid">
                     <div class="card o-hidden border-0 shadow-lg ">
                         <div class="card-header py-3 d-flex">
-                            <h6 class="m-0 font-weight-bold text-primary">PAC APP - Goods Management</h6>
+                            <h6 class="m-0 font-weight-bold text-primary sidebar-brand d-flex align-items-center justify-content-center">                  
+                                <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-solid fa-business-time"></i></div>
+                                <div class="sidebar-brand-text mx-3">PAC APP<sup>2</sup>  - <i class="fas fa-cubes fa-fw"></i> Goods Management</div>                            
+                            </h6>
                             <a href="/stockCardGoods/Edit/<%= stockCardGoods.id %>" class="btn btn-warning btn-icon-split ml-auto btn-sm">
                                 <span class="icon text-white-50">
                                     <i class="fas fa-pen"></i>
@@ -151,8 +154,12 @@
                         </div>
                         <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
                     </div>
+            </div>
+
+            <hr>
                     <!-- /.container-fluid -->
                 <!-- Begin Page Content -->
+            <div id="content">
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
@@ -211,7 +218,7 @@
                                                 <td><%= stockCard.statusName %></td>
                                                 <td class="text-right"><%= stockCard.qty %></td>
                                                 <td><%= stockCard.Note %></td>
-                                                <td>     
+                                                <td class="align-middle text-center">     
                                                     <a href="/stockCard/View/<%= stockCard.id %>" class="btn btn-info btn-circle">
                                                         <i class="fas fa-eye"></i></a>                              
                                                     <a href="/stockCard/Edit/<%= stockCard.id %>" class="btn btn-warning btn-circle">

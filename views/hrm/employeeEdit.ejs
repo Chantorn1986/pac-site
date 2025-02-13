@@ -54,7 +54,7 @@
                                 <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
                                 <div class="col-lg-12">
                                     <div class="p-4">
-                                        <form class="user" action="/tableTest/Edit/<%= employeeFull.id %>" method="POST" enctype="multipart/form-data">
+                                        <form class="user" action="/employee/Edit/<%= employeeFull.id %>" method="POST" enctype="multipart/form-data">
                                             <div class="form-group row">
                                                 <div class="col-sm-9">
                                                     <div class="form-group row">
@@ -75,12 +75,17 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <div class="col-sm-6">
+                                                        <div class="col-sm-4">
+                                                            <label for="nicknameE" class="form-label">Nickname</label>
+                                                            <input type="text" class="form-control" name="nicknameE" 
+                                                            value="<%= employeeFull.nickname %>">
+                                                        </div>
+                                                        <div class="col-sm-4">
                                                             <label for="mobileE" class="form-label">Mobile</label>
                                                             <input type="text" class="form-control" name="mobileE" 
                                                             value="<%= employeeFull.mobile %>">
                                                         </div>
-                                                        <div class="col-sm-6">
+                                                        <div class="col-sm-4">
                                                             <label for="userLoginE" class="form-label">Email Login</label>
                                                             <select name="userLoginE" class="form-control form-select" aria-label="Default select example">
                                                                 <option value="<%= employeeFull.userID %>"><%= employeeFull.email %></option>
@@ -162,13 +167,19 @@
                                             <div class="form-group row">
                                                 <div class="col-sm-3">
                                                     <label for="startDateE" class="form-label">Start Date</label>
-                                                    <input type="date" class="form-control" name="startDateE" 
-                                                    value="<%= coverDate.startDate %>">
+                                                    <% if (coverDate.startDate) { %>
+                                                        <input type="date" class="form-control" name="startDateE" value="<%= coverDate.startDate %>" >
+                                                    <% } else { %>
+                                                        <input type="text" class="form-control" name="startDateE" value="" >
+                                                    <% } %>
                                                 </div>
                                                 <div class="col-sm-3">
                                                     <label for="endDateE" class="form-label">End Date</label>
-                                                    <input type="date" class="form-control" name="endDateE"
-                                                    value="<%= coverDate.endDate %>">
+                                                    <% if (coverDate.endDate) { %>
+                                                    <input type="date" class="form-control" name="endDateE" value="<%= coverDate.endDate %>">
+                                                    <% } else { %>
+                                                        <input type="date" class="form-control" name="endDateE" value="">
+                                                    <% } %>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <label for="ReasonForLeavingE" class="form-label">Reason for leaving</label>
@@ -182,8 +193,11 @@
                                             <div class="form-group row">
                                                 <div class="col-sm-3">
                                                     <label for="dateOfBirthE" class="form-label">Date of birth</label>
-                                                    <input type="date" class="form-control" name="dateOfBirthE" 
-                                                    value="<%= coverDate.dateOfBirth %>">
+                                                    <% if (coverDate.dateOfBirth) { %>
+                                                        <input type="date" class="form-control" name="dateOfBirthE" value="<%= coverDate.dateOfBirth %>">
+                                                    <% } else { %>
+                                                        <input type="date" class="form-control" name="dateOfBirthE" value="">
+                                                    <% } %>
                                                 </div>
                                                 <div class="col-sm-3">
                                                     <label for="nameTitleE" class="form-label">Name Title</label>
@@ -311,7 +325,7 @@
                                         </form>
                                         <hr>
                                         <div class="text-center">
-                                            <a class="small" href="/tableTest/Sub/<%= employeeFull.id %>">Back to ...</a>
+                                            <a class="small" href="/employee/Sub/<%= employeeFull.id %>">Back to ...</a>
                                         </div>
                                     </div>
                                 </div>

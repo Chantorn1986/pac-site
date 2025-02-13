@@ -3,8 +3,7 @@ const app = express();
 const path = require('path');
 const mysql = require('mysql2');
 const session = require('express-session');
-//const db = require("./models/db.js");
-//const multer = require('multer');
+const multer = require('multer');
 
 app.set('view engine', 'ejs');
 
@@ -29,6 +28,8 @@ app.use('/workLevel',require('./routes/workLevel'));
 app.use('/position',require('./routes/position'));
 
 app.use('/tableTest',require('./routes/tableTest'));
+
+app.use('/employee',require('./routes/employee'));
 
 app.use('/stockCard',require('./routes/stockCard'));
 app.use('/stockCardGoods',require('./routes/stockCardGoods'));
