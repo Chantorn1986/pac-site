@@ -170,7 +170,7 @@
                                                     <% if (coverDate.startDate) { %>
                                                         <input type="date" class="form-control" name="startDateE" value="<%= coverDate.startDate %>" >
                                                     <% } else { %>
-                                                        <input type="date" class="form-control" name="startDateE"  >
+                                                        <input type="date" class="form-control" name="startDateE"  value="null">
                                                     <% } %>
                                                 </div>
                                                 <div class="col-sm-3">
@@ -178,7 +178,7 @@
                                                     <% if (coverDate.endDate) { %>
                                                     <input type="date" class="form-control" name="endDateE" value="<%= coverDate.endDate %>">
                                                     <% } else { %>
-                                                        <input type="date" class="form-control" name="endDateE" >
+                                                        <input type="date" class="form-control" name="endDateE" value="null">
                                                     <% } %>
                                                 </div>
                                                 <div class="col-sm-6">
@@ -196,7 +196,7 @@
                                                     <% if (coverDate.dateOfBirth) { %>
                                                         <input type="date" class="form-control" name="dateOfBirthE" value="<%= coverDate.dateOfBirth %>">
                                                     <% } else { %>
-                                                        <input type="date" class="form-control" name="dateOfBirthE">
+                                                        <input type="date" class="form-control" name="dateOfBirthE" value="null">
                                                     <% } %>
                                                 </div>
                                                 <div class="col-sm-3">
