@@ -676,9 +676,15 @@ router.get('/SubZzView/:id',isAuthenticated, (req, res) => {
         db.query(sql, [req.params.id], (err, result) => {
 
             const coverDate = {
-                createdAt : moment(result[0]['createdAt']).format('YYYY-MM-DD'),
-                updatedAt : moment(result[0]['updatedAt']).format('YYYY-MM-DD')
+                createdAt : null,
+                updatedAt : null
             }
+            if(result[0]['createdAt']){
+                if(result[0]['createdAt'].toString()!== "Thu Nov 30 1899 00:00:00 GMT+0642 (เวลาอินโดจีน)" ){
+                    coverDate.createdAt = moment(result[0]['createdAt']).format('YYYY-MM-DD');}}
+            if(result[0]['updatedAt']){
+                if(result[0]['updatedAt'].toString()!== "Thu Nov 30 1899 00:00:00 GMT+0642 (เวลาอินโดจีน)" ){
+                    coverDate.updatedAt = moment(result[0]['updatedAt']).format('YYYY-MM-DD');}}
             if (err) throw err;
             res.render('hrm/employeeSubZzView', {
                 title: 'Vehicle View', 
