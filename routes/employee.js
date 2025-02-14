@@ -149,7 +149,7 @@ router.post('/Add',isAuthen_assImage,(req, res) => {
 
     const image = req.file ? req.file.filename : null;
     const uuid1 = uuidv4();
-    const sqlAdd1 = "INSERT INTO `employee`(`id`, `code`, `serialNumber`, `mobile`, `InternalTelephone`, `nameTH`, `nameEN`,`nickname`, `departmentID`, `positionID`, `workLevelID`, `employmentType`, `startDate`, `endDate`, `reasonForLeaving`, `userID`,`image`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    const sqlAdd1 = "INSERT INTO `employee`(`id`, `code`, `serialNumber`, `mobile`, `InternalTelephone`, `nameTH`, `nameEN`,`nickname`, `departmentID`, `positionID`, `workLevelID`, `employmentType`, `startDate`, `endDate`, `reasonForLeaving`, `userID`,`image`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     const uuid2 = uuidv4();
     const sqlAdd2 = "INSERT INTO `employeeInfo`(`id`, `address`, `subdistrict`, `district`, `province`, `postcode`, `dateOfBirth`, `nameTitle`, `gender`, `bloodGroup`, `maritalStatus`, `religion`, `nationality`, `ethnicity`, `taxID`, `bank`, `bankNumber`, `emID`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     try{
