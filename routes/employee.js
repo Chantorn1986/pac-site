@@ -28,7 +28,7 @@ const upload = multer({ storage });
 
 router.get('/',isAuthenticated,(req, res) => {
     try {
-        const sql = "SELECT * FROM `view_employeeFull`";
+        const sql = "SELECT * FROM `view_employeeSub`";
         db.query(sql, (err, results) => {
             if (err) throw err;
 
