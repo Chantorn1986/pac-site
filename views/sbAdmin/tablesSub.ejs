@@ -44,24 +44,17 @@
             
                             <!-- Begin Page Content -->
                             <div class="container-fluid">
-                                <div class="card o-hidden border-0 shadow-lg ">
+                                <div class="card o-hidden border-0 shadow-lg">
+                                    <a href="#collapseCardEM" class="card-header" data-toggle="collapse"
+                                    role="button" aria-expanded="true" aria-controls="collapseCardEM">
+                                    <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-address-card fa-fw"></i> <%= title %> </h6>
+                                    </a>
             
-                                    <div class="card-header py-3 d-flex">
-                                        <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-address-card fa-fw"></i> <%= title %> </h6>
-                                        <a href="/tableTest/Edit/<%= employeeFull.id %>" class="btn btn-warning btn-icon-split ml-auto btn-sm">
-                                            <span class="icon text-white-50">
-                                                <i class="fas fa-pen"></i>
-                                            </span>
-                                            <span class="text">Edit Employee</span>
-                                        </a>
-                                    </div>
-            
-                                    <div class="card-body p-0">
+                                    <div class="card-body collapse show" id="collapseCardEM">
                                         <!-- Nested Row within Card Body -->
                                         <div class="row">
                                             <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
-                                            <div class="col-lg-12">
-                                                <div class="p-4">
+                                            <div class="col-lg-12">                                              
                                                     <div class="form-group row">
                                                         <div class="col-sm-9">
                                                             <div class="form-group row">
@@ -107,170 +100,181 @@
                                                         </div>
                                                     </div>
 
-                                                        <div class="form-group row">
-                                                            <div class="col-sm-6">
-                                                                <label for="nameTH" class="form-label">Full name thai</label>
-                                                                <input type="text" class="form-control" name="nameTH" 
-                                                                value="<%= employeeFull.nameTH %>" readonly>
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                                <label for="nameEN" class="form-label">Full name english</label>
-                                                                <input type="text" class="form-control" name="nameEN" 
-                                                                value="<%= employeeFull.nameEN %>" readonly>
-                                                            </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-6">
+                                                            <label for="nameTH" class="form-label">Full name thai</label>
+                                                            <input type="text" class="form-control" name="nameTH" 
+                                                            value="<%= employeeFull.nameTH %>" readonly>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label for="nameEN" class="form-label">Full name english</label>
+                                                            <input type="text" class="form-control" name="nameEN" 
+                                                            value="<%= employeeFull.nameEN %>" readonly>
+                                                        </div>
 
+                                                    </div>
+    
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-6">
+                                                            <label for="departmentID" class="form-label">Department</label>
+                                                            <input type="text" class="form-control" name="departmentID" 
+                                                            value="<%= employeeFull.depEN %>" readonly>
                                                         </div>
-     
-                                                        <div class="form-group row">
-                                                            <div class="col-sm-6">
-                                                                <label for="departmentID" class="form-label">Department</label>
-                                                                <input type="text" class="form-control" name="departmentID" 
-                                                                value="<%= employeeFull.depEN %>" readonly>
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                                <label for="positionID" class="form-label">Position</label> 
-                                                                <input type="text" class="form-control" name="positionID" 
-                                                                value="<%= employeeFull.posEN %>" readonly>          
-                                                            </div>
+                                                        <div class="col-sm-6">
+                                                            <label for="positionID" class="form-label">Position</label> 
+                                                            <input type="text" class="form-control" name="positionID" 
+                                                            value="<%= employeeFull.posEN %>" readonly>          
                                                         </div>
-                                                        <div class="form-group row">
-                                                            <div class="col-sm-6">
-                                                                <label for="workLevelID" class="form-label">Work Level</label>
-                                                                <input type="text" class="form-control" name="workLevelID" 
-                                                                value="<%= employeeFull.wleEN %>" readonly>                                                  
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                                <label for="employmentType" class="form-label">Employment Type</label>
-                                                                <input type="text" class="form-control" name="employmentType" 
-                                                                value="<%= employeeFull.employmentType %>" readonly>  
-                                                            </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-6">
+                                                            <label for="workLevelID" class="form-label">Work Level</label>
+                                                            <input type="text" class="form-control" name="workLevelID" 
+                                                            value="<%= employeeFull.wleEN %>" readonly>                                                  
                                                         </div>
-                                                        <div class="form-group row">
-                                                            <div class="col-sm-3">
-                                                                <label for="startDate" class="form-label">Start Date</label>
-                                                                <% if (coverDate.startDate) { %>
-                                                                    <input type="date" class="form-control" name="startDate" value="<%= coverDate.startDate %>" readonly>
-                                                                <% } else { %>
-                                                                    <input type="text" class="form-control" name="startDate" value="-" readonly>
-                                                                <% } %>
-                                                            </div>
-                                                            <div class="col-sm-3">
-                                                                <label for="endDate" class="form-label">End Date</label>
-                                                                <% if (coverDate.endDate) { %>
-                                                                    <input type="date" class="form-control" name="endDate" value="<%= coverDate.endDate %>" readonly>
-                                                                <% } else { %>
-                                                                    <input type="text" class="form-control" name="endDate" value="-" readonly>
-                                                                <% } %>
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                                <label for="ReasonForLeaving" class="form-label">Reason for leaving</label>
-                                                                <input type="text" class="form-control" name="ReasonForLeaving"
-                                                                value="<%= employeeFull.reasonForLeaving %>" readonly>
-                                                            </div>
+                                                        <div class="col-sm-6">
+                                                            <label for="employmentType" class="form-label">Employment Type</label>
+                                                            <input type="text" class="form-control" name="employmentType" 
+                                                            value="<%= employeeFull.employmentType %>" readonly>  
                                                         </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-3">
+                                                            <label for="startDate" class="form-label">Start Date</label>
+                                                            <% if (coverDate.startDate) { %>
+                                                                <input type="date" class="form-control" name="startDate" value="<%= coverDate.startDate %>" readonly>
+                                                            <% } else { %>
+                                                                <input type="text" class="form-control" name="startDate" value="-" readonly>
+                                                            <% } %>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <label for="endDate" class="form-label">End Date</label>
+                                                            <% if (coverDate.endDate) { %>
+                                                                <input type="date" class="form-control" name="endDate" value="<%= coverDate.endDate %>" readonly>
+                                                            <% } else { %>
+                                                                <input type="text" class="form-control" name="endDate" value="-" readonly>
+                                                            <% } %>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label for="ReasonForLeaving" class="form-label">Reason for leaving</label>
+                                                            <input type="text" class="form-control" name="ReasonForLeaving"
+                                                            value="<%= employeeFull.reasonForLeaving %>" readonly>
+                                                        </div>
+                                                    </div>
+        
+                                                    <hr class="sidebar-divider">
+                                                    <h6 class="m-0 font-weight-bold text-primary mb-3"><i class="fas fa-address-book fa-fw"></i> Personal information</h6>
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-3">
+                                                            <label for="dateOfBirth" class="form-label">Date of birth</label>
+                                                            <% if (coverDate.dateOfBirth) { %>
+                                                                <input type="date" class="form-control" name="dateOfBirth" value="<%= coverDate.dateOfBirth %>" readonly>
+                                                            <% } else { %>
+                                                                <input type="text" class="form-control" name="dateOfBirth" value="-" readonly>
+                                                            <% } %>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <label for="nameTitle" class="form-label">Name Title</label>
+                                                            <input type="text" class="form-control" name="nameTitle" 
+                                                            value="<%= employeeFull.nameTitle %>" readonly>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <label for="gender" class="form-label">Gender</label>
+                                                            <input type="text" class="form-control" name="gender" 
+                                                            value="<%= employeeFull.gender %>" readonly>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <label for="bloodGroup" class="form-label">Blood Group</label>
+                                                            <input type="text" class="form-control" name="bloodGroup" 
+                                                            value="<%= employeeFull.bloodGroup %>" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-3">
+                                                            <label for="maritalStatus" class="form-label">Marital Status</label>
+                                                            <input type="text" class="form-control" name="maritalStatus" 
+                                                            value="<%= employeeFull.maritalStatus %>" readonly>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <label for="religion" class="form-label">Religion</label>
+                                                            <input type="text" class="form-control" name="religion" 
+                                                            value="<%= employeeFull.religion %>" readonly>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <label for="nationality" class="form-label">Nationality</label>
+                                                            <input type="text" class="form-control" name="nationality" 
+                                                            value="<%= employeeFull.nationality %>" readonly>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <label for="ethnicity" class="form-label">Ethnicity</label>
+                                                            <input type="text" class="form-control" name="ethnicity" 
+                                                            value="<%= employeeFull.ethnicity %>" readonly>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-6">
+                                                            <label for="taxID" class="form-label">Tax ID</label>
+                                                            <input type="text" class="form-control" name="taxID" 
+                                                            value="<%= employeeFull.taxID %>" readonly>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <label for="bank" class="form-label">Bank</label>
+                                                            <input type="text" class="form-control" name="bank" 
+                                                            value="<%= employeeFull.bank %>" readonly>
             
-                                                        <hr class="sidebar-divider">
-                                                        <h6 class="m-0 font-weight-bold text-primary mb-3"><i class="fas fa-address-book fa-fw"></i> Personal information</h6>
-                                                        <div class="form-group row">
-                                                            <div class="col-sm-3">
-                                                                <label for="dateOfBirth" class="form-label">Date of birth</label>
-                                                                <% if (coverDate.dateOfBirth) { %>
-                                                                    <input type="date" class="form-control" name="dateOfBirth" value="<%= coverDate.dateOfBirth %>" readonly>
-                                                                <% } else { %>
-                                                                    <input type="text" class="form-control" name="dateOfBirth" value="-" readonly>
-                                                                <% } %>
-                                                            </div>
-                                                            <div class="col-sm-3">
-                                                                <label for="nameTitle" class="form-label">Name Title</label>
-                                                                <input type="text" class="form-control" name="nameTitle" 
-                                                                value="<%= employeeFull.nameTitle %>" readonly>
-                                                            </div>
-                                                            <div class="col-sm-3">
-                                                                <label for="gender" class="form-label">Gender</label>
-                                                                <input type="text" class="form-control" name="gender" 
-                                                                value="<%= employeeFull.gender %>" readonly>
-                                                            </div>
-                                                            <div class="col-sm-3">
-                                                                <label for="bloodGroup" class="form-label">Blood Group</label>
-                                                                <input type="text" class="form-control" name="bloodGroup" 
-                                                                value="<%= employeeFull.bloodGroup %>" readonly>
-                                                            </div>
                                                         </div>
-                                                        <div class="form-group row">
-                                                            <div class="col-sm-3">
-                                                                <label for="maritalStatus" class="form-label">Marital Status</label>
-                                                                <input type="text" class="form-control" name="maritalStatus" 
-                                                                value="<%= employeeFull.maritalStatus %>" readonly>
-                                                            </div>
-                                                            <div class="col-sm-3">
-                                                                <label for="religion" class="form-label">Religion</label>
-                                                                <input type="text" class="form-control" name="religion" 
-                                                                value="<%= employeeFull.religion %>" readonly>
-                                                            </div>
-                                                            <div class="col-sm-3">
-                                                                <label for="nationality" class="form-label">Nationality</label>
-                                                                <input type="text" class="form-control" name="nationality" 
-                                                                value="<%= employeeFull.nationality %>" readonly>
-                                                            </div>
-                                                            <div class="col-sm-3">
-                                                                <label for="ethnicity" class="form-label">Ethnicity</label>
-                                                                <input type="text" class="form-control" name="ethnicity" 
-                                                                value="<%= employeeFull.ethnicity %>" readonly>
-                                                            </div>
+                                                        <div class="col-sm-3">
+                                                            <label for="bankNumber" class="form-label">Bank Number</label>
+                                                            <input type="text" class="form-control" name="bankNumber" 
+                                                            value="<%= employeeFull.bankNumber %>" readonly>
                                                         </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="Address" class="form-label">Address</label>
+                                                        <input type="text" class="form-control" name="Address" 
+                                                        value="<%= employeeFull.address %>" readonly>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                            <div class="col-sm-3">
+                                                                <label for="subdistrict" class="form-label">Subdistrict</label>
+                                                                <input type="text" class="form-control" name="subdistrict" 
+                                                                value="<%= employeeFull.subdistrict %>" readonly>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <label for="district" class="form-label">District</label>
+                                                                <input type="text" class="form-control" name="district"
+                                                                value="<%= employeeFull.district %>" readonly>                                                 
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <label for="province" class="form-label">Province</label>
+                                                                <input type="text" class="form-control" name="province"
+                                                                value="<%= employeeFull.province %>" readonly>    
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <label for="postcode" class="form-label">Postcode</label>
+                                                                <input type="text" class="form-control" name="postcode"
+                                                                value="<%= employeeFull.postcode %>" readonly>   
+                                                            </div>
                                                         
-                                                        <div class="form-group row">
-                                                            <div class="col-sm-6">
-                                                                <label for="taxID" class="form-label">Tax ID</label>
-                                                                <input type="text" class="form-control" name="taxID" 
-                                                                value="<%= employeeFull.taxID %>" readonly>
-                                                            </div>
-                                                            <div class="col-sm-3">
-                                                                <label for="bank" class="form-label">Bank</label>
-                                                                <input type="text" class="form-control" name="bank" 
-                                                                value="<%= employeeFull.bank %>" readonly>
-              
-                                                            </div>
-                                                            <div class="col-sm-3">
-                                                                <label for="bankNumber" class="form-label">Bank Number</label>
-                                                                <input type="text" class="form-control" name="bankNumber" 
-                                                                value="<%= employeeFull.bankNumber %>" readonly>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="Address" class="form-label">Address</label>
-                                                            <input type="text" class="form-control" name="Address" 
-                                                            value="<%= employeeFull.address %>" readonly>
-                                                        </div>
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-3">
-                                                                    <label for="subdistrict" class="form-label">Subdistrict</label>
-                                                                    <input type="text" class="form-control" name="subdistrict" 
-                                                                    value="<%= employeeFull.subdistrict %>" readonly>
-                                                                </div>
-                                                                <div class="col-sm-3">
-                                                                    <label for="district" class="form-label">District</label>
-                                                                    <input type="text" class="form-control" name="district"
-                                                                    value="<%= employeeFull.district %>" readonly>                                                 
-                                                                </div>
-                                                                <div class="col-sm-3">
-                                                                    <label for="province" class="form-label">Province</label>
-                                                                    <input type="text" class="form-control" name="province"
-                                                                    value="<%= employeeFull.province %>" readonly>    
-                                                                </div>
-                                                                <div class="col-sm-3">
-                                                                    <label for="postcode" class="form-label">Postcode</label>
-                                                                    <input type="text" class="form-control" name="postcode"
-                                                                    value="<%= employeeFull.postcode %>" readonly>   
-                                                                </div>
-                                                            
-                                                        </div>
-                                                </div>
+                                                    </div>
+                                                    <div class="mb-3 text-right">
+                                                        <a href="/tableTest/Edit/<%= employeeFull.id %>" class="btn btn-warning btn-icon-split ml-auto btn-sm">
+                                                            <span class="icon text-white-50">
+                                                                <i class="fas fa-pen"></i>
+                                                            </span>
+                                                            <span class="text">Edit Employee</span>
+                                                        </a>
+                                                    </div>
                                             </div>
+
                                         </div>
+  
                                     </div>
+         
                                 </div>
                                 <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
+
                             </div>
                             <!-- /.container-fluid -->
             
@@ -291,18 +295,20 @@
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3 d-flex">
-                            <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-graduation-cap fa-fw"></i> Education information</h6>
-                            <!--<a href="/tablesAdd" class="btn btn-info btn-circle btn-sm ml-auto"><i class="fas fa-plus"></i></a>-->
+                        <a href="#collapseCardED" class="card-header" data-toggle="collapse"
+                        role="button" aria-expanded="true" aria-controls="collapseCardED">
+                        <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-graduation-cap fa-fw"></i> Education information</h6>
+                        </a>
+
+
+                        <div class="card-body collapse show" id="collapseCardED">
+                            <div class="mb-3 align-items-center text-center">
                             <a href="/tableTest/SubAdd/<%= employeeFull.id %>" class="btn btn-primary btn-icon-split ml-auto btn-sm">
                                 <span class="icon text-white-50">
                                     <i class="fas fa-plus-circle"></i>
                                 </span>
                                 <span class="text">Create Education</span>
-                            </a>
-                            
-                        </div>
-                        <div class="card-body">
+                            </a></div>
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
@@ -344,10 +350,6 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <hr>
-                            <div class="text-center">
-                                <a class="small" href="/tableTest">Back to ...</a>
-                            </div>
                         </div>
                     </div>
 
@@ -371,18 +373,19 @@
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3 d-flex">
-                            <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-graduation-cap fa-fw"></i> Education information</h6>
-                            <!--<a href="/tablesAdd" class="btn btn-info btn-circle btn-sm ml-auto"><i class="fas fa-plus"></i></a>-->
+                        <a href="#collapseCardC" class="card-header" data-toggle="collapse"
+                        role="button" aria-expanded="true" aria-controls="collapseCardC">
+                        <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-graduation-cap fa-fw"></i> Education information</h6>
+                        </a>
+      
+
+                        <div class="card-body collapse show" id="collapseCardC">
                             <a href="/tableTest/SubZAdd/<%= employeeFull.id %>" class="btn btn-primary btn-icon-split ml-auto btn-sm">
                                 <span class="icon text-white-50">
                                     <i class="fas fa-plus-circle"></i>
                                 </span>
                                 <span class="text">Create Card</span>
                             </a>
-                            
-                        </div>
-                        <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
