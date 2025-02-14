@@ -68,7 +68,7 @@ router.get('/Sub/:id',isAuthenticated,(req, res) => {
                         }
                         if(results[0]['startDate']){
                             if(results[0]['startDate'].toString()!== "Thu Nov 30 1899 00:00:00 GMT+0642 (เวลาอินโดจีน)" ){
-                                coverDate.startDate = moment(results[0]['endDate']).format('YYYY-MM-DD');}}
+                                coverDate.startDate = moment(results[0]['startDate']).format('YYYY-MM-DD');}}
                         if(results[0]['endDate']){
                             if(results[0]['endDate'].toString()!== "Thu Nov 30 1899 00:00:00 GMT+0642 (เวลาอินโดจีน)" ){
                                 coverDate.endDate = moment(results[0]['endDate']).format('YYYY-MM-DD');}}
