@@ -156,7 +156,7 @@
                                                                 <% if (coverDate.startDate) { %>
                                                                     <input type="date" class="form-control" name="startDate" value="<%= coverDate.startDate %>" readonly>
                                                                 <% } else { %>
-                                                                    <input type="text" class="form-control" name="startDate" readonly>
+                                                                    <input type="text" class="form-control" name="startDate" value="-" readonly>
                                                                 <% } %>
                                                             </div>
                                                             <div class="col-sm-3">
@@ -164,7 +164,7 @@
                                                                 <% if (coverDate.endDate) { %>
                                                                     <input type="date" class="form-control" name="endDate" value="<%= coverDate.endDate %>" readonly>
                                                                 <% } else { %>
-                                                                    <input type="text" class="form-control" name="endDate"  readonly>
+                                                                    <input type="text" class="form-control" name="endDate" value="-" readonly>
                                                                 <% } %>
                                                             </div>
                                                             <div class="col-sm-6">
@@ -182,7 +182,7 @@
                                                                 <% if (coverDate.dateOfBirth) { %>
                                                                     <input type="date" class="form-control" name="dateOfBirth" value="<%= coverDate.dateOfBirth %>" readonly>
                                                                 <% } else { %>
-                                                                    <input type="text" class="form-control" name="dateOfBirth" value="" readonly>
+                                                                    <input type="text" class="form-control" name="dateOfBirth" value="-" readonly>
                                                                 <% } %>
                                                             </div>
                                                             <div class="col-sm-3">

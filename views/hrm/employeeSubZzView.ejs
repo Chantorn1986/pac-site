@@ -95,7 +95,7 @@
                                                     <% if (coverDate.createdAt) { %>
                                                         <input type="text" name="createdAtCarE" class="form-control" value="<%= coverDate.createdAt %>" readonly>
                                                     <% } else { %>
-                                                        <input type="text" class="form-control" name="createdAtCarE" readonly>
+                                                        <input type="text" class="form-control" name="createdAtCarE" value="-" readonly>
                                                     <% } %>
                                                     
                                                 </div>
@@ -104,7 +104,7 @@
                                                     <% if (coverDate.updatedAt) { %>
                                                         <input type="text" name="updatedAtCarE" class="form-control" value="<%= coverDate.updatedAt %>" readonly>
                                                     <% } else { %>
-                                                        <input type="text" class="form-control" name="updatedAtCarE" readonly>
+                                                        <input type="text" class="form-control" name="updatedAtCarE" value="-" readonly>
                                                     <% } %>
                                                 </div>
                                             </div>

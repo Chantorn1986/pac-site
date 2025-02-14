@@ -72,7 +72,7 @@
                                                     <% if (coverDate.registrationDate) { %>
                                                         <input type="date" class="form-control" name="registrationDateE" value="<%= coverDate.registrationDate %>" readonly>
                                                     <% } else { %>
-                                                        <input type="date" class="form-control" name="registrationDateE" value="" readonly>
+                                                        <input type="date" class="form-control" name="registrationDateE" value="-" readonly>
                                                     <% } %>
                                                 </div>
                                                 <div class="col-sm-3">
@@ -80,7 +80,7 @@
                                                     <% if (coverDate.graduationDate) { %>
                                                     <input type="date" class="form-control" name="graduationDateE" value="<%= coverDate.graduationDate %>" readonly>
                                                     <% } else { %>
-                                                        <input type="date" class="form-control" name="graduationDateE" value="" readonly>
+                                                        <input type="date" class="form-control" name="graduationDateE" value="-" readonly>
                                                     <% } %>
                                                 </div>
                                             </div>
