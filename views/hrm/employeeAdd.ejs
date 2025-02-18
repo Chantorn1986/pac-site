@@ -58,7 +58,7 @@
                                 <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
                                 <div class="col-lg-12">
                                     <div class="p-4">
-                                        <form class="user" action="/employee/Add" method="POST" enctype="multipart/form-data">
+                                        <form class="user" action="/employee/Add" method="POST" enctype="multipart/form-data" id="emAdd">
                                             <div class="form-group row">
                                                 <div class="col-sm-9">
                                                     <div class="form-group row">
@@ -121,7 +121,7 @@
                                             <div class="form-group row">
                                                 <div class="col-sm-6">
                                                     <label for="departmentID" class="form-label">Department</label>
-                                                    <select name="departmentID" class="form-control form-select" aria-label="Default select example">
+                                                    <select name="departmentID" class="form-control form-select" aria-label="Default select example" onchange="runDocNumber();">
                                                         <option value="">--- Select Department ---</option>
                                                         <% departments.forEach(departments => { %>
                                                         <option value="<%= departments.id %>"><%= departments.nameEN %></option>
@@ -343,6 +343,26 @@
 
     <!-- Page level custom scripts -->
     <script src="/js/demo/datatables-demo.js"></script>
+    <script>      
+        function runDocNumber(){
+            let departmentID = document.forms['emAdd']['departmentID'].value;
+            if(departmentID === "04c2f03c-40bc-4af3-bb61-e0c2f60782be"){
+                document.forms['emAdd']['serialNumber'].value = (new Date().toLocaleDateString('th-TH', {year: '2-digit'})).substr(5) +"02"
+                }else if (departmentID === "5cd4e191-7274-4e8d-a16e-94618c038369"){
+                    document.forms['emAdd']['serialNumber'].value = (new Date().toLocaleDateString('th-TH', {year: '2-digit'})).substr(5)  + "04" 
+                }else if (departmentID  === "e5b07568-584b-4708-bd85-a40f63156c90"){
+                    document.forms['emAdd']['serialNumber'].value = (new Date().toLocaleDateString('th-TH', {year: '2-digit'})).substr(5)  + "05" 
+                }else if (departmentID  === "9d27bb4f-23b2-4ca2-aec1-089411815631"){
+                    document.forms['emAdd']['serialNumber'].value = (new Date().toLocaleDateString('th-TH', {year: '2-digit'})).substr(5)  + "06"
+                }else if (departmentID  === "ffac12a5-c846-4512-95ca-6f91b1c9ab39"){
+                    document.forms['emAdd']['serialNumber'].value = (new Date().toLocaleDateString('th-TH', {year: '2-digit'})).substr(5)  + "08"
+                }else if (departmentID  === "0114178b-5b7e-453a-bd04-2e3eb4c60097"){
+                    document.forms['emAdd']['serialNumber'].value = (new Date().toLocaleDateString('th-TH', {year: '2-digit'})).substr(5)  + "08"
+                }else{
+                    document.forms['emAdd']['serialNumber'].value = (new Date().toLocaleDateString('th-TH', {year: '2-digit'})).substr(5) 
+                }
+        }
+    </script>
 
 </body>
 

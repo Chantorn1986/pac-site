@@ -27,6 +27,7 @@ router.get('/', (req, res) => {
     res.render('index', { user: req.session.user });
 })
 
+
 router.get('/utilities-animation', (req, res) => {
     res.render('sbAdmin/utilities-animation', { user: req.session.user });
 })
