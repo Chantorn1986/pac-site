@@ -105,8 +105,9 @@ router.get('/Add',isAuthenticated, (req, res) => {
         const sql2 = "SELECT * FROM positions ORDER BY no ASC";
         const sql3 = "SELECT * FROM workLevel ORDER BY no ASC";
         const sql4 = "SELECT * FROM users ORDER BY name ASC";
+        const now = new Date();
+        const dateString = moment(now).format('YYYY-MM-DD');
         try { 
-            const sql = "SELECT * FROM workLevel ORDER BY no ASC";
             db.query(sql1, (err, departments) => {
                 if (err) throw err;
 
@@ -125,6 +126,7 @@ router.get('/Add',isAuthenticated, (req, res) => {
                                 positions:positions,
                                 workLevel:workLevel,
                                 users:users,
+                                dateDefault:dateString,
                                 user: req.session.user
                             });
                         }) 
@@ -701,7 +703,7 @@ router.get('/SubZzView/:id',isAuthenticated, (req, res) => {
 
 router.get('/rptContact',isAuthenticated,(req, res) => {
     try {
-        const sql = "SELECT * FROM `view_employeeFull`";
+        const sql = "SELECT * FROM `view_employeeSub`";
         db.query(sql, (err, results) => {
             if (err) throw err;
 
@@ -719,7 +721,7 @@ router.get('/rptContact',isAuthenticated,(req, res) => {
 
 router.get('/rptInformation',isAuthenticated,(req, res) => {
     try {
-        const sql = "SELECT * FROM `view_employeeFull`";
+        const sql = "SELECT * FROM `view_employeeSub`";
         db.query(sql, (err, results) => {
             if (err) throw err;
 
@@ -753,7 +755,7 @@ router.get('/rptEducation',isAuthenticated,(req, res) => {
 });
 router.get('/rptWorkPeriod',isAuthenticated,(req, res) => {
     try {
-        const sql = "SELECT * FROM `view_employeeFull`";
+        const sql = "SELECT * FROM `view_employeeSub`";
         db.query(sql, (err, results) => {
             if (err) throw err;
 
