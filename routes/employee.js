@@ -155,7 +155,7 @@ router.post('/Add',isAuthen_assImage,(req, res) => {
     const uuid2 = uuidv4();
     const sqlAdd2 = "INSERT INTO `employeeInfo`(`id`, `address`, `subdistrict`, `district`, `province`, `postcode`, `dateOfBirth`, `nameTitle`, `gender`, `bloodGroup`, `maritalStatus`, `religion`, `nationality`, `ethnicity`, `taxID`, `bank`, `bankNumber`, `emID`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     try{
-        db.query(sqlAdd1, [ uuid1 , employeeCode , serialNumber , mobile , internalTelephone , nameTH , nameEN ,nickname, departmentID ,
+       db.query(sqlAdd1, [ uuid1 , employeeCode , serialNumber , mobile , internalTelephone , nameTH , nameEN ,nickname, departmentID ,
             positionID , workLevelID , employmentType , startDate , endDate , ReasonForLeaving ,userLogin,image ], (err, result1) => {
             if (err) throw err;
 

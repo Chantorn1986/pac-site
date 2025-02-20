@@ -28,13 +28,13 @@ const upload = multer({ storage });
 
 router.get('/',(req, res) => {
     try {
-        const sql = "SELECT * FROM `view_employeeFull`";
+        const sql = "SELECT * FROM `view_statusClockInOut`";
         db.query(sql, (err, results) => {
             if (err) throw err;
 
-            res.render('sbAdmin/tables', { 
-                title: 'Employee Management',
-                employee : results,
+            res.render('timeAtt/rptTimeAttClockInOut', { 
+                title: 'Clock In-Out Report',
+                statusClockInOut : results,
                 user: req.session.user
             });
         })

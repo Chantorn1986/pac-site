@@ -31,6 +31,8 @@ app.use('/tableTest',require('./routes/tableTest'));
 
 app.use('/employee',require('./routes/employee'));
 
+app.use('/timeAtt',require('./routes/timeAttendance'));
+
 app.use('/stockCard',require('./routes/stockCard'));
 app.use('/stockCardGoods',require('./routes/stockCardGoods'));
 app.use('/stockCardBrands',require('./routes/stockCardBrands'));
