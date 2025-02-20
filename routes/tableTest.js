@@ -28,11 +28,11 @@ const upload = multer({ storage });
 
 router.get('/',(req, res) => {
     try {
-        const sql = "SELECT * FROM `view_statusClockInOut`";
+        const sql = "SELECT `id`, `acNo`, `code`, `name`, `date`, `dateF`, `dayTypeWork`, `onDuty`, `offDuty`, `clockIn`, `clockOut`, `remark`, `late`, `lateHour`, `lateMinute`, `statusScan`, IF(`lateHour`>0,IF(`lateMinute`>0,CONCAT(`lateHour`,' ชม. ',`lateMinute`,' นาที'),CONCAT(`lateHour`,' ชม.')) ,IF(`lateMinute`>0,CONCAT(`lateMinute`,' นาที'),'-')) AS `timeLate` FROM `view_statusClockInOut`";
         db.query(sql, (err, results) => {
             if (err) throw err;
 
-            res.render('timeAtt/rptTimeAttClockInOut', { 
+            res.render('sbAdmin/tables', { 
                 title: 'Clock In-Out Report',
                 statusClockInOut : results,
                 user: req.session.user
