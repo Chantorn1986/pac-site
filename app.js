@@ -33,6 +33,8 @@ app.use('/employee',require('./routes/employee'));
 
 app.use('/timeAtt',require('./routes/timeAttendance'));
 
+app.use('/library',require('./routes/library'));
+
 app.use('/stockCard',require('./routes/stockCard'));
 app.use('/stockCardGoods',require('./routes/stockCardGoods'));
 app.use('/stockCardBrands',require('./routes/stockCardBrands'));

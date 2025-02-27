@@ -50,11 +50,11 @@
                         <div class="card-header py-3 d-flex">
                             <h6 class="m-0 font-weight-bold text-primary">PAC APP - <%= title %></h6>
                             <!--<a href="/tablesAdd" class="btn btn-info btn-circle btn-sm ml-auto"><i class="fas fa-plus"></i></a>-->
-                            <a href="#" class="btn btn-primary btn-icon-split ml-auto btn-sm">
+                            <a href="/library/industryType/Add" class="btn btn-primary btn-icon-split ml-auto btn-sm">
                                 <span class="icon text-white-50">
                                     <i class="fas fa-plus-circle"></i>
                                 </span>
-                                <span class="text">Clock In-Out Report</span>
+                                <span class="text">Library Industry Type Create</span>
                             </a>
                             
                         </div>
@@ -63,50 +63,34 @@
                                 <table class="table table-bordered align-middle" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th class="align-middle">Date</th>
-                                            <th class="align-middle">AC.No</th>
                                             <th class="align-middle">Code</th>
-                                            <th class="align-middle">Name</th>
-                                            <th class="align-middle">DayType</th>
-                                            <th class="align-middle">OnDuty</th>
-                                            <th class="align-middle">OffDuty</th>
-                                            <th class="align-middle">ClockIn</th>
-                                            <th class="align-middle">ClockOut</th>
-                                            <th class="align-middle">Late</th>
-                                            <th class="align-middle">Time.L</th>
+                                            <th class="align-middle">Name TH</th>
+                                            <th class="align-middle">Name EN</th>
+                                            <th class="align-middle">Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th class="align-middle">Date</th>
-                                            <th class="align-middle">AC.No</th>
                                             <th class="align-middle">Code</th>
-                                            <th class="align-middle">Name</th>
-                                            <th class="align-middle">DayType</th>
-                                            <th class="align-middle">OnDuty</th>
-                                            <th class="align-middle">OffDuty</th>
-                                            <th class="align-middle">ClockIn</th>
-                                            <th class="align-middle">ClockOut</th>
-                                            <th class="align-middle">Late</th>
-                                            <th class="align-middle">Time.L</th>
-                                       
+                                            <th class="align-middle">Name TH</th>
+                                            <th class="align-middle">Name EN</th>
+                                            <th class="align-middle">Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <% statusClockInOut.forEach(statusClockInOut => { %>
+                                        <% libraryIndustryType.forEach(libraryIndustryType => { %>
                                             <tr>
-                                                <td class="align-middle"><%= statusClockInOut.dateF %></td>
-                                                <td class="align-middle"><%= statusClockInOut.acNo %></td>
-                                                <td class="align-middle text-center"><%= statusClockInOut.code %></td>
-                                                <td class="align-middle"><%= statusClockInOut.name %></td>
-                                                <td class="align-middle"><%= statusClockInOut.dayTypeWork %></td>
-                                                <td class="align-middle"><%= statusClockInOut.onDuty %></td>
-                                                <td class="align-middle"><%= statusClockInOut.offDuty %></td>
-                                                <td class="align-middle"><%= statusClockInOut.clockIn %></td>
-                                                <td class="align-middle"><%= statusClockInOut.clockOut %></td>
-                                                <td class="align-middle"><%= statusClockInOut.late %></td>
-                                                <td class="align-middle"><%= statusClockInOut.timeLate %></td>
-           
+                                                <td class="align-middle"><%= libraryIndustryType.code %></td>
+                                                <td class="align-middle"><%= libraryIndustryType.nameTH %></td>
+                                                <td class="align-middle"><%= libraryIndustryType.nameEN %></td>   
+                                                <td class="align-middle text-center">     
+                                                    <a href="/library/industryType/View/<%= libraryIndustryType.id %>" class="btn btn-info btn-circle">
+                                                        <i class="fas fa-eye"></i></a>                              
+                                                    <a href="/library/industryType/Edit/<%= libraryIndustryType.id %>" class="btn btn-warning btn-circle">
+                                                        <i class="fas fa-pen"></i></a>
+                                                    <a href="/library/industryType/Del/<%= libraryIndustryType.id %>" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure ?');">
+                                                        <i class="fas fa-trash-alt"></i></a>
+                                                </td>        
                                             </tr>
                                             <% }) %>                                    
                                     </tbody>

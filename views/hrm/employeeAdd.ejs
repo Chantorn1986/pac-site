@@ -345,22 +345,25 @@
     <script src="/js/demo/datatables-demo.js"></script>
     <script>      
         function runDocNumber(){
-            let departmentID = document.forms['emAdd']['departmentID'].value;
-            if(departmentID === "04c2f03c-40bc-4af3-bb61-e0c2f60782be"){
-                document.forms['emAdd']['serialNumber'].value = (new Date().toLocaleDateString('th-TH', {year: '2-digit'})).substr(5) +"02"
-                }else if (departmentID === "5cd4e191-7274-4e8d-a16e-94618c038369"){
+            let departmentID = document.forms['emAdd']['departmentID'];
+            
+                if(departmentID.value === "04c2f03c-40bc-4af3-bb61-e0c2f60782be"){
+                    document.forms['emAdd']['serialNumber'].value = (new Date().toLocaleDateString('th-TH', {year: '2-digit'})).substr(5)  + "02"
+                }else if (departmentID.value === "5cd4e191-7274-4e8d-a16e-94618c038369"){
                     document.forms['emAdd']['serialNumber'].value = (new Date().toLocaleDateString('th-TH', {year: '2-digit'})).substr(5)  + "04" 
-                }else if (departmentID  === "e5b07568-584b-4708-bd85-a40f63156c90"){
+                }else if (departmentID.value  === "e5b07568-584b-4708-bd85-a40f63156c90"){
                     document.forms['emAdd']['serialNumber'].value = (new Date().toLocaleDateString('th-TH', {year: '2-digit'})).substr(5)  + "05" 
-                }else if (departmentID  === "9d27bb4f-23b2-4ca2-aec1-089411815631"){
+                }else if (departmentID.value  === "9d27bb4f-23b2-4ca2-aec1-089411815631"){
                     document.forms['emAdd']['serialNumber'].value = (new Date().toLocaleDateString('th-TH', {year: '2-digit'})).substr(5)  + "06"
-                }else if (departmentID  === "ffac12a5-c846-4512-95ca-6f91b1c9ab39"){
+                }else if (departmentID.value  === "ffac12a5-c846-4512-95ca-6f91b1c9ab39"){
                     document.forms['emAdd']['serialNumber'].value = (new Date().toLocaleDateString('th-TH', {year: '2-digit'})).substr(5)  + "08"
-                }else if (departmentID  === "0114178b-5b7e-453a-bd04-2e3eb4c60097"){
+                }else if (departmentID.value  === "0114178b-5b7e-453a-bd04-2e3eb4c60097"){
                     document.forms['emAdd']['serialNumber'].value = (new Date().toLocaleDateString('th-TH', {year: '2-digit'})).substr(5)  + "08"
                 }else{
                     document.forms['emAdd']['serialNumber'].value = (new Date().toLocaleDateString('th-TH', {year: '2-digit'})).substr(5) 
                 }
+            
+
         }
     </script>
 
