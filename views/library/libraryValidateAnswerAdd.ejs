@@ -60,17 +60,17 @@
                                             <h6 class="m-0 font-weight-bold text-primary mb-3"><i class="fas fa-file-signature fa-fw"></i> <%= title %></h6>
                                             <div class="form-group row">
                                                 <div class="col-sm-4">
-                                                    <label for="libraryQuestionDate" class="form-label">Date :</label>
-                                                    <input type="date" class="form-control" name="libraryQuestionDate" 
+                                                    <label for="libraryVAnswerDate" class="form-label">Date :</label>
+                                                    <input type="date" class="form-control" name="libraryVAnswerDate" 
                                                     value="<%= dateDefaul %>">
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <label for="libraryQuestionCategory" class="form-label">Category :</label>
-                                                    <input type="text" class="form-control" name="libraryQuestionCategory" >
+                                                    <label for="libraryVAnswerCategory" class="form-label">Category :</label>
+                                                    <input type="text" class="form-control" name="libraryVAnswerCategory" >
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <label for="libraryQuestionQuestioner" class="form-label">Questioner :</label>
-                                                    <select name="libraryQuestionQuestioner" class="form-control form-select" aria-label="Default select example">
+                                                    <label for="libraryVAnswerQuestioner" class="form-label">Questioner :</label>
+                                                    <select name="libraryVAnswerQuestioner" class="form-control form-select" aria-label="Default select example">
                                                         <option value="">--- Select Name ---</option>
                                                         <% employee.forEach(employee => { %>
                                                         <option value="<%= employee.nameTH %>"><%= employee.nameTH %></option>
@@ -79,12 +79,12 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="libraryQuestionTitle" class="form-label">Question ? :</label>
-                                                <textarea type="textarea" rows="8" class="form-control" name="libraryQuestionTitle" ></textarea>
+                                                <label for="libraryVAnswerTitle" class="form-label">Question ? :</label>
+                                                <textarea type="textarea" rows="8" class="form-control" name="libraryVAnswerTitle" ></textarea>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-sm-4">
-                                                    <label for="libraryQuestionBrands" class="form-label">Brands :<br></label>
+                                                    <label for="libraryVAnswerBrands" class="form-label">Brands :<br></label>
                                                     <% libraryBrands.forEach(libraryBrands => { %>
                                                         <br>
                                                         <input type="checkbox" id="vehicle<%= libraryBrands.code %>" name="vehicle<%= libraryBrands.code %>" value="<%= libraryBrands.nameEN %>">
@@ -92,7 +92,7 @@
                                                     <% }) %> 
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <label for="libraryQuestionProductType" class="form-label">Product Type :<br></label>
+                                                    <label for="libraryVAnswerProductType" class="form-label">Product Type :<br></label>
                                                     <% libraryProductType.forEach(libraryProductType => { %>
                                                         <br>
                                                         <input type="checkbox" id="vehicle<%= libraryProductType.code %>" name="vehicle<%= libraryProductType.code %>" value="<%= libraryBrands.nameEN %>">
@@ -100,7 +100,7 @@
                                                     <% }) %> 
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <label for="libraryQuestionIndustryType" class="form-label">Industry Type :<br></label>
+                                                    <label for="libraryVAnswerIndustryType" class="form-label">Industry Type :<br></label>
                                                     <% libraryIndustryType.forEach(libraryIndustryType => { %>
                                                         <br>
                                                         <input type="checkbox" id="vehicle<%= libraryIndustryType.code %>" name="vehicle<%= libraryIndustryType.code %>" value="<%= libraryBrands.nameEN %>">
@@ -113,8 +113,8 @@
                                             <div class="form-group row">
   
                                                 <div class="col-sm-6">
-                                                    <label for="libraryAnswerAnswerer" class="form-label">Answerer :</label>
-                                                    <select name="libraryAnswerAnswerer" class="form-control form-select" aria-label="Default select example">
+                                                    <label for="libraryVAnswerAnswerer" class="form-label">Answerer :</label>
+                                                    <select name="libraryVAnswerAnswerer" class="form-control form-select" aria-label="Default select example">
                                                         <option value="">--- Select Name ---</option>
                                                         <% employee.forEach(employee => { %>
                                                         <option value="<%= employee.nameTH %>"><%= employee.nameTH %></option>
@@ -122,22 +122,22 @@
                                                       </select>  
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <label for="libraryQuestionDate" class="form-label">Answer Date :</label>
-                                                    <input type="datetime" class="form-control" name="libraryQuestionDate" 
+                                                    <label for="libraryVAnswerAnswerDate" class="form-label">Answer Date :</label>
+                                                    <input type="datetime" class="form-control" name="libraryVAnswerAnswerDate" 
                                                     value="<%= timestamp %>" readonly>
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="libraryQuestionTitle" class="form-label">Answer :</label>
-                                                <textarea type="textarea" rows="13" class="form-control" name="libraryQuestionTitle" ></textarea>
+                                                <label for="libraryVAnswerAnswer" class="form-label">Answer :</label>
+                                                <textarea type="textarea" rows="13" class="form-control" name="libraryVAnswerAnswer" ></textarea>
                                             </div>
                                             <hr class="sidebar-divider">
                                                 <h6 class="m-0 font-weight-bold text-primary mb-3"><i class="fas fa-user-check fa-fw"></i> Validator</h6>
                                             <div class="form-group row">
                                                 <div class="col-sm-6">
-                                                    <label for="libraryAnswerAnswerer" class="form-label">Validator :</label>
-                                                    <select name="libraryAnswerAnswerer" class="form-control form-select" aria-label="Default select example">
+                                                    <label for="libraryVAnswerValidator" class="form-label">Validator :</label>
+                                                    <select name="libraryVAnswerValidator" class="form-control form-select" aria-label="Default select example">
                                                         <option value="">--- Select Name ---</option>
                                                         <% employee.forEach(employee => { %>
                                                         <option value="<%= employee.nameTH %>"><%= employee.nameTH %></option>
@@ -146,26 +146,26 @@
                                                 </div>
                                       
                                                 <div class="col-sm-6">
-                                                    <label for="libraryQuestionDate" class="form-label">Validate Date :</label>
-                                                    <input type="datetime" class="form-control" name="libraryQuestionDate" 
+                                                    <label for="libraryVAnswerValidateDate" class="form-label">Validate Date :</label>
+                                                    <input type="datetime" class="form-control" name="libraryVAnswerValidateDate" 
                                                     value="<%= timestamp %>" readonly>
                                                 </div>
                                            
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="libraryQuestionTitle" class="form-label">Summary :</label>
-                                                <textarea type="textarea" rows="5" class="form-control" name="libraryQuestionTitle" ></textarea>
+                                                <label for="libraryVAnswerSummary" class="form-label">Summary :</label>
+                                                <textarea type="textarea" rows="5" class="form-control" name="libraryVAnswerSummary" ></textarea>
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="libraryQuestionTitle" class="form-label">Keyword :</label>
-                                                <textarea type="textarea" rows="15" class="form-control" name="libraryQuestionTitle" ></textarea>
+                                                <label for="libraryVAnswerKeyword" class="form-label">Keyword :</label>
+                                                <textarea type="textarea" rows="15" class="form-control" name="libraryVAnswerKeyword" ></textarea>
                                             </div>
                                             <div class="form-group">
-                                                <label for="libraryAnswerAddPAC" class="form-label">Library PAC :</label><br>
-                                                <input type="checkbox" id="libraryAnswerAddPAC" name="libraryAnswerAddPAC" value="True">
-                                                <label for="libraryAnswerAddPAC"> <i class="fas fa-fw fa-book"></i>  Add to Library PAC </label>
+                                                <label for="libraryVAnswerAddPAC" class="form-label">Library PAC :</label><br>
+                                                <input type="checkbox" id="libraryAVAnswerAddPAC" name="libraryVAnswerAddPAC" value="True">
+                                                <label for="libraryVAnswerAddPAC"> <i class="fas fa-fw fa-book"></i>  Add to Library PAC </label>
                                             </div>
 
                                             <button type="submit" class="btn btn-success btn-block">

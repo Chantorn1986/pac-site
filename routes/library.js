@@ -429,7 +429,8 @@ router.get('/productType/View/:id', (req, res) => {
 
 router.get('/question',(req, res) => {
     try {
-        const sql = "SELECT `id`, `date`, `no`, `categoryGID`, `brandGID`, `industryTypeGID`, `productTypeGID`, `image`, `title`, `summaryContent`, `content`, `keyword`, `questioner`, `answerer`, `createdAt`, `updatedAt` , DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryData`";
+        let sql = "SELECT `id`, `date`, `docQTN`, `noQTN`, `categoryGID`, `brandGID`, `industryTypeGID`, `productTypeGID`, `image`, `title`,";
+              sql += "`summaryContent`, `content`, `keyword`, `questioner`, `answerer`, `createdAt`, `updatedAt`, `answerDate`, `validator`, `validateDate`, `addPAC`, `docLBL`, `noLBL` FROM `libraryData` WHERE 1";
         db.query(sql, (err, results) => {
             if (err) throw err;
 
@@ -483,11 +484,33 @@ router.get('/question/Add',(req, res) => {
 });
 
 router.post('/question/Add',(req, res) => {
-    const { libraryProductTypeCode,libraryProductTypeNameTH,libraryProductTypeNameEN }= req.body;
+    const { libraryQuestionDate, libraryQuestionDocQTN, libraryQuestionQuestioner, libraryQuestionTitle }= req.body;
     const uuid = uuidv4();
-    const sqlAdd = "INSERT INTO `libraryProductType` ( `id`, `code`, `nameTH`, `nameEN` ) VALUES(?, ?, ?, ?)";
+    const sqlAdd1 = "INSERT INTO `libraryData`(`id`, `date`, `docQTN`, `noQTN`, `title`, `questioner`) VALUES ( ? , ? , ? , ? , ? , ?)";
+
+    const { libraryAnswerDate, libraryAnswerCategory, libraryAnswerQuestioner, libraryAnswerTitle, libraryAnswerBrands, libraryAnswerAnswerer, libraryAnswerAnswerDate, libraryAnswerAnswer }= req.body;
+    const sqlBrands = "SELECT `id`, `code`, `nameTH`, `nameEN` FROM `libraryBrands` ORDER BY `nameEN` ASC";
+    const sqlIndustryType = "SELECT `id`, `code`, `nameTH`, `nameEN` FROM `libraryIndustryType` ORDER BY `nameEN` ASC";
+    const sqlProductType = "SELECT `id`, `code`, `nameTH`, `nameEN` FROM `libraryProductType` ORDER BY `nameEN` ASC";
+    
     try{
-        db.query(sqlAdd, [ uuid, libraryProductTypeCode,libraryProductTypeNameTH,libraryProductTypeNameEN ], (err, result) => {
+        db.query(sqlBrands, (err, dbBrands) => {
+            if (err) throw err;
+            dbBrands.forEach((element) => {
+                const a = "vehicle"+element['code']
+                a= req.body;
+                console.log(a);
+            });
+
+        });
+
+
+
+
+
+
+
+       /* db.query(sqlAdd, [ uuid, libraryQuestionDate, libraryQuestionDocQTN, libraryQuestionQuestioner, libraryQuestionTitle ], (err, result) => {
             if (err) throw err;
             const sql = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt`,DATE_FORMAT(`pac_system`.`libraryProductType`.`createdAt`,'%d/%m/%Y %H:%i:%s') AS `createdF`,DATE_FORMAT(`pac_system`.`libraryProductType`.`updatedAt`,'%d/%m/%Y %H:%i:%s') AS `updatedF` FROM `libraryProductType`";
     
@@ -500,7 +523,7 @@ router.post('/question/Add',(req, res) => {
                     user: req.session.user
                 });
             })
-        })
+        })*/
     } catch (err) {
         console.error('Error inserting data:', err);
         res.status(500).json({ error: 'Error inserting data into the database.' });
@@ -591,7 +614,8 @@ router.get('/question/View/:id', (req, res) => {
 
 router.get('/answer',(req, res) => {
     try {
-        const sql = "SELECT `id`, `date`, `no`, `categoryGID`, `brandGID`, `industryTypeGID`, `productTypeGID`, `image`, `title`, `summaryContent`, `content`, `keyword`, `questioner`, `answerer`, `createdAt`, `updatedAt` , DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryData`";
+        let sql = "SELECT `id`, `date`, `docQTN`, `noQTN`, `categoryGID`, `brandGID`, `industryTypeGID`, `productTypeGID`, `image`, `title`,";
+        sql += "`summaryContent`, `content`, `keyword`, `questioner`, `answerer`, `createdAt`, `updatedAt`, `answerDate`, `validator`, `validateDate`, `addPAC`, `docLBL`, `noLBL` FROM `libraryData` WHERE 1";
         db.query(sql, (err, results) => {
             if (err) throw err;
 
@@ -647,9 +671,12 @@ router.get('/answer/Add',(req, res) => {
 });
 
 router.post('/answer/Add',(req, res) => {
-    const { libraryProductTypeCode,libraryProductTypeNameTH,libraryProductTypeNameEN }= req.body;
+    const { libraryAnswerDate, libraryAnswerCategory, libraryAnswerQuestioner, libraryAnswerTitle, libraryAnswerBrands, libraryAnswerAnswerer, libraryAnswerAnswerDate, libraryAnswerAnswer }= req.body;
     const uuid = uuidv4();
     const sqlAdd = "INSERT INTO `libraryProductType` ( `id`, `code`, `nameTH`, `nameEN` ) VALUES(?, ?, ?, ?)";
+    const sqlBrands = "SELECT `id`, `code`, `nameTH`, `nameEN` FROM `libraryBrands` ORDER BY `nameEN` ASC";
+    const sqlIndustryType = "SELECT `id`, `code`, `nameTH`, `nameEN` FROM `libraryIndustryType` ORDER BY `nameEN` ASC";
+    const sqlProductType = "SELECT `id`, `code`, `nameTH`, `nameEN` FROM `libraryProductType` ORDER BY `nameEN` ASC";
     try{
         db.query(sqlAdd, [ uuid, libraryProductTypeCode,libraryProductTypeNameTH,libraryProductTypeNameEN ], (err, result) => {
             if (err) throw err;
@@ -673,7 +700,8 @@ router.post('/answer/Add',(req, res) => {
 
 router.get('/ValidateAnswer',(req, res) => {
     try {
-        const sql = "SELECT `id`, `date`, `no`, `categoryGID`, `brandGID`, `industryTypeGID`, `productTypeGID`, `image`, `title`, `summaryContent`, `content`, `keyword`, `questioner`, `answerer`, `createdAt`, `updatedAt` , DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryData`";
+        let sql = "SELECT `id`, `date`, `docQTN`, `noQTN`, `categoryGID`, `brandGID`, `industryTypeGID`, `productTypeGID`, `image`, `title`,";
+        sql += "`summaryContent`, `content`, `keyword`, `questioner`, `answerer`, `createdAt`, `updatedAt`, `answerDate`, `validator`, `validateDate`, `addPAC`, `docLBL`, `noLBL` FROM `libraryData` WHERE 1";
         db.query(sql, (err, results) => {
             if (err) throw err;
 
