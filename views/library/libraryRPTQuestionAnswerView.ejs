@@ -67,139 +67,31 @@
                                                     </h6>
                                                     <div class="form-group row">
                                                         <div class="col-sm-4">
-                                                            <label for="libraryAnswerDateE" class="form-label">Date
+                                                            <label for="libraryAnswerDateE" class="form-label">วันที่ถามคำถาม
                                                                 :</label>
-                                                            <input type="date" class="form-control"
-                                                                name="libraryAnswerDateE" value="<%= results.dateE %>" readonly>
+                                                            <span><%= results.dateF %></span>    
+                                                       
                                                         </div>
                                                         <div class="col-sm-4">
                                                             <label for="libraryAnswerDocQTNE" class="form-label">Doc No.
                                                                 :</label>
-                                                            <input type="text" class="form-control"
-                                                                name="libraryAnswerDocQTNE" id="libraryAnswerDocQTNE"
-                                                                value="<%= results.docQTN %>" readonly>
+                                                                <span><%= results.docQTN %></span>
                                                         </div>
                                                         <div class="col-sm-4">
                                                             <label for="libraryAnswerQuestionerE"
-                                                                class="form-label">Questioner :</label>
-                                                                <input type="text" class="form-control"
-                                                                name="libraryAnswerQuestionerE" id="libraryAnswerQuestionerE"
-                                                                value="<%= results.questioner %>" readonly>
+                                                                class="form-label">ผู้ถาม :</label>
+                                                                <span><%= results.questioner %></span>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="libraryAnswerTitleE" class="form-label">Question ?
-                                                            :</label>
-                                                        <textarea type="textarea" rows="8" class="form-control"
-                                                            name="libraryAnswerTitleE" readonly><%= results.title %></textarea>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-4">
-                                                            <label for="libraryQuestionBrands" class="form-label">Brands
-                                                                :<br></label>
-                                                            <% libraryBrands.forEach(libraryBrands=> { %>
-                                                                <br>
-                                                                <% let valueCheckedA=0 %>
-                                                                    <% tagArray.forEach(tagArray=> { %>
-                                                                        <% if(tagArray===libraryBrands.nameEN ){%>
-                                                                            <% valueCheckedA ++ %>
-                                                                                <% } %>
-                                                                                    <% }) %>
-
-                                                                                        <% if(valueCheckedA===1 ){%>
-                                                                                            <input type="checkbox"
-                                                                                                class="checkbox"
-                                                                                                id="vehicle<%= libraryBrands.code %>"
-                                                                                                name="vehicle<%= libraryBrands.code %>"
-                                                                                                value="<%= libraryBrands.nameEN %>"
-                                                                                                checked  disabled="disabled">
-                                                                                            <%} else{%>
-                                                                                                <input type="checkbox"
-                                                                                                    class="checkbox"
-                                                                                                    id="vehicle<%= libraryBrands.code %>"
-                                                                                                    name="vehicle<%= libraryBrands.code %>"
-                                                                                                    value="<%= libraryBrands.nameEN %>"  disabled="disabled">
-                                                                                                <% } %>
-                                                                                                    <label
-                                                                                                        for="vehicle<%= libraryBrands.code %>">
-                                                                                                        <%= libraryBrands.nameEN
-                                                                                                            %>
-                                                                                                    </label>
-
-                                                                                                    <% }) %>
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <label for="libraryQuestionProductType"
-                                                                class="form-label">Product Type :<br></label>
-                                                            <% libraryProductType.forEach(libraryProductType=> { %>
-                                                                <br>
-                                                                <% let valueCheckedA=0 %>
-                                                                    <% tagArray.forEach(tagArray=> { %>
-                                                                        <% if(tagArray===libraryProductType.nameEN ){%>
-                                                                            <% valueCheckedA ++ %>
-                                                                                <% } %>
-                                                                                    <% }) %>
-                                                                                        <% if(valueCheckedA===1 ){%>
-                                                                                            <input type="checkbox"
-                                                                                                class="checkbox"
-                                                                                                id="vehicle<%= libraryProductType.code %>"
-                                                                                                name="vehicle<%= libraryProductType.code %>"
-                                                                                                value="<%= libraryProductType.nameEN %>"
-                                                                                                checked  disabled="disabled">
-                                                                                            <%} else{%>
-                                                                                                <input type="checkbox"
-                                                                                                    class="checkbox"
-                                                                                                    id="vehicle<%= libraryProductType.code %>"
-                                                                                                    name="vehicle<%= libraryProductType.code %>"
-                                                                                                    value="<%= libraryProductType.nameEN %>"  disabled="disabled">
-                                                                                                <% } %>
-
-                                                                                                    <label
-                                                                                                        for="vehicle<%= libraryProductType.code %>">
-                                                                                                        <%= libraryProductType.nameEN
-                                                                                                            %>
-                                                                                                    </label>
-                                                                                                    <% }) %>
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <label for="libraryQuestionIndustryType"
-                                                                class="form-label">Industry Type :<br></label>
-                                                            <% libraryIndustryType.forEach(libraryIndustryType=> { %>
-                                                                <br>
-                                                                <% let valueCheckedA=0 %>
-                                                                    <% tagArray.forEach(tagArray=> { %>
-                                                                        <% if(tagArray===libraryIndustryType.nameEN ){%>
-                                                                            <% valueCheckedA ++ %>
-                                                                                <% } %>
-                                                                                    <% }) %>
-                                                                                        <% if(valueCheckedA===1 ){%>
-                                                                                            <input type="checkbox"
-                                                                                                class="checkbox"
-                                                                                                id="vehicle<%= libraryIndustryType.code %>"
-                                                                                                name="vehicle<%= libraryIndustryType.code %>"
-                                                                                                value="<%= libraryIndustryType.nameEN %>"
-                                                                                                checked  disabled="disabled">
-                                                                                            <%} else{%>
-                                                                                                <input type="checkbox"
-                                                                                                    class="checkbox"
-                                                                                                    id="vehicle<%= libraryIndustryType.code %>"
-                                                                                                    name="vehicle<%= libraryIndustryType.code %>"
-                                                                                                    value="<%= libraryIndustryType.nameEN %>"  disabled="disabled">
-                                                                                                <% } %>
-
-                                                                                                    <label
-                                                                                                        for="vehicle<%= libraryIndustryType.code %>">
-                                                                                                        <%= libraryIndustryType.nameEN
-                                                                                                            %>
-                                                                                                    </label>
-                                                                                                    <% }) %>
-                                                        </div>
+                                                        <label for="libraryAnswerTitleE" class="form-label">คำถาม
+                                                            :</label><br>
+                                                            <span><%= results.title %></span>
+                                                   
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="tagValueAE" class="form-label">Tag :</label>
-                                                        <textarea type="textarea" rows="2"
-                                                            class="form-control tagValueAE" name="tagValueAE"
-                                                            readonly><%= results.tagContent %></textarea>
+                                                        <span><%= results.tagContent %></span>
                                                     </div>
                                                     <hr class="sidebar-divider">
                                                     <h6 class="m-0 font-weight-bold text-primary mb-3"><i
@@ -208,32 +100,24 @@
 
                                                         <div class="col-sm-6">
                                                             <label for="libraryAnswerAnswererE"
-                                                                class="form-label">Answerer :</label>
-                                                            <input type="text" class="form-control"
-                                                                name="libraryAnswerAnswererE"
-                                                                value="<%= results.answerer %>" readonly>
-                               
+                                                                class="form-label">ผู้ตอบคำถาม :</label>
+                                                                <span><%= results.answerer %></span>                 
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <label for="libraryAnswerAnswerDateE"
-                                                                class="form-label">Answer Date :</label>
+                                                                class="form-label">วันที่ตอบคำถาม :</label>
                                                             <% if( results.answerDate){%>
-                                                                <input type="datetime" class="form-control"
-                                                                    name="libraryAnswerAnswerDateE"
-                                                                    value="<%= results.answerDateF %>" readonly>
+                                                                <span><%= results.answerDateF %></span>
                                                                 <% } else { %>
-                                                                    <input type="datetime" class="form-control"
-                                                                        name="libraryAnswerAnswerDateE"
-                                                                        value="<%= timestamp %>" readonly>
+                                                                    <span></span>
                                                                     <%}%>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <label for="libraryAnswerAnswerE" class="form-label">Answer
-                                                            :</label>
-                                                        <textarea type="textarea" rows="13" class="form-control"
-                                                            name="libraryAnswerAnswerE" readonly><%= results.content %></textarea>
+                                                        <label for="libraryAnswerAnswerE" class="form-label">คำตอบ
+                                                            :</label><br>
+                                                            <span><%= results.content %></span>
                                                     </div>
 
       
