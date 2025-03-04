@@ -59,7 +59,7 @@
                                         <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
                                         <div class="col-lg-12">
                                             <div class="p-4">
-                                                <form class="user" action="/library/answer/Edit/<%= results.id %>" method="POST">
+                               
 
                                                     <h6 class="m-0 font-weight-bold text-primary mb-3"><i
                                                             class="fas fa-file-signature fa-fw"></i>
@@ -70,38 +70,28 @@
                                                             <label for="libraryAnswerDateE" class="form-label">Date
                                                                 :</label>
                                                             <input type="date" class="form-control"
-                                                                name="libraryAnswerDateE" value="<%= results.dateE %>">
+                                                                name="libraryAnswerDateE" value="<%= results.dateE %>" readonly>
                                                         </div>
                                                         <div class="col-sm-4">
                                                             <label for="libraryAnswerDocQTNE" class="form-label">Doc No.
                                                                 :</label>
                                                             <input type="text" class="form-control"
                                                                 name="libraryAnswerDocQTNE" id="libraryAnswerDocQTNE"
-                                                                value="<%= results.docQTN %>">
+                                                                value="<%= results.docQTN %>" readonly>
                                                         </div>
                                                         <div class="col-sm-4">
                                                             <label for="libraryAnswerQuestionerE"
                                                                 class="form-label">Questioner :</label>
-                                                            <select name="libraryAnswerQuestionerE"
-                                                                class="form-control form-select"
-                                                                aria-label="Default select example">
-                                                                <option value="<%= results.questioner %>">
-                                                                    <%= results.questioner %>
-                                                                </option>
-                                                                <option value="">--- Select Name ---</option>
-                                                                <% employee.forEach(employee=> { %>
-                                                                    <option value="<%= employee.nameTH %>">
-                                                                        <%= employee.nameTH %>
-                                                                    </option>
-                                                                    <% }) %>
-                                                            </select>
+                                                                <input type="text" class="form-control"
+                                                                name="libraryAnswerQuestionerE" id="libraryAnswerQuestionerE"
+                                                                value="<%= results.questioner %>" readonly>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="libraryAnswerTitleE" class="form-label">Question ?
                                                             :</label>
                                                         <textarea type="textarea" rows="8" class="form-control"
-                                                            name="libraryAnswerTitleE"><%= results.title %></textarea>
+                                                            name="libraryAnswerTitleE" readonly><%= results.title %></textarea>
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="col-sm-4">
@@ -122,13 +112,13 @@
                                                                                                 id="vehicle<%= libraryBrands.code %>"
                                                                                                 name="vehicle<%= libraryBrands.code %>"
                                                                                                 value="<%= libraryBrands.nameEN %>"
-                                                                                                checked>
+                                                                                                checked  disabled="disabled">
                                                                                             <%} else{%>
                                                                                                 <input type="checkbox"
                                                                                                     class="checkbox"
                                                                                                     id="vehicle<%= libraryBrands.code %>"
                                                                                                     name="vehicle<%= libraryBrands.code %>"
-                                                                                                    value="<%= libraryBrands.nameEN %>">
+                                                                                                    value="<%= libraryBrands.nameEN %>"  disabled="disabled">
                                                                                                 <% } %>
                                                                                                     <label
                                                                                                         for="vehicle<%= libraryBrands.code %>">
@@ -155,13 +145,13 @@
                                                                                                 id="vehicle<%= libraryProductType.code %>"
                                                                                                 name="vehicle<%= libraryProductType.code %>"
                                                                                                 value="<%= libraryProductType.nameEN %>"
-                                                                                                checked>
+                                                                                                checked  disabled="disabled">
                                                                                             <%} else{%>
                                                                                                 <input type="checkbox"
                                                                                                     class="checkbox"
                                                                                                     id="vehicle<%= libraryProductType.code %>"
                                                                                                     name="vehicle<%= libraryProductType.code %>"
-                                                                                                    value="<%= libraryProductType.nameEN %>">
+                                                                                                    value="<%= libraryProductType.nameEN %>"  disabled="disabled">
                                                                                                 <% } %>
 
                                                                                                     <label
@@ -188,13 +178,13 @@
                                                                                                 id="vehicle<%= libraryIndustryType.code %>"
                                                                                                 name="vehicle<%= libraryIndustryType.code %>"
                                                                                                 value="<%= libraryIndustryType.nameEN %>"
-                                                                                                checked>
+                                                                                                checked  disabled="disabled">
                                                                                             <%} else{%>
                                                                                                 <input type="checkbox"
                                                                                                     class="checkbox"
                                                                                                     id="vehicle<%= libraryIndustryType.code %>"
                                                                                                     name="vehicle<%= libraryIndustryType.code %>"
-                                                                                                    value="<%= libraryIndustryType.nameEN %>">
+                                                                                                    value="<%= libraryIndustryType.nameEN %>"  disabled="disabled">
                                                                                                 <% } %>
 
                                                                                                     <label
@@ -219,16 +209,10 @@
                                                         <div class="col-sm-6">
                                                             <label for="libraryAnswerAnswererE"
                                                                 class="form-label">Answerer :</label>
-                                                            <select name="libraryAnswerAnswererE"
-                                                                class="form-control form-select"
-                                                                aria-label="Default select example">
-                                                                <option value="">--- Select Name ---</option>
-                                                                <% employee.forEach(employee=> { %>
-                                                                    <option value="<%= employee.nameTH %>">
-                                                                        <%= employee.nameTH %>
-                                                                    </option>
-                                                                    <% }) %>
-                                                            </select>
+                                                            <input type="text" class="form-control"
+                                                                name="libraryAnswerAnswererE"
+                                                                value="<%= results.answerer %>" readonly>
+                               
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <label for="libraryAnswerAnswerDateE"
@@ -249,14 +233,10 @@
                                                         <label for="libraryAnswerAnswerE" class="form-label">Answer
                                                             :</label>
                                                         <textarea type="textarea" rows="13" class="form-control"
-                                                            name="libraryAnswerAnswerE"><%= results.content %></textarea>
+                                                            name="libraryAnswerAnswerE" readonly><%= results.content %></textarea>
                                                     </div>
 
-                                                    <button type="submit" class="btn btn-success btn-block">
-                                                        <i class="fas fa-save fa-fw"></i>
-                                                        <span class="text">Save</span></button>
-
-                                                </form>
+      
                                                 <hr>
                                                 <div class="text-center">
                                                     <a class="small" href="/library/answer">Back to ...</a>

@@ -741,7 +741,7 @@ router.get('/answer/Add', (req, res) => {
 });
 
 router.post('/answer/Add', (req, res) => {
-    const { libraryAnswerDate,libraryAnswerDocQTN,libraryAnswerQuestioner,libraryAnswerTitle,tagValueA,libraryAnswerAnswerer,libraryAnswerAnswerDate,libraryAnswerAnswer,} = req.body;
+    const { libraryAnswerDate,libraryAnswerDocQTN,libraryAnswerQuestioner,libraryAnswerTitle,tagValueA,libraryAnswerAnswerer,libraryAnswerAnswerDate,libraryAnswerAnswer} = req.body;
     const uuid = uuidv4();
     const sqlAdd1 = "INSERT INTO `libraryData`(`id`, `date`, `docQTN`, `noQTN`, `title`, `questioner`, `tagContent`, `answerer`,`answerDate`,`content`) VALUES ( ? , ? , ? , ? , ? , ? , ?, ?, ?, ?)";
     const sqlQtnMaxNo = "SELECT IFNULL(MAX( `noQTN`),0)+1 as maxNo FROM `libraryData`";
@@ -765,7 +765,7 @@ router.post('/answer/Add', (req, res) => {
                     if (err) throw err;
                     res.render('library/libraryAnswer', {
                         title: 'Answer Management',
-                        libraryQuestion: results,
+                        libraryAnswer: results,
                         user: req.session.user
                     });
                 });
@@ -828,28 +828,28 @@ router.get('/answer/Edit/:id', (req, res) => {
 })
 
 router.post('/answer/Edit/:id', (req, res) => {
-    const { libraryQuestionDateE, libraryQuestionDocQTNE, libraryQuestionQuestionerE, libraryQuestionTitleE, tagValueE } = req.body;
+    const { libraryAnswerDateE,libraryAnswerDocQTNE,libraryAnswerQuestionerE,libraryAnswerTitleE,tagValueAE,libraryAnswerAnswererE,libraryAnswerAnswerDateE,libraryAnswerAnswerE} = req.body;
     const today = new Date();
     const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
     const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     const dateTime = date + ' ' + time;
     const timestamp = dateTime;
-    const sqlEdit = "UPDATE `libraryData` SET `date`= ?, `docQTN`= ?, `title`= ?, `questioner`= ?, `tagContent` = ?, `updatedAt` =?  WHERE `id` = ?";
+    const sqlEdit = "UPDATE `libraryData` SET `date`= ?, `docQTN`= ?, `title`= ?, `questioner`= ?, `tagContent` = ?, `answerDate` =?,`answerer`=?,`content`=?  WHERE `id` = ?";
 
     let sql = "SELECT `id`, `date`, `docQTN`, `noQTN`, `categoryGID`, `brandGID`, `industryTypeGID`, `productTypeGID`, `image`, `title`, `summaryContent`, `content`, `keyword`, `questioner`, `answerer`";
     sql += ", `createdAt`, `updatedAt`, `answerDate`, `validator`, `validateDate`, `addPAC`, `docLBL`, `noLBL`, `tagContent`, DATE_FORMAT(`date`,'%d/%m/%Y') as `dateF`";
     sql += ",DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as `createdAtF`,DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as `updatedAtF`,DATE_FORMAT(`answerDate`,'%d/%m/%Y') as `answerDateF`";
     sql += ",DATE_FORMAT(`validateDate`,'%d/%m/%Y') as `validateDateF` FROM `libraryData`";
     try {
-        db.query(sqlEdit, [libraryQuestionDateE, libraryQuestionDocQTNE, libraryQuestionTitleE, libraryQuestionQuestionerE, tagValueE, timestamp, req.params.id], (err, result) => {
+        db.query(sqlEdit, [libraryAnswerDateE, libraryAnswerDocQTNE, libraryAnswerTitleE, libraryAnswerQuestionerE, tagValueAE, timestamp,libraryAnswerAnswererE,libraryAnswerAnswerE, req.params.id], (err, result) => {
             if (err) throw err;
 
             db.query(sql, (err, results) => {
                 if (err) throw err;
 
                 res.render('library/libraryAnswer', {
-                    title: 'Question Management',
-                    libraryQuestion: results,
+                    title: 'Answer Management',
+                    libraryAnswer: results,
                     user: req.session.user
                 });
             })
@@ -858,6 +858,73 @@ router.post('/answer/Edit/:id', (req, res) => {
     } catch (err) {
         console.error('Error editing data:', err);
         res.status(500).json({ error: 'Error editing data into the database.' });
+    }
+})
+
+router.get('/answer/Del/:id', (req, res) => {
+    const sqlDel = "DELETE FROM `libraryData` WHERE id = ?";
+    let sql = "SELECT `id`, `date`, `docQTN`, `noQTN`, `categoryGID`, `brandGID`, `industryTypeGID`, `productTypeGID`, `image`, `title`, `summaryContent`, `content`, `keyword`, `questioner`, `answerer`";
+    sql += ", `createdAt`, `updatedAt`, `answerDate`, `validator`, `validateDate`, `addPAC`, `docLBL`, `noLBL`, `tagContent`, DATE_FORMAT(`date`,'%d/%m/%Y') as `dateF`";
+    sql += ",DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as `createdAtF`,DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as `updatedAtF`,DATE_FORMAT(`answerDate`,'%d/%m/%Y') as `answerDateF`";
+    sql += ",DATE_FORMAT(`validateDate`,'%d/%m/%Y') as `validateDateF` FROM `libraryData`";
+    try {
+        db.query(sqlDel, [req.params.id], (err, resultDel) => {
+            if (err) throw err;
+            db.query(sql, (err, results) => {
+                if (err) throw err;
+
+                res.render('library/libraryAnswer', {
+                    title: 'Answer Management',
+                    libraryAnswer : results,
+                    user: req.session.user
+                });
+            })
+        });
+    } catch (err) {
+        console.error('Error inserting data:', err);
+        res.status(500).json({ error: 'Error inserting data into the database.' });
+    }
+})
+
+router.get('/answer/View/:id', (req, res) => {
+    const sqlBrands = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt`, DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryBrands` ORDER BY `nameEN` ASC";
+    const sqlIndustryType = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt` , DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryIndustryType` ORDER BY `nameEN` ASC";
+    const sqlProductType = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt` , DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryProductType` ORDER BY `nameEN` ASC";
+
+    let sql = "SELECT `id`, `date`, `docQTN`, `noQTN`, `categoryGID`, `brandGID`, `industryTypeGID`, `productTypeGID`, `image`, `title`, `summaryContent`, `content`, `keyword`, `questioner`, `answerer`";
+    sql += ", `createdAt`, `updatedAt`, `answerDate`, `validator`, `validateDate`, `addPAC`, `docLBL`, `noLBL`, `tagContent`, DATE_FORMAT(`date`,'%d/%m/%Y') as `dateF`,DATE_FORMAT(`date`,'%Y-%m-%d') as `dateE`";
+    sql += ",DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as `createdAtF`,DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as `updatedAtF`,DATE_FORMAT(`answerDate`,'%d/%m/%Y') as `answerDateF`,DATE_FORMAT(`answerDate`,'%Y-%m-%d') as `answerDateE`";
+    sql += ",DATE_FORMAT(`validateDate`,'%d/%m/%Y') as `validateDateF`,DATE_FORMAT(`validateDate`,'%Y-%m-%d') as `validateDateE` FROM `libraryData`";
+    try {
+
+        db.query(sqlBrands, (err, resultsBrands) => {
+            if (err) throw err;
+            db.query(sqlIndustryType, (err, resultsIndustryType) => {
+                if (err) throw err;
+                db.query(sqlProductType, (err, resultsProductType) => {
+                    if (err) throw err;
+
+                    db.query(sql, (err, results) => {
+                        if (err) throw err;
+
+                        const tagArray = results[0]['tagContent'].split(";");
+                        // console.log(tagArray);
+                        res.render('library/libraryAnswerView', {
+                            title: 'Question View',
+                            libraryBrands: resultsBrands,
+                            libraryIndustryType: resultsIndustryType,
+                            libraryProductType: resultsProductType,
+                            results: results[0],
+                            tagArray: tagArray,
+                            user: req.session.user
+                        });
+                    });
+                });
+            });
+        })
+    } catch (err) {
+        console.error('Error inserting data:', err);
+        res.status(500).json({ error: 'Error inserting data into the database.' });
     }
 })
 

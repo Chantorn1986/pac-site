@@ -62,8 +62,7 @@
                                 <table class="table table-bordered align-middle" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th class="align-middle">Date</th>
-                                            <th class="align-middle">DocNo.</th>
+                                            <th class="align-middle">Date/DocNo.</th>
                                             <th class="align-middle">Question</th>
                                             <th class="align-middle">Answer</th>
                                             <th class="align-middle">Tag</th>
@@ -72,8 +71,7 @@
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th class="align-middle">Date</th>
-                                            <th class="align-middle">DocNo.</th>
+                                            <th class="align-middle">Date/DocNo.</th>
                                             <th class="align-middle">Question</th>
                                             <th class="align-middle">Answer</th>
                                             <th class="align-middle">Tag</th>
@@ -83,11 +81,10 @@
                                     <tbody>
                                         <% libraryQuestion.forEach(libraryQuestion => { %>
                                             <tr>
-                                                <td class="align-middle"><%= libraryQuestion.dateF %></td>
-                                                <td class="align-middle"><%= libraryQuestion.docQTN %></td>
-                                                <td class="align-middle"><%= libraryQuestion.title %></td>
-                                                <td class="align-middle"><%= libraryQuestion.content %></td>
-                                                <td class="align-middle"><%= libraryQuestion.tagContent %></td> 
+                                                <td><%= libraryQuestion.dateF %> ; <%= libraryQuestion.docQTN %></td>
+                                                <td><%= libraryQuestion.title %></td>
+                                                <td><%= libraryQuestion.content %></td>
+                                                <td><%= libraryQuestion.tagContent %></td> 
                                                 <td class="align-middle text-center">     
                                                     <a href="/library/question/View/<%= libraryQuestion.id %>" class="btn btn-info btn-circle">
                                                         <i class="fas fa-eye"></i></a>                              
