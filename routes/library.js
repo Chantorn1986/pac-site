@@ -1013,4 +1013,67 @@ router.post('/validateAnswer/Add', (req, res) => {
     }
 });
 
+router.get('/rptQuestionAnswer', (req, res) => {
+    try {
+        let sql = "SELECT `id`, `date`, `docQTN`, `noQTN`, `categoryGID`, `brandGID`, `industryTypeGID`, `productTypeGID`, `image`, `title`, `summaryContent`, `content`, `keyword`, `questioner`, `answerer`";
+        sql += ", `createdAt`, `updatedAt`, `answerDate`, `validator`, `validateDate`, `addPAC`, `docLBL`, `noLBL`, `tagContent`, DATE_FORMAT(`date`,'%d/%m/%Y') as `dateF`";
+        sql += ",DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as `createdAtF`,DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as `updatedAtF`,DATE_FORMAT(`answerDate`,'%d/%m/%Y') as `answerDateF`";
+        sql += ",DATE_FORMAT(`validateDate`,'%d/%m/%Y') as `validateDateF` FROM `libraryData`";
+        db.query(sql, (err, results) => {
+            if (err) throw err;
+
+            res.render('library/libraryRPTQuestionAnswer', {
+                title: 'Library PAC',
+                libraryQuestion: results,
+                user: req.session.user
+            });
+        })
+    } catch (err) {
+        console.error('Error inserting data:', err);
+        res.status(500).json({ error: 'Error inserting data into the database.' });
+    }
+});
+
+router.get('/rptQuestionAnswer/View/:id', (req, res) => {
+    const sqlBrands = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt`, DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryBrands` ORDER BY `nameEN` ASC";
+    const sqlIndustryType = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt` , DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryIndustryType` ORDER BY `nameEN` ASC";
+    const sqlProductType = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt` , DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryProductType` ORDER BY `nameEN` ASC";
+
+    let sql = "SELECT `id`, `date`, `docQTN`, `noQTN`, `categoryGID`, `brandGID`, `industryTypeGID`, `productTypeGID`, `image`, `title`, `summaryContent`, `content`, `keyword`, `questioner`, `answerer`";
+    sql += ", `createdAt`, `updatedAt`, `answerDate`, `validator`, `validateDate`, `addPAC`, `docLBL`, `noLBL`, `tagContent`, DATE_FORMAT(`date`,'%d/%m/%Y') as `dateF`,DATE_FORMAT(`date`,'%Y-%m-%d') as `dateE`";
+    sql += ",DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as `createdAtF`,DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as `updatedAtF`,DATE_FORMAT(`answerDate`,'%d/%m/%Y') as `answerDateF`,DATE_FORMAT(`answerDate`,'%Y-%m-%d') as `answerDateE`";
+    sql += ",DATE_FORMAT(`validateDate`,'%d/%m/%Y') as `validateDateF`,DATE_FORMAT(`validateDate`,'%Y-%m-%d') as `validateDateE` FROM `libraryData`";
+    try {
+
+        db.query(sqlBrands, (err, resultsBrands) => {
+            if (err) throw err;
+            db.query(sqlIndustryType, (err, resultsIndustryType) => {
+                if (err) throw err;
+                db.query(sqlProductType, (err, resultsProductType) => {
+                    if (err) throw err;
+
+                    db.query(sql, (err, results) => {
+                        if (err) throw err;
+
+                        const tagArray = results[0]['tagContent'].split(";");
+                        // console.log(tagArray);
+                        res.render('library/libraryRPTQuestionAnswerView', {
+                            title: 'Library PAC View',
+                            libraryBrands: resultsBrands,
+                            libraryIndustryType: resultsIndustryType,
+                            libraryProductType: resultsProductType,
+                            results: results[0],
+                            tagArray: tagArray,
+                            user: req.session.user
+                        });
+                    });
+                });
+            });
+        })
+    } catch (err) {
+        console.error('Error inserting data:', err);
+        res.status(500).json({ error: 'Error inserting data into the database.' });
+    }
+})
+
 module.exports = router;
