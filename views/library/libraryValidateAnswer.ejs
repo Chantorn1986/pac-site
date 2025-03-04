@@ -62,29 +62,32 @@
                                 <table class="table table-bordered align-middle" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th class="align-middle">date</th>
-                                            <th class="align-middle">title</th>
-                                            <th class="align-middle">content</th>
-                                            <th class="align-middle">answerer</th>
-                                            <th class="align-middle">Action</th>
+                                            <th class="align-middle">Date</th>
+                                            <th class="align-middle">DocNo.</th>
+                                            <th class="align-middle">Question</th>
+                                            <th class="align-middle">Answer</th>
+                                            <th class="align-middle">Tag</th>
+                                            <th class="align-middle text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th class="align-middle">date</th>
-                                            <th class="align-middle">title</th>
-                                            <th class="align-middle">content</th>
-                                            <th class="align-middle">answerer</th>
-                                            <th class="align-middle">Action</th>
+                                            <th class="align-middle">Date</th>
+                                            <th class="align-middle">DocNo.</th>
+                                            <th class="align-middle">Question</th>
+                                            <th class="align-middle">Answer</th>
+                                            <th class="align-middle">Tag</th>
+                                            <th class="align-middle text-center">Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                         <% libraryAnswer.forEach(libraryAnswer => { %>
                                             <tr>
-                                                <td class="align-middle"><%= libraryAnswer.date %></td>
+                                                <td class="align-middle"><%= libraryAnswer.dateF %></td>
+                                                <td class="align-middle"><%= libraryAnswer.docQTN %></td>
                                                 <td class="align-middle"><%= libraryAnswer.title %></td>
                                                 <td class="align-middle"><%= libraryAnswer.content %></td>
-                                                <td class="align-middle"><%= libraryAnswer.answerer %></td>   
+                                                <td class="align-middle"><%= libraryAnswer.tagContent %></td> 
                                                 <td class="align-middle text-center">     
                                                     <a href="/library/validateAnswer/View/<%= libraryAnswer.id %>" class="btn btn-info btn-circle">
                                                         <i class="fas fa-eye"></i></a>                              
