@@ -48,8 +48,8 @@
                             <div class="card o-hidden border-0 shadow-lg ">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary"><i
-                                            class="fas fa-fw fa-comment-alt"></i> Validate Q & A Management - <%=
-                                            title %>
+                                            class="fas fa-fw fa-comment-alt"></i> Validate Q & A Management - <%= title
+                                            %>
                                     </h6>
                                 </div>
 
@@ -59,7 +59,7 @@
                                         <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
                                         <div class="col-lg-12">
                                             <div class="p-4">
-                                                <form class="user" action="/library/question/Add" method="POST">
+                                                <form id="formVAnswer" class="user" action="/library/validateAnswer/Add" method="POST">
 
                                                     <h6 class="m-0 font-weight-bold text-primary mb-3"><i
                                                             class="fas fa-file-signature fa-fw"></i>
@@ -145,8 +145,9 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="tagValueVA" class="form-label">Tag :</label>
-                                                        <textarea type="textarea" rows="2" class="form-control tagValueVA"
-                                                            name="tagValueVA" readonly></textarea>
+                                                        <textarea type="textarea" rows="2"
+                                                            class="form-control tagValueVA" name="tagValueVA"
+                                                            readonly></textarea>
                                                     </div>
                                                     <hr class="sidebar-divider">
                                                     <h6 class="m-0 font-weight-bold text-primary mb-3"><i
@@ -224,21 +225,29 @@
                                                         <textarea type="textarea" rows="15" class="form-control"
                                                             name="libraryVAnswerKeyword"></textarea>
                                                     </div>
-                                                    <div class="form-group">
+                                                    <div class="form-group row">
                                                         <div class="col-sm-6">
-                                                        <label for="libraryVAnswerAddPAC"> <i
-                                                                class="fas fa-fw fa-book"></i> Add to Library PAC
-                                                        </label>
+                                                            <label for="libraryVAnswerAddPAC"> <i
+                                                                    class="fas fa-fw fa-book"></i> Add to Library PAC
+                                                            </label>
 
-                                                        <select name="libraryVAnswerAddPAC"
-                                                        class="form-control form-select"
-                                                        aria-label="Default select example">
-                                                        <option value="false">--- Select Value ---</option>
-                                                        <option value="true">Add to Library PAC</option>
-                                                        <option value="false">Do not add to Library PAC</option>
-                                                           
-                                                    </select>
-                                                    </div></div>
+                                                            <select name="libraryVAnswerAddPAC"
+                                                                class="form-control form-select"
+                                                                aria-label="Default select example" onchange="runDocNumber();">
+                                                                <option value="false">--- Select Value ---</option>
+                                                                <option value="true">Add to Library PAC</option>
+                                                                <option value="false">Do not add to Library PAC</option>
+
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label for="libraryVAnswerDocLBL" class="form-label">Doc LBL
+                                                                No.:</label>
+                                                            <input type="text" class="form-control"
+                                                                name="libraryVAnswerDocLBLE" id="libraryVAnswerDocLBL"
+                                                                readonly>
+                                                        </div>
+                                                    </div>
 
                                                     <button type="submit" class="btn btn-success btn-block">
                                                         <i class="fas fa-save fa-fw"></i>
@@ -293,6 +302,23 @@
     <!-- Page level custom scripts -->
     <script src="/js/demo/datatables-demo.js"></script>
     <script>
+        let doLblNo = "<%= maxNoLBL.maxNo %>";
+        let docQtnNo = "<%= maxNo.maxNo %>";
+        if (docQtnNo.length = 1) { docQtnNo = "00" + docQtnNo; }
+        else if (docQtnNo.length = 2) { docQtnNo = "0" + docQtnNo; }
+        document.getElementById('libraryVAnswerDocQTN').value = "QTN" + new Date().toLocaleString("en-US", { year: "2-digit" }) + "-" + docQtnNo;
+
+        function runDocNumber() {
+            let ddlApp = document.forms['formVAnswer']['libraryVAnswerAddPAC'].value;
+            if (ddlApp === "true") {
+                if (doLblNo.length = 1) { doLblNo = "00" + doLblNo; }
+                else if (doLblNo.length = 2) { doLblNo = "0" + doLblNo; }
+                document.getElementById('libraryVAnswerDocLBL').value = "LBL" + new Date().toLocaleString("en-US", { year: "2-digit" }) + "-" + doLblNo;
+            }else{
+                document.getElementById('libraryVAnswerDocLBL').value = "";
+            }
+        }
+
         const value = document.querySelector('.tagValueVA');
         let listArray = [];
 

@@ -73,8 +73,7 @@
                                                        
                                                         </div>
                                                         <div class="col-sm-4">
-                                                            <label for="libraryAnswerDocQTNE" class="form-label">Doc No.
-                                                                :</label>
+                                                            <label for="libraryAnswerDocQTNE" class="form-label">Doc No. </label>
                                                                 <span><%= results.docQTN %></span>
                                                         </div>
                                                         <div class="col-sm-4">
@@ -97,13 +96,7 @@
                                                     <h6 class="m-0 font-weight-bold text-primary mb-3"><i
                                                             class="fas fa-user-edit fa-fw"></i> Answerer</h6>
                                                     <div class="form-group row">
-
-                                                        <div class="col-sm-6">
-                                                            <label for="libraryAnswerAnswererE"
-                                                                class="form-label">ผู้ตอบคำถาม :</label>
-                                                                <span><%= results.answerer %></span>                 
-                                                        </div>
-                                                        <div class="col-sm-6">
+                                                        <div class="col-sm-4">
                                                             <label for="libraryAnswerAnswerDateE"
                                                                 class="form-label">วันที่ตอบคำถาม :</label>
                                                             <% if( results.answerDate){%>
@@ -112,8 +105,21 @@
                                                                     <span></span>
                                                                     <%}%>
                                                         </div>
+                                                        <div class="col-sm-4">
+                                                            <label for="libraryAnswerAnswererE"
+                                                                class="form-label">LBL No. </label>
+                                                                <% if(results.docLBL!== null) { %>
+                                                                <span><%= results.docLBL %></span>  
+                                                                <% }else{ %>  
+                                                                    <span> - </span>            
+                                                                    <% } %>   
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <label for="libraryAnswerAnswererE"
+                                                                class="form-label">ผู้ตอบคำถาม :</label>
+                                                                <span><%= results.answerer %></span>                 
+                                                        </div>
                                                     </div>
-
                                                     <div class="form-group">
                                                         <label for="libraryAnswerAnswerE" class="form-label">คำตอบ
                                                             :</label><br>

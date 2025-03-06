@@ -111,11 +111,12 @@
                                                             <% libraryBrands.forEach(libraryBrands=> { %>
                                                                 <br>
                                                                 <% let valueCheckedA=0 %>
+                                                                <% if(tagArray !== null){ %>
                                                                     <% tagArray.forEach(tagArray=> { %>
                                                                         <% if(tagArray===libraryBrands.nameEN ){%>
                                                                             <% valueCheckedA ++ %>
                                                                                 <% } %>
-                                                                                    <% }) %>
+                                                                                    <% })} %>
 
                                                                                         <% if(valueCheckedA===1 ){%>
                                                                                             <input type="checkbox"
@@ -145,11 +146,12 @@
                                                             <% libraryProductType.forEach(libraryProductType=> { %>
                                                                 <br>
                                                                 <% let valueCheckedA=0 %>
+                                                                <% if(tagArray !== null){ %>
                                                                     <% tagArray.forEach(tagArray=> { %>
                                                                         <% if(tagArray===libraryProductType.nameEN ){%>
                                                                             <% valueCheckedA ++ %>
                                                                                 <% } %>
-                                                                                    <% }) %>
+                                                                                    <% })} %>
                                                                                         <% if(valueCheckedA===1 ){%>
                                                                                             <input type="checkbox"
                                                                                                 class="checkbox"
@@ -178,11 +180,12 @@
                                                             <% libraryIndustryType.forEach(libraryIndustryType=> { %>
                                                                 <br>
                                                                 <% let valueCheckedA=0 %>
+                                                                <% if(tagArray !== null){ %>
                                                                     <% tagArray.forEach(tagArray=> { %>
                                                                         <% if(tagArray===libraryIndustryType.nameEN ){%>
                                                                             <% valueCheckedA ++ %>
                                                                                 <% } %>
-                                                                                    <% }) %>
+                                                                                    <% })} %>
                                                                                         <% if(valueCheckedA===1 ){%>
                                                                                             <input type="checkbox"
                                                                                                 class="checkbox"
