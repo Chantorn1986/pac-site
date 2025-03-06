@@ -87,11 +87,13 @@
                                                 <td><%= libraryAnswer.tagContent %></td> 
                                                 <td class="align-middle text-center">     
                                                     <a href="/library/answer/View/<%= libraryAnswer.id %>" class="btn btn-info btn-circle">
-                                                        <i class="fas fa-eye"></i></a>                              
+                                                        <i class="fas fa-eye"></i></a>
+                                                        <% if(libraryAnswer.validator === null ){ %>                                 
                                                     <a href="/library/answer/Edit/<%= libraryAnswer.id %>" class="btn btn-warning btn-circle">
                                                         <i class="fas fa-pen"></i></a>
                                                     <a href="/library/answer/Del/<%= libraryAnswer.id %>" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure ?');">
                                                         <i class="fas fa-trash-alt"></i></a>
+                                                        <% } %>
                                                 </td>        
                                             </tr>
                                             <% }) %>                                    
