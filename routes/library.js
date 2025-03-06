@@ -1276,7 +1276,7 @@ router.get('/rptQuestionAnswer', (req, res) => {
             if (err) throw err;
 
             res.render('library/libraryRPTQuestionAnswer', {
-                title: 'Library PAC',
+                title: 'Report',
                 libraryQuestion: results,
                 user: req.session.user
             });
@@ -1311,7 +1311,7 @@ router.get('/rptQuestionAnswer/View/:id', (req, res) => {
                         const tagArray = results[0]['tagContent'].split(";");
                         // console.log(tagArray);
                         res.render('library/libraryRPTQuestionAnswerView', {
-                            title: 'Library PAC View',
+                            title: 'Report View',
                             libraryBrands: resultsBrands,
                             libraryIndustryType: resultsIndustryType,
                             libraryProductType: resultsProductType,
