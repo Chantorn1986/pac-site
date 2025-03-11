@@ -36,10 +36,6 @@ app.use('/timeAtt',require('./routes/timeAttendance'));
 app.use('/library',require('./routes/library'));
 
 app.use('/stockCard',require('./routes/stockCard'));
-app.use('/stockCardGoods',require('./routes/stockCardGoods'));
-app.use('/stockCardBrands',require('./routes/stockCardBrands'));
-app.use('/stockCardStatus',require('./routes/stockCardStatus'));
-
 
 function isAuthenticated(req, res, next) {
     if (req.session.user) {

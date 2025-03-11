@@ -1297,7 +1297,6 @@ router.get('/rptQuestionAnswer/View/:id', (req, res) => {
     sql += ",DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as `createdAtF`,DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as `updatedAtF`,DATE_FORMAT(`answerDate`,'%d/%m/%Y') as `answerDateF`,DATE_FORMAT(`answerDate`,'%Y-%m-%d') as `answerDateE`";
     sql += ",DATE_FORMAT(`validateDate`,'%d/%m/%Y') as `validateDateF`,DATE_FORMAT(`validateDate`,'%Y-%m-%d') as `validateDateE` FROM `libraryData` WHERE id = ?";
     try {
-
         db.query(sqlBrands, (err, resultsBrands) => {
             if (err) throw err;
             db.query(sqlIndustryType, (err, resultsIndustryType) => {

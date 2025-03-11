@@ -305,4 +305,430 @@ router.get('/AddCard/:id',isAuthenticated, (req, res) => {
     }
  })
 
+ router.get('/brand',isAuthenticated,(req, res) => {
+    try {
+        const sql = "SELECT id,no,code,name,DATE_FORMAT(createdAt, '%d/%m/%Y %H:%i:%s') as createdAt,DATE_FORMAT(updatedAt, '%d/%m/%Y %H:%i:%s') as updatedAt FROM stockCardBrands ORDER BY no,code ASC";
+        db.query(sql, (err, results) => {
+            if (err) throw err;
+
+            res.render('stockCard/stockCardBrands', { 
+                title: 'Stock Card Brands Management',
+                stockCardBrands: results,
+                user: req.session.user
+            });
+        })
+    } catch (err) {
+        console.error('Error inserting data:', err);
+        res.status(500).json({ error: 'Error inserting data into the database.' });
+    } 
+});
+
+
+router.get('/brand/Add',isAuthenticated, (req, res) => {
+    res.render('stockCard/stockCardBrandsAdd',{ 
+        title: 'Stock Card Brands Create',
+        user: req.session.user });
+})
+
+router.post('/brand/Add',isAuthenticated,(req, res) => {
+    const { stockCardBrandsNo,stockCardBrandsCode,stockCardBrandsName }= req.body;
+    const uuid = uuidv4();
+    const sql = "INSERT INTO stockCardBrands ( id, no,code, name ) VALUES(?, ?, ?,?)";
+    db.query(sql, [ uuid,stockCardBrandsNo,stockCardBrandsCode, stockCardBrandsName ], (err, result) => {
+        if (err) throw err;
+        const sql = "SELECT id,no,code,name,DATE_FORMAT(createdAt, '%d/%m/%Y %H:%i:%s') as createdAt,DATE_FORMAT(updatedAt, '%d/%m/%Y %H:%i:%s') as updatedAt FROM stockCardBrands ORDER BY no,code ASC";
+
+        db.query(sql, (err, results) => {
+            if (err) throw err;
+    
+            res.render('stockCard/stockCardBrands', { 
+                title: 'Stock Card Brands Management',
+                stockCardBrands : results,
+                user: req.session.user
+            });
+        })
+    })
+})
+
+router.get('/brand/Edit/:id',isAuthenticated, (req, res) => {
+    const sql = "SELECT * FROM stockCardBrands WHERE id = ?";
+    db.query(sql, [req.params.id], (err, result) => {
+        if (err) throw err;
+        res.render('stockCard/stockCardBrandsEdit', { 
+            title: 'Stock Card Brands Edit',
+            stockCardBrands : result[0] ,
+            user: req.session.user 
+        });
+    });
+})
+
+router.post('/brand/Edit/:id',isAuthenticated,(req, res) => {
+    const { stockCardBrandsNoE,stockCardBrandsCodeE,stockCardBrandsNameE } = req.body;
+    const today = new Date();
+    const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    const dateTime = date + ' ' + time;
+    const timestamp = dateTime;
+    const sql = "UPDATE stockCardBrands SET no = ?, Code = ?, name = ?, updatedAt=?  WHERE id = ?";
+    db.query(sql, [stockCardBrandsNoE,stockCardBrandsCodeE,stockCardBrandsNameE ,timestamp, req.params.id], (err, result) => {
+        if (err) throw err;
+        const sql = "SELECT id,no,code,name,DATE_FORMAT(createdAt, '%d/%m/%Y %H:%i:%s') as createdAt,DATE_FORMAT(updatedAt, '%d/%m/%Y %H:%i:%s') as updatedAt FROM stockCardBrands ORDER BY no,code ASC";
+
+        db.query(sql, (err, results) => {
+            if (err) throw err;
+    
+            res.render('stockCard/stockCardBrands', { 
+                title: 'Stock Card Brands Management',
+                stockCardBrands : results,
+                user: req.session.user
+            });
+        })
+    })
+})
+
+router.get('/brand/Del/:id',isAuthenticated, (req, res) => {
+    const sql = "DELETE FROM stockCardBrands WHERE id = ?";
+    db.query(sql, [req.params.id], (err, result) => {
+        if (err) throw err;
+        const sql = "SELECT id,no,code,name,DATE_FORMAT(createdAt, '%d/%m/%Y %H:%i:%s') as createdAt,DATE_FORMAT(updatedAt, '%d/%m/%Y %H:%i:%s') as updatedAt FROM stockCardBrands ORDER BY no ASC";
+
+        db.query(sql, (err, results) => {
+            if (err) throw err;
+    
+            res.render('stockCard/stockCardBrands', { 
+                title: 'Stock Card Brands Management',
+                stockCardBrands : results,
+                user: req.session.user
+            });
+        })
+    });
+})
+
+router.get('/brand/View/:id',isAuthenticated, (req, res) => {
+    const sql = "SELECT id,no,code,name,DATE_FORMAT(createdAt, '%d/%m/%Y %H:%i:%s') as createdAt,DATE_FORMAT(updatedAt, '%d/%m/%Y %H:%i:%s') as updatedAt FROM stockCardBrands WHERE id = ? ";
+    db.query(sql, [req.params.id], (err, result) => {
+        if (err) throw err;
+        res.render('stockCard/stockCardBrandsView', {
+            title: 'Stock Card Brands View', 
+            stockCardBrands : result[0] ,
+            user: req.session.user 
+        });
+    });
+})
+
+router.get('/good',(req, res) => {
+    try {
+        const sql2t = "SELECT * FROM view_goods_brands ;";
+
+        db.query(sql2t, (err, results) => {
+            if (err) throw err;
+
+            res.render('stockCard/stockCardGoods', { 
+                title: 'Stock Card Goods Management',
+                stockCardGoods: results,
+                user: req.session.user
+            });
+        })
+    } catch (err) {
+        console.error('Error view data:', err);
+        res.status(500).json({ error: 'Error view data into the database.' });
+    } 
+});
+
+
+router.get('/good/Add', (req, res) => {
+    try {
+        const sql = "SELECT id,name FROM stockCardBrands ORDER BY name ASC";
+        db.query(sql, (err, results) => {
+            if (err) throw err;
+
+            res.render('stockCard/stockCardGoodsAdd',{ 
+                title: 'Stock Card Goods Create',
+                stockCardBrands: results,
+                user: req.session.user });
+        })
+    } catch (err) {
+        console.error('Error view data:', err);
+        res.status(500).json({ error: 'Error view data into the database.' });
+    } 
+
+})
+
+router.post('/good/Add',(req, res) => {
+    try {
+        const { stockCardGoodsNo,stockCardGoodsBrand,stockCardGoodsCode,stockCardGoodsModel,stockCardGoodsKeyword,stockCardGoodsPrice ,stockCardGoodsLimitPrice ,stockCardGoodsShelf , stockCardGoodsRemarkPurchase ,stockCardGoodsRemarkSale , stockCardGoodsRemain,stockCardGoodsLength }= req.body;
+        const uuid = uuidv4();
+        const sql = "INSERT INTO stockCardGoods ( id, no,brandID,code, model ,keyword,price , limitPrice ,shelf , remarkPurchase ,remarkSale , remain,length) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        db.query(sql, [ uuid,stockCardGoodsNo,stockCardGoodsBrand,stockCardGoodsCode, stockCardGoodsModel,stockCardGoodsKeyword,stockCardGoodsPrice ,stockCardGoodsLimitPrice ,stockCardGoodsShelf , stockCardGoodsRemarkPurchase ,stockCardGoodsRemarkSale , stockCardGoodsRemain,stockCardGoodsLength ], (err, result) => {
+            if (err) throw err;
+
+            const sql2t = "SELECT * FROM `viewRpt_stockCard` ORDER BY code ASC;";
+
+            db.query(sql2t, (err, results) => {
+                if (err) throw err;
+
+                res.render('stockCard/stockCardReportBackEnd', { 
+                    title: 'Stock Card Management',
+                    stockCard : results,
+                    user: req.session.user
+                });
+            })
+        })
+    } catch (err) {
+        console.error('Error inserting data:', err);
+        res.status(500).json({ error: 'Error inserting data into the database.' });
+    } 
+})
+
+router.get('/good/Edit/:id', (req, res) => {
+    try {
+         const sql2t = "SELECT * FROM view_goods_brands WHERE id = ? ;";
+        db.query(sql2t, [req.params.id], (err, result) => {
+            if (err) throw err;
+            
+            const sql2 = "SELECT id,name FROM stockCardBrands ORDER BY name ASC";
+            db.query(sql2, (err, stockCardBrands) => {
+                if (err) throw err;
+                res.render('stockCard/stockCardGoodsEdit', {
+                    title: 'Stock Card Goods Edit', 
+                    stockCardGoods : result[0] ,
+                    stockCardBrands : stockCardBrands,
+                    user: req.session.user 
+                });
+            });
+        });
+    } catch (err) {
+        console.error('Error view data:', err);
+        res.status(500).json({ error: 'Error view data into the database.' });
+    }
+})
+
+router.post('/good/Edit/:id',(req, res) => {
+    try {
+        const { stockCardGoodsNoE,stockCardGoodsCodeE,stockCardGoodsBrandE,stockCardGoodsModelE,stockCardGoodsKeywordE,stockCardGoodsPriceE ,stockCardGoodsLimitPriceE ,stockCardGoodsShelfE , stockCardGoodsRemarkPurchaseE ,stockCardGoodsRemarkSaleE , stockCardGoodsRemainE,stockCardGoodsLengthE } = req.body;
+        const today = new Date();
+        const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+        const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        const dateTime = date + ' ' + time;
+        const timestamp = dateTime;
+        const sql = "UPDATE stockCardGoods SET no = ?, Code = ?,brandID = ?, model = ?,keyword = ?, updatedAt=? ,price=? , limitPrice=? ,shelf=? , remarkPurchase=? ,remarkSale=? , remain=? ,length =?  WHERE id = ?";
+        db.query(sql, [stockCardGoodsNoE,stockCardGoodsCodeE,stockCardGoodsBrandE,stockCardGoodsModelE,stockCardGoodsKeywordE ,timestamp,stockCardGoodsPriceE ,stockCardGoodsLimitPriceE ,stockCardGoodsShelfE , stockCardGoodsRemarkPurchaseE ,stockCardGoodsRemarkSaleE , stockCardGoodsRemainE,stockCardGoodsLengthE, req.params.id], (err, result) => {
+            if (err) throw err;
+            
+            res.redirect('/stockCard/AddCard/'+req.params.id);
+            /*const sql2t = "SELECT * FROM view_goods_brands ;";
+            db.query(sql2t, (err, results) => {
+                if (err) throw err;
+            
+                res.render('stockCard/stockCardGoods', { 
+                    title: 'Stock Card Goods Management',
+                    stockCardGoods : results,
+                    user: req.session.user
+                });
+            })*/
+        })
+    } catch (err) {
+        console.error('Error editing data:', err);
+        res.status(500).json({ error: 'Error editing data into the database.' });
+    } 
+})
+
+router.get('/good/Del/:id', (req, res) => {
+    try {
+        const sql = "DELETE FROM stockCardGoods WHERE id = ?";
+        db.query(sql, [req.params.id], (err, result) => {
+            if (err) throw err;
+            /*const sql2t = "SELECT * FROM view_goods_brands ;";
+
+            db.query(sql2t, (err, results) => {
+                if (err) throw err;
+        
+                res.render('stockCard/stockCardGoods', { 
+                    title: 'Stock Card Goods Management',
+                    stockCardGoods : results,
+                    user: req.session.user
+                });
+            */
+            const sql2t = "SELECT * FROM `viewRpt_stockCard` ORDER BY code ASC;";
+
+            db.query(sql2t, (err, results) => {
+                if (err) throw err;
+    
+                res.render('stockCard/stockCardReportBackEnd', { 
+                    title: 'Stock Card Management',
+                    stockCard : results,
+                    user: req.session.user
+                });
+            })
+        });
+    } catch (err) {
+        console.error('Error deleting data:', err);
+        res.status(500).json({ error: 'Error deleting data into the database.' });
+    } 
+})
+
+router.get('/good/View/:id', (req, res) => {
+    try {
+        const sql2t = "SELECT * FROM view_goods_brands WHERE id = ? ;";
+        db.query(sql2t, [req.params.id], (err, result) => {
+            if (err) throw err;
+
+            res.render('stockCard/stockCardGoodsView', {
+                title: 'Stock Card Goods View', 
+                stockCardGoods : result[0] ,
+                user: req.session.user 
+            });
+        });
+    } catch (err) {
+        console.error('Error view data:', err);
+        res.status(500).json({ error: 'Error view data into the database.' });
+    }
+})
+
+router.get('/status',isAuthenticated,(req, res) => {
+    try {
+        const sql2t = "SELECT * FROM stockCardStatus ORDER BY no ASC;";
+
+        db.query(sql2t, (err, results) => {
+            if (err) throw err;
+
+            res.render('stockCard/stockCardStatus', { 
+                title: 'Stock Card Status Management',
+                stockCardStatus: results,
+                user: req.session.user
+            });
+        })
+    } catch (err) {
+        console.error('Error view data:', err);
+        res.status(500).json({ error: 'Error view data into the database.' });
+    } 
+});
+
+
+router.get('/status/Add',isAuthenticated, (req, res) => {
+   /* try {
+        const sql = "SELECT id,name FROM stockCardBrands ORDER BY name ASC";
+        db.query(sql, (err, results) => {
+            if (err) throw err;*/
+
+            res.render('stockCard/stockCardStatusAdd',{ 
+                title: 'Stock Card Status Create',
+                user: req.session.user });
+       /* })    stockCardBrands: results,
+    } catch (err) {
+        console.error('Error view data:', err);
+        res.status(500).json({ error: 'Error view data into the database.' }); stockCardStatus
+    } */
+
+})
+
+router.post('/status/Add',isAuthenticated,(req, res) => {
+    try {
+        const { stockCardStatusNo,stockCardStatusNameTH,stockCardStatusNameEN,stockCardStatusInOut }= req.body;
+        const uuid = uuidv4();
+        const sql = "INSERT INTO stockCardStatus ( id,no,nameTH,nameEN,ValueInOut) VALUES(?, ?, ?, ?, ?)";
+        db.query(sql, [ uuid,stockCardStatusNo,stockCardStatusNameTH,stockCardStatusNameEN,stockCardStatusInOut], (err, result) => {
+            if (err) throw err;
+            const sql2t = "SELECT * FROM stockCardStatus ORDER BY no ASC;";
+
+            db.query(sql2t, (err, results) => {
+                if (err) throw err;
+        
+                res.render('stockCard/stockCardStatus', { 
+                    title: 'Stock Card Goods Management',
+                    stockCardStatus : results,
+                    user: req.session.user
+                });
+            })
+        })
+    } catch (err) {
+        console.error('Error inserting data:', err);
+        res.status(500).json({ error: 'Error inserting data into the database.' });
+    } 
+})
+
+router.get('/status/Edit/:id',isAuthenticated, (req, res) => {
+    try {
+         const sql2t = "SELECT * FROM stockCardStatus WHERE id = ? ;"
+        db.query(sql2t, [req.params.id], (err, result) => {
+            if (err) throw err;
+
+                res.render('stockCard/stockCardStatusEdit', {
+                    title: 'Stock Card Status Edit', 
+                    stockCardStatus : result[0] ,
+                    user: req.session.user 
+                });
+        });
+    } catch (err) {
+        console.error('Error view data:', err);
+        res.status(500).json({ error: 'Error view data into the database.' });
+    }
+})
+
+router.post('/status/Edit/:id',isAuthenticated,(req, res) => {
+    try {
+        const { stockCardStatusNoE,stockCardStatusNameTHE,stockCardStatusNameENE,stockCardStatusInOutE } = req.body;
+        const sql = "UPDATE stockCardStatus SET no = ?, nameTH = ?,nameEN = ?, ValueInOut = ?  WHERE id = ?";
+        db.query(sql, [ stockCardStatusNoE,stockCardStatusNameTHE,stockCardStatusNameENE,stockCardStatusInOutE, req.params.id], (err, result) => {
+            if (err) throw err;
+            const sql2t = "SELECT * FROM stockCardStatus ORDER BY no ASC;";
+
+            db.query(sql2t, (err, results) => {
+                if (err) throw err;
+        
+                res.render('stockCard/stockCardStatus', { 
+                    title: 'Stock Card Status Management',
+                    stockCardStatus : results,
+                    user: req.session.user
+                });
+            })
+        })
+    } catch (err) {
+        console.error('Error editing data:', err);
+        res.status(500).json({ error: 'Error editing data into the database.' });
+    } 
+})
+
+router.get('/status/Del/:id',isAuthenticated, (req, res) => {
+    try {
+        const sql = "DELETE FROM stockCardStatus WHERE id = ?";
+        db.query(sql, [req.params.id], (err, result) => {
+            if (err) throw err;
+            const sql2t = "SELECT * FROM stockCardStatus ORDER BY no ASC;";
+
+            db.query(sql2t, (err, results) => {
+                if (err) throw err;
+        
+                res.render('stockCard/stockCardStatus', { 
+                    title: 'Stock Card Status Management',
+                    stockCardStatus : results,
+                    user: req.session.user
+                });
+            })
+        });
+    } catch (err) {
+        console.error('Error deleting data:', err);
+        res.status(500).json({ error: 'Error deleting data into the database.' });
+    } 
+})
+
+router.get('/status/View/:id',isAuthenticated, (req, res) => {
+    try {
+        const sql2t = "SELECT * FROM stockCardStatus WHERE id = ? ;"
+
+        db.query(sql2t, [req.params.id], (err, result) => {
+            if (err) throw err;
+
+            res.render('stockCard/stockCardStatusView', {
+                title: 'Stock Card Status View', 
+                stockCardStatus : result[0] ,
+                user: req.session.user 
+            });
+        });
+    } catch (err) {
+        console.error('Error view data:', err);
+        res.status(500).json({ error: 'Error view data into the database.' });
+    }
+})
+
 module.exports =  router;
