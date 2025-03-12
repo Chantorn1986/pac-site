@@ -159,16 +159,9 @@
                                                         <div class="col-sm-6">
                                                             <label for="libraryAnswerAnswerer"
                                                                 class="form-label">Answerer :</label>
-                                                            <select name="libraryAnswerAnswerer"
-                                                                class="form-control form-select"
-                                                                aria-label="Default select example">
-                                                                <option value="">--- Select Name ---</option>
-                                                                <% employee.forEach(employee=> { %>
-                                                                    <option value="<%= employee.nameTH %>">
-                                                                        <%= employee.nameTH %>
-                                                                    </option>
-                                                                    <% }) %>
-                                                            </select>
+                                                                <input type="text" class="form-control"
+                                                                name="libraryAnswerAnswerer"
+                                                                value="<%= nameCreate %>" readonly>
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <label for="libraryAnswerAnswerDate"

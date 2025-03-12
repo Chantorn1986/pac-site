@@ -55,7 +55,7 @@
                                 <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
                                 <div class="col-lg-12">
                                     <div class="p-4">
-                                        <form class="user" action="/employee/SubZzAdd/<%= employeeID %>" method="POST">
+                                        <form class="user" action="/employee/SubZzEdit/<%= emCar.emID %>" method="POST">
 
                                             <h6 class="m-0 font-weight-bold text-primary mb-3"><i class="fas fa-car-side fa-fw"></i> / <i class="fas fa-motorcycle fa-fw"></i> <%= title %></h6>
                                             <div class="form-group row">
@@ -102,7 +102,7 @@
                                         </form>
                                         <hr>
                                         <div class="text-center">
-                                            <a class="small" href="/employee/Sub/<%= employeeID %>">Back to ...</a>
+                                            <a class="small" href="/employee/Sub/<%= emCar.emID %>">Back to ...</a>
                                         </div>
                                     </div>
                                 </div>

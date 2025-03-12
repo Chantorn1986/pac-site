@@ -618,7 +618,7 @@ router.get('/SubZzEdit/:id',isAuthenticated, (req, res) => {
 
             res.render('hrm/employeeSubZzEdit', {
                 title: 'Card Edit', 
-                employeeCar : result[0],
+                emCar : result[0],
                 user: req.session.user 
             });
         });
@@ -629,21 +629,20 @@ router.get('/SubZzEdit/:id',isAuthenticated, (req, res) => {
 })
 
 router.post('/SubZzEdit/:id',isAuthenticated,(req, res) => {
-    const { vehicleE,brandE,modelE,colorE,registrationE }= req.body;
+    const { vehicle,carBrandE,carModelE,carColorE,carRegistrationE}= req.body;
     const paramID = req.params.id;
     const sqlEdit = "UPDATE `employeeVehicle` SET `vehicle`=?,`brand`=?,`model`=?,`color`=?,`registration`=?,`updatedAt`=? WHERE `id`=?";
     const today = new Date();
     const timestamp= moment(today).format();
-    const sql = "SELECT * FROM employeeVehicle WHERE id = ?";
+    const sql = "SELECT `id`, `emID`, `vehicle`, `brand`, `model`, `color`, `registration`, `createdAt`, `updatedAt` FROM `employeeVehicle` WHERE `id` = ?";
     try {
-        db.query(sqlEdit, [ vehicleE,brandE,modelE,colorE,registrationE,timestamp,paramID], (err, resultEdit) => {
+        db.query(sqlEdit, [ vehicle,carBrandE,carModelE,carColorE,carRegistrationE,timestamp,paramID], (err, resultEdit) => {
             if (err) throw err;
 
             db.query(sql, [req.params.id], (err, result) => {
                 if (err) throw err;
-
+                console.log(result[0]['emID']);
                 res.redirect('/employee/Sub/'+result[0]['emID']);
-
             })
         })
     } catch (err) {

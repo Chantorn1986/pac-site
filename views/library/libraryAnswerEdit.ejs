@@ -88,12 +88,12 @@
                                                                 <option value="<%= results.questioner %>">
                                                                     <%= results.questioner %>
                                                                 </option>
-                                                                <option value="">--- Select Name ---</option>
+                                                                <!-- <option value="">--- Select Name ---</option>
                                                                 <% employee.forEach(employee=> { %>
                                                                     <option value="<%= employee.nameTH %>">
                                                                         <%= employee.nameTH %>
                                                                     </option>
-                                                                    <% }) %>
+                                                                    <% }) %> -->
                                                             </select>
                                                         </div>
                                                     </div>
@@ -222,16 +222,17 @@
                                                         <div class="col-sm-6">
                                                             <label for="libraryAnswerAnswererE"
                                                                 class="form-label">Answerer :</label>
-                                                            <select name="libraryAnswerAnswererE"
-                                                                class="form-control form-select"
-                                                                aria-label="Default select example">
-                                                                <option value="">--- Select Name ---</option>
-                                                                <% employee.forEach(employee=> { %>
-                                                                    <option value="<%= employee.nameTH %>">
-                                                                        <%= employee.nameTH %>
-                                                                    </option>
-                                                                    <% }) %>
-                                                            </select>
+                                                                <% if(results.answerer) {%>
+                                                                    <input type="text" class="form-control"
+                                                                    name="libraryAnswerAnswererE"
+                                                                    value="<%= results.answerer %>" readonly>
+                                                   
+                                                                <% } else {%>
+                                                                    <input type="text" class="form-control"
+                                                                    name="libraryAnswerAnswererE"
+                                                                    value="<%= nameCreateE %>" readonly>
+                                                                <% } %>
+
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <label for="libraryAnswerAnswerDateE"

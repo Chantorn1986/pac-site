@@ -16,7 +16,7 @@ function isAuthenticated(req, res, next) {
     }
 }
 
-router.get('/brands', (req, res) => {
+router.get('/brands',isAuthenticated, (req, res) => {
     try {
         const sql = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt`,DATE_FORMAT(`pac_system`.`libraryBrands`.`createdAt`,'%d/%m/%Y %H:%i:%s') AS `createdF`,DATE_FORMAT(`pac_system`.`libraryBrands`.`updatedAt`,'%d/%m/%Y %H:%i:%s') AS `updatedF` FROM `libraryBrands`";
         db.query(sql, (err, results) => {
@@ -34,7 +34,7 @@ router.get('/brands', (req, res) => {
     }
 });
 
-router.get('/brands/Add', (req, res) => {
+router.get('/brands/Add',isAuthenticated, (req, res) => {
     try {
         res.render('library/libraryBrandsAdd', {
             title: 'Library Brands Create',
@@ -46,7 +46,7 @@ router.get('/brands/Add', (req, res) => {
     }
 });
 
-router.post('/brands/Add', (req, res) => {
+router.post('/brands/Add',isAuthenticated, (req, res) => {
     const { libraryBrandsCode, libraryBrandsNameTH, libraryBrandsNameEN } = req.body;
     const uuid = uuidv4();
     const sqlAdd = "INSERT INTO `libraryBrands` ( `id`, `code`, `nameTH`, `nameEN` ) VALUES(?, ?, ?, ?)";
@@ -71,7 +71,7 @@ router.post('/brands/Add', (req, res) => {
     }
 });
 
-router.get('/brands/Edit/:id', (req, res) => {
+router.get('/brands/Edit/:id',isAuthenticated, (req, res) => {
     try {
         const sql2t = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt`,DATE_FORMAT(`pac_system`.`libraryBrands`.`createdAt`,'%d/%m/%Y %H:%i:%s') AS `createdF`,DATE_FORMAT(`pac_system`.`libraryBrands`.`updatedAt`,'%d/%m/%Y %H:%i:%s') AS `updatedF` FROM `libraryBrands` WHERE `id` = ? ";
         db.query(sql2t, [req.params.id], (err, result) => {
@@ -89,7 +89,7 @@ router.get('/brands/Edit/:id', (req, res) => {
     }
 })
 
-router.post('/brands/Edit/:id', (req, res) => {
+router.post('/brands/Edit/:id',isAuthenticated, (req, res) => {
     const { libraryBrandsCodeE, libraryBrandsNameTHE, libraryBrandsNameENE } = req.body;
     const today = new Date();
     const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
@@ -119,7 +119,7 @@ router.post('/brands/Edit/:id', (req, res) => {
     }
 })
 
-router.get('/brands/Del/:id', (req, res) => {
+router.get('/brands/Del/:id',isAuthenticated, (req, res) => {
     const sqlDel = "DELETE FROM `libraryBrands` WHERE id = ?";
     const sql = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt`,DATE_FORMAT(`pac_system`.`libraryBrands`.`createdAt`,'%d/%m/%Y %H:%i:%s') AS `createdF`,DATE_FORMAT(`pac_system`.`libraryBrands`.`updatedAt`,'%d/%m/%Y %H:%i:%s') AS `updatedF` FROM `libraryBrands`";
     try {
@@ -141,7 +141,7 @@ router.get('/brands/Del/:id', (req, res) => {
     }
 })
 
-router.get('/brands/View/:id', (req, res) => {
+router.get('/brands/View/:id',isAuthenticated, (req, res) => {
     const sql = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt`,DATE_FORMAT(`pac_system`.`libraryBrands`.`createdAt`,'%d/%m/%Y %H:%i:%s') AS `createdF`,DATE_FORMAT(`pac_system`.`libraryBrands`.`updatedAt`,'%d/%m/%Y %H:%i:%s') AS `updatedF` FROM `libraryBrands` WHERE `id` = ?";
     db.query(sql, [req.params.id], (err, result) => {
         if (err) throw err;
@@ -153,7 +153,7 @@ router.get('/brands/View/:id', (req, res) => {
     });
 })
 
-router.get('/industryType', (req, res) => {
+router.get('/industryType',isAuthenticated, (req, res) => {
     try {
         const sql = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt`,DATE_FORMAT(`pac_system`.`libraryIndustryType`.`createdAt`,'%d/%m/%Y %H:%i:%s') AS `createdF`,DATE_FORMAT(`pac_system`.`libraryIndustryType`.`updatedAt`,'%d/%m/%Y %H:%i:%s') AS `updatedF` FROM `libraryIndustryType`";
         db.query(sql, (err, results) => {
@@ -171,7 +171,7 @@ router.get('/industryType', (req, res) => {
     }
 });
 
-router.get('/industryType/Add', (req, res) => {
+router.get('/industryType/Add',isAuthenticated, (req, res) => {
     try {
         res.render('library/libraryIndustryTypeAdd', {
             title: 'Industry Type Create',
@@ -183,7 +183,7 @@ router.get('/industryType/Add', (req, res) => {
     }
 });
 
-router.post('/industryType/Add', (req, res) => {
+router.post('/industryType/Add',isAuthenticated, (req, res) => {
     const { libraryIndustryTypeCode, libraryIndustryTypeNameTH, libraryIndustryTypeNameEN } = req.body;
     const uuid = uuidv4();
     const sqlAdd = "INSERT INTO `libraryIndustryType` ( `id`, `code`, `nameTH`, `nameEN` ) VALUES(?, ?, ?, ?)";
@@ -208,7 +208,7 @@ router.post('/industryType/Add', (req, res) => {
     }
 });
 
-router.get('/industryType/Edit/:id', (req, res) => {
+router.get('/industryType/Edit/:id',isAuthenticated, (req, res) => {
     try {
         const sql2t = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt`,DATE_FORMAT(`pac_system`.`libraryIndustryType`.`createdAt`,'%d/%m/%Y %H:%i:%s') AS `createdF`,DATE_FORMAT(`pac_system`.`libraryIndustryType`.`updatedAt`,'%d/%m/%Y %H:%i:%s') AS `updatedF` FROM `libraryIndustryType` WHERE `id` = ? ";
         db.query(sql2t, [req.params.id], (err, result) => {
@@ -226,7 +226,7 @@ router.get('/industryType/Edit/:id', (req, res) => {
     }
 })
 
-router.post('/industryType/Edit/:id', (req, res) => {
+router.post('/industryType/Edit/:id',isAuthenticated, (req, res) => {
     const { libraryIndustryTypeCodeE, libraryIndustryTypeNameTHE, libraryIndustryTypeNameENE } = req.body;
     const today = new Date();
     const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
@@ -256,7 +256,7 @@ router.post('/industryType/Edit/:id', (req, res) => {
     }
 })
 
-router.get('/industryType/Del/:id', (req, res) => {
+router.get('/industryType/Del/:id',isAuthenticated, (req, res) => {
     const sqlDel = "DELETE FROM `libraryIndustryType` WHERE id = ?";
     const sql = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt`,DATE_FORMAT(`pac_system`.`libraryIndustryType`.`createdAt`,'%d/%m/%Y %H:%i:%s') AS `createdF`,DATE_FORMAT(`pac_system`.`libraryIndustryType`.`updatedAt`,'%d/%m/%Y %H:%i:%s') AS `updatedF` FROM `libraryIndustryType`";
     try {
@@ -278,7 +278,7 @@ router.get('/industryType/Del/:id', (req, res) => {
     }
 })
 
-router.get('/industryType/View/:id', (req, res) => {
+router.get('/industryType/View/:id',isAuthenticated, (req, res) => {
     const sql = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt`,DATE_FORMAT(`pac_system`.`libraryIndustryType`.`createdAt`,'%d/%m/%Y %H:%i:%s') AS `createdF`,DATE_FORMAT(`pac_system`.`libraryIndustryType`.`updatedAt`,'%d/%m/%Y %H:%i:%s') AS `updatedF` FROM `libraryIndustryType` WHERE `id` = ?";
     db.query(sql, [req.params.id], (err, result) => {
         if (err) throw err;
@@ -290,7 +290,7 @@ router.get('/industryType/View/:id', (req, res) => {
     });
 })
 
-router.get('/productType', (req, res) => {
+router.get('/productType',isAuthenticated, (req, res) => {
     try {
         const sql = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt`,DATE_FORMAT(`pac_system`.`libraryProductType`.`createdAt`,'%d/%m/%Y %H:%i:%s') AS `createdF`,DATE_FORMAT(`pac_system`.`libraryProductType`.`updatedAt`,'%d/%m/%Y %H:%i:%s') AS `updatedF` FROM `libraryProductType`";
         db.query(sql, (err, results) => {
@@ -308,7 +308,7 @@ router.get('/productType', (req, res) => {
     }
 });
 
-router.get('/productType/Add', (req, res) => {
+router.get('/productType/Add',isAuthenticated, (req, res) => {
     try {
         res.render('library/libraryProductTypeAdd', {
             title: 'Product Type Create',
@@ -320,7 +320,7 @@ router.get('/productType/Add', (req, res) => {
     }
 });
 
-router.post('/productType/Add', (req, res) => {
+router.post('/productType/Add',isAuthenticated, (req, res) => {
     const { libraryProductTypeCode, libraryProductTypeNameTH, libraryProductTypeNameEN } = req.body;
     const uuid = uuidv4();
     const sqlAdd = "INSERT INTO `libraryProductType` ( `id`, `code`, `nameTH`, `nameEN` ) VALUES(?, ?, ?, ?)";
@@ -345,7 +345,7 @@ router.post('/productType/Add', (req, res) => {
     }
 });
 
-router.get('/productType/Edit/:id', (req, res) => {
+router.get('/productType/Edit/:id',isAuthenticated, (req, res) => {
     try {
         const sql2t = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt`,DATE_FORMAT(`pac_system`.`libraryProductType`.`createdAt`,'%d/%m/%Y %H:%i:%s') AS `createdF`,DATE_FORMAT(`pac_system`.`libraryProductType`.`updatedAt`,'%d/%m/%Y %H:%i:%s') AS `updatedF` FROM `libraryProductType` WHERE `id` = ? ";
         db.query(sql2t, [req.params.id], (err, result) => {
@@ -363,7 +363,7 @@ router.get('/productType/Edit/:id', (req, res) => {
     }
 })
 
-router.post('/productType/Edit/:id', (req, res) => {
+router.post('/productType/Edit/:id',isAuthenticated, (req, res) => {
     const { libraryProductTypeCodeE, libraryProductTypeNameTHE, libraryProductTypeNameENE } = req.body;
     const today = new Date();
     const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
@@ -393,7 +393,7 @@ router.post('/productType/Edit/:id', (req, res) => {
     }
 })
 
-router.get('/productType/Del/:id', (req, res) => {
+router.get('/productType/Del/:id',isAuthenticated, (req, res) => {
     const sqlDel = "DELETE FROM `libraryProductType` WHERE id = ?";
     const sql = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt`,DATE_FORMAT(`pac_system`.`libraryProductType`.`createdAt`,'%d/%m/%Y %H:%i:%s') AS `createdF`,DATE_FORMAT(`pac_system`.`libraryProductType`.`updatedAt`,'%d/%m/%Y %H:%i:%s') AS `updatedF` FROM `libraryProductType`";
     try {
@@ -415,7 +415,7 @@ router.get('/productType/Del/:id', (req, res) => {
     }
 })
 
-router.get('/productType/View/:id', (req, res) => {
+router.get('/productType/View/:id',isAuthenticated, (req, res) => {
     const sql = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt`,DATE_FORMAT(`pac_system`.`libraryProductType`.`createdAt`,'%d/%m/%Y %H:%i:%s') AS `createdF`,DATE_FORMAT(`pac_system`.`libraryProductType`.`updatedAt`,'%d/%m/%Y %H:%i:%s') AS `updatedF` FROM `libraryProductType` WHERE `id` = ?";
     db.query(sql, [req.params.id], (err, result) => {
         if (err) throw err;
@@ -427,20 +427,28 @@ router.get('/productType/View/:id', (req, res) => {
     });
 })
 
-router.get('/question', (req, res) => {
+router.get('/question',isAuthenticated, (req, res) => {
+    const sessionUser = req.session.user ;
+    const sqlCreateName = "SELECT `nameTH` FROM `employee` WHERE `code` =  ?";
+    let sql = "SELECT `id`, `date`, `docQTN`, `noQTN`, `categoryGID`, `brandGID`, `industryTypeGID`, `productTypeGID`, `image`, `title`, `summaryContent`, `content`, `keyword`, `questioner`, `answerer`";
+    sql += ", `createdAt`, `updatedAt`, `answerDate`, `validator`, `validateDate`, `addPAC`, `docLBL`, `noLBL`, `tagContent`, DATE_FORMAT(`date`,'%d/%m/%Y') as `dateF`";
+    sql += ",DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as `createdAtF`,DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as `updatedAtF`,DATE_FORMAT(`answerDate`,'%d/%m/%Y') as `answerDateF`";
+    sql += ",DATE_FORMAT(`validateDate`,'%d/%m/%Y') as `validateDateF` FROM `libraryData`";
     try {
-        let sql = "SELECT `id`, `date`, `docQTN`, `noQTN`, `categoryGID`, `brandGID`, `industryTypeGID`, `productTypeGID`, `image`, `title`, `summaryContent`, `content`, `keyword`, `questioner`, `answerer`";
-        sql += ", `createdAt`, `updatedAt`, `answerDate`, `validator`, `validateDate`, `addPAC`, `docLBL`, `noLBL`, `tagContent`, DATE_FORMAT(`date`,'%d/%m/%Y') as `dateF`";
-        sql += ",DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as `createdAtF`,DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as `updatedAtF`,DATE_FORMAT(`answerDate`,'%d/%m/%Y') as `answerDateF`";
-        sql += ",DATE_FORMAT(`validateDate`,'%d/%m/%Y') as `validateDateF` FROM `libraryData`";
+
         db.query(sql, (err, results) => {
             if (err) throw err;
+            db.query(sqlCreateName,[sessionUser.name], (err, nameCreate) => {
+                if (err) throw err;
+                res.render('library/libraryQuestion', {
+                    title: 'Question Management',
+                    libraryQuestion: results,
+                    nameCreate : nameCreate[0]['nameTH'],
+                    user: req.session.user
+                });
 
-            res.render('library/libraryQuestion', {
-                title: 'Question Management',
-                libraryQuestion: results,
-                user: req.session.user
-            });
+            })
+
         })
     } catch (err) {
         console.error('Error inserting data:', err);
@@ -448,7 +456,7 @@ router.get('/question', (req, res) => {
     }
 });
 
-router.get('/question/Add', (req, res) => {
+router.get('/question/Add',isAuthenticated, (req, res) => {
     const sqlBrands = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt`, DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryBrands` ORDER BY `nameEN` ASC";
     const sqlIndustryType = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt` , DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryIndustryType` ORDER BY `nameEN` ASC";
     const sqlProductType = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt` , DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryProductType` ORDER BY `nameEN` ASC";
@@ -456,6 +464,8 @@ router.get('/question/Add', (req, res) => {
     const now = new Date();
     const dateString = moment(now).format('YYYY-MM-DD');
     const sqlLBLmaxNo = "SELECT IFNULL(MAX( `noQTN`),0)+1 as maxNo FROM `libraryData`";
+    const sessionUser = req.session.user ;
+    const sqlCreateName = "SELECT `nameTH` FROM `employee` WHERE `code` =  ?";
     try {
 
         db.query(sqlBrands, (err, resultsBrands) => {
@@ -468,16 +478,20 @@ router.get('/question/Add', (req, res) => {
                         if (err) throw err;
                         db.query(sqlLBLmaxNo, (err, resultsMaxNo) => {
                             if (err) throw err;
-                            res.render('library/libraryQuestionAdd', {
-                                title: 'Question Create',
-                                libraryBrands: resultsBrands,
-                                libraryIndustryType: resultsIndustryType,
-                                libraryProductType: resultsProductType,
-                                dateDefaul: dateString,
-                                employee: resultsEm,
-                                maxNo: resultsMaxNo[0],
-                                user: req.session.user
-                            });
+                            db.query(sqlCreateName,[sessionUser.name], (err, nameCreate) => {
+                                if (err) throw err;
+                                res.render('library/libraryQuestionAdd', {
+                                    title: 'Question Create',
+                                    libraryBrands: resultsBrands,
+                                    libraryIndustryType: resultsIndustryType,
+                                    libraryProductType: resultsProductType,
+                                    dateDefaul: dateString,
+                                    employee: resultsEm,
+                                    maxNo: resultsMaxNo[0],
+                                    nameCreate : nameCreate[0]['nameTH'],
+                                    user: req.session.user
+                                });
+                            })
                         });
                     });
                 });
@@ -489,12 +503,13 @@ router.get('/question/Add', (req, res) => {
     }
 });
 
-router.post('/question/Add', (req, res) => {
+router.post('/question/Add',isAuthenticated, (req, res) => {
     const { libraryQuestionDate, libraryQuestionDocQTN, libraryQuestionQuestioner, libraryQuestionTitle, tagValue } = req.body;
     const uuid = uuidv4();
     const sqlAdd1 = "INSERT INTO `libraryData`(`id`, `date`, `docQTN`, `noQTN`, `title`, `questioner`, `tagContent`) VALUES ( ? , ? , ? , ? , ? , ? , ?)";
     const sqlQtnMaxNo = "SELECT IFNULL(MAX( `noQTN`),0)+1 as maxNo FROM `libraryData`";
-
+    const sessionUser = req.session.user ;
+    const sqlCreateName = "SELECT `nameTH` FROM `employee` WHERE `code` =  ?";
     let sql = "SELECT `id`, `date`, `docQTN`, `noQTN`, `categoryGID`, `brandGID`, `industryTypeGID`, `productTypeGID`, `image`, `title`, `summaryContent`, `content`, `keyword`, `questioner`, `answerer`";
     sql += ", `createdAt`, `updatedAt`, `answerDate`, `validator`, `validateDate`, `addPAC`, `docLBL`, `noLBL`, `tagContent`, DATE_FORMAT(`date`,'%d/%m/%Y') as `dateF`";
     sql += ",DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as `createdAtF`,DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as `updatedAtF`,DATE_FORMAT(`answerDate`,'%d/%m/%Y') as `answerDateF`";
@@ -512,11 +527,15 @@ router.post('/question/Add', (req, res) => {
                 if (err) throw err;
                 db.query(sql, (err, results) => {
                     if (err) throw err;
-                    res.render('library/libraryQuestion', {
-                        title: 'Question Management',
-                        libraryQuestion: results,
-                        user: req.session.user
-                    });
+                    db.query(sqlCreateName,[sessionUser.name], (err, nameCreate) => {
+                        if (err) throw err;
+                        res.render('library/libraryQuestion', {
+                            title: 'Question Management',
+                            libraryQuestion: results,
+                            nameCreate : nameCreate[0]['nameTH'],
+                            user: req.session.user
+                        });
+                    })
                 });
             });
         });
@@ -527,7 +546,7 @@ router.post('/question/Add', (req, res) => {
     }
 });
 
-router.get('/question/Edit/:id', (req, res) => {
+router.get('/question/Edit/:id',isAuthenticated, (req, res) => {
     const sqlBrands = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt`, DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryBrands` ORDER BY `nameEN` ASC";
     const sqlIndustryType = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt` , DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryIndustryType` ORDER BY `nameEN` ASC";
     const sqlProductType = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt` , DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryProductType` ORDER BY `nameEN` ASC";
@@ -577,7 +596,7 @@ router.get('/question/Edit/:id', (req, res) => {
     }
 })
 
-router.post('/question/Edit/:id', (req, res) => {
+router.post('/question/Edit/:id',isAuthenticated, (req, res) => {
     const { libraryQuestionDateE, libraryQuestionDocQTNE, libraryQuestionQuestionerE, libraryQuestionTitleE, tagValueE } = req.body;
     const today = new Date();
     const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
@@ -585,7 +604,8 @@ router.post('/question/Edit/:id', (req, res) => {
     const dateTime = date + ' ' + time;
     const timestamp = dateTime;
     const sqlEdit = "UPDATE `libraryData` SET `date`= ?, `docQTN`= ?, `title`= ?, `questioner`= ?, `tagContent` = ?, `updatedAt` =?  WHERE `id` = ?";
-
+    const sessionUser = req.session.user ;
+    const sqlCreateName = "SELECT `nameTH` FROM `employee` WHERE `code` =  ?";
     let sql = "SELECT `id`, `date`, `docQTN`, `noQTN`, `categoryGID`, `brandGID`, `industryTypeGID`, `productTypeGID`, `image`, `title`, `summaryContent`, `content`, `keyword`, `questioner`, `answerer`";
     sql += ", `createdAt`, `updatedAt`, `answerDate`, `validator`, `validateDate`, `addPAC`, `docLBL`, `noLBL`, `tagContent`, DATE_FORMAT(`date`,'%d/%m/%Y') as `dateF`";
     sql += ",DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as `createdAtF`,DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as `updatedAtF`,DATE_FORMAT(`answerDate`,'%d/%m/%Y') as `answerDateF`";
@@ -596,12 +616,17 @@ router.post('/question/Edit/:id', (req, res) => {
 
             db.query(sql, (err, results) => {
                 if (err) throw err;
+                db.query(sqlCreateName,[sessionUser.name], (err, nameCreate) => {
+                    if (err) throw err;
+                    res.render('library/libraryQuestion', {
+                        title: 'Question Management',
+                        libraryQuestion: results,
+                        nameCreate : nameCreate[0]['nameTH'],
+                        user: req.session.user
+                    });
 
-                res.render('library/libraryQuestion', {
-                    title: 'Question Management',
-                    libraryQuestion: results,
-                    user: req.session.user
-                });
+                })
+
             })
 
         })
@@ -611,23 +636,29 @@ router.post('/question/Edit/:id', (req, res) => {
     }
 })
 
-router.get('/question/Del/:id', (req, res) => {
+router.get('/question/Del/:id',isAuthenticated, (req, res) => {
     const sqlDel = "DELETE FROM `libraryData` WHERE id = ?";
     let sql = "SELECT `id`, `date`, `docQTN`, `noQTN`, `categoryGID`, `brandGID`, `industryTypeGID`, `productTypeGID`, `image`, `title`, `summaryContent`, `content`, `keyword`, `questioner`, `answerer`";
     sql += ", `createdAt`, `updatedAt`, `answerDate`, `validator`, `validateDate`, `addPAC`, `docLBL`, `noLBL`, `tagContent`, DATE_FORMAT(`date`,'%d/%m/%Y') as `dateF`";
     sql += ",DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as `createdAtF`,DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as `updatedAtF`,DATE_FORMAT(`answerDate`,'%d/%m/%Y') as `answerDateF`";
     sql += ",DATE_FORMAT(`validateDate`,'%d/%m/%Y') as `validateDateF` FROM `libraryData`";
+    const sessionUser = req.session.user ;
+    const sqlCreateName = "SELECT `nameTH` FROM `employee` WHERE `code` =  ?";
     try {
         db.query(sqlDel, [req.params.id], (err, resultDel) => {
             if (err) throw err;
             db.query(sql, (err, results) => {
                 if (err) throw err;
+                db.query(sqlCreateName,[sessionUser.name], (err, nameCreate) => {
+                    if (err) throw err;
+                    res.render('library/libraryQuestion', {
+                        title: 'Question Management',
+                        libraryQuestion: results,
+                        nameCreate : nameCreate[0]['nameTH'],
+                        user: req.session.user
+                    });
+                })
 
-                res.render('library/libraryQuestion', {
-                    title: 'Question Management',
-                    libraryQuestion: results,
-                    user: req.session.user
-                });
             })
         });
     } catch (err) {
@@ -636,7 +667,7 @@ router.get('/question/Del/:id', (req, res) => {
     }
 })
 
-router.get('/question/View/:id', (req, res) => {
+router.get('/question/View/:id',isAuthenticated, (req, res) => {
     const sqlBrands = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt`, DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryBrands` ORDER BY `nameEN` ASC";
     const sqlIndustryType = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt` , DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryIndustryType` ORDER BY `nameEN` ASC";
     const sqlProductType = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt` , DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryProductType` ORDER BY `nameEN` ASC";
@@ -678,7 +709,7 @@ router.get('/question/View/:id', (req, res) => {
     }
 })
 
-router.get('/answer', (req, res) => {
+router.get('/answer',isAuthenticated, (req, res) => {
     try {
         let sql = "SELECT `id`, `date`, `docQTN`, `noQTN`, `categoryGID`, `brandGID`, `industryTypeGID`, `productTypeGID`, `image`, `title`, `summaryContent`, `content`, `keyword`, `questioner`, `answerer`";
         sql += ", `createdAt`, `updatedAt`, `answerDate`, `validator`, `validateDate`, `addPAC`, `docLBL`, `noLBL`, `tagContent`, DATE_FORMAT(`date`,'%d/%m/%Y') as `dateF`,DATE_FORMAT(`date`,'%Y-%m-%d') as `dateE`";
@@ -699,7 +730,7 @@ router.get('/answer', (req, res) => {
     }
 });
 
-router.get('/answer/Add', (req, res) => {
+router.get('/answer/Add',isAuthenticated, (req, res) => {
     const sqlBrands = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt`, DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryBrands` ORDER BY `nameEN` ASC";
     const sqlIndustryType = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt` , DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryIndustryType` ORDER BY `nameEN` ASC";
     const sqlProductType = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt` , DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryProductType` ORDER BY `nameEN` ASC";
@@ -708,6 +739,8 @@ router.get('/answer/Add', (req, res) => {
     const dateString = moment(now).format('YYYY-MM-DD');
     const timestamp= moment(now).format();
     const sqlLBLmaxNo = "SELECT IFNULL(MAX( `noQTN`),0)+1 as maxNo FROM `libraryData`";
+    const sessionUser = req.session.user ;
+    const sqlCreateName = "SELECT `nameTH` FROM `employee` WHERE `code` =  ?";
     try {
 
         db.query(sqlBrands, (err, resultsBrands) => {
@@ -720,17 +753,21 @@ router.get('/answer/Add', (req, res) => {
                         if (err) throw err;
                         db.query(sqlLBLmaxNo, (err, resultsMaxNo) => {
                             if (err) throw err;
-                            res.render('library/libraryAnswerAdd', {
-                                title: 'Question & Answer Create',
-                                libraryBrands: resultsBrands,
-                                libraryIndustryType: resultsIndustryType,
-                                libraryProductType: resultsProductType,
-                                dateDefaul: dateString,
-                                employee: resultsEm,
-                                maxNo: resultsMaxNo[0],
-                                timestamp:timestamp,
-                                user: req.session.user
-                            });
+                            db.query(sqlCreateName,[sessionUser.name], (err, nameCreate) => {
+                                if (err) throw err;
+                                res.render('library/libraryAnswerAdd', {
+                                    title: 'Question & Answer Create',
+                                    libraryBrands: resultsBrands,
+                                    libraryIndustryType: resultsIndustryType,
+                                    libraryProductType: resultsProductType,
+                                    dateDefaul: dateString,
+                                    employee: resultsEm,
+                                    maxNo: resultsMaxNo[0],
+                                    timestamp:timestamp,
+                                    nameCreate : nameCreate[0]['nameTH'],
+                                    user: req.session.user
+                                });
+                            })
                         });
                     });
                 });
@@ -742,7 +779,7 @@ router.get('/answer/Add', (req, res) => {
     }
 });
 
-router.post('/answer/Add', (req, res) => {
+router.post('/answer/Add',isAuthenticated, (req, res) => {
     const { libraryAnswerDate,libraryAnswerDocQTN,libraryAnswerQuestioner,libraryAnswerTitle,tagValueA,libraryAnswerAnswerer,libraryAnswerAnswerDate,libraryAnswerAnswer} = req.body;
     const uuid = uuidv4();
     const sqlAdd1 = "INSERT INTO `libraryData`(`id`, `date`, `docQTN`, `noQTN`, `title`, `questioner`, `tagContent`, `answerer`,`answerDate`,`content`) VALUES ( ? , ? , ? , ? , ? , ? , ?, ?, ?, ?)";
@@ -779,7 +816,7 @@ router.post('/answer/Add', (req, res) => {
     }
 });
 
-router.get('/answer/Edit/:id', (req, res) => {
+router.get('/answer/Edit/:id',isAuthenticated, (req, res) => {
     const sqlBrands = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt`, DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryBrands` ORDER BY `nameEN` ASC";
     const sqlIndustryType = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt` , DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryIndustryType` ORDER BY `nameEN` ASC";
     const sqlProductType = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt` , DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryProductType` ORDER BY `nameEN` ASC";
@@ -787,6 +824,8 @@ router.get('/answer/Edit/:id', (req, res) => {
     const now = new Date();
     const dateString = moment(now).format('YYYY-MM-DD');
     const timestamp= moment(now).format();
+    const sessionUser = req.session.user ;
+    const sqlCreateName = "SELECT `nameTH` FROM `employee` WHERE `code` =  ?";
     let sql = "SELECT `id`, `date`, `docQTN`, `noQTN`, `categoryGID`, `brandGID`, `industryTypeGID`, `productTypeGID`, `image`, `title`, `summaryContent`, `content`, `keyword`, `questioner`, `answerer`";
     sql += ", `createdAt`, `updatedAt`, `answerDate`, `validator`, `validateDate`, `addPAC`, `docLBL`, `noLBL`, `tagContent`, DATE_FORMAT(`date`,'%d/%m/%Y') as `dateF`,DATE_FORMAT(`date`,'%Y-%m-%d') as `dateE`";
     sql += ",DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as `createdAtF`,DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as `updatedAtF`,DATE_FORMAT(`answerDate`,'%d/%m/%Y') as `answerDateF`,DATE_FORMAT(`answerDate`,'%Y-%m-%d') as `answerDateE`";
@@ -803,23 +842,27 @@ router.get('/answer/Edit/:id', (req, res) => {
                         if (err) throw err;
                         db.query(sql,[req.params.id], (err, results) => {
                             if (err) throw err;
+                            db.query(sqlCreateName,[sessionUser.name], (err, nameCreate) => {
+                                if (err) throw err;
+                                let tagArray =null;
+                                if(results[0]['tagContent']){
+                                    tagArray = results[0]['tagContent'].split(";");
+                                }
+                                res.render('library/libraryAnswerEdit', {
+                                    title: 'Question Edit',
+                                    libraryBrands: resultsBrands,
+                                    libraryIndustryType: resultsIndustryType,
+                                    libraryProductType: resultsProductType,
+                                    dateDefaul: dateString,
+                                    employee: resultsEm,
+                                    results: results[0],
+                                    tagArray: tagArray,
+                                    timestamp:timestamp,
+                                    nameCreateE : nameCreate[0]['nameTH'],
+                                    user: req.session.user
+                                });
+                            })
 
-                            let tagArray =null;
-                            if(results[0]['tagContent']){
-                                tagArray = results[0]['tagContent'].split(";");
-                            }
-                            res.render('library/libraryAnswerEdit', {
-                                title: 'Question Edit',
-                                libraryBrands: resultsBrands,
-                                libraryIndustryType: resultsIndustryType,
-                                libraryProductType: resultsProductType,
-                                dateDefaul: dateString,
-                                employee: resultsEm,
-                                results: results[0],
-                                tagArray: tagArray,
-                                timestamp:timestamp,
-                                user: req.session.user
-                            });
                         });
                     });
                 });
@@ -831,7 +874,7 @@ router.get('/answer/Edit/:id', (req, res) => {
     }
 })
 
-router.post('/answer/Edit/:id', (req, res) => {
+router.post('/answer/Edit/:id',isAuthenticated, (req, res) => {
     const { libraryAnswerDateE,libraryAnswerDocQTNE,libraryAnswerQuestionerE,libraryAnswerTitleE,tagValueAE,libraryAnswerAnswererE,libraryAnswerAnswerDateE,libraryAnswerAnswerE} = req.body;
     const today = new Date();
     const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
@@ -865,7 +908,7 @@ router.post('/answer/Edit/:id', (req, res) => {
     }
 })
 
-router.get('/answer/Del/:id', (req, res) => {
+router.get('/answer/Del/:id',isAuthenticated, (req, res) => {
     const sqlDel = "DELETE FROM `libraryData` WHERE id = ?";
     let sql = "SELECT `id`, `date`, `docQTN`, `noQTN`, `categoryGID`, `brandGID`, `industryTypeGID`, `productTypeGID`, `image`, `title`, `summaryContent`, `content`, `keyword`, `questioner`, `answerer`";
     sql += ", `createdAt`, `updatedAt`, `answerDate`, `validator`, `validateDate`, `addPAC`, `docLBL`, `noLBL`, `tagContent`, DATE_FORMAT(`date`,'%d/%m/%Y') as `dateF`";
@@ -890,7 +933,7 @@ router.get('/answer/Del/:id', (req, res) => {
     }
 })
 
-router.get('/answer/View/:id', (req, res) => {
+router.get('/answer/View/:id',isAuthenticated, (req, res) => {
     const sqlBrands = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt`, DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryBrands` ORDER BY `nameEN` ASC";
     const sqlIndustryType = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt` , DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryIndustryType` ORDER BY `nameEN` ASC";
     const sqlProductType = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt` , DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryProductType` ORDER BY `nameEN` ASC";
@@ -932,7 +975,7 @@ router.get('/answer/View/:id', (req, res) => {
     }
 })
 
-router.get('/validateAnswer', (req, res) => {
+router.get('/validateAnswer',isAuthenticated, (req, res) => {
     try {
         let sql = "SELECT `id`, `date`, `docQTN`, `noQTN`, `categoryGID`, `brandGID`, `industryTypeGID`, `productTypeGID`, `image`, `title`, `summaryContent`, `content`, `keyword`, `questioner`, `answerer`";
         sql += ", `createdAt`, `updatedAt`, `answerDate`, `validator`, `validateDate`, `addPAC`, `docLBL`, `noLBL`, `tagContent`, DATE_FORMAT(`date`,'%d/%m/%Y') as `dateF`,DATE_FORMAT(`date`,'%Y-%m-%d') as `dateE`";
@@ -953,7 +996,7 @@ router.get('/validateAnswer', (req, res) => {
     }
 });
 
-router.get('/validateAnswer/Add', (req, res) => {
+router.get('/validateAnswer/Add',isAuthenticated, (req, res) => {
     const sqlBrands = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt`, DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryBrands` ORDER BY `nameEN` ASC";
     const sqlIndustryType = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt` , DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryIndustryType` ORDER BY `nameEN` ASC";
     const sqlProductType = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt` , DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryProductType` ORDER BY `nameEN` ASC";
@@ -1005,7 +1048,7 @@ router.get('/validateAnswer/Add', (req, res) => {
     }
 });
 
-router.post('/validateAnswer/Add', (req, res) => {
+router.post('/validateAnswer/Add',isAuthenticated, (req, res) => {
     const { libraryVAnswerDate,libraryVAnswerDocQTN,libraryVAnswerTitle,libraryVAnswerQuestioner,tagValueVA,libraryVAnswerAnswerer,libraryVAnswerAnswerDate,libraryVAnswerAnswer,libraryVAnswerValidator,libraryVAnswerValidateDate,libraryVAnswerSummary,libraryVAnswerKeyword,libraryVAnswerAddPAC } = req.body;
     const uuid = uuidv4();
     let LblDoc,QtnDoc,LblNo,QtnNo = null;
@@ -1078,7 +1121,7 @@ router.post('/validateAnswer/Add', (req, res) => {
     }
 });
 
-router.get('/validateAnswer/Edit/:id', (req, res) => {
+router.get('/validateAnswer/Edit/:id',isAuthenticated, (req, res) => {
     const sqlBrands = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt`, DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryBrands` ORDER BY `nameEN` ASC";
     const sqlIndustryType = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt` , DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryIndustryType` ORDER BY `nameEN` ASC";
     const sqlProductType = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt` , DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryProductType` ORDER BY `nameEN` ASC";
@@ -1137,7 +1180,7 @@ router.get('/validateAnswer/Edit/:id', (req, res) => {
     }
 })
 
-router.post('/validateAnswer/Edit/:id', (req, res) => {
+router.post('/validateAnswer/Edit/:id',isAuthenticated, (req, res) => {
     const { libraryVAnswerDateE,libraryVAnswerDocQTNE,libraryVAnswerTitleE,libraryVAnswerQuestionerE,tagValueVAE,libraryVAnswerAnswerDateE,libraryVAnswerAnswererE,libraryVAnswerAnswerE,libraryVAnswerValidatorE,libraryVAnswerValidateDateE,libraryVAnswerSummaryE,libraryVAnswerKeywordE,libraryVAnswerAddPACE } = req.body;
     const today = new Date();
     const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
@@ -1199,7 +1242,7 @@ router.post('/validateAnswer/Edit/:id', (req, res) => {
     }
 })
 
-router.get('/validateAnswer/Del/:id', (req, res) => {
+router.get('/validateAnswer/Del/:id',isAuthenticated, (req, res) => {
     const sqlDel = "DELETE FROM `libraryData` WHERE id = ?";
     let sql = "SELECT `id`, `date`, `docQTN`, `noQTN`, `categoryGID`, `brandGID`, `industryTypeGID`, `productTypeGID`, `image`, `title`, `summaryContent`, `content`, `keyword`, `questioner`, `answerer`";
     sql += ", `createdAt`, `updatedAt`, `answerDate`, `validator`, `validateDate`, `addPAC`, `docLBL`, `noLBL`, `tagContent`, DATE_FORMAT(`date`,'%d/%m/%Y') as `dateF`";
@@ -1224,7 +1267,7 @@ router.get('/validateAnswer/Del/:id', (req, res) => {
     }
 })
 
-router.get('/validateAnswer/View/:id', (req, res) => {
+router.get('/validateAnswer/View/:id',isAuthenticated, (req, res) => {
     const sqlBrands = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt`, DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryBrands` ORDER BY `nameEN` ASC";
     const sqlIndustryType = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt` , DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryIndustryType` ORDER BY `nameEN` ASC";
     const sqlProductType = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt` , DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryProductType` ORDER BY `nameEN` ASC";
@@ -1266,7 +1309,7 @@ router.get('/validateAnswer/View/:id', (req, res) => {
     }
 })
 
-router.get('/rptQuestionAnswer', (req, res) => {
+router.get('/rptQuestionAnswer',isAuthenticated, (req, res) => {
     try {
         let sql = "SELECT `id`, `date`, `docQTN`, `noQTN`, `categoryGID`, `brandGID`, `industryTypeGID`, `productTypeGID`, `image`, `title`, `summaryContent`, `content`, `keyword`, `questioner`, `answerer`";
         sql += ", `createdAt`, `updatedAt`, `answerDate`, `validator`, `validateDate`, `addPAC`, `docLBL`, `noLBL`, `tagContent`, DATE_FORMAT(`date`,'%d/%m/%Y') as `dateF`";
@@ -1287,7 +1330,7 @@ router.get('/rptQuestionAnswer', (req, res) => {
     }
 });
 
-router.get('/rptQuestionAnswer/View/:id', (req, res) => {
+router.get('/rptQuestionAnswer/View/:id',isAuthenticated, (req, res) => {
     const sqlBrands = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt`, DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryBrands` ORDER BY `nameEN` ASC";
     const sqlIndustryType = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt` , DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryIndustryType` ORDER BY `nameEN` ASC";
     const sqlProductType = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt` , DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryProductType` ORDER BY `nameEN` ASC";
@@ -1310,6 +1353,68 @@ router.get('/rptQuestionAnswer/View/:id', (req, res) => {
                         const tagArray = results[0]['tagContent'].split(";");
                         // console.log(tagArray);
                         res.render('library/libraryRPTQuestionAnswerView', {
+                            title: 'Report View',
+                            libraryBrands: resultsBrands,
+                            libraryIndustryType: resultsIndustryType,
+                            libraryProductType: resultsProductType,
+                            results: results[0],
+                            tagArray: tagArray,
+                            user: req.session.user
+                        });
+                    });
+                });
+            });
+        })
+    } catch (err) {
+        console.error('Error inserting data:', err);
+        res.status(500).json({ error: 'Error inserting data into the database.' });
+    }
+})
+
+router.get('/RPTQueAns', (req, res) => {
+    try {
+        let sql = "SELECT `id`, `date`, `docQTN`, `noQTN`, `categoryGID`, `brandGID`, `industryTypeGID`, `productTypeGID`, `image`, `title`, `summaryContent`, `content`, `keyword`, `questioner`, `answerer`";
+        sql += ", `createdAt`, `updatedAt`, `answerDate`, `validator`, `validateDate`, `addPAC`, `docLBL`, `noLBL`, `tagContent`, DATE_FORMAT(`date`,'%d/%m/%Y') as `dateF`";
+        sql += ",DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as `createdAtF`,DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as `updatedAtF`,DATE_FORMAT(`answerDate`,'%d/%m/%Y') as `answerDateF`";
+        sql += ",DATE_FORMAT(`validateDate`,'%d/%m/%Y') as `validateDateF` FROM `libraryData`";
+        db.query(sql, (err, results) => {
+            if (err) throw err;
+
+            res.render('library/libraryRPTQueAns', {
+                title: 'Report',
+                libraryQuestion: results,
+                user: req.session.user
+            });
+        })
+    } catch (err) {
+        console.error('Error inserting data:', err);
+        res.status(500).json({ error: 'Error inserting data into the database.' });
+    }
+});
+
+router.get('/RPTQueAns/View/:id', (req, res) => {
+    const sqlBrands = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt`, DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryBrands` ORDER BY `nameEN` ASC";
+    const sqlIndustryType = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt` , DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryIndustryType` ORDER BY `nameEN` ASC";
+    const sqlProductType = "SELECT `id`, `code`, `nameTH`, `nameEN`, `createdAt`, `updatedAt` , DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as createdF , DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as updatedF FROM `libraryProductType` ORDER BY `nameEN` ASC";
+
+    let sql = "SELECT `id`, `date`, `docQTN`, `noQTN`, `categoryGID`, `brandGID`, `industryTypeGID`, `productTypeGID`, `image`, `title`, `summaryContent`, `content`, `keyword`, `questioner`, `answerer`";
+    sql += ", `createdAt`, `updatedAt`, `answerDate`, `validator`, `validateDate`, `addPAC`, `docLBL`, `noLBL`, `tagContent`, DATE_FORMAT(`date`,'%d/%m/%Y') as `dateF`,DATE_FORMAT(`date`,'%Y-%m-%d') as `dateE`";
+    sql += ",DATE_FORMAT(`createdAt`,'%d/%m/%Y %H:%i:%s') as `createdAtF`,DATE_FORMAT(`updatedAt`,'%d/%m/%Y %H:%i:%s') as `updatedAtF`,DATE_FORMAT(`answerDate`,'%d/%m/%Y') as `answerDateF`,DATE_FORMAT(`answerDate`,'%Y-%m-%d') as `answerDateE`";
+    sql += ",DATE_FORMAT(`validateDate`,'%d/%m/%Y') as `validateDateF`,DATE_FORMAT(`validateDate`,'%Y-%m-%d') as `validateDateE` FROM `libraryData` WHERE id = ?";
+    try {
+        db.query(sqlBrands, (err, resultsBrands) => {
+            if (err) throw err;
+            db.query(sqlIndustryType, (err, resultsIndustryType) => {
+                if (err) throw err;
+                db.query(sqlProductType, (err, resultsProductType) => {
+                    if (err) throw err;
+
+                    db.query(sql,[req.params.id], (err, results) => {
+                        if (err) throw err;
+
+                        const tagArray = results[0]['tagContent'].split(";");
+                        // console.log(tagArray);
+                        res.render('library/libraryRPTQueAnsView', {
                             title: 'Report View',
                             libraryBrands: resultsBrands,
                             libraryIndustryType: resultsIndustryType,
