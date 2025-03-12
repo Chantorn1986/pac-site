@@ -523,12 +523,10 @@ router.post('/SubZEdit/:id',isAuthen_assCardE,(req, res) => {
     const image = req.file ? req.file.filename : req.body.oldImage;
     const sql = "SELECT * FROM employeeCard WHERE id = ?";
     try {
-        db.query(sqlEdit, [ image,paramID], (err, resultEdit) => {
+        db.query(sql, [req.params.id], (err, result) => {
             if (err) throw err;
-
-            db.query(sql, [req.params.id], (err, result) => {
+            db.query(sqlEdit, [ image,paramID], (err, resultEdit) => {
                 if (err) throw err;
-
                 res.redirect('/employee/Sub/'+result[0]['emID']);
 
             })
@@ -629,20 +627,20 @@ router.get('/SubZzEdit/:id',isAuthenticated, (req, res) => {
 })
 
 router.post('/SubZzEdit/:id',isAuthenticated,(req, res) => {
-    const { vehicle,carBrandE,carModelE,carColorE,carRegistrationE}= req.body;
+    const { vehicleE,carBrandE,carModelE,carColorE,carRegistrationE}= req.body;
     const paramID = req.params.id;
     const sqlEdit = "UPDATE `employeeVehicle` SET `vehicle`=?,`brand`=?,`model`=?,`color`=?,`registration`=?,`updatedAt`=? WHERE `id`=?";
     const today = new Date();
     const timestamp= moment(today).format();
     const sql = "SELECT `id`, `emID`, `vehicle`, `brand`, `model`, `color`, `registration`, `createdAt`, `updatedAt` FROM `employeeVehicle` WHERE `id` = ?";
     try {
-        db.query(sqlEdit, [ vehicle,carBrandE,carModelE,carColorE,carRegistrationE,timestamp,paramID], (err, resultEdit) => {
+        db.query(sql, [paramID], (err, result) => {
             if (err) throw err;
-
-            db.query(sql, [req.params.id], (err, result) => {
+            db.query(sqlEdit, [ vehicleE,carBrandE,carModelE,carColorE,carRegistrationE,timestamp,paramID], (err, resultEdit) => {
                 if (err) throw err;
-                console.log(result[0]['emID']);
-                res.redirect('/employee/Sub/'+result[0]['emID']);
+                const emID = result[0]['emID'];
+                
+                res.redirect('/employee/Sub/'+emID);
             })
         })
     } catch (err) {
