@@ -173,9 +173,9 @@
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%= user.name %>, <%= user.role %></span>
                     <% if(user.image){%>
-                        <img class="img-profile rounded-circle" src="img/<%= user.image %>">
+                        <img class="img-profile rounded-circle" src="/uploads/<%= user.image %>">
                     <%}else{%>
-                    <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                    <img class="img-profile rounded-circle" src="/img/undraw_profile.svg">
                         <% } %>
                 </a>
                 <% } %>
@@ -198,9 +198,7 @@
 
         </ul>
         <% } else { %>
-
             <ul class="navbar-nav ml-auto">
-                 
                 <!-- Nav Item - User Information -->
                 <li class="nav-item no-arrow">
                     <a href="/login" class="btn btn-light btn-icon-split">
