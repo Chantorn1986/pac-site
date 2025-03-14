@@ -89,7 +89,7 @@ router.get('/logout', (req, res) => {
 router.post('/login',(req,res)=>{
     const { email, password } = req.body;
 
-    const sql = 'SELECT * FROM users WHERE email = ?';
+    const sql = 'SELECT * FROM `view_profileSession` WHERE email = ?';
     db.query(sql, [email], (err, result) => {
         if (err) throw err;
 
