@@ -317,12 +317,12 @@
                                                     <div class="text-center">
                                                         <img class="img-fluid px-3 px-sm-4 mt-3 mb-4"
                                                             src="/uploads/<%= employeeFull.image %>"
-                                                            height="80">
+                                                            style="width: 50%">
                                                     </div>
                                                     <% } else { %>
                                                         <div class="text-center">
                                                             <img class="img-fluid px-3 px-sm-4 mt-3 mb-4"
-                                                            height="80" src="/img/NoPic.jpg" alt="...">
+                                                            style="width: 50%" src="/img/NoPic.jpg" alt="...">
                                                         </div>
                                                         <% } %>
                                             </div>
@@ -440,10 +440,10 @@
                                                 <% emCard.forEach(emCard=> { %>
                                                             <% if (emCard.Card) { %>
                                                                 <strong><%= emCard.createdAt %></strong><br>
-                                                                <img src="/uploads/<%= emCard.Card %>" width="100%" />
+                                                                <img src="/uploads/<%= emCard.Card %>" style="width: 100%" />
                                                                 <% } else { %>
                                                                     <strong><%= emCard.createdAt %></strong><br>
-                                                                    <img src="/img/NoPic.jpg" width="100%" />
+                                                                    <img src="/img/NoPic.jpg" style="width: 100%" />
                                                                     <% } %>
                                                     <% }) %>
                                             </div>
