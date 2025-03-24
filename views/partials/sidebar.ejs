@@ -19,9 +19,10 @@
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
-        <hr class="sidebar-divider">
+        
 
         <% if ( user.role === "ADMIN") { %>
+        <hr class="sidebar-divider">
         <div class="sidebar-heading">
             User Login
         </div>
@@ -31,6 +32,29 @@
                 <span>User login</span></a>
         </li>
         <% } %>
+        <hr class="sidebar-divider">
+        <div class="sidebar-heading">
+            IT Helpdesk
+        </div>
+        <!-- Nav Item - Stock Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseitHelpdesk"
+                aria-expanded="true" aria-controls="collapseUtilities">
+                <i class="fas fa-tools"></i>
+                <span>IT Helpdesk</span>
+            </a>
+            <div id="collapseitHelpdesk" class="collapse" aria-labelledby="headingUtilities"
+                data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <% if ( user.role === "ADMIN") { %>
+                        <a class="collapse-item" href="/itHelpdesk/admin">IT Helpdesk</a>
+                        <%}%>
+                    <a class="collapse-item" href="/itHelpdesk/user">Problem</a>
+                    <a class="collapse-item" href="/itHelpdesk/report">Report problem</a>
+                </div>
+            </div>
+        </li>
+
 
         <% if ( user.role === "ADMIN" || user.name === "SK" || user.name === "CK"|| user.name === "KN") { %>
         <hr class="sidebar-divider">
@@ -108,10 +132,11 @@
                     <a class="collapse-item" href="/timeAtt/rptClockInOut">Clock in-out report</a>
                     <a class="collapse-item" href="#">Approve leave report</a>
                     <a class="collapse-item" href="#">Leave quota report</a>
-                    <h6 class="collapse-header">-------- Setting --------</h6>
-                    <a class="collapse-item" href="#">Approve leave</a>
-                    <a class="collapse-item" href="#">Leave quota</a>
-                    
+                    <h6 class="collapse-header">-------- Setting --------</h6> 
+                    <a class="collapse-item" href="/leave/leaveQuota">Leave Quota</a>
+                    <a class="collapse-item" href="/leave/leaveApprove">Leave Approve</a>
+                    <a class="collapse-item" href="/leave/leaveType">Leave Type</a>
+                    <a class="collapse-item" href="/leave/approveStep">Approve Step</a>
                 </div>
             </div>
         </li>
@@ -197,6 +222,8 @@
                 <span>Dashboard</span></a>
         </li>
 
+
+
         <!-- Divider -->
         <hr class="sidebar-divider">
 
@@ -273,12 +300,6 @@
             <div id="stockCard" class="collapse" aria-labelledby="headingUtilities"
                 data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                     <!--<h6 class="collapse-header">Back end :</h6>
-                    <a class="collapse-item" href="/stockCard/ReportBackEnd">Stock Card Management</a>
-                   <a class="collapse-item" href="/stockCard">Stock Card</a>
-                    <a class="collapse-item" href="/stockCardGoods">Goods</a>
-                    <a class="collapse-item" href="/stockCardBrands">Brands</a>
-                    <a class="collapse-item" href="/stockCardStatus">Status Stock Card</a>-->
                     <h6 class="collapse-header">Front end :</h6>
                     <a class="collapse-item" href="/stockCard/Report">Stock Card Report</a>
                 </div>

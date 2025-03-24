@@ -68,7 +68,7 @@ router.get('/login', ifLoggedIn, (req, res) => {
 router.get('/home', isAuthenticated, (req, res) => {
     //console.log(req.session.user);
     const sql = "SELECT * FROM products";
-
+    const sqlAlert = "SELECT `itHelpdeskDoc`.`id`, `document`,DATE_FORMAT(`datetime`, '%d/%m/%Y %H:%i:%s') as `datetimeS` , `datetime`, `reporter`, `problem`, `location`, `status`,`InternalTelephone`,`image` FROM `itHelpdeskDoc` LEFT JOIN `employee` ON `employee`.`nameTH` = `itHelpdeskDoc`.`reporter` WHERE `itHelpdeskDoc`.`status` = 'รอ'";
     db.query(sql, (err, results) => {
         if (err) throw err;
 
@@ -88,8 +88,9 @@ router.get('/logout', (req, res) => {
 
 router.post('/login',(req,res)=>{
     const { email, password } = req.body;
-
+    const sqlAlert = "SELECT `itHelpdeskDoc`.`id`, `document`,DATE_FORMAT(`datetime`, '%d/%m/%Y %H:%i:%s') as `datetimeS` , `datetime`, `reporter`, `problem`, `location`, `status`,`InternalTelephone`,`image`,`employee`.`code` FROM `itHelpdeskDoc` LEFT JOIN `employee` ON `employee`.`nameTH` = `itHelpdeskDoc`.`reporter` WHERE `itHelpdeskDoc`.`status` = 'รอ'";
     const sql = 'SELECT * FROM `view_profileSession` WHERE email = ?';
+    try {
     db.query(sql, [email], (err, result) => {
         if (err) throw err;
 
@@ -98,55 +99,49 @@ router.post('/login',(req,res)=>{
             bcrypt.compare(password, user.password, (err, data) => {
                 //if error than throw error
                 if (err) throw err
-
                 //if both match than you can do anything
                 if (data) {
                     req.session.user = user;
-                    const sql = "SELECT * FROM products";
-                
-                    db.query(sql, (err, results) => {
+                    db.query(sqlAlert, (err, resultsAlert) => {
                         if (err) throw err;
-                        
-                        res.render('home', { 
-                            title: 'Home',
-                            products: results,
-                            user : user
-                        });
+                        //console.log(resultsAlert);
+                        if(resultsAlert.length>0){
+                            res.render('home', { 
+                                title: 'Home',
+                                user : user,
+                                dataAlert: resultsAlert,
+                                lengthAlert :result.length
+                            });
+                        }
+                        else{
+                            res.render('home', { 
+                                title: 'Home',
+                                user : user,
+                                dataAlert:null,
+                                lengthAlert :0
+                            });
+                        }
+
                     })
                 } else {
-                    return res.render('login',{ 
-                        success: false,
-                        error_msg: "Password ไม่ถูกต้อง!!" });               
+                        res.render('login', { 
+                            title: 'login',
+                            error_msg: "Password ไม่ถูกต้อง!!" 
+                        });          
                 }
-
             })
-            /*decodedData = Buffer.from(user.password, 'base64').toString('utf8');
-            if (password === decodedData) {
-                req.session.user = user;
-
-                const sql = "SELECT * FROM products";
-                
-                db.query(sql, (err, results) => {
-                    if (err) throw err;
-                    
-                    res.render('home', { 
-                        title: 'Home',
-                        products: results,
-                        user : user
-                    });
-                })
-            } else {
-                return res.render('login',{ 
-                    success: false,
-                    error_msg: "Password ไม่ถูกต้อง!!" }); 
-            }*/
         } else {
             return res.render('login',{ 
                 success: false,
+                title: 'login',
                 error_msg: "Email ไม่ถูกต้องกรุณากรอก email ใหม่ !!!" });
         }
     })
-});
+    } catch (err) {
+        console.error('Error inserting data:', err);
+        res.status(500).json({ error: 'Error inserting data into the database.' });
+    } 
+    });
 
 
 module.exports =  router;

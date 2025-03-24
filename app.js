@@ -35,6 +35,10 @@ app.use('/timeAtt',require('./routes/timeAttendance'));
 
 app.use('/library',require('./routes/library'));
 
+app.use('/leave',require('./routes/leave'));
+
+app.use('/itHelpdesk',require('./routes/itHelpdesk'));
+
 app.use('/stockCard',require('./routes/stockCard'));
 
 function isAuthenticated(req, res, next) {
