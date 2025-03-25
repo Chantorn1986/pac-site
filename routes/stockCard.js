@@ -16,17 +16,18 @@ function isAuthenticated(req, res, next) {
 }
 
 router.get('/',isAuthenticated,(req, res) => {
+    const sql2t = "SELECT * FROM `view_stockCard_goodsBrandsStatus` ORDER BY cardDate DESC;";
     try {
-        const sql2t = "SELECT * FROM `view_stockCard_goodsBrandsStatus` ORDER BY cardDate DESC;";
-
         db.query(sql2t, (err, results) => {
             if (err) throw err;
 
-            res.render('stockCard/stockCard', { 
-                title: 'Stock Card Management',
-                stockCard : results,
-                user: req.session.user
-            });
+                res.render('stockCard/stockCard', { 
+                    title: 'Stock Card Management',
+                    stockCard : results,
+                    user: req.session.user
+
+            })
+
         })
     } catch (err) {
         console.error('Error view data:', err);
@@ -217,17 +218,20 @@ router.get('/View/:id',isAuthenticated, (req, res) => {
 })
 
 router.get('/Report',(req, res) => {
-    try {
-        const sql2t = "SELECT * FROM `viewRpt_stockCard` ORDER BY code ASC;";
-
+    const sqlBarBrand = "SELECT `id`, `code`, `name`,LEFT(`name`,1) as `title` FROM `stockCardBrands`;";
+    const sql2t = "SELECT * FROM `viewRpt_stockCard` ORDER BY code ASC;";
+    try {        
         db.query(sql2t, (err, results) => {
             if (err) throw err;
-
-            res.render('stockCard/stockCardReport', { 
-                title: 'Stock Card Management',
-                stockCard : results,
-                user: req.session.user
-            });
+            db.query(sqlBarBrand, (err, barBrand) => {
+                if (err) throw err;
+                res.render('stockCard/stockCardReport', { 
+                    title: 'Stock Card Management',
+                    stockCard : results,
+                    barBrand:barBrand,
+                    user: req.session.user
+                });
+            })
         })
     } catch (err) {
         console.error('Error view data:', err);
@@ -236,17 +240,20 @@ router.get('/Report',(req, res) => {
 });
 
 router.get('/Report/:id',(req, res) => {
-    try {
-        const sql2t = "SELECT * FROM `viewRpt_stockCard` WHERE brandID = ?;";
-
+    const sqlBarBrand = "SELECT `id`, `code`, `name`,LEFT(`name`,1) as `title` FROM `stockCardBrands`;";
+    const sql2t = "SELECT * FROM `viewRpt_stockCard` WHERE brandID = ?;";
+    try {       
         db.query(sql2t,[req.params.id], (err, results) => {
             if (err) throw err;
-
-            res.render('stockCard/stockCardReport', { 
-                title: 'Stock Card Management',
-                stockCard : results,
-                user: req.session.user
-            });
+            db.query(sqlBarBrand, (err, barBrand) => {
+                    if (err) throw err;
+                 res.render('stockCard/stockCardReport', { 
+                    title: 'Stock Card Management',
+                    stockCard : results,
+                    barBrand:barBrand,
+                    user: req.session.user
+                });
+            })
         })
     } catch (err) {
         console.error('Error view data:', err);
