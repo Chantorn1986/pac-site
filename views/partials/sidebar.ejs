@@ -31,6 +31,20 @@
                 <i class="fas fa-fw fa-user"></i>
                 <span>User login</span></a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMenuRole"
+                aria-expanded="true" aria-controls="collapseUtilities">
+                <i class="fas fa-list-alt"></i>
+                <span>Menu & Role</span>
+            </a>
+            <div id="collapseMenuRole" class="collapse" aria-labelledby="headingUtilities"
+                data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="/menuRole/menu">Menu</a>
+                    <a class="collapse-item" href="/menuRole/menuPAC">Role</a>
+                </div>
+            </div>
+        </li>
         <% } %>
         <hr class="sidebar-divider">
         <div class="sidebar-heading">
@@ -56,7 +70,7 @@
         </li>
 
 
-        <% if ( user.role === "ADMIN" || user.name === "SK" || user.name === "CK"|| user.name === "KN") { %>
+        <% if ( user.role === "ADMIN" || user.name === "SK" || user.name === "CK"|| user.name === "KN"|| user.name === "NC") { %>
         <hr class="sidebar-divider">
         <div class="sidebar-heading">
             Stock Card
@@ -73,8 +87,6 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Back end :</h6>
                     <a class="collapse-item" href="/stockCard/ReportBackEnd">Stock Card</a>
-                    <!--<a class="collapse-item" href="/stockCard">Stock Card</a>
-                    <a class="collapse-item" href="/stockCardGoods">Goods</a>-->
                     <a class="collapse-item" href="/stockCard/brand">Brands</a>
                     <a class="collapse-item" href="/stockCard/status">Status Stock Card</a>
                     <h6 class="collapse-header">Front end :</h6>

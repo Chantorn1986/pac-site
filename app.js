@@ -19,17 +19,15 @@ app.use(session({
 
 app.use('/',require('./routes/login'));
 
+app.use('/menuRole',require('./routes/menuRole'));
+
 app.use('/user',require('./routes/user'));
-
 app.use('/department',require('./routes/department'));
-
 app.use('/workLevel',require('./routes/workLevel'));
-
 app.use('/position',require('./routes/position'));
+app.use('/employee',require('./routes/employee'));
 
 app.use('/tableTest',require('./routes/tableTest'));
-
-app.use('/employee',require('./routes/employee'));
 
 app.use('/timeAtt',require('./routes/timeAttendance'));
 
