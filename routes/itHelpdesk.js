@@ -208,7 +208,7 @@ router.get('/admin/Add',isAuthenticated, (req, res) => {
     const sqlLBLmaxNo = "SELECT IFNULL(MAX( `no`),0)+1 as maxNo FROM `itHelpdeskDoc`";
     const now = new Date();
     const dateString = moment(now).format('YYYY-MM-DD');
-    const timestamp= moment(now).format();
+    const timestamp= moment(now).format('YYYY-MM-DDTHH:mm');
     const sqlName = "SELECT `nameTH` FROM `employee` ORDER BY `nameTH` ASC";
     try {
         db.query(sqlLBLmaxNo, (err, resultsMaxNo) => {

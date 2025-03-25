@@ -47,7 +47,7 @@
                     <div class="card o-hidden border-0 shadow-lg ">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">
-                                <i class="fas fa-calendar fa-fw"></i>Leave PAC - <%= title %></h6>
+                                <i class="fas fa-calendar fa-fw"></i>IT Helpdesk - <%= title %></h6>
                         </div>
                         <div class="card-body p-0">
                             <!-- Nested Row within Card Body -->
@@ -59,11 +59,11 @@
                                             <div class="form-group row">
                                                 <div class="col-sm-6">
                                                     <label for="itHelpdeskDocumentA" class="form-label">เลขที่เอกสาร</label>
-                                                    <input type="text" class="form-control" name="itHelpdeskDocumentA" id="itHelpdeskDocumentA" readonly>
+                                                    <input type="text" class="form-control" name="itHelpdeskDocumentA" id="itHelpdeskDocumentA">
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <label for="itHelpdeskDatetimeA" class="form-label">วันที่ เวลา</label>
-                                                    <input type="text" class="form-control" name="itHelpdeskDatetimeA" value="<%= timestamp %>" readonly>
+                                                    <input type="datetime-local" class="form-control" name="itHelpdeskDatetimeA" value="<%= timestamp %>">
                                                 </div>
 
                                             </div>
@@ -161,7 +161,7 @@
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <label for="itHelpdeskITDatetimeA" class="form-label">วันที่ เวลา รับเรื่อง</label>
-                                                    <input type="text" class="form-control" name="itHelpdeskITDatetimeA" value="<%= timestamp %>" readonly>
+                                                    <input type="datetime-local" class="form-control" name="itHelpdeskITDatetimeA" value="<%= timestamp %>">
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <label for="itHelpdeskStatusA"
