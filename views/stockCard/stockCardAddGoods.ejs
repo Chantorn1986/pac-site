@@ -2,14 +2,14 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>PAC APP - <%= title %></title>
+    <title>PAC APP - <%= title %>
+    </title>
 
     <!-- Custom fonts for this template -->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -32,219 +32,275 @@
 
         <%- include('../partials/sidebar'); %>
 
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Content Wrapper -->
+            <div id="content-wrapper" class="d-flex flex-column">
 
-            <!-- Main Content -->
-            <div id="content">
+                <!-- Main Content -->
+                <div id="content">
 
-                <!-- Topbar -->
-                <%- include('../partials/topbar'); %>
-                <!-- End of Topbar -->
+                    <!-- Topbar -->
+                    <%- include('../partials/topbar'); %>
+                        <!-- End of Topbar -->
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-                    <div class="card o-hidden border-0 shadow-lg ">
-                        <div class="card-header py-3 d-flex">
-                            <h6 class="m-0 font-weight-bold text-primary">                 
-                                <i class="fas fa-fw fa-archive"></i> Goods Management                          
-                            </h6>
-                            <a href="/stockCard/good/Edit/<%= stockCardGoods.id %>" class="btn btn-warning btn-icon-split ml-auto btn-sm">
-                                <span class="icon text-white-50">
-                                    <i class="fas fa-pen"></i>
-                                </span>
-                                <span class="text">Edit Goods</span>
-                            </a>
-                        </div>
-                        <div class="card-body p-0">
-                            <!-- Nested Row within Card Body -->
-                            <div class="row">
-                                <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
-                                <div class="col-lg-12">
-                                    <div class="p-4">
-                                        <div class="form-group row">
-                                            <div class="col-sm-4 mb-3 mb-sm-0">
-                                                <label for="stockCardGoodsNoE" class="form-label">stockCardGoods No.</label>
-                                                <input type="text" class="form-control" 
-                                                    name="stockCardGoodsNoE" value="<%= stockCardGoods.no %>" readonly>
+                        <!-- Begin Page Content -->
+                        <div class="container-fluid">
+
+                            <!-- Collapsable Card Profile -->
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Accordion -->
+                                <a href="#collapseGoods" class="d-block card-header py-3" data-toggle="collapse"
+                                    role="button" aria-expanded="true" aria-controls="collapseCardProfile">
+                                    <h6 class="m-0 font-weight-bold text-primary">
+                                        <i class="fas fa-fw fa-archive"></i> Goods Management - <%= stockCardGoods.code %> : <%= stockCardGoods.model %>
+                                    </h6>
+                                </a>
+                                <!-- Card Content - Collapse -->
+                                <div class="collapse show" id="collapseGoods">
+                                    <div class="card-body">
+                                        <div class="row mb-2">
+                                            <div class="col-2 text-right"><strong>No. : </strong></div>
+                                            <div class="col-4">
+                                                <%= stockCardGoods.no %>
                                             </div>
-                                            <div class="col-sm-4 mb-3 mb-sm-0">
-                                                <label for="stockCardGoodsCodeE" class="form-label">stockCardGoods Code</label>
-                                                <input type="text" class="form-control" 
-                                                    name="stockCardGoodsCodeE" value="<%= stockCardGoods.code %>" readonly>
-                                            </div>
-                                            <div class="col-sm-4 mb-3 mb-sm-0">
-                                                <label for="stockCardGoodsLengthE" class="form-label">Length (m.)</label>
-                                                <input type="number" class="form-control text-right" name="stockCardGoodsLengthE" 
-                                                value="<%= stockCardGoods.length %>" readonly>
+                                            <div class="col-2 text-right"><strong>Length (m.) : </strong></div>
+                                            <div class="col-4">
+                                                <%= stockCardGoods.length %>
                                             </div>
                                         </div>
-
-                                        <div class="form-group row">
-                                            <div class="col-sm-6">
-                                                <label for="stockCardGoodsModelE" class="form-label">Model</label>
-                                                <input type="text" class="form-control" name="stockCardGoodsModelE" 
-                                                value="<%= stockCardGoods.model %>" readonly>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <label for="stockCardGoodsBrandE" class="form-label">Brand</label>
-                                                <input type="text" class="form-control" name="stockCardGoodsBrandE" 
-                                                value="<%= stockCardGoods.brand %>" readonly>
+                                        <div class="row mb-2">
+                                            <div class="col-2 text-right"><strong>Code : </strong></div>
+                                            <div class="col-10">
+                                                <%= stockCardGoods.code %>
                                             </div>
                                         </div>
-
-
-                                        <div class="form-group">
-                                            <label for="stockCardGoodsKeywordE" class="form-label">Full Keyword</label>
-                                            <input type="text" class="form-control" name="stockCardGoodsKeywordE" 
-                                            value="<%= stockCardGoods.keyword %>" readonly>
-                                        </div>
-                                        <div class="form-group row">
-                                            <div class="col-sm-3">
-                                                <label for="stockCardGoodsPriceE" class="form-label">Price</label>
-                                                <input type="number" class="form-control text-right" name="stockCardGoodsPriceE" 
-                                                value="<%= stockCardGoods.price %>" readonly>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <label for="stockCardGoodsLimitPriceE" class="form-label">Limit Price</label>
-                                                <input type="number" class="form-control text-right" name="stockCardGoodsLimitPriceE" 
-                                                value="<%= stockCardGoods.limitPrice %>" readonly>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <label for="stockCardGoodsRemainE" class="form-label">Remain</label>
-                                                <input type="text" class="form-control" name="stockCardGoodsRemainE" 
-                                                value="<%= stockCardGoods.remain %>" readonly>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <label for="stockCardGoodsShelfE" class="form-label">Shelf</label>
-                                                <input type="text" class="form-control" name="stockCardGoodsShelfE" 
-                                                value="<%= stockCardGoods.shelf %>" readonly>
+                                        <div class="row mb-2">
+                                            <div class="col-2 text-right"><strong>Model : </strong></div>
+                                            <div class="col-10">
+                                                <%= stockCardGoods.model %>
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <div class="col-sm-6">
-                                                <label for="stockCardGoodsRemarkPurchaseE" class="form-label">Descrition for Sale</label>
-                                                <input type="text" class="form-control" name="stockCardGoodsRemarkPurchaseE" 
-                                                value="<%= stockCardGoods.remarkPurchase %>" readonly>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <label for="stockCardGoodsRemarkSaleE" class="form-label">Remark for Sale</label>
-                                                <input type="text" class="form-control" name="stockCardGoodsRemarkSaleE" 
-                                                value="<%= stockCardGoods.remarkSale %>" readonly>
+                                        <div class="row mb-2">
+                                            <div class="col-2 text-right"><strong>Brand : </strong></div>
+                                            <div class="col-10">
+                                                <%= stockCardGoods.brand %>
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <div class="col-sm-6">
-                                                <label for="stockCardGoodsCreatedAt" class="form-label">CreatedAt</label>
-                                                <input type="text" class="form-control" 
-                                                    name="stockCardBrandsCreatedAt" value="<%= stockCardGoods.createdAt %>" readonly>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <label for="stockCardGoodsUpdatedAt" class="form-label">Updated At</label>
-                                                <input type="text" class="form-control" 
-                                                    name="stockCardBrandsUpdatedAt" value="<%= stockCardGoods.updatedAt %>" readonly>
+                                        <div class="row mb-2">
+                                            <div class="col-2 text-right"><strong>Full Keyword : </strong></div>
+                                            <div class="col-10">
+                                                <%= stockCardGoods.keyword %>
                                             </div>
                                         </div>
-
+                                        <div class="row mb-2">
+                                            <div class="col-2 text-right"><strong>Price : </strong></div>
+                                            <div class="col-4">
+                                                <%= stockCardGoods.price %>
+                                            </div>
+                                            <div class="col-2 text-right"><strong>Limit Price : </strong></div>
+                                            <div class="col-4">
+                                                <%= stockCardGoods.limitPrice %>
+                                            </div>
                                         </div>
+                                        <div class="row mb-2">
+                                            <div class="col-2 text-right"><strong>Shelf : </strong></div>
+                                            <div class="col-4">
+                                                <%= stockCardGoods.shelf %>
+                                            </div>
+                                            <div class="col-2 text-right"><strong>Remain : </strong></div>
+                                            <div class="col-4">
+                                                <%= stockCardGoods.remain %>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-2 text-right"><strong>Descrition for Sale : </strong></div>
+                                            <div class="col-10">
+                                                <%= stockCardGoods.remarkPurchase %>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-2 text-right"><strong>Remark : </strong></div>
+                                            <div class="col-10">
+                                                <%= stockCardGoods.remarkSale %>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-2 text-right"><strong>Created : </strong></div>
+                                            <div class="col-4">
+                                                <%= stockCardGoods.createdAt %>
+                                            </div>
+                                            <div class="col-2 text-right"><strong>Updated : </strong></div>
+                                            <div class="col-4">
+                                                <%= stockCardGoods.updatedAt %>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row p-3">
+                                            <div class="col-2">
+                                                <div class="card border-left-success shadow">
+                                                    <div class="card-body">
+                                                        <div class="row no-gutters align-items-center">
+                                                            <div class="col mr-2">
+                                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                                   คงเหลือ</div>
+                                                                <div class="h4 mb-0 font-weight-bold text-gray-800"><%= resultsSum.balance %></div>
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <i class="fas fa-fw fa-archive fa-2x text-gray-300"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-8">
+                                                <table class="table table-bordered" >
+                                                    <tr>
+                                                        <th class="text-center bg-info text-white">รับ</th>
+                                                        <th class="text-center bg-info text-white">ยืม</th>
+                                                        <th class="text-center bg-info text-white">จอง</th>
+                                                        <th class="text-center bg-info text-white">คืนจอง</th>
+                                                        <th class="text-center bg-info text-white">ขาย</th>
+                                                        <th class="text-center bg-info text-white">คืน</th>
+                                                        <th class="text-center bg-info text-white">กำลังเข้า</th>
+                                                        <th class="text-center bg-info text-white">PO</th>
+                                                    </tr>
+                                                        <tr>
+                                                            <td class="text-center"><%= resultsSum.receiveQty %></td>
+                                                            <td class="text-center"><%= resultsSum.loaningQty %></td>
+                                                            <td class="text-center"><%= resultsSum.bookingQty %></td>
+                                                            <td class="text-center"><%= resultsSum.retrunBookingQty %></td>
+                                                            <td class="text-center"><%= resultsSum.saleQty %></td>
+                                                            <td class="text-center"><%= resultsSum.retrunQty %></td>
+                                                            <td class="text-center"><%= resultsSum.comingSoonQty %></td>
+                                                            <td class="text-center"><%= resultsSum.poQty %></td>
+                                                        </tr>
+                                            </table>
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="row d-flex">
+                                                    <a href="/stockCard/good/Edit/<%= stockCardGoods.id %>"
+                                                        class="btn btn-warning btn-icon-split ml-auto btn-sm">
+                                                        <span class="icon text-white-50">
+                                                            <i class="fas fa-pen"></i>
+                                                        </span>
+                                                        <span class="text">Edit Goods</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+  
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
-                    </div>
-            </div>
+                </div>
+                <div id="content">
+                    <div class="container-fluid">
 
-            <hr>
-                    <!-- /.container-fluid -->
-                <!-- Begin Page Content -->
-            <div id="content">
-                <div class="container-fluid">
+                        <!-- DataTales Example -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3 d-flex">
+                                <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-money-check"></i>
+                                    <%= title %>
+                                </h6>
+                                <!--<a href="/tablesAdd" class="btn btn-info btn-circle btn-sm ml-auto"><i class="fas fa-plus"></i></a>-->
+                                <a href="/stockCard/Add/<%= stockCardGoods.id %>"
+                                    class="btn btn-primary btn-icon-split ml-auto btn-sm">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </span>
+                                    <span class="text">Create Stock Card</span>
+                                </a>
 
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3 d-flex">
-                            <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-money-check"></i> <%= title %></h6>
-                            <!--<a href="/tablesAdd" class="btn btn-info btn-circle btn-sm ml-auto"><i class="fas fa-plus"></i></a>-->
-                            <a href="/stockCard/Add/<%= stockCardGoods.id %>" class="btn btn-primary btn-icon-split ml-auto btn-sm">
-                                <span class="icon text-white-50">
-                                    <i class="fas fa-plus-circle"></i>
-                                </span>
-                                <span class="text">Create Stock Card</span>
-                            </a>
-                            
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Date</th>
-                                            <th>Code</th>
-                                            <th>Model</th>
-                                            <th>Document</th>
-                                            <th>Status</th>
-                                            <th>Qty</th>
-                                            <th>Note</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Date</th>
-                                            <th>Code</th>
-                                            <th>Model</th>
-                                            <th>Document</th>
-                                            <th>Status</th>
-                                            <th>Qty</th>
-                                            <th>Note</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <% stockCard.forEach(stockCard => { %>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
                                             <tr>
-                                                <td><%= stockCard.cardDate %></td>
-                                                <td><%= stockCard.goodsCode %></td>
-                                                <td><%= stockCard.model %></td>
-                                                <td><%= stockCard.document %></td>
-                                                <td><%= stockCard.statusName %></td>
-                                                <td class="text-right"><%= stockCard.qty %></td>
-                                                <td><%= stockCard.note %></td>
-                                                <td class="align-middle text-center">     
-                                                    <a href="/stockCard/View/<%= stockCard.id %>" class="btn btn-info btn-circle">
-                                                        <i class="fas fa-eye"></i></a>                              
-                                                    <a href="/stockCard/Edit/<%= stockCard.id %>" class="btn btn-warning btn-circle">
-                                                        <i class="fas fa-pen"></i></a>
-                                                    <a href="/stockCard/Del/<%= stockCard.id %>" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure ?');">
-                                                        <i class="fas fa-trash-alt"></i></a>
-
-                                                </td>
+                                                <th>Date</th>
+                                                <th>Code</th>
+                                                <th>Model</th>
+                                                <th>Document</th>
+                                                <th>Status</th>
+                                                <th>Qty</th>
+                                                <th>Note</th>
+                                                <th class="text-center">Action</th>
                                             </tr>
-                                            <% }) %>                                    
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>Code</th>
+                                                <th>Model</th>
+                                                <th>Document</th>
+                                                <th>Status</th>
+                                                <th>Qty</th>
+                                                <th>Note</th>
+                                                <th class="text-center">Action</th>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody>
+                                            <% stockCard.forEach(stockCard=> { %>
+                                                <tr>
+                                                    <td>
+                                                        <%= stockCard.cardDate %>
+                                                    </td>
+                                                    <td>
+                                                        <%= stockCard.goodsCode %>
+                                                    </td>
+                                                    <td>
+                                                        <%= stockCard.model %>
+                                                    </td>
+                                                    <td>
+                                                        <%= stockCard.document %>
+                                                    </td>
+                                                    <td>
+                                                        <%= stockCard.statusName %>
+                                                    </td>
+                                                    <td class="text-right">
+                                                        <%= stockCard.qty %>
+                                                    </td>
+                                                    <td>
+                                                        <%= stockCard.note %>
+                                                    </td>
+                                                    <td class="align-middle text-center">
+                                                        <a href="/stockCard/View/<%= stockCard.id %>"
+                                                            class="btn btn-info btn-circle btn-sm">
+                                                            <i class="fas fa-eye"></i></a>
+                                                        <a href="/stockCard/Edit/<%= stockCard.id %>"
+                                                            class="btn btn-warning btn-circle btn-sm">
+                                                            <i class="fas fa-pen"></i></a>
+                                                        <a href="/stockCard/Del/<%= stockCard.id %>"
+                                                            class="btn btn-danger btn-circle btn-sm"
+                                                            onclick="return confirm('Are you sure ?');">
+                                                            <i class="fas fa-trash-alt"></i></a>
+
+                                                    </td>
+                                                </tr>
+                                                <% }) %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <hr>
+                                <div class="text-center">
+                                    <a class="small" href="/stockCard/ReportBackEnd">Back to ...</a>
+                                </div>
                             </div>
-                            <hr>
-                            <div class="text-center">
-                                <a class="small" href="/stockCard/ReportBackEnd">Back to ...</a>
-                            </div>
+
                         </div>
 
                     </div>
+
 
                 </div>
+                <!-- End of Main Content -->
 
-                
+                <!-- Footer -->
+                <%- include('../partials/footer'); %>
+                    <!-- End of Footer -->
+
             </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <%- include('../partials/footer'); %>
-            <!-- End of Footer -->
-
-        </div>
-        <!-- End of Content Wrapper -->
+            <!-- End of Content Wrapper -->
 
     </div>
     <!-- End of Page Wrapper -->

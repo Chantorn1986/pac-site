@@ -155,17 +155,7 @@ router.post('/Edit/:id',isAuthenticated,(req, res) => {
             if (err) throw err;
             console.log(sql);
             res.redirect('/stockCard/AddCard/'+ stockCardGoodsIDE);
-            /*const sql2t = "SELECT * FROM `view_stockCard_goodsBrandsStatus` ORDER BY cardDate DESC;";
-            db.query(sql2t, (err, results) => {
-                if (err) throw err;
-                
-                
-                res.render('stockCard/stockCard', { 
-                    title: 'Stock Card Management',
-                    stockCard : results,
-                    user: req.session.user
-                });
-            })*/
+
         })
     } catch (err) {
         console.error('Error editing data:', err);
@@ -204,7 +194,6 @@ router.get('/View/:id',isAuthenticated, (req, res) => {
         db.query(sql2t, [req.params.id], (err, result) => {
             if (err) throw err;
 
-            
             res.render('stockCard/stockCardView', {
                 title: 'Stock Card View', 
                 stockCard : result[0] ,
@@ -285,7 +274,7 @@ router.get('/AddCard/:id',isAuthenticated, (req, res) => {
     const sql1 = "SELECT * FROM view_goods_brands WHERE id = ? ;";
     const sql2 = "SELECT id,name FROM stockCardBrands ORDER BY name ASC";
     const sql3 = "SELECT * FROM view_stockCard_goodsBrandsStatus WHERE goodsID = ?;";
-   
+   const sqlSum = "SELECT `id`, `no`, `brandID`, `brand`, `code`, `model`, `keyword`, `createdAt`, `updatedAt`, `price`, `limitPrice`, `shelf`, `remarkPurchase`, `remarkSale`, `remain`, `brandCode`, `goodsQty`, `length`, `inQty`, `outQty`, `balance`, `loaningQty`, `qtyLoaning`, `comingSoonQty`, `poQty`, `bookingQty`, `qtyBooking`, `receiveQty`, `saleQty`, `retrunQty`, `retrunBookingQty`, `SecFull`, `lengthQty` FROM `viewRpt_stockCard` WHERE `id` = ?";
     try {
         db.query(sql1, [paramsID], (err, result) => {
             if (err) throw err;
@@ -296,13 +285,18 @@ router.get('/AddCard/:id',isAuthenticated, (req, res) => {
                 db.query(sql3, [paramsID],  (err, results) => {
                     if (err) throw err;
 
-                    res.render('stockCard/stockCardAddGoods', { 
-                        title: 'Stock Card Management',
-                        stockCard : results,
-                        stockCardGoods : result[0] ,
-                        stockCardBrands : stockCardBrands,
-                        user: req.session.user 
-                    });
+                    db.query(sqlSum, [paramsID],  (err, resultsSum) => {
+                        if (err) throw err;
+                        res.render('stockCard/stockCardAddGoods', { 
+                            title: 'Stock Card Management',
+                            stockCard : results,
+                            stockCardGoods : result[0] ,
+                            stockCardBrands : stockCardBrands,
+                            resultsSum : resultsSum[0],
+                            user : req.session.user 
+                        });
+                    })
+
                 })
             });
         });
