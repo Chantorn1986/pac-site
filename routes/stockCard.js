@@ -273,7 +273,7 @@ router.get('/AddCard/:id',isAuthenticated, (req, res) => {
     const sql1 = "SELECT * FROM view_goods_brands WHERE id = ? ;";
     const sql2 = "SELECT id,name FROM stockCardBrands ORDER BY name ASC";
     const sql3 = "SELECT * FROM view_stockCard_goodsBrandsStatus WHERE goodsID = ?;";
-   const sqlSum = "SELECT `id`, `no`, `brandID`, `brand`, `code`, `model`, `keyword`, `createdAt`, `updatedAt`, `price`, `limitPrice`, `shelf`, `remarkPurchase`, `remarkSale`, `remain`, `brandCode`, `goodsQty`, `length`, `inQty`, `outQty`, `balance`, `loaningQty`, `qtyLoaning`, `comingSoonQty`, `poQty`, `bookingQty`, `qtyBooking`, `receiveQty`, `saleQty`, `retrunQty`, `retrunBookingQty`, `SecFull`, `lengthQty` FROM `viewRpt_stockCard` WHERE `id` = ?";
+   const sqlSum = "SELECT * FROM `viewRpt_stockCard` WHERE `id` = ?";
     try {
         db.query(sql1, [paramsID], (err, result) => {
             if (err) throw err;
