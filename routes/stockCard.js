@@ -87,11 +87,11 @@ router.get('/Add/:id',isAuthenticated, (req, res) => {
 })
 
 router.post('/Add',isAuthenticated,(req, res) => {
-    const { stockCardGoodsID,stockCardDate,stockCardDocument,stockCardStatusID,stockCardQty,stockCardNote,stockCardSecFull }= req.body;
+    const { stockCardGoodsID,stockCardDate,stockCardDocument,stockCardStatusID,stockCardQty,stockCardNote,stockCardSecFull,stockCardRetrun }= req.body;
     const uuid = uuidv4();
-    const sqlAdd = "INSERT INTO `stockCard`(`id`, `goodsID`, `date`, `document`, `statusID`,`qty`, `note` ,`sectionFull`) VALUES (?,?,?,?,?,?,?,?)";
+    const sqlAdd = "INSERT INTO `stockCard`(`id`, `goodsID`, `date`, `document`, `statusID`,`qty`, `note` ,`sectionFull`,`qtyRe`) VALUES (?,?,?,?,?,?,?,?,?)";
     try {
-        db.query(sqlAdd, [ uuid,stockCardGoodsID,stockCardDate,stockCardDocument,stockCardStatusID,stockCardQty,stockCardNote,stockCardSecFull], (err, result) => {
+        db.query(sqlAdd, [ uuid,stockCardGoodsID,stockCardDate,stockCardDocument,stockCardStatusID,stockCardQty,stockCardNote,stockCardSecFull,stockCardRetrun], (err, result) => {
             if (err) throw err;
 
             const sql2t = "SELECT * FROM `view_stockCard_goodsBrandsStatus` ORDER BY cardDate DESC;";
@@ -146,14 +146,13 @@ router.get('/Edit/:id',isAuthenticated, (req, res) => {
 
 router.post('/Edit/:id',isAuthenticated,(req, res) => {
     try {
-        const { stockCardGoodsIDE,stockCardDateE,stockCardDocumentE,stockCardStatusIDE,stockCardQtyE,stockCardNoteE,stockCardSecFullE } = req.body;
-        const sql = "UPDATE stockCard SET goodsID=?,date=?,document=?,statusID=?,qty=?,note=?,updatedAt=? ,sectionFull=? WHERE id = ?";
+        const { stockCardGoodsIDE,stockCardDateE,stockCardDocumentE,stockCardStatusIDE,stockCardQtyE,stockCardNoteE,stockCardSecFullE,stockCardRetrunE } = req.body;
+        const sql = "UPDATE stockCard SET goodsID=?,date=?,document=?,statusID=?,qty=?,note=?,updatedAt=? ,sectionFull=?,qtyRe=? WHERE id = ?";
         const today = new Date();
         const timestamp= moment(today).format();
 
-        db.query(sql, [ stockCardGoodsIDE,stockCardDateE,stockCardDocumentE,stockCardStatusIDE,stockCardQtyE,stockCardNoteE,timestamp,stockCardSecFullE, req.params.id], (err, result) => {
+        db.query(sql, [ stockCardGoodsIDE,stockCardDateE,stockCardDocumentE,stockCardStatusIDE,stockCardQtyE,stockCardNoteE,timestamp,stockCardSecFullE,stockCardRetrunE, req.params.id], (err, result) => {
             if (err) throw err;
-            console.log(sql);
             res.redirect('/stockCard/AddCard/'+ stockCardGoodsIDE);
 
         })
@@ -517,16 +516,6 @@ router.post('/good/Edit/:id',(req, res) => {
             if (err) throw err;
             
             res.redirect('/stockCard/AddCard/'+req.params.id);
-            /*const sql2t = "SELECT * FROM view_goods_brands ;";
-            db.query(sql2t, (err, results) => {
-                if (err) throw err;
-            
-                res.render('stockCard/stockCardGoods', { 
-                    title: 'Stock Card Goods Management',
-                    stockCardGoods : results,
-                    user: req.session.user
-                });
-            })*/
         })
     } catch (err) {
         console.error('Error editing data:', err);
