@@ -55,32 +55,30 @@
                                 <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
                                 <div class="col-lg-12">
                                     <div class="p-5">
-                                        <form class="user" action="/leave/leaveType/Add" method="POST">
                                             <div class="form-group row">
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                                     <label for="leaveTypeNo" class="form-label">No.</label>
-                                                    <input type="number" class="form-control text-right" name="leaveTypeNo" required>
+                                                    <input type="number" class="form-control text-right" name="leaveTypeNo" 
+                                                    value="<%= results.no %>" readonly>
                                                 </div>
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                                     <label for="leaveTypeQuota" class="form-label">Quota</label>
-                                                    <input type="number" class="form-control text-right" name="leaveTypeQuota" required>
+                                                    <input type="number" class="form-control text-right" name="leaveTypeQuota"
+                                                    value="<%= results.quota %>"  readonly>
                                                 </div>
 
                                             </div>
                                             <div class="form-group">
                                                 <label for="leaveTypeNameTH" class="form-label">Name thai</label>
-                                                <input type="text" class="form-control" name="leaveTypeNameTH" required>
+                                                <input type="text" class="form-control" name="leaveTypeNameTH"
+                                                value="<%= results.nameTH %>"  readonly>
                                             </div>
                                             <div class="form-group">
                                                 <label for="leaveTypeNameEN" class="form-label">Name english</label>
-                                                <input type="text" class="form-control" name="leaveTypeNameEN" required>
+                                                <input type="text" class="form-control" name="leaveTypeNameEN"
+                                                value="<%= results.nameEN %>"  readonly>
                                             </div>
 
-                                            <button type="submit" class="btn btn-success btn-block">
-                                                <i class="fas fa-save fa-fw"></i>
-                                                <span class="text">Save</span></button>
-
-                                        </form>
                                         <hr>
                                         <div class="text-center">
                                             <a class="small" href="/leave/leaveType">Back to ...</a>

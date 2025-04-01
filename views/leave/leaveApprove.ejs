@@ -49,13 +49,12 @@
                         <div class="card-header py-3 d-flex">
                             <h6 class="m-0 font-weight-bold text-primary">Leave PAC - <%= title %></h6>
                             <!--<a href="/tablesAdd" class="btn btn-info btn-circle btn-sm ml-auto"><i class="fas fa-plus"></i></a>-->
-                            <a href="/leave/leaveType/Add" class="btn btn-primary btn-icon-split ml-auto btn-sm">
+                            <a href="/leave/leaveApprove/Add" class="btn btn-primary btn-icon-split ml-auto btn-sm">
                                 <span class="icon text-white-50">
                                     <i class="fas fa-plus-circle"></i>
                                 </span>
-                                <span class="text">Leave Type Create</span>
+                                <span class="text">Leave Approve Create</span>
                             </a>
-                            
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -64,8 +63,9 @@
                                         <tr>
                                             <th class="align-middle">No.</th>
                                             <th class="align-middle">Name thai</th>
-                                            <th class="align-middle">Name English</th>
-                                            <th class="align-middle">Quota default</th>
+                                            <th class="align-middle">Head</th>
+                                            <th class="align-middle">HR</th>
+                                            <th class="align-middle">MD</th>
                                             <th class="align-middle text-center">Action</th>
                                         </tr>
                                     </thead>
@@ -73,24 +73,26 @@
                                         <tr>
                                             <th class="align-middle">No.</th>
                                             <th class="align-middle">Name thai</th>
-                                            <th class="align-middle">Name English</th>
-                                            <th class="align-middle">Quota default</th>
+                                            <th class="align-middle">Head</th>
+                                            <th class="align-middle">HR</th>
+                                            <th class="align-middle">MD</th>
                                             <th class="align-middle text-center">Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                         <% results.forEach(results => { %>
                                             <tr>
-                                                <td class="text-right"><%= results.no %> </td>
+                                                <td><%= results.code %> </td>
                                                 <td><%= results.nameTH %></td>
-                                                <td><%= results.nameEN %></td>
-                                                <td><%= results.quota %></td> 
+                                                <td><%= results.approveHead %></td>
+                                                <td><%= results.approveHR %></td> 
+                                                <td><%= results.approveMD %></td> 
                                                 <td class="align-middle text-center">     
-                                                    <a href="/leave/leaveType/View/<%= results.id %>" class="btn btn-info btn-circle">
+                                                    <a href="/leave/leaveApprove/View/<%= results.leaveAppID %>" class="btn btn-info btn-circle">
                                                         <i class="fas fa-eye"></i></a>                           
-                                                    <a href="/leave/leaveType/Edit/<%= results.id %>" class="btn btn-warning btn-circle">
+                                                    <a href="/leave/leaveApprove/Edit/<%= results.leaveAppID %>" class="btn btn-warning btn-circle">
                                                         <i class="fas fa-pen"></i></a>
-                                                    <a href="/leave/leaveType/Del/<%= results.id %>" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure ?');">
+                                                    <a href="/leave/leaveApprove/Del/<%= results.leaveAppID %>" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure ?');">
                                                         <i class="fas fa-trash-alt"></i></a>
                                                 </td>        
                                             </tr>
