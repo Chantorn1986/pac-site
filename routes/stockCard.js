@@ -206,7 +206,7 @@ router.get('/View/:id',isAuthenticated, (req, res) => {
 })
 
 router.get('/Report',(req, res) => {
-    const sqlBarBrand = "SELECT `id`, `code`, `name`,LEFT(`name`,1) as `title` FROM `stockCardBrands`;";
+    const sqlBarBrand = "SELECT `name`,`id`, `code`, LEFT(`name`,1) as `title` FROM `stockCardBrands` ORDER BY name asc;";
     const sql2t = "SELECT * FROM `viewRpt_stockCard` ORDER BY code ASC;";
     try {        
         db.query(sql2t, (err, results) => {
