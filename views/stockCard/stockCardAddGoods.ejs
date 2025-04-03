@@ -142,7 +142,8 @@
                                                             <div class="col mr-2">
                                                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                                    คงเหลือ</div>
-                                                                <div class="h4 mb-0 font-weight-bold text-gray-800"><%= resultsSum.balance %></div>
+                                                                <div class="h4 mb-0 font-weight-bold text-gray-800"><%= resultsSum.balance %>
+                                                                </div>
                                                             </div>
                                                             <div class="col-auto">
                                                                 <i class="fas fa-fw fa-archive fa-2x text-gray-300"></i>
@@ -155,6 +156,9 @@
                                                 <table class="table table-bordered" >
                                                     <tr>
                                                         <th class="text-center bg-success text-white">รับ</th>
+                                                        <% if(resultsSum.SecFull>0){ %>
+                                                            <th class="text-center bg-success text-white">ท่อนเต็ม</th>
+                                                        <% } %>
                                                         <th class="text-center bg-success text-white">ยืม</th>
                                                         <th class="text-center bg-success text-white">จอง</th>
                                                         <th class="text-center bg-success text-white">คืนจอง</th>
@@ -165,6 +169,9 @@
                                                     </tr>
                                                         <tr>
                                                             <td class="text-center"><%= resultsSum.receiveQty %></td>
+                                                            <% if(resultsSum.SecFull>0){ %>
+                                                                <td class="text-center"><%= resultsSum.SecFull %></td>
+                                                            <% } %>
                                                             <td class="text-center"><%= resultsSum.loaningQty %></td>
                                                             <td class="text-center"><%= resultsSum.bookingQty %></td>
                                                             <td class="text-center"><%= resultsSum.retrunBookingQty %></td>
@@ -223,6 +230,9 @@
                                                 <th>Document</th>
                                                 <th>Status</th>
                                                 <th>Qty</th>
+                                                <% if(resultsSum.SecFull>0){ %>
+                                                    <th>Full</th>
+                                                <% } %>
                                                 <th>Note</th>
                                                 <th class="text-center">Action</th>
                                             </tr>
@@ -235,6 +245,9 @@
                                                 <th>Document</th>
                                                 <th>Status</th>
                                                 <th>Qty</th>
+                                                <% if(resultsSum.SecFull>0){ %>
+                                                    <th>Full</th>
+                                                <% } %>
                                                 <th>Note</th>
                                                 <th class="text-center">Action</th>
                                             </tr>
@@ -260,6 +273,9 @@
                                                     <td class="text-right">
                                                         <%= stockCard.qty %>
                                                     </td>
+                                                    <% if(resultsSum.SecFull>0){ %>
+                                                        <td class="text-right"><%= stockCard.sectionFull %></td>
+                                                    <% } %>
                                                     <td>
                                                         <%= stockCard.note %>
                                                     </td>

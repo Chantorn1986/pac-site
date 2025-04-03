@@ -284,25 +284,25 @@ router.get('/leaveApprove/View/:id', isAuthenticated, (req, res) => {
     try {
         db.query(sql, [req.params.id], (err, result) => {
             if (err) throw err;
-                            const coverDate = {
-                                createdAt: null,
-                                updatedAt: null
-                            }
-                            if (result[0]['createdAt']) {
-                                if (result[0]['createdAt'].toString() !== "Thu Nov 30 1899 00:00:00 GMT+0642 (เวลาอินโดจีน)") {
-                                    coverDate.createdAt = moment(result[0]['createdAt']).format('DD/MM/YYYY HH:mm:ss');
-                                }
-                            }
-                            if (result[0]['updatedAt']) {
-                                if (result[0]['datetiupdatedAtmeSolve'].toString() !== "Thu Nov 30 1899 00:00:00 GMT+0642 (เวลาอินโดจีน)") {
-                                    coverDate.updatedAt = moment(result[0]['updatedAt']).format('DD/MM/YYYY HH:mm:ss');
-                                }
-                            }
+            const coverDate = {
+                createdAt: null,
+                updatedAt: null
+            }
+            if (result[0]['createdAt']) {
+                if (result[0]['createdAt'].toString() !== "Thu Nov 30 1899 00:00:00 GMT+0642 (เวลาอินโดจีน)") {
+                    coverDate.createdAt = moment(result[0]['createdAt']).format('DD/MM/YYYY HH:mm:ss');
+                }
+            }
+            if (result[0]['updatedAt']) {
+                if (result[0]['datetiupdatedAtmeSolve'].toString() !== "Thu Nov 30 1899 00:00:00 GMT+0642 (เวลาอินโดจีน)") {
+                    coverDate.updatedAt = moment(result[0]['updatedAt']).format('DD/MM/YYYY HH:mm:ss');
+                }
+            }
             res.render('leave/leaveApproveView', {
                 title: 'Leave Approve View',
                 results: result[0],
                 user: req.session.user,
-                coverDate:coverDate
+                coverDate: coverDate
             });
         });
     } catch (err) {
