@@ -186,11 +186,10 @@ router.get('/leaveApprove/Add', isAuthenticated, (req, res) => {
 
 router.post('/leaveApprove/Add', isAuthenticated, (req, res) => {
     const { leaveApproveEmployee, leaveApproveHead, leaveApproveHR, leaveApproveMD } = req.body;
-    const uuid = uuidv4();
-    const sqlAdd = "INSERT INTO `leaveApprove` (`id`, `emID`, `approveHead`, `approveHR`, `approveMD`) VALUES(?, ?, ?, ?, ?)";
+    const sqlAdd = "INSERT INTO `leaveApprove` (`id`, `emID`, `approveHead`, `approveHR`, `approveMD`) VALUES(?, ?, ?, ?, ?);";
     const sql = "SELECT * FROM `view_leaveApprove` ORDER BY `nameTH` ASC";
     try {
-        db.query(sqlAdd, [uuid, leaveApproveEmployee, leaveApproveHead, leaveApproveHR, leaveApproveMD], (err, resultAdd) => {
+        db.query(sqlAdd, [uuidv4(), leaveApproveEmployee, leaveApproveHead, leaveApproveHR, leaveApproveMD], (err, resultAdd) => {
             if (err) throw err;
 
             db.query(sql, (err, results) => {
