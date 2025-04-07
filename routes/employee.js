@@ -836,17 +836,16 @@ router.get('/rptVehicle', isAuthenticated, (req, res) => {
 
 router.get('/profile', isAuthenticated, (req, res) => {
     const sql1 = "SELECT * FROM `view_employeeFull` WHERE `userID` = ?";
-    const sql2 = "SELECT * FROM `employeeEducation` WHERE empID = ?"
-    const sql3 = "SELECT `id`, `emID`, `Card`,DATE_FORMAT(`createdAt`, '%d/%m/%Y %H:%i:%s') as createdAt FROM `employeeCard` WHERE emID = ?"
-    const sql4 = "SELECT * FROM `employeeVehicle` WHERE emID = ?"
+    const sql2 = "SELECT * FROM `employeeEducation` WHERE empID = ?";
+    const sql3 = "SELECT `id`, `emID`, `Card`,DATE_FORMAT(`createdAt`, '%d/%m/%Y %H:%i:%s') as createdAt FROM `employeeCard` WHERE emID = ?";
+    const sql4 = "SELECT * FROM `employeeVehicle` WHERE emID = ?";
+    const sql5 = "SELECT `typeNo`,`id`, `emID`, `leaveTypeID`, `quota`, `year`, `code`, `emNameTH`, `emNameEN`, `typeNameTH`, `typeNameEN`, `typeQuota` FROM `view_leaveQuotaTypeEm` WHERE emID = ? ORDER BY `typeNo` ASC";
+    const sql6 = "SELECT `leaveAppID`, `emID`, `approveHead`, `approveHR`, `approveMD`, `createdAt`, `updatedAt`, `id`, `code`, `serialNumber`, `nameTH`, `nameEN`, `nickname`, `image`, `depNameTH`, `depNameEN` FROM `view_leaveApprove`  WHERE emID = ?";
     const sqlSub = "SELECT * FROM `view_employeeSub` WHERE `userID` = ?";
     const sessionUser = req.session.user;
-
     try {
         db.query(sql1, [sessionUser.id], (err, results) => {
             if (err) throw err;
-
-
             db.query(sql2, [results[0]['id']], (err, emEducation) => {
                 if (err) throw err;
                 db.query(sql3, [results[0]['id']], (err, emCard) => {
@@ -855,51 +854,58 @@ router.get('/profile', isAuthenticated, (req, res) => {
                         if (err) throw err;
                         db.query(sqlSub, [sessionUser.id], (err, emSub) => {
                             if (err) throw err;
-                            const coverDate = {
-                                startDate: null,
-                                endDate: null,
-                                dateOfBirth: null,
-                                registrationDate: null,
-                                graduationDate: null
-                            }
-                            if (results[0]['startDate']) {
-                                if (results[0]['startDate'].toString() !== "Thu Nov 30 1899 00:00:00 GMT+0642 (เวลาอินโดจีน)") {
-                                    coverDate.startDate = moment(results[0]['startDate']).format('DD-MM-YYYY');
-                                }
-                            }
-                            if (results[0]['endDate']) {
-                                if (results[0]['endDate'].toString() !== "Thu Nov 30 1899 00:00:00 GMT+0642 (เวลาอินโดจีน)") {
-                                    coverDate.endDate = moment(results[0]['endDate']).format('DD-MM-YYYY');
-                                }
-                            }
-                            if (results[0]['dateOfBirth']) {
-                                if (results[0]['dateOfBirth'].toString() !== "Thu Nov 30 1899 00:00:00 GMT+0642 (เวลาอินโดจีน)") {
-                                    coverDate.dateOfBirth = moment(results[0]['dateOfBirth']).format('DD-MM-YYYY');
-                                }
-                            }
-                            if (results[0]['registrationDate']) {
-                                if (results[0]['registrationDate'].toString() !== "Thu Nov 30 1899 00:00:00 GMT+0642 (เวลาอินโดจีน)") {
-                                    coverDate.registrationDate = moment(results[0]['registrationDate']).format('DD-MM-YYYY');
-                                }
-                            }
-                            if (results[0]['graduationDate']) {
-                                if (results[0]['graduationDate'].toString() !== "Thu Nov 30 1899 00:00:00 GMT+0642 (เวลาอินโดจีน)") {
-                                    coverDate.graduationDate = moment(results[0]['graduationDate']).format('DD-MM-YYYY');
-                                }
-                            }
-                            res.render('hrm/employeeProfile', {
-                                title: 'Employee Detail',
-                                emEducation: emEducation,
-                                emCard: emCard,
-                                emCar: emCar,
-                                employeeFull: results[0],
-                                coverDate: coverDate,
-                                emSub:emSub[0],
-                                user: req.session.user
-                            });
+                            db.query(sql5, [sessionUser.idEM], (err, emQuota) => {
+                                if (err) throw err;
+                                db.query(sql6, [sessionUser.idEM], (err, emApprove) => {
+                                    if (err) throw err;
+                                    const coverDate = {
+                                        startDate: null,
+                                        endDate: null,
+                                        dateOfBirth: null,
+                                        registrationDate: null,
+                                        graduationDate: null
+                                    }
+                                    if (results[0]['startDate']) {
+                                        if (results[0]['startDate'].toString() !== "Thu Nov 30 1899 00:00:00 GMT+0642 (เวลาอินโดจีน)") {
+                                            coverDate.startDate = moment(results[0]['startDate']).format('DD-MM-YYYY');
+                                        }
+                                    }
+                                    if (results[0]['endDate']) {
+                                        if (results[0]['endDate'].toString() !== "Thu Nov 30 1899 00:00:00 GMT+0642 (เวลาอินโดจีน)") {
+                                            coverDate.endDate = moment(results[0]['endDate']).format('DD-MM-YYYY');
+                                        }
+                                    }
+                                    if (results[0]['dateOfBirth']) {
+                                        if (results[0]['dateOfBirth'].toString() !== "Thu Nov 30 1899 00:00:00 GMT+0642 (เวลาอินโดจีน)") {
+                                            coverDate.dateOfBirth = moment(results[0]['dateOfBirth']).format('DD-MM-YYYY');
+                                        }
+                                    }
+                                    if (results[0]['registrationDate']) {
+                                        if (results[0]['registrationDate'].toString() !== "Thu Nov 30 1899 00:00:00 GMT+0642 (เวลาอินโดจีน)") {
+                                            coverDate.registrationDate = moment(results[0]['registrationDate']).format('DD-MM-YYYY');
+                                        }
+                                    }
+                                    if (results[0]['graduationDate']) {
+                                        if (results[0]['graduationDate'].toString() !== "Thu Nov 30 1899 00:00:00 GMT+0642 (เวลาอินโดจีน)") {
+                                            coverDate.graduationDate = moment(results[0]['graduationDate']).format('DD-MM-YYYY');
+                                        }
+                                    }
+                                    res.render('hrm/employeeProfile', {
+                                        title: 'Employee Detail',
+                                        emEducation: emEducation,
+                                        emCard: emCard,
+                                        emCar: emCar,
+                                        employeeFull: results[0],
+                                        coverDate: coverDate,
+                                        emSub:emSub[0],
+                                        emQuota:emQuota,
+                                        emApprove:emApprove[0],
+                                        user: req.session.user
+                                    });
+                                })
+                            })
+
                         })
-
-
                     })
                 })
             })

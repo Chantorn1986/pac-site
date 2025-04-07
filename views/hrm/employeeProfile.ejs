@@ -329,6 +329,73 @@
                                         </div>
                                     </div>
 
+                                    <!-- Collapsable Card Approve -->
+                                    <div class="card shadow mb-4">
+                                        <!-- Card Header - Accordion -->
+                                        <a href="#collapseApprove" class="d-block card-header py-3"
+                                            data-toggle="collapse" role="button" aria-expanded="true"
+                                            aria-controls="collapseApprove">
+                                            <h6 class="m-0 font-weight-bold text-primary">
+                                                <i class="fas fa-pen-nib fa-fw"></i> Approve Manager
+                                            </h6>
+                                        </a>
+                                        <!-- Card Content - Collapse -->
+                                        <div class="collapse show" id="collapseApprove">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-4 text-right"><strong>Employee name : </strong></div>
+                                                    <div class="col-8">
+                                                        <%= emApprove.nameTH %>
+                                                    </div>
+                                                </div>
+                                                    <div class="row">
+                                                        <div class="col-4 text-right"><strong>Head of department : </strong></div>
+                                                        <div class="col-8">
+                                                            <%= emApprove.approveHead %>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-4 text-right"><strong>HR : </strong>
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <%= emApprove.approveHR %>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-4 text-right"><strong>Manager director : </strong></div>
+                                                        <div class="col-8">
+                                                            <%= emApprove.approveMD %>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Collapsable Card Quota -->
+                                    <div class="card shadow mb-4">
+                                        <!-- Card Header - Accordion -->
+                                        <a href="#collapseQuota" class="d-block card-header py-3"
+                                            data-toggle="collapse" role="button" aria-expanded="true"
+                                            aria-controls="collapseQuota">
+                                            <h6 class="m-0 font-weight-bold text-primary">
+                                                <i class="fas fa-calendar-alt fa-fw"></i> Leave Quota
+                                            </h6>
+                                        </a>
+                                        <!-- Card Content - Collapse -->
+                                        <div class="collapse show" id="collapseQuota">
+                                            <div class="card-body">
+                                                <% emQuota.forEach(emQuota=> { %>
+                                                <div class="row">
+                                                    <div class="col-5"><strong><%= emQuota.typeNo %> ) <%= emQuota.typeNameTH %> : </strong></div>
+                                                    <div class="col-7">
+                                                       <%= emQuota.quota %> วัน
+                                                    </div>
+                                                </div>
+                                                    <% }) %>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <!-- Collapsable Card Education -->
                                     <div class="card shadow mb-4">
                                         <!-- Card Header - Accordion -->
