@@ -90,7 +90,8 @@ router.post('/menu/Edit/:id', isAuthenticated, (req, res) => {
     const timestamp= moment(now).format();
     try {
         db.query(sqlEdit, [menuRoleMainMenuE,menuRoleSubMenuE,menuRoleNameTHE,menuRoleNameENE,timestamp,menuRoleRoutesMenuE, req.params.id], (err, result) => {
-            if (err) throw err;          
+            if (err) throw err;   
+            console.log(sqlEdit)       
             db.query(sql, (err, results) => {
                 if (err) throw err;
                 res.render('menuRole/menuRoleMenu', {

@@ -17,8 +17,8 @@ function isAuthenticated(req, res, next) {
 }
 
 router.get('/leaveType', isAuthenticated, (req, res) => {
+    const sql = "SELECT `id`, `no`, `nameTH`, `nameEN`, `quota` FROM `leaveType` ORDER BY `no` ASC";
     try {
-        const sql = "SELECT `id`, `no`, `nameTH`, `nameEN`, `quota` FROM `leaveType` ORDER BY `no` ASC";
         db.query(sql, (err, results) => {
             if (err) throw err;
 
@@ -501,4 +501,76 @@ router.post('/leaveQuota/Add/:id', isAuthenticated, (req, res) => {
     }
 });
 
+router.get('/leaveDocMain', isAuthenticated, (req, res) => {
+    const sql = "SELECT * FROM `view_docLeaveMain` ";
+    try {
+        db.query(sql, (err, results) => {
+            if (err) throw err;
+
+            res.render('leave/leaveDocumentMain', {
+                title: 'Leave Document Management',
+                results: results,
+                user: req.session.user
+            });
+        })
+    } catch (err) {
+        console.error('Error inserting data:', err);
+        res.status(500).json({ error: 'Error inserting data into the database.' });
+    }
+});
+
+router.get('/leaveDoc/:id', isAuthenticated, (req, res) => {
+    const sql = "SELECT * FROM `view_docLeave` WHERE  `emID` = ? ORDER BY `doc` ASC";
+    const sqlName = "SELECT `id`,`nameTH`,`code`,`mobile` FROM `employee` WHERE id = ?";
+    try {
+        db.query(sql,[req.params.id], (err, results) => {
+            if (err) throw err;
+            db.query(sqlName,[req.params.id], (err, resultsName) => {
+                if (err) throw err;
+                res.render('leave/leaveDocument', {
+                    title: 'Leave Document Management',
+                    results: results,
+                    resultsName:resultsName[0],
+                    user: req.session.user
+                });
+            })
+        })
+    } catch (err) {
+        console.error('Error inserting data:', err);
+        res.status(500).json({ error: 'Error inserting data into the database.' });
+    }
+});
+
+router.get('/leaveDoc/Add/:id', isAuthenticated, (req, res) => {
+    const sqlName = "SELECT `id`,`nameTH`,`code`,`mobile` FROM `employee` WHERE id = ?";
+    const sqlType = "SELECT `id`, `no`, `nameTH`, `nameEN`, `quota` FROM `leaveType` ORDER BY `no` ASC";
+    const now = new Date();
+    const dateStamp = moment(now).format('YYYY-MM-DD');
+    const timestamp= moment(now).format();
+    const sqlLBLmaxNo = "SELECT IFNULL(MAX( `no`),0)+1 as maxNo FROM `leaveDoc` WHERE `emID` = ? ";
+    try {
+        db.query(sqlName,[req.params.id], (err, resultsName) => {
+            if (err) throw err;
+            db.query(sqlType, (err, resultsType) => {
+                if (err) throw err;
+                db.query(sqlLBLmaxNo,[req.params.id], (err, resultsMaxNo) => {
+                    if (err) throw err;
+
+                    res.render('leave/leaveDocumentAdd', {
+                        title: 'leave Document Create',
+                        resultsName: resultsName[0],
+                        resultsType:resultsType,
+                        dateStamp:dateStamp,
+                        maxNo: resultsMaxNo[0],
+                        user: req.session.user
+                    });
+                })
+            })
+        })
+    } catch (err) {
+        console.error('Error inserting data:', err);
+        res.status(500).json({ error: 'Error inserting data into the database.' });
+    }
+
+})
 module.exports = router;
