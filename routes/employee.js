@@ -737,7 +737,7 @@ router.get('/SubZzView/:id', isAuthenticated, (req, res) => {
 
 router.get('/rptContact', isAuthenticated, (req, res) => {
     try {
-        const sql = "SELECT * FROM `view_employeeSub`";
+        const sql = "SELECT * FROM `view_employeeSub` WHERE `resignation`=0";
         db.query(sql, (err, results) => {
             if (err) throw err;
 
@@ -755,7 +755,7 @@ router.get('/rptContact', isAuthenticated, (req, res) => {
 
 router.get('/rptInformation', isAuthenticated, (req, res) => {
     try {
-        const sql = "SELECT * FROM `view_employeeSub`";
+        const sql = "SELECT * FROM `view_employeeSub` WHERE `resignation`=0";
         db.query(sql, (err, results) => {
             if (err) throw err;
 
@@ -772,7 +772,7 @@ router.get('/rptInformation', isAuthenticated, (req, res) => {
 });
 router.get('/rptEducation', isAuthenticated, (req, res) => {
     try {
-        const sql = "SELECT * FROM `view_employeeFull`";
+        const sql = "SELECT * FROM `view_employeeFull` WHERE `resignation`=0";
         db.query(sql, (err, results) => {
             if (err) throw err;
 
@@ -789,7 +789,7 @@ router.get('/rptEducation', isAuthenticated, (req, res) => {
 });
 router.get('/rptWorkPeriod', isAuthenticated, (req, res) => {
     try {
-        const sql = "SELECT * FROM `view_employeeSub`";
+        const sql = "SELECT * FROM `view_employeeSub` WHERE `resignation`=0";
         db.query(sql, (err, results) => {
             if (err) throw err;
 
@@ -806,7 +806,7 @@ router.get('/rptWorkPeriod', isAuthenticated, (req, res) => {
 });
 router.get('/rptCards', isAuthenticated, (req, res) => {
     try {
-        const sql = "SELECT * FROM `view_cardEmployee`";
+        const sql = "SELECT * FROM `view_cardEmployee` WHERE `resignation`=0";
         db.query(sql, (err, results) => {
             if (err) throw err;
 
@@ -823,7 +823,7 @@ router.get('/rptCards', isAuthenticated, (req, res) => {
 });
 router.get('/rptVehicle', isAuthenticated, (req, res) => {
     try {
-        const sql = "SELECT * FROM `view_carEmployee`";
+        const sql = "SELECT * FROM `view_carEmployee` WHERE `resignation`=0";
         db.query(sql, (err, results) => {
             if (err) throw err;
 
