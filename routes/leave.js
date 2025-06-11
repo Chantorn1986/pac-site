@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-//const mysql = require('mysql2');
 const path = require('path');
 const { v4: uuidv4 } = require("uuid");
 router.use(express.urlencoded({ extended: true }));
@@ -15,6 +14,16 @@ function isAuthenticated(req, res, next) {
         res.redirect('/login');
     }
 }
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'public/uploads/');
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname));
+    }
+})
+const upload = multer({ storage });
 
 router.get('/leaveType', isAuthenticated, (req, res) => {
     const sql = "SELECT `id`, `no`, `nameTH`, `nameEN`, `quota` FROM `leaveType` ORDER BY `no` ASC";
@@ -527,18 +536,71 @@ router.get('/leaveDoc/:id', isAuthenticated, (req, res) => {
             if (err) throw err;
             db.query(sqlName,[req.params.id], (err, resultsName) => {
                 if (err) throw err;
-                res.render('leave/leaveDocument', {
+                if(results.length > 0){
+                const coverDate = {
+                    date:null,
+                    startDate: null,
+                    endDate: null,
+                    createdAt: null,
+                    updatedAt: null
+
+                }
+                    if (results[0]['date']) {
+                        if (results[0]['date'].toString() !== "Thu Nov 30 1899 00:00:00 GMT+0642 (เวลาอินโดจีน)") {
+                            coverDate.date = moment(results[0]['date']).format('DD/MM/YYYY');
+                        }
+                    }
+                    if (results[0]['startDate']) {
+                        if (results[0]['startDate'].toString() !== "Thu Nov 30 1899 00:00:00 GMT+0642 (เวลาอินโดจีน)") {
+                            coverDate.startDate = moment(results[0]['startDate']).format('DD/MM/YYYY');
+                        }
+                    }
+                    if (results[0]['endDate']) {
+                        if (results[0]['endDate'].toString() !== "Thu Nov 30 1899 00:00:00 GMT+0642 (เวลาอินโดจีน)") {
+                            coverDate.endDate = moment(results[0]['endDate']).format('DD/MM/YYYY');
+                        }
+                    }
+                    if (results[0]['createdAt']) {
+                        if (results[0]['createdAt'].toString() !== "Thu Nov 30 1899 00:00:00 GMT+0642 (เวลาอินโดจีน)") {
+                            coverDate.createdAt = moment(results[0]['createdAt']).format('DD/MM/YYYY HH:mm:ss');
+                        }
+                    }
+                    if (results[0]['updatedAt']) {
+                        if (results[0]['updatedAt'].toString() !== "Thu Nov 30 1899 00:00:00 GMT+0642 (เวลาอินโดจีน)") {
+                            coverDate.updatedAt = moment(results[0]['updatedAt']).format('DD/MM/YYYY HH:mm:ss');
+                        }
+                    }
+                    res.render('leave/leaveDocument', {
+                        title: 'Leave Document Management',
+                        results: results,
+                        resultsName:resultsName[0],
+                        coverDate:coverDate,
+                        user: req.session.user
+                    });
+                }else{
+                    const coverDate = {
+                    date:null,
+                    startDate: null,
+                    endDate: null,
+                    createdAt: null,
+                    updatedAt: null
+                    }
+                    res.render('leave/leaveDocument', {
                     title: 'Leave Document Management',
                     results: results,
                     resultsName:resultsName[0],
+                    coverDate:coverDate,
                     user: req.session.user
-                });
+                    });
+                }
+
+
+                })
             })
-        })
-    } catch (err) {
-        console.error('Error inserting data:', err);
-        res.status(500).json({ error: 'Error inserting data into the database.' });
-    }
+        } catch (err) {
+            console.error('Error inserting data:', err);
+            res.status(500).json({ error: 'Error inserting data into the database.' });
+        }
 });
 
 router.get('/leaveDoc/Add/:id', isAuthenticated, (req, res) => {
@@ -573,4 +635,218 @@ router.get('/leaveDoc/Add/:id', isAuthenticated, (req, res) => {
     }
 
 })
+
+const isAuthen_assImage = [isAuthenticated, upload.single('image')];
+
+router.post('/leaveDoc/Add/:id', isAuthen_assImage, (req, res) => {
+    const { leaveDocument,leaveDocTypeID,leaveDocDays,leaveDocStartDate,leaveDocEndDate,leaveDocHatfDate,leaveDocRemark,leaveDocContact } = req.body;
+    const image = req.file ? req.file.filename : null;
+    const paramID = req.params.id;
+    const uuid = uuidv4();
+    const today = new Date();
+    const timestamp = moment(today).format();
+    const dateString = moment(today).format('YYYY-MM-DD');
+    let sql_insert_leaveDoc_user = "INSERT INTO `leaveDoc`(`id`, `doc`, `no`, `date`, `docTypeID`, `emID`, `startDate`, `endDate`, `hatfDate`, `status`, `leaveDays`, `remark`, `file`, `contact`, `statusAppHead`, `nameAppHead`, `statusAppHR`, `nameAppHR`, `statusAppMD`, `nameAppMD`) ";
+    sql_insert_leaveDoc_user += "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    const sqlQtnMaxNo = "SELECT IFNULL(MAX( `no`),0)+1 as maxNo FROM `leaveDoc` WHERE `emID` = ? ";
+    const sqlApproveHHM = "SELECT `id`, `emID`, `approveHead`, `approveHR`, `approveMD`, `createdAt`, `updatedAt` FROM `leaveApprove` WHERE `emID` = ? ";
+    const sqlQuata = "SELECT `quota`, `year` FROM `leaveQuota` WHERE `emID` =? and `leaveTypeID`=? and `year`=?";
+    let sqlEmDetail = "SELECT  `code`, `serialNumber`, `mobile`, `InternalTelephone`, `nameTH`, `nameEN`, `nickname`";
+    sqlEmDetail += ",`approveHead`, `approveHR`, `approveMD` FROM `employee` LEFT JOIN `leaveApprove` ON `leaveApprove`.`emID` = `employee`.`id` WHERE `employee`.`id` =?";
+    const sqlCheckLeave = "SELECT  `docTypeID`, `emID`, SUM(`leaveDays`) as `leaveDaysSum` FROM `leaveDoc` WHERE `status` = 'อนุมัติ'  and `emID` = ? and  `docTypeID=? GROUP BY  `docTypeID`, `emID ";
+    try {
+        db.query(sqlQtnMaxNo,[req.params.id], (err, QtnMaxNo) => {
+            if (err) throw err;
+
+            db.query(sqlEmDetail,[req.params.id], (err, emDetail) => {
+            if (err) throw err;
+
+            const QtnNo = QtnMaxNo[0]['maxNo'];
+            let QtnDoc = QtnNo;
+            if (QtnNo.length = 1) { QtnDoc = "LE"+emDetail[0]['code'] + new Date().toLocaleString("en-US", { year: "2-digit" }) + "-" + "00" + QtnNo; }
+            else if (QtnNo.length = 2) { QtnDoc = "LE"+emDetail[0]['code'] + new Date().toLocaleString("en-US", { year: "2-digit" }) + "-" + "0" + QtnNo; }
+
+                db.query(sql_insert_leaveDoc_user, [ uuid,QtnDoc,QtnNo,dateString,leaveDocTypeID,req.params.id,leaveDocStartDate,leaveDocEndDate,leaveDocHatfDate,"รอ Leader อนุมัติ",leaveDocDays,leaveDocRemark,image,leaveDocContact,"รออนุมัติ",emDetail[0]['approveHead'],"รออนุมัติ",emDetail[0]['approveHR'],"รออนุมัติ",emDetail[0]['approveMD'] ], (err, result) => {
+                    if (err) throw err;
+                    res.redirect('/leave/leaveDoc/' + paramID);
+                    
+                })
+            })
+         })    
+    } catch (err) {
+        console.error('Error inserting data:', err);
+        res.status(500).json({ error: 'Error inserting data into the database.' });
+    }
+});
+
+router.get('/leaveDoc/Edit/:id', isAuthenticated, (req, res) => {
+    const sqlLeaveDoc = "SELECT * FROM `view_docLeave` WHERE id = ?";
+    const sqlType = "SELECT `id`, `no`, `nameTH`, `nameEN`, `quota` FROM `leaveType` ORDER BY `no` ASC";
+    const now = new Date();
+    const dateStamp = moment(now).format('YYYY-MM-DD');
+    const timestamp= moment(now).format();
+    const sqlLBLmaxNo = "SELECT IFNULL(MAX( `no`),0)+1 as maxNo FROM `leaveDoc` WHERE `emID` = ? ";
+    try {
+        db.query(sqlLeaveDoc,[req.params.id], (err, resultsLeaveDoc) => {
+            if (err) throw err;
+            db.query(sqlType, (err, resultsType) => {
+                if (err) throw err;
+                const coverDate = {
+                    date:null,
+                    startDate: null,
+                    endDate: null,
+                    createdAt: null,
+                    updatedAt: null
+
+                }
+                    if (resultsLeaveDoc[0]['date']) {
+                        if (resultsLeaveDoc[0]['date'].toString() !== "Thu Nov 30 1899 00:00:00 GMT+0642 (เวลาอินโดจีน)") {
+                            coverDate.date = moment(resultsLeaveDoc[0]['date']).format('YYYY-MM-DD');
+                        }
+                    }
+                    if (resultsLeaveDoc[0]['startDate']) {
+                        if (resultsLeaveDoc[0]['startDate'].toString() !== "Thu Nov 30 1899 00:00:00 GMT+0642 (เวลาอินโดจีน)") {
+                            coverDate.startDate = moment(resultsLeaveDoc[0]['startDate']).format('YYYY-MM-DD');
+                        }
+                    }
+                    if (resultsLeaveDoc[0]['endDate']) {
+                        if (resultsLeaveDoc[0]['endDate'].toString() !== "Thu Nov 30 1899 00:00:00 GMT+0642 (เวลาอินโดจีน)") {
+                            coverDate.endDate = moment(resultsLeaveDoc[0]['endDate']).format('YYYY-MM-DD');
+                        }
+                    }
+                    if (resultsLeaveDoc[0]['createdAt']) {
+                        if (resultsLeaveDoc[0]['createdAt'].toString() !== "Thu Nov 30 1899 00:00:00 GMT+0642 (เวลาอินโดจีน)") {
+                            coverDate.createdAt = moment(resultsLeaveDoc[0]['createdAt']).format('DD/MM/YYYY HH:mm:ss');
+                        }
+                    }
+                    if (resultsLeaveDoc[0]['updatedAt']) {
+                        if (resultsLeaveDoc[0]['updatedAt'].toString() !== "Thu Nov 30 1899 00:00:00 GMT+0642 (เวลาอินโดจีน)") {
+                            coverDate.updatedAt = moment(resultsLeaveDoc[0]['updatedAt']).format('DD/MM/YYYY HH:mm:ss');
+                        }
+                    }
+                    res.render('leave/leaveDocumentEdit', {
+                        title: 'leave Document Edit',
+                        resultsLeaveDoc: resultsLeaveDoc[0],
+                        resultsType:resultsType,
+                        dateStamp:dateStamp,
+                        user: req.session.user,
+                        coverDate:coverDate,
+                    });
+            })
+        })
+    } catch (err) {
+        console.error('Error inserting data:', err);
+        res.status(500).json({ error: 'Error inserting data into the database.' });
+    }
+
+})
+
+const isAuthen_assImageE = [isAuthenticated, upload.single('imageE')];
+
+router.post('/leaveDoc/Edit/:id', isAuthen_assImageE, (req, res) => {
+    const { leaveDocumentE,leaveDocTypeIDE,leaveDocDaysE,leaveDocStartDateE,leaveDocEndDateE,leaveDocHatfDateE,leaveDocRemarkE,leaveDocContactE } = req.body;
+    const image = req.file ? req.file.filename : null;
+    const paramID = req.params.id;
+    const today = new Date();
+    const timestamp = moment(today).format();
+    const dateString = moment(today).format('YYYY-MM-DD');
+    let sql_edit_leaveDoc_user = "UPDATE `leaveDoc` SET `docTypeID` = ?, `startDate`= ?, `endDate`= ?, `hatfDate`= ?, `status`= ?, `leaveDays`= ?, `remark`= ?, `file`=?, `contact`= ?,  ";
+    sql_edit_leaveDoc_user += " `statusAppHead`= ?, `nameAppHead`= ?, `statusAppHR`= ?, `nameAppHR`= ?, `statusAppMD`= ?, `nameAppMD`= ?, `updatedAt`= ? WHERE `id` = ? ";
+    const sqlLeaveDocEmID = "SELECT `emID` FROM `leaveDoc` WHERE `id` = ? ";
+    const sqlQuata = "SELECT `quota`, `year` FROM `leaveQuota` WHERE `emID` =? and `leaveTypeID`=? and `year`=?";
+    let sqlEmDetail = "SELECT  `employee`.`id`,`code`, `serialNumber`, `mobile`, `InternalTelephone`, `nameTH`, `nameEN`, `nickname`";
+    sqlEmDetail += ",`approveHead`, `approveHR`, `approveMD` FROM `employee` LEFT JOIN `leaveApprove` ON `leaveApprove`.`emID` = `employee`.`id` WHERE `employee`.`id` =?";
+    const sqlCheckLeave = "SELECT  `docTypeID`, `emID`, SUM(`leaveDays`) as `leaveDaysSum` FROM `leaveDoc` WHERE `status` = 'อนุมัติ'  and `emID` = ? and  `docTypeID=? GROUP BY  `docTypeID`, `emID ";
+    try {
+        db.query(sqlLeaveDocEmID,[req.params.id], (err, leaveDocEmID) => {
+        if (err) throw err;
+            db.query(sqlEmDetail,[leaveDocEmID[0]['emID']], (err, emDetail) => {
+            if (err) throw err;
+                db.query(sql_edit_leaveDoc_user, [ leaveDocTypeIDE,leaveDocStartDateE,leaveDocEndDateE,leaveDocHatfDateE,"รอ Leader อนุมัติ",leaveDocDaysE,leaveDocRemarkE,image,leaveDocContactE,"รออนุมัติ",emDetail[0]['approveHead'],"รออนุมัติ",emDetail[0]['approveHR'],"รออนุมัติ",emDetail[0]['approveMD'],timestamp,req.params.id ], (err, result) => {
+                        if (err) throw err;
+                        res.redirect('/leave/leaveDoc/' + emDetail[0]['id']);
+                    })
+            })   
+        })
+    } catch (err) {
+        console.error('Error inserting data:', err);
+        res.status(500).json({ error: 'Error inserting data into the database.' });
+    }
+});
+
+router.get('/leaveDoc/View/:id', isAuthenticated, (req, res) => {
+    const sqlLeaveDoc = "SELECT * FROM `view_docLeave` WHERE id = ?";
+    const sqlType = "SELECT `id`, `no`, `nameTH`, `nameEN`, `quota` FROM `leaveType` ORDER BY `no` ASC";
+    const now = new Date();
+    const dateStamp = moment(now).format('YYYY-MM-DD');
+    const timestamp= moment(now).format();
+    try {
+        db.query(sqlLeaveDoc,[req.params.id], (err, resultsLeaveDoc) => {
+            if (err) throw err;
+                const coverDate = {
+                    date:null,
+                    startDate: null,
+                    endDate: null,
+                    createdAt: null,
+                    updatedAt: null
+
+                }
+                    if (resultsLeaveDoc[0]['date']) {
+                        if (resultsLeaveDoc[0]['date'].toString() !== "Thu Nov 30 1899 00:00:00 GMT+0642 (เวลาอินโดจีน)") {
+                            coverDate.date = moment(resultsLeaveDoc[0]['date']).format('YYYY-MM-DD');
+                        }
+                    }
+                    if (resultsLeaveDoc[0]['startDate']) {
+                        if (resultsLeaveDoc[0]['startDate'].toString() !== "Thu Nov 30 1899 00:00:00 GMT+0642 (เวลาอินโดจีน)") {
+                            coverDate.startDate = moment(resultsLeaveDoc[0]['startDate']).format('YYYY-MM-DD');
+                        }
+                    }
+                    if (resultsLeaveDoc[0]['endDate']) {
+                        if (resultsLeaveDoc[0]['endDate'].toString() !== "Thu Nov 30 1899 00:00:00 GMT+0642 (เวลาอินโดจีน)") {
+                            coverDate.endDate = moment(resultsLeaveDoc[0]['endDate']).format('YYYY-MM-DD');
+                        }
+                    }
+                    if (resultsLeaveDoc[0]['createdAt']) {
+                        if (resultsLeaveDoc[0]['createdAt'].toString() !== "Thu Nov 30 1899 00:00:00 GMT+0642 (เวลาอินโดจีน)") {
+                            coverDate.createdAt = moment(resultsLeaveDoc[0]['createdAt']).format('DD/MM/YYYY HH:mm:ss');
+                        }
+                    }
+                    if (resultsLeaveDoc[0]['updatedAt']) {
+                        if (resultsLeaveDoc[0]['updatedAt'].toString() !== "Thu Nov 30 1899 00:00:00 GMT+0642 (เวลาอินโดจีน)") {
+                            coverDate.updatedAt = moment(resultsLeaveDoc[0]['updatedAt']).format('DD/MM/YYYY HH:mm:ss');
+                        }
+                    }
+                    res.render('leave/leaveDocumentView', {
+                        title: 'leave Document View',
+                        resultsLeaveDoc: resultsLeaveDoc[0],
+                        dateStamp:dateStamp,
+                        user: req.session.user,
+                        coverDate:coverDate
+                    });
+        })
+    } catch (err) {
+        console.error('Error inserting data:', err);
+        res.status(500).json({ error: 'Error inserting data into the database.' });
+    }
+
+})
+
+router.get('/leaveDoc/Del/:id', isAuthenticated, (req, res) => {
+    const sqlDel = "DELETE FROM `leaveDoc` WHERE id = ?";
+    const sql = "SELECT `emID` FROM `leaveDoc` WHERE id = ?";
+    try {
+        db.query(sql, [req.params.id], (err, result) => {
+            if (err) throw err;
+            const emID = result[0]['emID'];
+            db.query(sqlDel,[req.params.id], (err, results) => {
+                if (err) throw err;
+                res.redirect('/leave/leaveDoc/' + emID);
+            })
+        });
+    } catch (err) {
+        console.error('Error inserting data:', err);
+        res.status(500).json({ error: 'Error inserting data into the database.' });
+    }
+})
+
 module.exports = router;

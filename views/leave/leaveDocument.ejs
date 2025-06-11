@@ -66,6 +66,7 @@
                                             <th class="align-middle">Doc.</th>
                                             <th class="align-middle">Leave / Status</th>
                                             <th class="align-middle">Date / Days</th>
+                                            <th class="align-middle">File</th>
                                             <th class="align-middle text-center">Action</th>
                                         </tr>
                                     </thead>
@@ -75,6 +76,7 @@
                                             <th class="align-middle">Doc.</th>
                                             <th class="align-middle">Leave / Status</th>
                                             <th class="align-middle">Date / Days</th>
+                                            <th class="align-middle">File</th>
                                             <th class="align-middle text-center">Action</th>
                                         </tr>
                                     </tfoot>
@@ -82,21 +84,45 @@
                                         <% results.forEach(results => { %>
                                             <tr>
                                                 <td><%= results.no %> </td>
-                                                <td><%= results.doc %> <%= results.date %></td>
-                                                <td><%= results.typeNameTH %> <%= results.status %></td>
-                                                <td><%= results.startDate %> - <%= results.endDate %> จำนวน <%= results.leaveDays %> วัน</td> 
+                                                <td><%= results.doc %> <br><%= coverDate.createdAt %></td>
+                                                <td><%= results.typeNameTH %> <br>
+                                                    <% if(results.status !== 'อนุมัติสำเร็จ' ) { %> 
+                                                        <i class="fas fa-exclamation-circle text-warning"></i> <%= results.status %> 
+                                                    <%} else {%>
+                                                         <i class="fas fa-check-circle text-success"></i> <%= results.status %> 
+                                                        <%} %>
+                                                </td>
+                                                <td><%= coverDate.startDate %> - <%= coverDate.endDate %>&nbsp;&nbsp;
+                                                    <% if(results.hatfDate !== 'ไม่มี' ) { %> 
+                                                        , ลาช่วง : <%= results.hatfDate %>
+                                                        <%} %>
+                                                    <br>จำนวน <%= results.leaveDays %> วัน</td> 
+                                                <td class="text-center align-middle">
+                                                    <% if(results.file) { %> 
+                                                        <a href="/uploads/<%= results.file %>" target="_blank"><h3><i class="fas fa-image text-success"></i></h3> </a>
+                                                    <%} else {%>
+                                                         <a>-</a>
+                                                        <%} %>
+                                                </td>
                                                 <td class="align-middle text-center">     
                                                     <a href="/leave/leaveDoc/View/<%= results.id %>" class="btn btn-info btn-circle">
-                                                        <i class="fas fa-eye"></i></a>                           
+                                                        <i class="fas fa-eye"></i></a> 
+                                                    <% if(results.status !== 'อนุมัติสำเร็จ' ) { %>                          
                                                     <a href="/leave/leaveDoc/Edit/<%= results.id %>" class="btn btn-warning btn-circle">
                                                         <i class="fas fa-pen"></i></a>
                                                     <a href="/leave/leaveDoc/Del/<%= results.id %>" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure ?');">
                                                         <i class="fas fa-trash-alt"></i></a>
+                                                         <%} %>
                                                 </td>        
                                             </tr>
                                             <% }) %>                                    
                                     </tbody>
                                 </table>
+                                <hr>
+                                <div class="text-center">
+                                    <a class="small" href="/leave/leaveDocMain">Back
+                                        to ...</a>
+                                </div>
                             </div>
                         </div>
                     </div>

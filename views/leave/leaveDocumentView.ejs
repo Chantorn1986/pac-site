@@ -49,7 +49,7 @@
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">
                                         <i class="fas fa-calendar fa-fw"></i>Leave PAC - <%= title %> - (<%=
-                                                resultsName.code %>) <%= resultsName.nameTH %>
+                                                resultsLeaveDoc.emCode %>) <%= resultsLeaveDoc.emNameTH %>
                                     </h6>
                                 </div>
                                 <div class="card-body p-0">
@@ -58,95 +58,112 @@
                                         <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
                                         <div class="col-lg-12">
                                             <div class="p-5">
-                                                <form class="user" action="/leave/leaveDoc/Add/<%= resultsName.id %>"
-                                                    method="POST"  enctype="multipart/form-data" >
                                                     <div class="form-group row">
                                                         <div class="col-sm-4">
-                                                            <label for="leaveDocument"
+                                                            <label for="leaveDocumentE"
                                                                 class="form-label">เอกสารใบลา</label>
-                                                            <input type="text" class="form-control" name="leaveDocument"
-                                                                id="leaveDocument" readonly>
+                                                            <input type="text" class="form-control" name="leaveDocumentE"
+                                                                id="leaveDocumentE" value="<%= resultsLeaveDoc.doc %>" readonly>
                                                         </div>
                                                         <div class="col-sm-4">
-                                                            <label for="leaveDocTypeID"
+                                                            <label for="leaveDocTypeIDE"
                                                                 class="form-label">ประเภทการลา</label>
-                                                            <select name="leaveDocTypeID"
-                                                                class="form-control form-select"
-                                                                aria-label="Default select example" required>
-                                                                <option value="">--- เลือกประเภทการลา ---</option>
-                                                                <% resultsType.forEach(resultsType=> { %>
-                                                                    <option value="<%= resultsType.id %>">
-                                                                        <%= resultsType.nameTH %>
-                                                                    </option>
-                                                                    <% }) %>
-                                                            </select>
+                                                            <input type="text" class="form-control" name="leaveDocTypeIDE"
+                                                                id="leaveDocTypeIDE" value="<%= resultsLeaveDoc.typeNameTH %>" readonly>
                                                         </div>
                                                         <div class="col-sm-4">
-                                                            <label for="leaveDocDays"
+                                                            <label for="leaveDocDaysE"
                                                                 class="form-label">จำนวนวันลา</label>
                                                             <input type="text" class="form-control text-right"
-                                                                name="leaveDocDays" id="leaveDocDays" value="1" readonly>
+                                                                name="leaveDocDaysE" id="leaveDocDaysE" value="<%= resultsLeaveDoc.leaveDays %>" readonly>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-4">
-                                                            <label for="leaveDocStartDate"
+                                                            <label for="leaveDocStartDateE"
                                                                 class="form-label">วันที่เริ่มลา</label>
                                                             <input type="date" class="form-control"
-                                                                name="leaveDocStartDate" id="leaveDocStartDate"
-                                                                value="<%= dateStamp %>" onchange="cal()" required>
+                                                                name="leaveDocStartDateE" id="leaveDocStartDateE"
+                                                                value="<%= coverDate.startDate %>" readonly>
                                                         </div>
                                                         <div class="col-sm-4">
-                                                            <label for="leaveDocEndDate"
+                                                            <label for="leaveDocEndDateE"
                                                                 class="form-label">วันที่สิ้นสุด</label>
                                                             <input type="date" class="form-control"
-                                                                name="leaveDocEndDate" id="leaveDocEndDate"
-                                                                value="<%= dateStamp %>" onchange="cal()" required>
+                                                                name="leaveDocEndDateE" id="leaveDocEndDateE"
+                                                                value="<%= coverDate.endDate %>" readonly>
                                                         </div>
                                                         <div class="col-sm-4">
-                                                            <label for="leaveDocHatfDate" class="form-label">ลาครึ่งวัน
-                                                            </label><br>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                            <input type="radio" class="radio" id="leaveDocHatfDate"
-                                                                name="leaveDocHatfDate" value="เช้า">
-                                                            <label for="leaveDocHatfDate">ช่วงเช้า </label>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                            <input type="radio" class="radio" id="leaveDocHatfDate"
-                                                                name="leaveDocHatfDate" value="บ่าย">
-                                                            <label for="leaveDocHatfDate">ช่วงบ่าย
-                                                            </label>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                            <input type="radio" class="radio" id="leaveDocHatfDate"
-                                                                name="leaveDocHatfDate" value="ไม่มี" checked="true">
-                                                            <label for="leaveDocHatfDate">ไม่ลาครึ่งวัน </label>
+                                                            <label for="leaveDocHatfDateE" class="form-label">ลาครึ่งวัน</label><br>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <% if(resultsLeaveDoc.hatfDate === 'เช้า'){%>
+                                                            <input type="radio" class="radio" id="leaveDocHatfDateE"
+                                                                name="leaveDocHatfDateE" value="เช้า" checked="true" disabled="disabled">
+                                                            <% } else { %>
+                                                            <input type="radio" class="radio" id="leaveDocHatfDateE"
+                                                                name="leaveDocHatfDateE" value="เช้า" disabled="disabled">
+                                                            <% } %>
+                                                            <label for="leaveDocHatfDateE">ช่วงเช้า </label>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                                            <% if(resultsLeaveDoc.hatfDate === 'บ่าย'){%>
+                                                            <input type="radio" class="radio" id="leaveDocHatfDateE"
+                                                                name="leaveDocHatfDateE" value="บ่าย" checked="true" disabled="disabled">
+                                                            <% } else { %>
+                                                            <input type="radio" class="radio" id="leaveDocHatfDateE"
+                                                                name="leaveDocHatfDateE" value="บ่าย" disabled="disabled">
+                                                            <% } %>
+                                                            <label for="leaveDocHatfDateE">ช่วงบ่าย</label>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                                            <% if(resultsLeaveDoc.hatfDate === 'ไม่มี'){%>
+                                                            <input type="radio" class="radio" id="leaveDocHatfDateE"
+                                                                name="leaveDocHatfDateE" value="ไม่มี" checked="true" disabled="disabled">
+                                                            <% } else { %>
+                                                            <input type="radio" class="radio" id="leaveDocHatfDateE"
+                                                                name="leaveDocHatfDateE" value="ไม่มี" disabled="disabled">
+                                                            <% } %>
+                                                            <label for="leaveDocHatfDateE">ไม่ลาครึ่งวัน </label>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="col-sm-8">
-                                                            <label for="leaveDocRemark"
+                                                            <label for="leaveDocRemarkE"
                                                                 class="form-label">สาเหตุการลา</label>
                                                             <input type="text" class="form-control"
-                                                                name="leaveDocRemark" required>
+                                                                name="leaveDocRemarkE" value="<%= resultsLeaveDoc.remark %>" readonly>
                                                         </div>
                                                         <div class="col-sm-4">
-                                                            <label for="leaveDocContact"
+                                                            <label for="leaveDocContactE"
                                                                 class="form-label">รายละเอียดการติดต่อ</label>
                                                             <input type="text" class="form-control"
-                                                                name="leaveDocContact" value="<%= resultsName.mobile %>"
-                                                                required>
+                                                                name="leaveDocContactE" value="<%= resultsLeaveDoc.contact %>"
+                                                                readonly>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="image" class="form-label">อัพโหลด</label>
-                                                        <input type="file" name="image" class="form-control">
+                                                        <label for="imageE" class="form-label">อัพโหลด</label>
+                                                      <a href="/uploads/<%= resultsLeaveDoc.file %>" target="_blank"><img src="/uploads/<%= resultsLeaveDoc.file %>" width="50" /></a>  
+                                                        <input type="file" name="imageE" class="form-control" disabled="disabled" readonly>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-6">
+                                                            <label for="leaveDocRemarkE"
+                                                                class="form-label">createdAt</label>
+                                                            <input type="text" class="form-control"
+                                                                name="leaveDocRemarkE" value="<%= coverDate.createdAt %>" readonly>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label for="leaveDocContactE"
+                                                                class="form-label">updatedAt</label>
+                                                            <input type="text" class="form-control"
+                                                                name="leaveDocContactE" value="<%= coverDate.updatedAt %>"
+                                                                readonly>
+                                                        </div>
                                                     </div>
                                                     <br>
-                                                    <button type="submit" class="btn btn-success btn-block">
-                                                        <i class="fas fa-save fa-fw"></i>
-                                                        <span class="text">Save</span></button>
 
-                                                </form>
                                                 <hr>
                                                 <div class="text-center">
-                                                    <a class="small" href="/leave/leaveDoc/<%= resultsName.id %>">Back
+                                                    <a class="small" href="/leave/leaveDoc/<%= resultsLeaveDoc.emID %>">Back
                                                         to ...</a>
                                                 </div>
                                             </div>
@@ -193,19 +210,15 @@
     <!-- Page level custom scripts -->
     <script src="/js/demo/datatables-demo.js"></script>
     <script>
-        let docQtnNo = "<%= maxNo.maxNo %>";
-        if (docQtnNo.length = 1) { docQtnNo = "00" + docQtnNo; }
-        else if (docQtnNo.length = 2) { docQtnNo = "0" + docQtnNo; }
-        document.getElementById('leaveDocument').value = "<%= resultsName.code %>-" + new Date().toLocaleString("en-US", { year: "2-digit" }) + "-" + docQtnNo;
 
         function GetDays() {
-            var dropdt = new Date(document.getElementById("leaveDocEndDate").value);
-            var pickdt = new Date(document.getElementById("leaveDocStartDate").value);
+            var dropdt = new Date(document.getElementById("leaveDocEndDateE").value);
+            var pickdt = new Date(document.getElementById("leaveDocStartDateE").value);
             return parseInt(((dropdt - pickdt) / (24 * 3600 * 1000))+1);
         }
         function cal() {
-            if (document.getElementById("leaveDocEndDate")) {
-                document.getElementById("leaveDocDays").value = GetDays();
+            if (document.getElementById("leaveDocEndDateE")) {
+                document.getElementById("leaveDocDaysE").value = GetDays();
             }
         }
 
@@ -215,10 +228,10 @@
             radio.addEventListener('change', function () {
                 if (this.checked === true) {
                     if(this.value === "ไม่มี" ){
-                        document.getElementById("leaveDocDays").value = GetDays();
+                        document.getElementById("leaveDocDaysE").value = GetDays();
                     }
                     else{
-                        document.getElementById("leaveDocDays").value = GetDays()-0.5;
+                        document.getElementById("leaveDocDaysE").value = GetDays()-0.5;
                     }
                 }   
             })

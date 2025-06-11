@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-//const mysql = require('mysql2');
 const path = require('path');
 const { v4: uuidv4 } = require("uuid");
 router.use(express.urlencoded({ extended: true }));
