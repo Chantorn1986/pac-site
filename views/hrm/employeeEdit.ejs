@@ -173,6 +173,13 @@
                                                         <input type="date" class="form-control" name="startDateE" >
                                                     <% } %>
                                                 </div>
+                                                <div class="col-sm-2">
+                                                    <label for="resignationE" class="form-label">Status Employee</label><br>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="checkbox" name="resignationE"  value="1">
+                                                                <label for="resignationE">
+                                                                   &nbsp;&nbsp; ลาออก
+                                                                </label>
+                                                </div>
                                                 <div class="col-sm-3">
                                                     <label for="endDateE" class="form-label">End Date</label>
                                                     <% if (coverDate.endDate) { %>
@@ -181,7 +188,7 @@
                                                         <input type="date" class="form-control" name="endDateE" >
                                                     <% } %>
                                                 </div>
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-4">
                                                     <label for="ReasonForLeavingE" class="form-label">Reason for leaving</label>
                                                     <input type="text" class="form-control" name="ReasonForLeavingE" 
                                                     value="<%= employeeFull.reasonForLeaving %>">

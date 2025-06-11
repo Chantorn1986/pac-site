@@ -27,7 +27,7 @@ const upload = multer({ storage });
 
 router.get('/', isAuthenticated, (req, res) => {
     try {
-        const sql = "SELECT * FROM `view_employeeSub`";
+        const sql = "SELECT * FROM `view_employeeSub` WHERE  `resignation`=0";
         db.query(sql, (err, results) => {
             if (err) throw err;
 
@@ -45,8 +45,8 @@ router.get('/', isAuthenticated, (req, res) => {
 
 router.get('/Sub/:id', isAuthenticated, (req, res) => {
     try {
-        const sql1 = "SELECT * FROM `view_employeeFull` WHERE id = ?";
-        const sql2 = "SELECT * FROM `employeeEducation` WHERE empID = ?"
+        const sql1 = "SELECT * FROM `view_employeeFull` WHERE id = ? and `resignation`=0";
+        const sql2 = "SELECT * FROM `employeeEducation` WHERE empID = ? "
         const sql3 = "SELECT `id`, `emID`, `Card`,DATE_FORMAT(`createdAt`, '%d/%m/%Y %H:%i:%s') as createdAt FROM `employeeCard` WHERE emID = ?"
         const sql4 = "SELECT * FROM `employeeVehicle` WHERE emID = ?"
         db.query(sql1, [req.params.id], (err, results) => {
@@ -156,16 +156,19 @@ router.post('/Add', isAuthen_assImage, (req, res) => {
     const { employeeCode, serialNumber, mobile, internalTelephone, nameTH, nameEN, nickname, departmentID,
         positionID, workLevelID, employmentType, startDate, endDate, ReasonForLeaving, userLogin,
         dateOfBirth, nameTitle, gender, bloodGroup, maritalStatus, religion, nationality, ethnicity, taxID,
-        bank, bankNumber, address, subdistrict, district, province, postcode } = req.body;
-
+        bank, bankNumber, address, subdistrict, district, province, postcode,resignation } = req.body;
+    let resignationV = 0;
+    if(resignation){
+        resignationV = 1;
+    }
     const image = req.file ? req.file.filename : null;
     const uuid1 = uuidv4();
-    const sqlAdd1 = "INSERT INTO `employee`(`id`, `code`, `serialNumber`, `mobile`, `InternalTelephone`, `nameTH`, `nameEN`,`nickname`, `departmentID`, `positionID`, `workLevelID`, `employmentType`, `startDate`, `endDate`, `reasonForLeaving`, `userID`,`image`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    const sqlAdd1 = "INSERT INTO `employee`(`id`, `code`, `serialNumber`, `mobile`, `InternalTelephone`, `nameTH`, `nameEN`,`nickname`, `departmentID`, `positionID`, `workLevelID`, `employmentType`, `startDate`, `endDate`, `reasonForLeaving`, `userID`,`image`,`resignation`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     const uuid2 = uuidv4();
     const sqlAdd2 = "INSERT INTO `employeeInfo`(`id`, `address`, `subdistrict`, `district`, `province`, `postcode`, `dateOfBirth`, `nameTitle`, `gender`, `bloodGroup`, `maritalStatus`, `religion`, `nationality`, `ethnicity`, `taxID`, `bank`, `bankNumber`, `emID`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     try {
         db.query(sqlAdd1, [uuid1, employeeCode, serialNumber, mobile, internalTelephone, nameTH, nameEN, nickname, departmentID,
-            positionID, workLevelID, employmentType, startDate, endDate, ReasonForLeaving, userLogin, image], (err, result1) => {
+            positionID, workLevelID, employmentType, startDate, endDate, ReasonForLeaving, userLogin, image,resignationV], (err, result1) => {
                 if (err) throw err;
 
                 db.query(sqlAdd2, [uuid2, address, subdistrict, district, province, postcode, dateOfBirth, nameTitle, gender, bloodGroup,
@@ -275,10 +278,13 @@ router.post('/Edit/:id', isAuthen_assImageE, (req, res) => {
     const { employeeCodeE, serialNumberE, mobileE, internalTelephoneE, nameTHE, nameENE, nicknameE, departmentIDE,
         positionIDE, workLevelIDE, employmentTypeE, startDateE, endDateE, ReasonForLeavingE, userLoginE,
         dateOfBirthE, nameTitleE, genderE, bloodGroupE, maritalStatusE, religionE, nationalityE, ethnicityE, taxIDE,
-        bankE, bankNumberE, addressE, subdistrictE, districtE, provinceE, postcodeE } = req.body;
-
+        bankE, bankNumberE, addressE, subdistrictE, districtE, provinceE, postcodeE,resignationE } = req.body;
+    let resignationEV = 0;
+    if(resignationE){
+        resignationEV = 1;
+    }
     const image = req.file ? req.file.filename : req.body.oldImage;
-    const sql1 = "UPDATE `employee` SET `code`= ?, `serialNumber`= ?, `mobile`= ?, `InternalTelephone`= ?, `nameTH`= ?, `nameEN`= ?,`nickname`=?, `departmentID`= ?, `positionID`= ?, `workLevelID`= ?, `employmentType`= ?, `startDate`= ?, `endDate`= ?, `reasonForLeaving`= ?, `userID` = ?,`updatedAt`=?,`image` = ? WHERE id = ?";
+    const sql1 = "UPDATE `employee` SET `code`= ?, `serialNumber`= ?, `mobile`= ?, `InternalTelephone`= ?, `nameTH`= ?, `nameEN`= ?,`nickname`=?, `departmentID`= ?, `positionID`= ?, `workLevelID`= ?, `employmentType`= ?, `startDate`= ?, `endDate`= ?, `reasonForLeaving`= ?, `userID` = ?,`updatedAt`=?,`image` = ?,`resignation`=? WHERE id = ?";
     const sql2 = "UPDATE `employeeInfo` SET `address`= ?, `subdistrict`= ?, `district`= ?, `province`= ?, `postcode`= ?, `dateOfBirth`= ?, `nameTitle`= ?, `gender`= ?, `bloodGroup`= ?, `maritalStatus`= ?, `religion`= ?, `nationality`= ?, `ethnicity`= ?, `taxID`= ?, `bank`= ?, `bankNumber`= ?,`updatedAt`=? WHERE emID = ?";
     const sql3 = "SELECT * FROM `employeeInfo` WHERE emID = ?";
     const sqlAdd = "INSERT INTO `employeeInfo`(`id`, `address`, `subdistrict`, `district`, `province`, `postcode`, `dateOfBirth`, `nameTitle`, `gender`, `bloodGroup`, `maritalStatus`, `religion`, `nationality`, `ethnicity`, `taxID`, `bank`, `bankNumber`, `emID`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -286,7 +292,7 @@ router.post('/Edit/:id', isAuthen_assImageE, (req, res) => {
     const timestamp = moment(today).format();
     try {
         db.query(sql1, [employeeCodeE, serialNumberE, mobileE, internalTelephoneE, nameTHE, nameENE, nicknameE, departmentIDE,
-            positionIDE, workLevelIDE, employmentTypeE, startDateE, endDateE, ReasonForLeavingE, userLoginE, timestamp, image, req.params.id], (err, result1) => {
+            positionIDE, workLevelIDE, employmentTypeE, startDateE, endDateE, ReasonForLeavingE, userLoginE, timestamp, image,resignationEV, req.params.id], (err, result1) => {
                 if (err) throw err;
 
                 db.query(sql3, [req.params.id], (err, result3) => {
