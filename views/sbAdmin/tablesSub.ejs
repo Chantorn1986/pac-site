@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>PAC APP - <%= title %>
+  </title>
+
+  <!-- Custom fonts for this template -->
+  <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this page -->
+  <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <%- include('../partials/sidebar'); %>
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+          <!-- Topbar -->
+          <%- include('../partials/topbar'); %>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+              <div class="card o-hidden border-0 shadow-lg">
+                <a href="#collapseCardEM" class="card-header" data-toggle="collapse" role="button" aria-expanded="true"
+                  aria-controls="collapseCardEM">
+                  <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-address-card fa-fw"></i>
+                    <%= title %>
+                  </h6>
+                </a>
+
+                <div class="card-body collapse show" id="collapseCardEM">
+                  <!-- Nested Row within Card Body -->
+                  <div class="row">
+                    <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
+                    <div class="col-lg-12">
+                      <div class="form-group row">
+                        <div class="col-sm-9">
+                          <div class="form-group row">
+                            <div class="col-sm-4">
+                              <label for="employeeCode" class="form-label">Code</label>
+                              <input type="text" class="form-control" name="employeeCode"
+                                value="<%= employeeFull.code %>" readonly>
+                            </div>
+                            <div class="col-sm-4">
+                              <label for="serialNumber" class="form-label">Serial Number</label>
+                              <input type="text" class="form-control" name="serialNumber"
+                                value="<%= employeeFull.serialNumber %>" readonly>
+                            </div>
+                            <div class="col-sm-4">
+                              <label for="internalTelephone" class="form-label">Internal Telephone</label>
+                              <input type="text" class="form-control" name="internalTelephone"
+                                value="<% employeeFull.InternalTelephone %>" readonly>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <div class="col-sm-6">
+                              <label for="mobile" class="form-label">Mobile</label>
+                              <input type="text" class="form-control" name="mobile" value="<%= employeeFull.mobile %>"
+                                readonly>
+                            </div>
+                            <div class="col-sm-6">
+                              <label for="userLogin" class="form-label">Email Login</label>
+                              <input type="text" class="form-control" name="userLogin" value="<%= employeeFull.email %>"
+                                readonly>
+
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-sm-3">
+                          <div class="col-sm-12">
+                            <label for="imageE" class="form-label">Image</label>
+                            <% if (employeeFull.image) { %>
+                              <img src="/uploads/<%= employeeFull.image %>" height="119" />
+                              <input type="hidden" name="oldImage" value="<%= employeeFull.image %>">
+                              <% } %>
+                                <input type="text" name="imageE" class="form-control" readonly>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <div class="col-sm-6">
+                          <label for="nameTH" class="form-label">Full name thai</label>
+                          <input type="text" class="form-control" name="nameTH" value="<%= employeeFull.nameTH %>"
+                            readonly>
+                        </div>
+                        <div class="col-sm-6">
+                          <label for="nameEN" class="form-label">Full name english</label>
+                          <input type="text" class="form-control" name="nameEN" value="<%= employeeFull.nameEN %>"
+                            readonly>
+                        </div>
+
+                      </div>
+
+                      <div class="form-group row">
+                        <div class="col-sm-6">
+                          <label for="departmentID" class="form-label">Department</label>
+                          <input type="text" class="form-control" name="departmentID" value="<%= employeeFull.depEN %>"
+                            readonly>
+                        </div>
+                        <div class="col-sm-6">
+                          <label for="positionID" class="form-label">Position</label>
+                          <input type="text" class="form-control" name="positionID" value="<%= employeeFull.posEN %>"
+                            readonly>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <div class="col-sm-6">
+                          <label for="workLevelID" class="form-label">Work Level</label>
+                          <input type="text" class="form-control" name="workLevelID" value="<%= employeeFull.wleEN %>"
+                            readonly>
+                        </div>
+                        <div class="col-sm-6">
+                          <label for="employmentType" class="form-label">Employment Type</label>
+                          <input type="text" class="form-control" name="employmentType"
+                            value="<%= employeeFull.employmentType %>" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <div class="col-sm-3">
+                          <label for="startDate" class="form-label">Start Date</label>
+                          <% if (coverDate.startDate) { %>
+                            <input type="date" class="form-control" name="startDate" value="<%= coverDate.startDate %>"
+                              readonly>
+                            <% } else { %>
+                              <input type="text" class="form-control" name="startDate" value="-" readonly>
+                              <% } %>
+                        </div>
+                        <div class="col-sm-3">
+                          <label for="endDate" class="form-label">End Date</label>
+                          <% if (coverDate.endDate) { %>
+                            <input type="date" class="form-control" name="endDate" value="<%= coverDate.endDate %>"
+                              readonly>
+                            <% } else { %>
+                              <input type="text" class="form-control" name="endDate" value="-" readonly>
+                              <% } %>
+                        </div>
+                        <div class="col-sm-6">
+                          <label for="ReasonForLeaving" class="form-label">Reason for leaving</label>
+                          <input type="text" class="form-control" name="ReasonForLeaving"
+                            value="<%= employeeFull.reasonForLeaving %>" readonly>
+                        </div>
+                      </div>
+
+                      <hr class="sidebar-divider">
+                      <h6 class="m-0 font-weight-bold text-primary mb-3"><i class="fas fa-address-book fa-fw"></i>
+                        Personal information</h6>
+                      <div class="form-group row">
+                        <div class="col-sm-3">
+                          <label for="dateOfBirth" class="form-label">Date of birth</label>
+                          <% if (coverDate.dateOfBirth) { %>
+                            <input type="date" class="form-control" name="dateOfBirth"
+                              value="<%= coverDate.dateOfBirth %>" readonly>
+                            <% } else { %>
+                              <input type="text" class="form-control" name="dateOfBirth" value="-" readonly>
+                              <% } %>
+                        </div>
+                        <div class="col-sm-3">
+                          <label for="nameTitle" class="form-label">Name Title</label>
+                          <input type="text" class="form-control" name="nameTitle" value="<%= employeeFull.nameTitle %>"
+                            readonly>
+                        </div>
+                        <div class="col-sm-3">
+                          <label for="gender" class="form-label">Gender</label>
+                          <input type="text" class="form-control" name="gender" value="<%= employeeFull.gender %>"
+                            readonly>
+                        </div>
+                        <div class="col-sm-3">
+                          <label for="bloodGroup" class="form-label">Blood Group</label>
+                          <input type="text" class="form-control" name="bloodGroup"
+                            value="<%= employeeFull.bloodGroup %>" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <div class="col-sm-3">
+                          <label for="maritalStatus" class="form-label">Marital Status</label>
+                          <input type="text" class="form-control" name="maritalStatus"
+                            value="<%= employeeFull.maritalStatus %>" readonly>
+                        </div>
+                        <div class="col-sm-3">
+                          <label for="religion" class="form-label">Religion</label>
+                          <input type="text" class="form-control" name="religion" value="<%= employeeFull.religion %>"
+                            readonly>
+                        </div>
+                        <div class="col-sm-3">
+                          <label for="nationality" class="form-label">Nationality</label>
+                          <input type="text" class="form-control" name="nationality"
+                            value="<%= employeeFull.nationality %>" readonly>
+                        </div>
+                        <div class="col-sm-3">
+                          <label for="ethnicity" class="form-label">Ethnicity</label>
+                          <input type="text" class="form-control" name="ethnicity" value="<%= employeeFull.ethnicity %>"
+                            readonly>
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <div class="col-sm-6">
+                          <label for="taxID" class="form-label">Tax ID</label>
+                          <input type="text" class="form-control" name="taxID" value="<%= employeeFull.taxID %>"
+                            readonly>
+                        </div>
+                        <div class="col-sm-3">
+                          <label for="bank" class="form-label">Bank</label>
+                          <input type="text" class="form-control" name="bank" value="<%= employeeFull.bank %>" readonly>
+
+                        </div>
+                        <div class="col-sm-3">
+                          <label for="bankNumber" class="form-label">Bank Number</label>
+                          <input type="text" class="form-control" name="bankNumber"
+                            value="<%= employeeFull.bankNumber %>" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="Address" class="form-label">Address</label>
+                        <input type="text" class="form-control" name="Address" value="<%= employeeFull.address %>"
+                          readonly>
+                      </div>
+                      <div class="form-group row">
+                        <div class="col-sm-3">
+                          <label for="subdistrict" class="form-label">Subdistrict</label>
+                          <input type="text" class="form-control" name="subdistrict"
+                            value="<%= employeeFull.subdistrict %>" readonly>
+                        </div>
+                        <div class="col-sm-3">
+                          <label for="district" class="form-label">District</label>
+                          <input type="text" class="form-control" name="district" value="<%= employeeFull.district %>"
+                            readonly>
+                        </div>
+                        <div class="col-sm-3">
+                          <label for="province" class="form-label">Province</label>
+                          <input type="text" class="form-control" name="province" value="<%= employeeFull.province %>"
+                            readonly>
+                        </div>
+                        <div class="col-sm-3">
+                          <label for="postcode" class="form-label">Postcode</label>
+                          <input type="text" class="form-control" name="postcode" value="<%= employeeFull.postcode %>"
+                            readonly>
+                        </div>
+
+                      </div>
+                      <div class="mb-3 text-right">
+                        <a href="/tableTest/Edit/<%= employeeFull.id %>"
+                          class="btn btn-warning btn-icon-split ml-auto btn-sm">
+                          <span class="icon text-white-50">
+                            <i class="fas fa-pen"></i>
+                          </span>
+                          <span class="text">Edit Employee</span>
+                        </a>
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+              <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+        <!-- Main Content -->
+        <hr>
+        <div id="contentEducation">
+
+          <!-- Begin Page Content -->
+          <div class="container-fluid">
+
+            <!-- Page Heading -->
+            <!-- <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+                    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
+                        For more information about DataTables, please visit the <a target="_blank"
+                            href="https://datatables.net">official DataTables documentation</a>.</p>-->
+
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4">
+              <a href="#collapseCardED" class="card-header" data-toggle="collapse" role="button" aria-expanded="true"
+                aria-controls="collapseCardED">
+                <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-graduation-cap fa-fw"></i> Education
+                  information</h6>
+              </a>
+
+
+              <div class="card-body collapse show" id="collapseCardED">
+                <div class="mb-3 align-items-center text-center">
+                  <a href="/tableTest/SubAdd/<%= employeeFull.id %>"
+                    class="btn btn-primary btn-icon-split ml-auto btn-sm">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-plus-circle"></i>
+                    </span>
+                    <span class="text">Create Education</span>
+                  </a>
+                </div>
+                <div class="table-responsive">
+                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                      <tr>
+                        <th class="align-middle">Level</th>
+                        <th class="align-middle">University</th>
+                        <th class="align-middle">Major</th>
+                        <th class="align-middle">Year/Graduation</th>
+                        <th class="align-middle">Action</th>
+                      </tr>
+                    </thead>
+                    <tfoot>
+                      <tr>
+                        <th class="align-middle">Level</th>
+                        <th class="align-middle">University</th>
+                        <th class="align-middle">Major</th>
+                        <th class="align-middle">Year/Graduation</th>
+                        <th class="align-middle">Action</th>
+                      </tr>
+                    </tfoot>
+                    <tbody>
+                      <% emEducation.forEach(emEducation=> { %>
+                        <tr>
+                          <td class="align-middle">
+                            <%= emEducation.educationLevel %>
+                          </td>
+                          <td class="align-middle">
+                            <%= emEducation.university %>
+                          </td>
+                          <td class="align-middle">
+                            <%= emEducation.major %>
+                          </td>
+                          <td class="align-middle">
+                            <%= emEducation.yearGraduation %>
+                          </td>
+                          <td class="align-middle text-center">
+                            <a href="/tableTest/SubView/<%= emEducation.id %>" class="btn btn-info btn-circle">
+                              <i class="fas fa-eye"></i></a>
+                            <a href="/tableTest/SubEdit/<%= emEducation.id %>" class="btn btn-warning btn-circle">
+                              <i class="fas fa-pen"></i></a>
+                            <a href="/tableTest/SubDel/<%= emEducation.id %>" class="btn btn-danger btn-circle"
+                              onclick="return confirm('Are you sure ?');">
+                              <i class="fas fa-trash-alt"></i></a>
+
+                          </td>
+                        </tr>
+                        <% }) %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+        <!-- Main Content -->
+        <hr>
+        <div id="contentCard">
+
+          <!-- Begin Page Content -->
+          <div class="container-fluid">
+
+            <!-- Page Heading -->
+            <!-- <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+                    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
+                        For more information about DataTables, please visit the <a target="_blank"
+                            href="https://datatables.net">official DataTables documentation</a>.</p>-->
+
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4">
+              <a href="#collapseCardC" class="card-header" data-toggle="collapse" role="button" aria-expanded="true"
+                aria-controls="collapseCardC">
+                <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-graduation-cap fa-fw"></i> Education
+                  information</h6>
+              </a>
+
+
+              <div class="card-body collapse show" id="collapseCardC">
+                <a href="/tableTest/SubZAdd/<%= employeeFull.id %>"
+                  class="btn btn-primary btn-icon-split ml-auto btn-sm">
+                  <span class="icon text-white-50">
+                    <i class="fas fa-plus-circle"></i>
+                  </span>
+                  <span class="text">Create Card</span>
+                </a>
+                <div class="table-responsive">
+                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                      <tr>
+                        <th class="align-middle">Card</th>
+                        <th class="align-middle">Create</th>
+                        <th class="align-middle">Action</th>
+                      </tr>
+                    </thead>
+                    <tfoot>
+                      <tr>
+                        <th class="align-middle">Card</th>
+                        <th class="align-middle">Create</th>
+                        <th class="align-middle">Action</th>
+                      </tr>
+                    </tfoot>
+                    <tbody>
+                      <% emCard.forEach(emCard=> { %>
+                        <tr>
+                          <td class="align-middle text-center">
+                            <% if (emCard.Card) { %>
+                              <img src="/uploads/<%= emCard.Card %>" width="400" />
+                              <% } else { %>
+                                <p>No image</p>
+                                <% } %>
+                          </td>
+                          <td class="align-middle">
+                            <%= emCard.createdAt %>
+                          </td>
+                          <td class="align-middle text-center">
+                            <a href="/tableTest/SubZView/<%= emCard.id %>" class="btn btn-info btn-circle">
+                              <i class="fas fa-eye"></i></a>
+                            <a href="/tableTest/SubZEdit/<%= emCard.id %>" class="btn btn-warning btn-circle">
+                              <i class="fas fa-pen"></i></a>
+                            <a href="/tableTest/SubZDel/<%= emCard.id %>" class="btn btn-danger btn-circle"
+                              onclick="return confirm('Are you sure ?');">
+                              <i class="fas fa-trash-alt"></i></a>
+
+                          </td>
+                        </tr>
+                        <% }) %>
+                    </tbody>
+                  </table>
+                </div>
+                <hr>
+                <div class="text-center">
+                  <a class="small" href="/tableTest">Back to ...</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+        <!-- Footer -->
+        <%- include('../partials/footer'); %>
+          <!-- End of Footer -->
+
+      </div>
+      <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="/js/sb-admin-2.min.js"></script>
+
+  <!-- Page level plugins -->
+  <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="/js/demo/datatables-demo.js"></script>
+
+</body>
+
+</html>

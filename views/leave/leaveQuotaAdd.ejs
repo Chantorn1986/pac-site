@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>PAC APP - <%= title %>
+  </title>
+
+  <!-- Custom fonts for this template -->
+  <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this page -->
+  <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <%- include('../partials/sidebar'); %>
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+          <!-- Topbar -->
+          <%- include('../partials/topbar'); %>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+              <div class="card o-hidden border-0 shadow-lg ">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">
+                    <i class="fas fa-calendar fa-fw"></i>Leave PAC - <%= title %> - (<%= resultsMain.code %>) <%=
+                          resultsMain.nameTH %>
+                  </h6>
+                </div>
+                <div class="card-body p-0">
+                  <!-- Nested Row within Card Body -->
+                  <div class="row">
+                    <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
+                    <div class="col-lg-12">
+                      <div class="p-5">
+                        <form class="user" action="/leave/leaveQuota/Add/<%= resultsMain.employeeID %>" method="POST">
+                          <div class="form-group row">
+                            <div class="col-sm-4">
+                              <label for="leaveAnnual" class="form-label">ลาพักร้อน ***</label>
+                              <% if(results){ %>
+                                <% results.forEach(results=> { %>
+                                  <% if( results.typeNameTH==='ลาพักร้อน' ){ %>
+                                    <input type="number" step="any" class="form-control text-right" name="leaveAnnual"
+                                      value="<%=  results.quota %>" required>
+                                    <% } %>
+                                      <% }) %>
+                                        <% }else{ %>
+                                          <% resultsType.forEach(resultsType=> { %>
+                                            <% if(resultsType.nameTH==='ลาพักร้อน' ){ %>
+                                              <input type="number" step="any" class="form-control text-right"
+                                                name="leaveAnnual" value="<%= resultsType.quota %>" required>
+                                              <% } %>
+                                                <% }) %>
+                                                  <% } %>
+                            </div>
+                            <div class="col-sm-4">
+                              <label for="leaveStudy" class="form-label">ลาเพื่อการศึกษา
+                                ฝึกอบรม</label>
+                              <% if(results){ %>
+                                <% results.forEach(results=> { %>
+                                  <% if( results.typeNameTH==='ลาเพื่อการศึกษา ฝึกอบรม' ){ %>
+                                    <input type="number" step="any" class="form-control text-right" name="leaveStudy"
+                                      value="<%=  results.quota %>" required>
+                                    <% } %>
+                                      <% }) %>
+                                        <% }else{ %>
+                                          <% resultsType.forEach(resultsType=> { %>
+                                            <% if(resultsType.nameTH==='ลาเพื่อการศึกษา ฝึกอบรม' ){ %>
+                                              <input type="number" step="any" class="form-control text-right"
+                                                name="leaveStudy" value="<%= resultsType.quota %>" required>
+                                              <% } %>
+                                                <% }) %>
+                                                  <% } %>
+                            </div>
+                            <div class="col-sm-4">
+                              <label for="leaveMaternity" class="form-label">ลาคลอดบุตร</label>
+                              <% if(results){ %>
+                                <% results.forEach(results=> { %>
+                                  <% if( results.typeNameTH==='ลาคลอดบุตร' ){ %>
+                                    <input type="number" step="any" class="form-control text-right"
+                                      name="leaveMaternity" value="<%=  results.quota %>" required>
+                                    <% } %>
+                                      <% }) %>
+                                        <% }else{ %>
+                                          <% resultsType.forEach(resultsType=> { %>
+                                            <% if(resultsType.nameTH==='ลาคลอดบุตร' ){ %>
+                                              <input type="number" step="any" class="form-control text-right"
+                                                name="leaveMaternity" value="<%= resultsType.quota %>" required>
+                                              <% } %>
+                                                <% }) %>
+                                                  <% } %>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <div class="col-sm-4">
+                              <label for="leavePersonal" class="form-label">ลากิจได้รับค่าจ้าง</label>
+                              <% if(results){ %>
+                                <% results.forEach(results=> { %>
+                                  <% if( results.typeNameTH==='ลากิจได้รับค่าจ้าง' ){ %>
+                                    <input type="number" step="any" class="form-control text-right" name="leavePersonal"
+                                      value="<%=  results.quota %>" required>
+                                    <% } %>
+                                      <% }) %>
+                                        <% }else{ %>
+                                          <% resultsType.forEach(resultsType=> { %>
+                                            <% if(resultsType.nameTH==='ลากิจได้รับค่าจ้าง' ){ %>
+                                              <input type="number" step="any" class="form-control text-right"
+                                                name="leavePersonal" value="<%= resultsType.quota %>" required>
+                                              <% } %>
+                                                <% }) %>
+                                                  <% } %>
+                            </div>
+                            <div class="col-sm-4">
+                              <label for="leaveSterilization" class="form-label">ลาเพื่อทำหมัน</label>
+                              <% if(results){ %>
+                                <% results.forEach(results=> { %>
+                                  <% if( results.typeNameTH==='ลาเพื่อทำหมัน' ){ %>
+                                    <input type="number" step="any" class="form-control text-right"
+                                      name="leaveSterilization" value="<%=  results.quota %>" required>
+                                    <% } %>
+                                      <% }) %>
+                                        <% }else{ %>
+                                          <% resultsType.forEach(resultsType=> { %>
+                                            <% if(resultsType.nameTH==='ลาเพื่อทำหมัน' ){ %>
+                                              <input type="number" step="any" class="form-control text-right"
+                                                name="leaveSterilization" value="<%= resultsType.quota %>" required>
+                                              <% } %>
+                                                <% }) %>
+                                                  <% } %>
+                            </div>
+                            <div class="col-sm-4">
+                              <label for="leaveOrdination" class="form-label">ลาอุปสมบท</label>
+                              <% if(results){ %>
+                                <% results.forEach(results=> { %>
+                                  <% if( results.typeNameTH==='ลาอุปสมบท' ){ %>
+                                    <input type="number" step="any" class="form-control text-right"
+                                      name="leaveOrdination" value="<%=  results.quota %>" required>
+                                    <% } %>
+                                      <% }) %>
+                                        <% }else{ %>
+                                          <% resultsType.forEach(resultsType=> { %>
+                                            <% if(resultsType.nameTH==='ลาอุปสมบท' ){ %>
+                                              <input type="number" step="any" class="form-control text-right"
+                                                name="leaveOrdination" value="<%= resultsType.quota %>" required>
+                                              <% } %>
+                                                <% }) %>
+                                                  <% } %>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <div class="col-sm-4">
+                              <label for="leaveSick" class="form-label">ลาป่วย</label>
+                              <% if(results){ %>
+                                <% results.forEach(results=> { %>
+                                  <% if( results.typeNameTH==='ลาป่วย' ){ %>
+                                    <input type="number" step="any" class="form-control text-right" name="leaveSick"
+                                      value="<%=  results.quota %>" required>
+                                    <% } %>
+                                      <% }) %>
+                                        <% }else{ %>
+                                          <% resultsType.forEach(resultsType=> { %>
+                                            <% if(resultsType.nameTH==='ลาป่วย' ){ %>
+                                              <input type="number" step="any" class="form-control text-right"
+                                                name="leaveSick" value="<%= resultsType.quota %>" required>
+                                              <% } %>
+                                                <% }) %>
+                                                  <% } %>
+                            </div>
+                            <div class="col-sm-4">
+                              <label for="leaveCompassionate" class="form-label">ลาเพื่อฌาปนกิจ</label>
+                              <% if(results){ %>
+                                <% results.forEach(results=> { %>
+                                  <% if( results.typeNameTH==='ลาเพื่อฌาปนกิจ' ){ %>
+                                    <input type="number" step="any" class="form-control text-right"
+                                      name="leaveCompassionate" value="<%=  results.quota %>" required>
+                                    <% } %>
+                                      <% }) %>
+                                        <% }else{ %>
+                                          <% resultsType.forEach(resultsType=> { %>
+                                            <% if(resultsType.nameTH==='ลาเพื่อฌาปนกิจ' ){ %>
+                                              <input type="number" step="any" class="form-control text-right"
+                                                name="leaveCompassionate" value="<%= resultsType.quota %>" required>
+                                              <% } %>
+                                                <% }) %>
+                                                  <% } %>
+                            </div>
+                            <div class="col-sm-4">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <div class="col-sm-4">
+                              <label for="leaveAbsence" class="form-label">ลากิจ (ไม่ได้รับค่าจ้าง)</label>
+                              <% if(results){ %>
+                                <% results.forEach(results=> { %>
+                                  <% if( results.typeNameTH==='ลากิจ (ไม่ได้รับค่าจ้าง)' ){ %>
+                                    <input type="number" step="any" class="form-control text-right" name="leaveAbsence"
+                                      value="<%=  results.quota %>" required>
+                                    <% } %>
+                                      <% }) %>
+                                        <% }else{ %>
+                                          <% resultsType.forEach(resultsType=> { %>
+                                            <% if(resultsType.nameTH==='ลากิจ (ไม่ได้รับค่าจ้าง)' ){ %>
+                                              <input type="number" step="any" class="form-control text-right"
+                                                name="leaveAbsence" value="<%= resultsType.quota %>" required>
+                                              <% } %>
+                                                <% }) %>
+                                                  <% } %>
+                            </div>
+                            <div class="col-sm-4">
+                              <label for="leaveMarriage" class="form-label">ลาเพื่อสมรส</label>
+                              <% if(results){ %>
+                                <% results.forEach(results=> { %>
+                                  <% if( results.typeNameTH==='ลาเพื่อสมรส' ){ %>
+                                    <input type="number" step="any" class="form-control text-right" name="leaveMarriage"
+                                      value="<%=  results.quota %>" required>
+                                    <% } %>
+                                      <% }) %>
+                                        <% }else{ %>
+                                          <% resultsType.forEach(resultsType=> { %>
+                                            <% if(resultsType.nameTH==='ลาเพื่อสมรส' ){ %>
+                                              <input type="number" step="any" class="form-control text-right"
+                                                name="leaveMarriage" value="<%= resultsType.quota %>" required>
+                                              <% } %>
+                                                <% }) %>
+                                                  <% } %>
+                            </div>
+                            <div class="col-sm-4">
+                            </div>
+                          </div>
+                          <br>
+                          <button type="submit" class="btn btn-success btn-block">
+                            <i class="fas fa-save fa-fw"></i>
+                            <span class="text">Save</span></button>
+
+                        </form>
+                        <hr>
+                        <div class="text-center">
+                          <a class="small" href="/leave/leaveQuotaMain">Back to ...</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <%- include('../partials/footer'); %>
+          <!-- End of Footer -->
+
+      </div>
+      <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="/js/sb-admin-2.min.js"></script>
+
+  <!-- Page level plugins -->
+  <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="/js/demo/datatables-demo.js"></script>
+
+</body>
+
+</html>

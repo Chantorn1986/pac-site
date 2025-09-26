@@ -1,0 +1,389 @@
+<!-- Sidebar -->
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+  <!-- Sidebar - Brand -->
+  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+    <div class="sidebar-brand-icon rotate-n-15">
+      <i class="fas fa-solid fa-business-time"></i>
+    </div>
+    <div class="sidebar-brand-text mx-3">PAC APP<sup>2</sup></div>
+  </a>
+
+  <!-- Divider -->
+  <hr class="sidebar-divider my-0">
+
+  <!-- Nav Item - Dashboard -->
+  <li class="nav-item active">
+    <a class="nav-link" href="/stockCard/Report">
+      <i class="fas fa-fw fa-archive"></i>
+      <span>Stock Card</span></a>
+  </li>
+
+  <!-- Nav Item - Stock Menu A........ -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#stockCardA" aria-expanded="true"
+      aria-controls="collapseUtilities">
+      <i class="fas fa-fw fa-archive"></i>
+      <span>Brands&nbsp;&nbsp;A</span>
+    </a>
+    <div id="stockCardA" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <% barBrand.forEach(barBrand=> { %>
+          <% if(barBrand.title==='A' ) {%>
+            <a class="collapse-item" href="/stockCard/Report/<%= barBrand.id %>">
+              <%= barBrand.name %>
+            </a>
+            <%}%>
+              <% }) %>
+      </div>
+    </div>
+  </li>
+
+  <!-- Nav Item - Stock Menu C........-->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#stockCardC" aria-expanded="true"
+      aria-controls="collapseUtilities">
+      <i class="fas fa-fw fa-archive"></i>
+      <span>Brands&nbsp;&nbsp;B&nbsp;&nbsp;C</span>
+    </a>
+    <div id="stockCardC" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <% barBrand.forEach(barBrand=> { %>
+          <% if(barBrand.title==='B' ) {%>
+            <a class="collapse-item" href="/stockCard/Report/<%= barBrand.id %>">
+              <%= barBrand.name %>
+            </a>
+            <%}%>
+              <% }) %>
+                <% barBrand.forEach(barBrand=> { %>
+                  <% if(barBrand.title==='C' ) {%>
+                    <a class="collapse-item" href="/stockCard/Report/<%= barBrand.id %>">
+                      <%= barBrand.name %>
+                    </a>
+                    <%}%>
+                      <% }) %>
+      </div>
+    </div>
+  </li>
+
+  <!-- Nav Item - Stock Menu D........-->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#stockCardD" aria-expanded="true"
+      aria-controls="collapseUtilities">
+      <i class="fas fa-fw fa-archive"></i>
+      <span>Brands&nbsp;&nbsp;D&nbsp;&nbsp;E&nbsp;&nbsp;F</span>
+    </a>
+    <div id="stockCardD" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <% barBrand.forEach(barBrand=> { %>
+          <% if(barBrand.title==='D' ) {%>
+            <a class="collapse-item" href="/stockCard/Report/<%= barBrand.id %>">
+              <%= barBrand.name %>
+            </a>
+            <%}%>
+              <% }) %>
+                <% barBrand.forEach(barBrand=> { %>
+                  <% if(barBrand.title==='E' ) {%>
+                    <a class="collapse-item" href="/stockCard/Report/<%= barBrand.id %>">
+                      <%= barBrand.name %>
+                    </a>
+                    <%}%>
+                      <% }) %>
+                        <% barBrand.forEach(barBrand=> { %>
+                          <% if(barBrand.title==='F' ) {%>
+                            <a class="collapse-item" href="/stockCard/Report/<%= barBrand.id %>">
+                              <%= barBrand.name %>
+                            </a>
+                            <%}%>
+                              <% }) %>
+      </div>
+    </div>
+  </li>
+
+  <!-- Nav Item - Stock Menu H........-->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#stockCardH" aria-expanded="true"
+      aria-controls="collapseUtilities">
+      <i class="fas fa-fw fa-archive"></i>
+      <span>Brands&nbsp;&nbsp;G&nbsp;&nbsp;H</span>
+    </a>
+    <div id="stockCardH" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <% barBrand.forEach(barBrand=> { %>
+          <% if(barBrand.title==='G' ) {%>
+            <a class="collapse-item" href="/stockCard/Report/<%= barBrand.id %>">
+              <%= barBrand.name %>
+            </a>
+            <%}%>
+              <% }) %>
+                <% barBrand.forEach(barBrand=> { %>
+                  <% if(barBrand.title==='H' ) {%>
+                    <a class="collapse-item" href="/stockCard/Report/<%= barBrand.id %>">
+                      <%= barBrand.name %>
+                    </a>
+                    <%}%>
+                      <% }) %>
+      </div>
+    </div>
+  </li>
+
+  <!-- Nav Item - Stock Menu I........-->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#stockCardI" aria-expanded="true"
+      aria-controls="collapseUtilities">
+      <i class="fas fa-fw fa-archive"></i>
+      <span>Brands&nbsp;&nbsp;I&nbsp;&nbsp;J&nbsp;&nbsp;K&nbsp;&nbsp;L</span>
+    </a>
+    <div id="stockCardI" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <% barBrand.forEach(barBrand=> { %>
+          <% if(barBrand.title==='I' ) {%>
+            <a class="collapse-item" href="/stockCard/Report/<%= barBrand.id %>">
+              <%= barBrand.name %>
+            </a>
+            <%}%>
+              <% }) %>
+                <% barBrand.forEach(barBrand=> { %>
+                  <% if(barBrand.title==='J' ) {%>
+                    <a class="collapse-item" href="/stockCard/Report/<%= barBrand.id %>">
+                      <%= barBrand.name %>
+                    </a>
+                    <%}%>
+                      <% }) %>
+                        <% barBrand.forEach(barBrand=> { %>
+                          <% if(barBrand.title==='K' ) {%>
+                            <a class="collapse-item" href="/stockCard/Report/<%= barBrand.id %>">
+                              <%= barBrand.name %>
+                            </a>
+                            <%}%>
+                              <% }) %>
+                                <% barBrand.forEach(barBrand=> { %>
+                                  <% if(barBrand.title==='L' ) {%>
+                                    <a class="collapse-item" href="/stockCard/Report/<%= barBrand.id %>">
+                                      <%= barBrand.name %>
+                                    </a>
+                                    <%}%>
+                                      <% }) %>
+      </div>
+    </div>
+  </li>
+
+
+  <!-- Nav Item - Stock Menu M........-->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#stockCardM" aria-expanded="true"
+      aria-controls="collapseUtilities">
+      <i class="fas fa-fw fa-archive"></i>
+      <span>Brands&nbsp;&nbsp;M&nbsp;&nbsp;N</span>
+    </a>
+    <div id="stockCardM" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <% barBrand.forEach(barBrand=> { %>
+          <% if(barBrand.title==='M' ) {%>
+            <a class="collapse-item" href="/stockCard/Report/<%= barBrand.id %>">
+              <%= barBrand.name %>
+            </a>
+            <%}%>
+              <% }) %>
+                <% barBrand.forEach(barBrand=> { %>
+                  <% if(barBrand.title==='N' ) {%>
+                    <a class="collapse-item" href="/stockCard/Report/<%= barBrand.id %>">
+                      <%= barBrand.name %>
+                    </a>
+                    <%}%>
+                      <% }) %>
+      </div>
+    </div>
+  </li>
+
+  <!-- Nav Item - Stock Menu O........-->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#stockCardO" aria-expanded="true"
+      aria-controls="collapseUtilities">
+      <i class="fas fa-fw fa-archive"></i>
+      <span>Brands&nbsp;&nbsp;O</span>
+    </a>
+    <div id="stockCardO" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <% barBrand.forEach(barBrand=> { %>
+          <% if(barBrand.title==='O' ) {%>
+            <a class="collapse-item" href="/stockCard/Report/<%= barBrand.id %>">
+              <%= barBrand.name %>
+            </a>
+            <%}%>
+              <% }) %>
+      </div>
+    </div>
+  </li>
+
+  <!-- Nav Item - Stock Menu P........-->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#stockCardP" aria-expanded="true"
+      aria-controls="collapseUtilities">
+      <i class="fas fa-fw fa-archive"></i>
+      <span>Brands&nbsp;&nbsp;P</span>
+    </a>
+    <div id="stockCardP" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <% barBrand.forEach(barBrand=> { %>
+          <% if(barBrand.title==='P' ) {%>
+            <a class="collapse-item" href="/stockCard/Report/<%= barBrand.id %>">
+              <%= barBrand.name %>
+            </a>
+            <%}%>
+              <% }) %>
+      </div>
+    </div>
+  </li>
+
+  <!-- Nav Item - Stock Menu R........-->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#stockCardR" aria-expanded="true"
+      aria-controls="collapseUtilities">
+      <i class="fas fa-fw fa-archive"></i>
+      <span>Brands&nbsp;&nbsp;Q&nbsp;&nbsp;R</span>
+    </a>
+    <div id="stockCardR" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <% barBrand.forEach(barBrand=> { %>
+          <% if(barBrand.title==='Q' ) {%>
+            <a class="collapse-item" href="/stockCard/Report/<%= barBrand.id %>">
+              <%= barBrand.name %>
+            </a>
+            <%}%>
+              <% }) %>
+                <% barBrand.forEach(barBrand=> { %>
+                  <% if(barBrand.title==='R' ) {%>
+                    <a class="collapse-item" href="/stockCard/Report/<%= barBrand.id %>">
+                      <%= barBrand.name %>
+                    </a>
+                    <%}%>
+                      <% }) %>
+      </div>
+    </div>
+  </li>
+
+  <!-- Nav Item - Stock Menu S........-->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#stockCardS" aria-expanded="true"
+      aria-controls="collapseUtilities">
+      <i class="fas fa-fw fa-archive"></i>
+      <span>Brands&nbsp;&nbsp;S</span>
+    </a>
+    <div id="stockCardS" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <% barBrand.forEach(barBrand=> { %>
+          <% if(barBrand.title==='S' ) {%>
+            <a class="collapse-item" href="/stockCard/Report/<%= barBrand.id %>">
+              <%= barBrand.name %>
+            </a>
+            <%}%>
+              <% }) %>
+      </div>
+    </div>
+  </li>
+
+  <!-- Nav Item - Stock Menu T........-->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#stockCardT" aria-expanded="true"
+      aria-controls="collapseUtilities">
+      <i class="fas fa-fw fa-archive"></i>
+      <span>Brands&nbsp;&nbsp;T</span>
+    </a>
+    <div id="stockCardT" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <% barBrand.forEach(barBrand=> { %>
+          <% if(barBrand.title==='T' ) {%>
+            <a class="collapse-item" href="/stockCard/Report/<%= barBrand.id %>">
+              <%= barBrand.name %>
+            </a>
+            <%}%>
+              <% }) %>
+      </div>
+    </div>
+  </li>
+
+  <!-- Nav Item - Stock Menu U........-->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#stockCardU" aria-expanded="true"
+      aria-controls="collapseUtilities">
+      <i class="fas fa-fw fa-archive"></i>
+      <span>Brands&nbsp;&nbsp;U&nbsp;&nbsp;V&nbsp;&nbsp;W</span>
+    </a>
+    <div id="stockCardU" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <% barBrand.forEach(barBrand=> { %>
+          <% if(barBrand.title==='U' ) {%>
+            <a class="collapse-item" href="/stockCard/Report/<%= barBrand.id %>">
+              <%= barBrand.name %>
+            </a>
+            <%}%>
+              <% }) %>
+                <% barBrand.forEach(barBrand=> { %>
+                  <% if(barBrand.title==='V' ) {%>
+                    <a class="collapse-item" href="/stockCard/Report/<%= barBrand.id %>">
+                      <%= barBrand.name %>
+                    </a>
+                    <%}%>
+                      <% }) %>
+                        <% barBrand.forEach(barBrand=> { %>
+                          <% if(barBrand.title==='W' ) {%>
+                            <a class="collapse-item" href="/stockCard/Report/<%= barBrand.id %>">
+                              <%= barBrand.name %>
+                            </a>
+                            <%}%>
+                              <% }) %>
+
+      </div>
+    </div>
+  </li>
+  <!-- Nav Item - Stock Menu T........-->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#stockCardX" aria-expanded="true"
+      aria-controls="collapseUtilities">
+      <i class="fas fa-fw fa-archive"></i>
+      <span>Brands&nbsp;&nbsp;X&nbsp;&nbsp;Y&nbsp;&nbsp;Z</span>
+    </a>
+    <div id="stockCardX" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <% barBrand.forEach(barBrand=> { %>
+          <% if(barBrand.title==='X' ) {%>
+            <a class="collapse-item" href="/stockCard/Report/<%= barBrand.id %>">
+              <%= barBrand.name %>
+            </a>
+            <%}%>
+              <% }) %>
+                <% barBrand.forEach(barBrand=> { %>
+                  <% if(barBrand.title==='Y' ) {%>
+                    <a class="collapse-item" href="/stockCard/Report/<%= barBrand.id %>">
+                      <%= barBrand.name %>
+                    </a>
+                    <%}%>
+                      <% }) %>
+                        <% barBrand.forEach(barBrand=> { %>
+                          <% if(barBrand.title==='Z' ) {%>
+                            <a class="collapse-item" href="/stockCard/Report/<%= barBrand.id %>">
+                              <%= barBrand.name %>
+                            </a>
+                            <%}%>
+                              <% }) %>
+      </div>
+    </div>
+  </li>
+  <!-- Divider -->
+  <hr class="sidebar-divider d-none d-md-block">
+
+  <!-- Sidebar Toggler (Sidebar) -->
+  <div class="text-center d-none d-md-inline">
+    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+  </div>
+
+  <!-- Sidebar Message 
+        <div class="sidebar-card d-none d-lg-flex">
+            <img class="sidebar-card-illustration mb-2" src="/img/undraw_rocket.svg" alt="...">
+            <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
+            <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
+        </div>-->
+
+</ul>
+<!-- End of Sidebar -->

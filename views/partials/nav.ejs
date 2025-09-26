@@ -1,0 +1,28 @@
+<nav>
+  <div class="logo">
+    <a href="/home">PAC NodeJS</a>
+  </div>
+
+  <ul class="menu">
+    <% if (typeof user !=='undefined' ) { %>
+      <li><a href="/home">Home</a></li>
+      <div class="dropdown">
+        <button class="dropbtn">Setting HRM</button>
+        <div class="dropdown-content">
+          <a href="/user">User</a>
+          <a href="/department">Department</a>
+          <a href="/workLevel">Work Level</a>
+          <a href="/position">Position</a>
+        </div>
+      </div>
+      <li><a href="/contact">Contact</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/logout" class="logout-btn">Logout</a></li>
+      <% } else { %>
+        <li><a href="/login" class="login-btn">Login</a></li>
+
+        <!--<li><a href="/register">Register</a></li>-->
+        <% } %>
+
+  </ul>
+</nav>

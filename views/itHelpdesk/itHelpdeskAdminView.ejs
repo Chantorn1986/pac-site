@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>PAC APP - <%= title %>
+  </title>
+
+  <!-- Custom fonts for this template -->
+  <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this page -->
+  <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <%- include('../partials/sidebar'); %>
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+          <!-- Topbar -->
+          <%- include('../partials/topbar'); %>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+              <div class="card o-hidden border-0 shadow-lg ">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">
+                    <i class="fas fa-calendar fa-fw"></i>IT Helpdesk - <%= title %>
+                  </h6>
+                </div>
+                <div class="card-body p-0">
+                  <!-- Nested Row within Card Body -->
+                  <div class="row">
+                    <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
+                    <div class="col-lg-12">
+                      <div class="p-4">
+                        <div class="form-group row">
+                          <div class="col-sm-6">
+                            <label for="itHelpdeskDocumentE" class="form-label">เลขที่เอกสาร</label>
+                            <input type="text" class="form-control" name="itHelpdeskDocumentE" id="itHelpdeskDocumentE"
+                              value="<%= results.document %>" readonly>
+                          </div>
+                          <div class="col-sm-6">
+                            <label for="itHelpdeskDatetimeE" class="form-label">วันที่ เวลา</label>
+                            <input type="text" class="form-control" name="itHelpdeskDatetimeE"
+                              value="<%= results.datetimeS %>" readonly>
+                          </div>
+
+                        </div>
+                        <div class="form-group row">
+                          <div class="col-sm-6">
+                            <label for="itHelpdeskReporterE" class="form-label">ชื่อผู้แจ้ง</label>
+                            <input type="text" class="form-control" name="itHelpdeskReporterE"
+                              value="<%= results.reporter %>" readonly>
+                          </div>
+                          <div class="col-sm-6">
+                            <label for="itHelpdeskLocationE" class="form-label">สถานที่เกิดปัญหา</label>
+                            <input type="text" class="form-control" name="itHelpdeskLocationE"
+                              value="<%= results.location %>" readonly>
+                          </div>
+
+                        </div>
+                        <div class="form-group">
+                          <label for="itHelpdeskProblemE" class="form-label">ปัญหาที่แจ้ง</label>
+                          <textarea type="textarea" rows="3" class="form-control" name="itHelpdeskProblemE"
+                            readonly><%= results.problem %></textarea>
+                        </div>
+                        <div class="form-group">
+                          <label for="libraryAnswerIndustryType" class="form-label">อุปกรณ์ : </label>
+
+                          <% if(tagArray !==null){ %>
+                            <% let monitor=0,caseCPU=0,powerSupply=0,keyboard=0,mouse=0,printer=0,notebook=0 %>
+                              <% tagArray.forEach(tagArray=> { %>
+                                <% if(tagArray==='Monitor' ){%>
+                                  <% monitor ++ %>
+                                    <% } %>
+                                      <% if(tagArray==='Case CPU' ){%>
+                                        <% caseCPU ++ %>
+                                          <% } %>
+                                            <% if(tagArray==='Power Supply' ){%>
+                                              <% powerSupply ++ %>
+                                                <% } %>
+                                                  <% if(tagArray==='Keyboard' ){%>
+                                                    <% keyboard ++ %>
+                                                      <% } %>
+                                                        <% if(tagArray==='Mouse' ){%>
+                                                          <% mouse ++ %>
+                                                            <% } %>
+                                                              <% if(tagArray==='Printer' ){%>
+                                                                <% printer ++ %>
+                                                                  <% } %>
+                                                                    <% if(tagArray==='Notebook' ){%>
+                                                                      <% notebook ++ %>
+                                                                        <% } %>
+
+                                                                          <% }) %>
+                                                                            <% if(monitor===1 ){%>
+                                                                              <input type="checkbox" class="checkbox"
+                                                                                id="Monitor" name="Monitor"
+                                                                                value="Monitor" checked
+                                                                                disabled="disabled">
+                                                                              <%} else{%>
+                                                                                <input type="checkbox" class="checkbox"
+                                                                                  id="Monitor" name="Monitor"
+                                                                                  value="Monitor" disabled="disabled">
+                                                                                <% } %>
+                                                                                  <label for="Monitor">Monitor
+                                                                                  </label>&nbsp;&nbsp;
+                                                                                  <% if(caseCPU===1 ){%>
+                                                                                    <input type="checkbox"
+                                                                                      class="checkbox" id="Case CPU"
+                                                                                      name="Case CPU" value="Case CPU"
+                                                                                      checked disabled="disabled">
+                                                                                    <%} else{%>
+                                                                                      <input type="checkbox"
+                                                                                        class="checkbox" id="Case CPU"
+                                                                                        name="Case CPU" value="Case CPU"
+                                                                                        disabled="disabled">
+                                                                                      <% } %>
+                                                                                        <label for="Case CPU">Case CPU
+                                                                                        </label>&nbsp;&nbsp;
+                                                                                        <% if(powerSupply===1 ){%>
+                                                                                          <input type="checkbox"
+                                                                                            class="checkbox"
+                                                                                            id="Power Supply"
+                                                                                            name="Power Supply"
+                                                                                            value="Power Supply" checked
+                                                                                            disabled="disabled">
+                                                                                          <%} else{%>
+                                                                                            <input type="checkbox"
+                                                                                              class="checkbox"
+                                                                                              id="Power Supply"
+                                                                                              name="Power Supply"
+                                                                                              value="Power Supply"
+                                                                                              disabled="disabled">
+                                                                                            <% } %>
+                                                                                              <label
+                                                                                                for="Power Supply">Power
+                                                                                                Supply
+                                                                                              </label>&nbsp;&nbsp;
+                                                                                              <% if(keyboard===1 ){%>
+                                                                                                <input type="checkbox"
+                                                                                                  class="checkbox"
+                                                                                                  id="Keyboard"
+                                                                                                  name="Keyboard"
+                                                                                                  value="Keyboard"
+                                                                                                  checked
+                                                                                                  disabled="disabled">
+                                                                                                <%} else{%>
+                                                                                                  <input type="checkbox"
+                                                                                                    class="checkbox"
+                                                                                                    id="Keyboard"
+                                                                                                    name="Keyboard"
+                                                                                                    value="Keyboard"
+                                                                                                    disabled="disabled">
+                                                                                                  <% } %>
+                                                                                                    <label
+                                                                                                      for="Keyboard">Keyboard
+                                                                                                    </label>&nbsp;&nbsp;
+                                                                                                    <% if(mouse===1 ){%>
+                                                                                                      <input
+                                                                                                        type="checkbox"
+                                                                                                        class="checkbox"
+                                                                                                        id="Mouse"
+                                                                                                        name="Mouse"
+                                                                                                        value="Mouse"
+                                                                                                        checked
+                                                                                                        disabled="disabled">
+                                                                                                      <%} else{%>
+                                                                                                        <input
+                                                                                                          type="checkbox"
+                                                                                                          class="checkbox"
+                                                                                                          id="Mouse"
+                                                                                                          name="Mouse"
+                                                                                                          value="Mouse"
+                                                                                                          disabled="disabled">
+                                                                                                        <% } %>
+                                                                                                          <label
+                                                                                                            for="Mouse">Mouse
+                                                                                                          </label>&nbsp;&nbsp;
+                                                                                                          <% if(printer===1
+                                                                                                            ){%>
+                                                                                                            <input
+                                                                                                              type="checkbox"
+                                                                                                              class="checkbox"
+                                                                                                              id="Printer"
+                                                                                                              name="Printer"
+                                                                                                              value="Printer"
+                                                                                                              checked
+                                                                                                              disabled="disabled">
+                                                                                                            <%} else{%>
+                                                                                                              <input
+                                                                                                                type="checkbox"
+                                                                                                                class="checkbox"
+                                                                                                                id="Printer"
+                                                                                                                name="Printer"
+                                                                                                                value="Printer"
+                                                                                                                disabled="disabled">
+                                                                                                              <% } %>
+                                                                                                                <label
+                                                                                                                  for="Printer">Printer
+                                                                                                                </label>&nbsp;&nbsp;
+                                                                                                                <% if(notebook===1
+                                                                                                                  ){%>
+                                                                                                                  <input
+                                                                                                                    type="checkbox"
+                                                                                                                    class="checkbox"
+                                                                                                                    id="Notebook"
+                                                                                                                    name="Notebook"
+                                                                                                                    value="Notebook"
+                                                                                                                    checked
+                                                                                                                    disabled="disabled">
+                                                                                                                  <%}
+                                                                                                                    else{%>
+                                                                                                                    <input
+                                                                                                                      type="checkbox"
+                                                                                                                      class="checkbox"
+                                                                                                                      id="Notebook"
+                                                                                                                      name="Notebook"
+                                                                                                                      value="Notebook"
+                                                                                                                      disabled="disabled">
+                                                                                                                    <% }
+                                                                                                                      %>
+                                                                                                                      <label
+                                                                                                                        for="Notebook">Notebook
+                                                                                                                      </label>
+                                                                                                                      <% }
+                                                                                                                        %>
+
+                        </div>
+                        <div class="form-group">
+                          <label for="libraryAnswerIndustryType" class="form-label">โปรแกรม : </label>
+                          <% if(tagArray !==null){ %>
+                            <% let windows=0,msOffice=0,ecount=0,email=0,appSheet=0 %>
+                              <% tagArray.forEach(tagArray=> { %>
+                                <% if(tagArray==='Windows' ){%>
+                                  <% windows ++ %>
+                                    <% } %>
+                                      <% if(tagArray==='MS Office' ){%>
+                                        <% msOffice ++ %>
+                                          <% } %>
+                                            <% if(tagArray==='Ecount' ){%>
+                                              <% ecount ++ %>
+                                                <% } %>
+                                                  <% if(tagArray==='Email' ){%>
+                                                    <% email ++ %>
+                                                      <% } %>
+                                                        <% if(tagArray==='App Sheet' ){%>
+                                                          <% appSheet ++ %>
+                                                            <% } %>
+                                                              <% }) %>
+                                                                <% if(windows===1 ){%>
+                                                                  <input type="checkbox" class="checkbox" id="Windows"
+                                                                    name="Windows" value="Windows" checked
+                                                                    disabled="disabled">
+                                                                  <%} else{%>
+                                                                    <input type="checkbox" class="checkbox" id="Windows"
+                                                                      name="Windows" value="Windows"
+                                                                      disabled="disabled">
+                                                                    <% } %>
+                                                                      <label for="Windows">Windows </label>&nbsp;&nbsp;
+                                                                      <% if(msOffice===1 ){%>
+                                                                        <input type="checkbox" class="checkbox"
+                                                                          id="MS Office" name="MS Office"
+                                                                          value="MS Office" checked disabled="disabled">
+                                                                        <%} else{%>
+                                                                          <input type="checkbox" class="checkbox"
+                                                                            id="MS Office" name="MS Office"
+                                                                            value="MS Office" disabled="disabled">
+                                                                          <% } %>
+                                                                            <label for="MS Office">MS Office
+                                                                            </label>&nbsp;&nbsp;
+                                                                            <% if(ecount===1 ){%>
+                                                                              <input type="checkbox" class="checkbox"
+                                                                                id="Ecount" name="Ecount" value="Ecount"
+                                                                                checked disabled="disabled">
+                                                                              <%} else{%>
+                                                                                <input type="checkbox" class="checkbox"
+                                                                                  id="Ecount" name="Ecount"
+                                                                                  value="Ecount" disabled="disabled">
+                                                                                <% } %>
+                                                                                  <label for="Ecount">Ecount
+                                                                                  </label>&nbsp;&nbsp;
+                                                                                  <% if(email===1 ){%>
+                                                                                    <input type="checkbox"
+                                                                                      class="checkbox" id="Email"
+                                                                                      name="Email" value="Email" checked
+                                                                                      disabled="disabled">
+                                                                                    <%} else{%>
+                                                                                      <input type="checkbox"
+                                                                                        class="checkbox" id="Email"
+                                                                                        name="Email" value="Email"
+                                                                                        disabled="disabled">
+                                                                                      <% } %>
+                                                                                        <label for="Email">Email
+                                                                                        </label>&nbsp;&nbsp;
+                                                                                        <% if(appSheet===1 ){%>
+                                                                                          <input type="checkbox"
+                                                                                            class="checkbox"
+                                                                                            id="App Sheet"
+                                                                                            name="App Sheet"
+                                                                                            value="App Sheet" checked
+                                                                                            disabled="disabled">
+                                                                                          <%} else{%>
+                                                                                            <input type="checkbox"
+                                                                                              class="checkbox"
+                                                                                              id="App Sheet"
+                                                                                              name="App Sheet"
+                                                                                              value="App Sheet"
+                                                                                              disabled="disabled">
+                                                                                            <% } %>
+                                                                                              <label for="App Sheet">App
+                                                                                                Sheet </label>
+
+                                                                                              <% } %>
+                        </div>
+                        <div class="form-group">
+                          <label for="itHelpdeskOther" class="form-label">อื่นๆ : </label>
+                          <% if(tagArray !==null){ %>
+                            <% let other=0 %>
+                              <% tagArray.forEach(tagArray=> { %>
+                                <% if(tagArray==='Other' ){%>
+                                  <% other ++ %>
+                                    <% } %>
+                                      <% }) %>
+                                        <% if(other===1 ){%>
+                                          <input type="checkbox" class="checkbox" id="Other" name="Other" value="Other"
+                                            checked disabled="disabled">
+                                          <%} else{%>
+                                            <input type="checkbox" class="checkbox" id="Other" name="Other"
+                                              value="Other" disabled="disabled">
+                                            <% } %>
+                                              <label for="Other">Other </label>
+                                              <% } %>
+
+
+                        </div>
+                        <div class="form-group">
+                          <label for="itHelpdeskSolveAE" class="form-label">แก้ปัญหา</label>
+                          <textarea type="textarea" rows="3" class="form-control" name="itHelpdeskSolveAE"
+                            readonly><%= results.solve %></textarea>
+                        </div>
+                        <div class="form-group row">
+                          <div class="col-sm-4">
+                            <label for="itHelpdeskEmIT" class="form-label">ไอที</label>
+                            <input type="text" class="form-control" name="itHelpdeskEmITE" value="<%= results.emIT %>"
+                              readonly>
+                          </div>
+                          <div class="col-sm-4">
+                            <label for="itHelpdeskDatetime" class="form-label">วันที่ เวลา รับเรื่อง</label>
+                            <input type="text" class="form-control" name="itHelpdeskDatetime"
+                              value="<%= results.datetimeSolveS %>" readonly>
+                          </div>
+                          <div class="col-sm-4">
+                            <label for="itHelpdeskStatusE" class="form-label">สถานะ </label><br>
+                            &nbsp;&nbsp;
+                            <% if(results.status==="สำเร็จ" ){%>
+                              <input type="radio" name="itHelpdeskStatusA" value="สำเร็จ" checked readonly>
+                              <%}else{%>
+                                <input type="radio" name="itHelpdeskStatusA" value="สำเร็จ" readonly>
+                                <%}%>
+                                  <label for="status">สำเร็จ </label>
+                                  &nbsp;&nbsp;
+                                  <% if(results.status==="รอ" ){%>
+                                    <input type="radio" name="itHelpdeskStatusA" value="รอ" checked readonly>
+                                    <%}else{%>
+                                      <input type="radio" name="itHelpdeskStatusA" value="รอ" readonly>
+                                      <%}%>
+                                        <label for="status">รอ </label>
+                                        &nbsp;&nbsp;
+                                        <% if(results.status==="ดำเนินการ" ){%>
+                                          <input type="radio" name="itHelpdeskStatusA" value="ดำเนินการ" checked
+                                            readonly>
+                                          <%}else{%>
+                                            <input type="radio" name="itHelpdeskStatusA" value="ดำเนินการ" readonly>
+                                            <%}%>
+                                              <label for="status">ดำเนินการ </label>
+                                              &nbsp;&nbsp;
+                                              <% if(results.status==="ไม่สำเร็จ" ){%>
+                                                <input type="radio" name="itHelpdeskStatusA" value="ไม่สำเร็จ" checked
+                                                  readonly>
+                                                <%}else{%>
+                                                  <input type="radio" name="itHelpdeskStatusA" value="ไม่สำเร็จ"
+                                                    readonly>
+                                                  <%}%>
+                                                    <label for="status">ไม่สำเร็จ </label>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="tagValueE" class="form-label">เกี่ยวข้อง</label>
+                          <textarea type="textarea" rows="2" class="form-control tagValueE" name="tagValueE"
+                            id="tagValueE" readonly><%= results.equipment %></textarea>
+                        </div>
+                        <hr>
+                        <div class="text-center">
+                          <a class="small" href="/itHelpdesk/admin">Back to ...</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <%- include('../partials/footer'); %>
+          <!-- End of Footer -->
+
+      </div>
+      <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="/js/sb-admin-2.min.js"></script>
+
+  <!-- Page level plugins -->
+  <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="/js/demo/datatables-demo.js"></script>
+  <script>
+    const value = document.querySelector('.tagValueE');
+    let listArray = [];
+
+    const checkboxes = document.querySelectorAll('.checkbox');
+    if (value.value) {
+      listArray = value.value.split(";");
+    }
+
+    checkboxes.forEach((checkbox) => {
+      checkbox.addEventListener('click', function () {
+        if (this.checked === true) {
+          listArray.push(this.value);
+          value.textContent = listArray.join(';')
+        } else {
+          listArray = listArray.filter((e) => e !== this.value)
+          value.textContent = listArray.join(';')
+        }
+      })
+    })
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>PAC APP - <%= title %>
+  </title>
+
+  <!-- Custom fonts for this template -->
+  <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this page -->
+  <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <%- include('../partials/sidebar'); %>
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+          <!-- Topbar -->
+          <%- include('../partials/topbar'); %>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+              <div class="card o-hidden border-0 shadow-lg ">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-fw fa-comment-alt"></i> Validate Q & A
+                    Management - <%= title %>
+                  </h6>
+                </div>
+
+                <div class="card-body p-0">
+                  <!-- Nested Row within Card Body -->
+                  <div class="row">
+                    <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
+                    <div class="col-lg-12">
+                      <div class="p-4">
+                        <form id="formVAnswer" class="user" action="/library/validateAnswer/Add" method="POST">
+
+                          <h6 class="m-0 font-weight-bold text-primary mb-3"><i class="fas fa-file-signature fa-fw"></i>
+                            <%= title %>
+                          </h6>
+                          <div class="form-group row">
+                            <div class="col-sm-4">
+                              <label for="libraryVAnswerDate" class="form-label">Date
+                                :</label>
+                              <input type="date" class="form-control" name="libraryVAnswerDate"
+                                value="<%= dateDefaul %>">
+                            </div>
+                            <div class="col-sm-4">
+                              <label for="libraryVAnswerDocQTN" class="form-label">Doc
+                                No.:</label>
+                              <input type="text" class="form-control" name="libraryVAnswerDocQTN"
+                                id="libraryVAnswerDocQTN">
+                            </div>
+                            <div class="col-sm-4">
+                              <label for="libraryVAnswerQuestioner" class="form-label">Questioner :</label>
+                              <select name="libraryVAnswerQuestioner" class="form-control form-select"
+                                aria-label="Default select example">
+                                <option value="">--- Select Name ---</option>
+                                <% employee.forEach(employee=> { %>
+                                  <option value="<%= employee.nameTH %>">
+                                    <%= employee.nameTH %>
+                                  </option>
+                                  <% }) %>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="libraryVAnswerTitle" class="form-label">Question ?
+                              :</label>
+                            <textarea type="textarea" rows="8" class="form-control"
+                              name="libraryVAnswerTitle"></textarea>
+                          </div>
+                          <div class="form-group row">
+                            <div class="col-sm-4">
+                              <label for="libraryVAnswerBrands" class="form-label">Brands
+                                :<br></label>
+                              <% libraryBrands.forEach(libraryBrands=> { %>
+                                <br>
+                                <input type="checkbox" class="checkbox" id="vehicle<%= libraryBrands.code %>"
+                                  name="vehicle<%= libraryBrands.code %>" value="<%= libraryBrands.nameEN %>">
+                                <label for="vehicle<%= libraryBrands.code %>">
+                                  <%= libraryBrands.nameEN %>
+                                </label>
+                                <% }) %>
+                            </div>
+                            <div class="col-sm-4">
+                              <label for="libraryVAnswerProductType" class="form-label">Product Type :<br></label>
+                              <% libraryProductType.forEach(libraryProductType=> { %>
+                                <br>
+                                <input type="checkbox" class="checkbox" id="vehicle<%= libraryProductType.code %>"
+                                  name="vehicle<%= libraryProductType.code %>" value="<%= libraryProductType.nameEN %>">
+                                <label for="vehicle<%= libraryProductType.code %>">
+                                  <%= libraryProductType.nameEN %>
+                                </label>
+                                <% }) %>
+                            </div>
+                            <div class="col-sm-4">
+                              <label for="libraryVAnswerIndustryType" class="form-label">Industry Type :<br></label>
+                              <% libraryIndustryType.forEach(libraryIndustryType=> { %>
+                                <br>
+                                <input type="checkbox" class="checkbox" id="vehicle<%= libraryIndustryType.code %>"
+                                  name="vehicle<%= libraryIndustryType.code %>"
+                                  value="<%= libraryIndustryType.nameEN %>">
+                                <label for="vehicle<%= libraryIndustryType.code %>">
+                                  <%= libraryIndustryType.nameEN %>
+                                </label>
+                                <% }) %>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="tagValueVA" class="form-label">Tag :</label>
+                            <textarea type="textarea" rows="2" class="form-control tagValueVA" name="tagValueVA"
+                              readonly></textarea>
+                          </div>
+                          <hr class="sidebar-divider">
+                          <h6 class="m-0 font-weight-bold text-primary mb-3"><i class="fas fa-user-edit fa-fw"></i>
+                            Answerer</h6>
+                          <div class="form-group row">
+
+                            <div class="col-sm-6">
+                              <label for="libraryVAnswerAnswerer" class="form-label">Answerer :</label>
+                              <select name="libraryVAnswerAnswerer" class="form-control form-select"
+                                aria-label="Default select example">
+                                <option value="">--- Select Name ---</option>
+                                <% employee.forEach(employee=> { %>
+                                  <option value="<%= employee.nameTH %>">
+                                    <%= employee.nameTH %>
+                                  </option>
+                                  <% }) %>
+                              </select>
+                            </div>
+                            <div class="col-sm-6">
+                              <label for="libraryVAnswerAnswerDate" class="form-label">Answer Date :</label>
+                              <input type="datetime" class="form-control" name="libraryVAnswerAnswerDate"
+                                value="<%= timestamp %>" readonly>
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <label for="libraryVAnswerAnswer" class="form-label">Answer
+                              :</label>
+                            <textarea type="textarea" rows="13" class="form-control"
+                              name="libraryVAnswerAnswer"></textarea>
+                          </div>
+                          <hr class="sidebar-divider">
+                          <h6 class="m-0 font-weight-bold text-primary mb-3"><i class="fas fa-user-check fa-fw"></i>
+                            Validator</h6>
+                          <div class="form-group row">
+                            <div class="col-sm-6">
+                              <label for="libraryVAnswerValidator" class="form-label">Validator :</label>
+                              <select name="libraryVAnswerValidator" class="form-control form-select"
+                                aria-label="Default select example">
+                                <option value="">--- Select Name ---</option>
+                                <% employee.forEach(employee=> { %>
+                                  <option value="<%= employee.nameTH %>">
+                                    <%= employee.nameTH %>
+                                  </option>
+                                  <% }) %>
+                              </select>
+                            </div>
+
+                            <div class="col-sm-6">
+                              <label for="libraryVAnswerValidateDate" class="form-label">Validate Date :</label>
+                              <input type="datetime" class="form-control" name="libraryVAnswerValidateDate"
+                                value="<%= timestamp %>" readonly>
+                            </div>
+
+                          </div>
+
+                          <div class="form-group">
+                            <label for="libraryVAnswerSummary" class="form-label">Summary
+                              :</label>
+                            <textarea type="textarea" rows="5" class="form-control"
+                              name="libraryVAnswerSummary"></textarea>
+                          </div>
+
+                          <div class="form-group">
+                            <label for="libraryVAnswerKeyword" class="form-label">Keyword
+                              :</label>
+                            <textarea type="textarea" rows="15" class="form-control"
+                              name="libraryVAnswerKeyword"></textarea>
+                          </div>
+                          <div class="form-group row">
+                            <div class="col-sm-6">
+                              <label for="libraryVAnswerAddPAC"> <i class="fas fa-fw fa-book"></i> Add to Library PAC
+                              </label>
+
+                              <select name="libraryVAnswerAddPAC" class="form-control form-select"
+                                aria-label="Default select example" onchange="runDocNumber();">
+                                <option value="false">--- Select Value ---</option>
+                                <option value="true">Add to Library PAC</option>
+                                <option value="false">Do not add to Library PAC</option>
+
+                              </select>
+                            </div>
+                            <div class="col-sm-6">
+                              <label for="libraryVAnswerDocLBL" class="form-label">Doc LBL
+                                No.:</label>
+                              <input type="text" class="form-control" name="libraryVAnswerDocLBLE"
+                                id="libraryVAnswerDocLBL" readonly>
+                            </div>
+                          </div>
+
+                          <button type="submit" class="btn btn-success btn-block">
+                            <i class="fas fa-save fa-fw"></i>
+                            <span class="text">Save</span></button>
+
+                        </form>
+                        <hr>
+                        <div class="text-center">
+                          <a class="small" href="/library/validateAnswer">Back to ...</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <%- include('../partials/footer'); %>
+          <!-- End of Footer -->
+
+      </div>
+      <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="/js/sb-admin-2.min.js"></script>
+
+  <!-- Page level plugins -->
+  <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="/js/demo/datatables-demo.js"></script>
+  <script>
+    let doLblNo = "<%= maxNoLBL.maxNo %>";
+    let docQtnNo = "<%= maxNo.maxNo %>";
+    if (docQtnNo.length = 1) { docQtnNo = "00" + docQtnNo; }
+    else if (docQtnNo.length = 2) { docQtnNo = "0" + docQtnNo; }
+    document.getElementById('libraryVAnswerDocQTN').value = "QTN" + new Date().toLocaleString("en-US", { year: "2-digit" }) + "-" + docQtnNo;
+
+    function runDocNumber() {
+      let ddlApp = document.forms['formVAnswer']['libraryVAnswerAddPAC'].value;
+      if (ddlApp === "true") {
+        if (doLblNo.length = 1) { doLblNo = "00" + doLblNo; }
+        else if (doLblNo.length = 2) { doLblNo = "0" + doLblNo; }
+        document.getElementById('libraryVAnswerDocLBL').value = "LBL" + new Date().toLocaleString("en-US", { year: "2-digit" }) + "-" + doLblNo;
+      } else {
+        document.getElementById('libraryVAnswerDocLBL').value = "";
+      }
+    }
+
+    const value = document.querySelector('.tagValueVA');
+    let listArray = [];
+
+    const checkboxes = document.querySelectorAll('.checkbox');
+
+    checkboxes.forEach((checkbox) => {
+      checkbox.addEventListener('click', function () {
+        if (this.checked === true) {
+          listArray.push(this.value);
+          value.textContent = listArray.join(';')
+        } else {
+          listArray = listArray.filter((e) => e !== this.value)
+          value.textContent = listArray.join(';')
+        }
+      })
+    })
+
+  </script>
+</body>
+
+</html>

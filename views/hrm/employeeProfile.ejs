@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>PAC APP - <%= title %>
+  </title>
+
+  <!-- Custom fonts for this template -->
+  <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this page -->
+  <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <%- include('../partials/sidebar'); %>
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+          <!-- Topbar -->
+          <%- include('../partials/topbar'); %>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-lg-6">
+                  <!-- Collapsable Card Profile -->
+                  <div class="card shadow mb-4">
+                    <!-- Card Header - Accordion -->
+                    <a href="#collapseCardProfile" class="d-block card-header py-3" data-toggle="collapse" role="button"
+                      aria-expanded="true" aria-controls="collapseCardProfile">
+                      <h6 class="m-0 font-weight-bold text-primary">
+                        <i class="fas fa-address-card fa-fw"></i>
+                        <%= title %>
+                      </h6>
+                    </a>
+                    <!-- Card Content - Collapse -->
+                    <div class="collapse show" id="collapseCardProfile">
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col-4 text-right"><strong>Code : </strong></div>
+                          <div class="col-8">
+                            <%= employeeFull.code %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-4 text-right"><strong>Serial : </strong></div>
+                          <div class="col-8">
+                            <%= employeeFull.serialNumber %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-4 text-right"><strong>Internal Telephone : </strong>
+                          </div>
+                          <div class="col-8">
+                            <%= employeeFull.InternalTelephone %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-4 text-right"><strong>Nickname : </strong></div>
+                          <div class="col-8">
+                            <%= employeeFull.nickname %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-4 text-right"><strong>Mobile : </strong></div>
+                          <div class="col-8">
+                            <%= employeeFull.mobile %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-4 text-right"><strong>Email : </strong></div>
+                          <div class="col-8">
+                            <%= employeeFull.email %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-4 text-right"><strong>Full name thai : </strong>
+                          </div>
+                          <div class="col-8">
+                            <%= employeeFull.nameTH %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-4 text-right"><strong>Full name english : </strong>
+                          </div>
+                          <div class="col-8">
+                            <%= employeeFull.nameEN %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-4 text-right"><strong>Department : </strong></div>
+                          <div class="col-8">
+                            <%= employeeFull.depEN %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-4 text-right"><strong>Position : </strong></div>
+                          <div class="col-8">
+                            <%= employeeFull.posEN %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-4 text-right"><strong>Work Level : </strong></div>
+                          <div class="col-8">
+                            <%= employeeFull.wleEN %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-4 text-right"><strong>Employment : </strong></div>
+                          <div class="col-8">
+                            <%= employeeFull.employmentType %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-4 text-right"><strong>Start Date : </strong></div>
+                          <div class="col-8">
+                            <% if (coverDate.startDate) { %>
+                              <%= coverDate.startDate %>
+                                <% } else { %>
+                                  -
+                                  <% } %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-4 text-right"><strong>End Date : </strong></div>
+                          <div class="col-8">
+                            <% if (coverDate.endDate) { %>
+                              <%= coverDate.endDate %>
+                                <% } else { %>
+                                  -
+                                  <% } %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-4 text-right"><strong>Reason for leaving : </strong>
+                          </div>
+                          <div class="col-8">
+                            <% if(employeeFull.reasonForLeaving==="" ){%>
+                              -
+                              <% } else {%>
+                                <%= employeeFull.reasonForLeaving %>
+                                  <% } %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-4 text-right"><strong>Period of Employment :
+                            </strong></div>
+                          <div class="col-8">
+                            <%= emSub.workPeriod %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Collapsable Card Infomation -->
+                  <div class="card shadow mb-4">
+                    <!-- Card Header - Accordion -->
+                    <a href="#collapseCardInfo" class="d-block card-header py-3" data-toggle="collapse" role="button"
+                      aria-expanded="true" aria-controls="collapseCardInfo">
+                      <h6 class="m-0 font-weight-bold text-primary">
+                        <i class="fas fa-address-book fa-fw"></i> Personal information
+                      </h6>
+                    </a>
+                    <!-- Card Content - Collapse -->
+                    <div class="collapse show" id="collapseCardInfo">
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col-4 text-right"><strong>Date of birth : </strong>
+                          </div>
+                          <div class="col-8">
+                            <% if (coverDate.dateOfBirth) { %>
+                              <%= coverDate.dateOfBirth %>
+                                <% } else { %>
+                                  -
+                                  <% } %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-4 text-right"><strong>Age : </strong></div>
+                          <div class="col-8">
+                            <%= emSub.ageEm %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-4 text-right"><strong>Name Title : </strong></div>
+                          <div class="col-8">
+                            <%= employeeFull.nameTitle %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-4 text-right"><strong>Gender : </strong></div>
+                          <div class="col-8">
+                            <%= employeeFull.gender %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-4 text-right"><strong>Blood Group : </strong></div>
+                          <div class="col-8">
+                            <%= employeeFull.bloodGroup %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-4 text-right"><strong>Marital Status : </strong>
+                          </div>
+                          <div class="col-8">
+                            <%= employeeFull.maritalStatus %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-4 text-right"><strong>Religion : </strong></div>
+                          <div class="col-8">
+                            <%= employeeFull.religion %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-4 text-right"><strong>Nationality : </strong></div>
+                          <div class="col-8">
+                            <%= employeeFull.nationality %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-4 text-right"><strong>Ethnicity : </strong></div>
+                          <div class="col-8">
+                            <%= employeeFull.ethnicity %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-4 text-right"><strong>Tax ID : </strong></div>
+                          <div class="col-8">
+                            <%= employeeFull.taxID %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-4 text-right"><strong>Bank : </strong></div>
+                          <div class="col-8">
+                            <%= employeeFull.bank %><br>
+                              <%= employeeFull.bankNumber %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-4 text-right"><strong>Address : </strong></div>
+                          <div class="col-8">
+                            <%= employeeFull.address %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-4 text-right"><strong>Subdistrict : </strong></div>
+                          <div class="col-8">
+                            <%= employeeFull.subdistrict %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-4 text-right"><strong>District : </strong></div>
+                          <div class="col-8">
+                            <%= employeeFull.district %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-4 text-right"><strong>Province : </strong></div>
+                          <div class="col-8">
+                            <%= employeeFull.province %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-4 text-right"><strong>Postcode : </strong></div>
+                          <div class="col-8">
+                            <%= employeeFull.postcode %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="col-lg-6">
+                  <!-- Collapsable Card Pic -->
+                  <div class="card shadow mb-4">
+                    <!-- Card Header - Accordion -->
+                    <a href="#collapseCardPic" class="d-block card-header py-3" data-toggle="collapse" role="button"
+                      aria-expanded="true" aria-controls="collapseCardPic">
+                      <h6 class="m-0 font-weight-bold text-primary">
+                        <i class="fas fa-portrait fa-fw"></i> Picture
+                      </h6>
+                    </a>
+                    <!-- Card Content - Collapse -->
+                    <div class="collapse show" id="collapseCardPic">
+                      <div class="card-body">
+                        <% if (employeeFull.image) { %>
+                          <div class="text-center">
+                            <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" src="/uploads/<%= employeeFull.image %>"
+                              style="width: 50%">
+                          </div>
+                          <% } else { %>
+                            <div class="text-center">
+                              <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 50%" src="/img/NoPic.jpg"
+                                alt="...">
+                            </div>
+                            <% } %>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Collapsable Card Approve -->
+                  <div class="card shadow mb-4">
+                    <!-- Card Header - Accordion -->
+                    <a href="#collapseApprove" class="d-block card-header py-3" data-toggle="collapse" role="button"
+                      aria-expanded="true" aria-controls="collapseApprove">
+                      <h6 class="m-0 font-weight-bold text-primary">
+                        <i class="fas fa-pen-nib fa-fw"></i> Approve Manager
+                      </h6>
+                    </a>
+                    <!-- Card Content - Collapse -->
+                    <div class="collapse show" id="collapseApprove">
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col-4 text-right"><strong>Employee name : </strong></div>
+                          <div class="col-8">
+                            <%= emApprove.nameTH %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-4 text-right"><strong>Head of department : </strong></div>
+                          <div class="col-8">
+                            <%= emApprove.approveHead %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-4 text-right"><strong>HR : </strong>
+                          </div>
+                          <div class="col-8">
+                            <%= emApprove.approveHR %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-4 text-right"><strong>Manager director : </strong></div>
+                          <div class="col-8">
+                            <%= emApprove.approveMD %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Collapsable Card Quota -->
+                  <div class="card shadow mb-4">
+                    <!-- Card Header - Accordion -->
+                    <a href="#collapseQuota" class="d-block card-header py-3" data-toggle="collapse" role="button"
+                      aria-expanded="true" aria-controls="collapseQuota">
+                      <h6 class="m-0 font-weight-bold text-primary">
+                        <i class="fas fa-calendar-alt fa-fw"></i> Leave Quota
+                      </h6>
+                    </a>
+                    <!-- Card Content - Collapse -->
+                    <div class="collapse show" id="collapseQuota">
+                      <div class="card-body">
+                        <% emQuota.forEach(emQuota=> { %>
+                          <div class="row">
+                            <div class="col-5"><strong>
+                                <%= emQuota.typeNo %> ) <%= emQuota.typeNameTH %> :
+                              </strong></div>
+                            <div class="col-7">
+                              <%= emQuota.quota %> วัน
+                            </div>
+                          </div>
+                          <% }) %>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Collapsable Card Education -->
+                  <div class="card shadow mb-4">
+                    <!-- Card Header - Accordion -->
+                    <a href="#collapseCardEdu" class="d-block card-header py-3" data-toggle="collapse" role="button"
+                      aria-expanded="true" aria-controls="collapseCardEdu">
+                      <h6 class="m-0 font-weight-bold text-primary">
+                        <i class="fas fa-graduation-cap fa-fw"></i> Education information
+                      </h6>
+                    </a>
+                    <!-- Card Content - Collapse -->
+                    <div class="collapse show" id="collapseCardEdu">
+                      <div class="card-body">
+                        <% emEducation.forEach(emEducation=> { %>
+                          <div class="row">
+                            <div class="col-4 text-right"><strong>Level : </strong></div>
+                            <div class="col-8">
+                              <%= emEducation.educationLevel %>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-4 text-right"><strong>University : </strong>
+                            </div>
+                            <div class="col-8">
+                              <%= emEducation.university %>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-4 text-right"><strong>Major : </strong></div>
+                            <div class="col-8">
+                              <%= emEducation.major %>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-4 text-right"><strong>Year Graduation :
+                              </strong></div>
+                            <div class="col-8">
+                              <%= emEducation.yearGraduation %>
+                            </div>
+                          </div>
+                          <% }) %>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Collapsable Card Car -->
+                  <div class="card shadow mb-4">
+                    <!-- Card Header - Accordion -->
+                    <a href="#collapseCardCar" class="d-block card-header py-3" data-toggle="collapse" role="button"
+                      aria-expanded="true" aria-controls="collapseCardCar">
+                      <h6 class="m-0 font-weight-bold text-primary">
+                        <i class="fas fa-car-side fa-fw"></i> / <i class="fas fa-motorcycle fa-fw"></i> Conveyance
+                      </h6>
+                    </a>
+                    <!-- Card Content - Collapse -->
+                    <div class="collapse show" id="collapseCardCar">
+                      <div class="card-body">
+                        <% emCar.forEach(emCar=> { %>
+                          <div class="row">
+                            <div class="col-4 text-right"><strong>Type : </strong></div>
+                            <div class="col-8">
+                              <%= emCar.vehicle %>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-4 text-right"><strong>Brand : </strong>
+                            </div>
+                            <div class="col-8">
+                              <%= emCar.brand %>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-4 text-right"><strong>Model : </strong></div>
+                            <div class="col-8">
+                              <%= emCar.model %>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-4 text-right"><strong>Color :
+                              </strong></div>
+                            <div class="col-8">
+                              <%= emCar.color %>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-4 text-right"><strong>Registration :
+                              </strong></div>
+                            <div class="col-8">
+                              <%= emCar.registration %>
+                            </div>
+                          </div>
+                          <% }) %>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Collapsable Card cardName -->
+                  <div class="card shadow mb-4">
+                    <!-- Card Header - Accordion -->
+                    <a href="#collapseCardName" class="d-block card-header py-3" data-toggle="collapse" role="button"
+                      aria-expanded="true" aria-controls="collapseCardName">
+                      <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-address-card fa-fw"></i> Employee
+                        Card</h6>
+                    </a>
+                    <!-- Card Content - Collapse -->
+                    <div class="collapse show" id="collapseCardName">
+                      <div class="card-body">
+                        <% emCard.forEach(emCard=> { %>
+                          <% if (emCard.Card) { %>
+                            <strong>
+                              <%= emCard.createdAt %>
+                            </strong><br>
+                            <img src="/uploads/<%= emCard.Card %>" style="width: 100%" />
+                            <% } else { %>
+                              <strong>
+                                <%= emCard.createdAt %>
+                              </strong><br>
+                              <img src="/img/NoPic.jpg" style="width: 100%" />
+                              <% } %>
+                                <% }) %>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+        <br>
+
+
+
+        <!-- Footer -->
+        <%- include('../partials/footer'); %>
+          <!-- End of Footer -->
+
+      </div>
+      <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="/js/sb-admin-2.min.js"></script>
+
+  <!-- Page level plugins -->
+  <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="/js/demo/datatables-demo.js"></script>
+
+</body>
+
+</html>

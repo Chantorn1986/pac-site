@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>PAC APP - <%= title %>
+  </title>
+
+  <!-- Custom fonts for this template -->
+  <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this page -->
+  <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <%- include('../partials/sidebar'); %>
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+          <!-- Topbar -->
+          <%- include('../partials/topbar'); %>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+              <div class="card o-hidden border-0 shadow-lg ">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">
+                    <i class="fas fa-calendar fa-fw"></i>IT Helpdesk - <%= title %>
+                  </h6>
+                </div>
+                <div class="card-body p-0">
+                  <!-- Nested Row within Card Body -->
+                  <div class="row">
+                    <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
+                    <div class="col-lg-12">
+                      <div class="p-4">
+                        <form class="user" action="/itHelpdesk/admin/Add" method="POST">
+                          <div class="form-group row">
+                            <div class="col-sm-6">
+                              <label for="itHelpdeskDocumentA" class="form-label">เลขที่เอกสาร</label>
+                              <input type="text" class="form-control" name="itHelpdeskDocumentA"
+                                id="itHelpdeskDocumentA">
+                            </div>
+                            <div class="col-sm-6">
+                              <label for="itHelpdeskDatetimeA" class="form-label">วันที่ เวลา</label>
+                              <input type="datetime-local" class="form-control" name="itHelpdeskDatetimeA"
+                                value="<%= timestamp %>">
+                            </div>
+
+                          </div>
+                          <div class="form-group row">
+                            <div class="col-sm-6">
+                              <label for="itHelpdeskReporterA" class="form-label">ชื่อผู้แจ้ง</label>
+                              <select name="itHelpdeskReporterA" class="form-control form-select"
+                                aria-label="Default select example">
+                                <option value="<%= user.nameTH %>">
+                                  <%= user.nameTH %>
+                                </option>
+                                <option value="">--- Select Name ---</option>
+                                <% resultsName.forEach(resultsName=> { %>
+                                  <option value="<%= resultsName.nameTH %>">
+                                    <%= resultsName.nameTH %>
+                                  </option>
+                                  <% }) %>
+                              </select>
+                            </div>
+                            <div class="col-sm-6">
+                              <label for="itHelpdeskLocationA" class="form-label">สถานที่เกิดปัญหา</label>
+                              <select name="itHelpdeskLocationA" class="form-control form-select"
+                                aria-label="Default select example">
+                                <option value="">--- Select Location ---</option>
+                                <option value="ชั้น 1 Solution">ชั้น 1 Solution</option>
+                                <option value="ชั้น 2 Stock">ชั้น 2 Stock</option>
+                                <option value="ชั้น 3 HR & Purchase">ชั้น 3 HR & Purchase</option>
+                                <option value="ชั้น 3 Sales & Marketing">ชั้น 3 Sales & Marketing</option>
+                                <option value="ชั้น 3 Product & Technical Support">ชั้น 3 Product & Technical Support
+                                </option>
+                                <option value="ชั้น 4 Financial">ชั้น 4 Financial</option>
+                                <option value="ชั้น 4 MD">ชั้น 4 MD</option>
+                                <option value="ชั้น 5 Server">ชั้น 5 Server</option>
+                                <option value="ชั้น 5 PLC">ชั้น 5 PLC</option>
+                                <option value="ชั้น 5 Robot">ชั้น 5 Robot</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="itHelpdeskProblemA" class="form-label">ปัญหาที่แจ้ง</label>
+                            <textarea type="textarea" rows="3" class="form-control" name="itHelpdeskProblemA"
+                              required></textarea>
+                          </div>
+                          <div class="form-group">
+                            <label for="libraryAnswerIndustryType" class="form-label">อุปกรณ์ : </label>
+                            <input type="checkbox" class="checkbox" id="Monitor" name="Monitor" value="Monitor">
+                            <label for="Monitor">Monitor </label>&nbsp;&nbsp;
+                            <input type="checkbox" class="checkbox" id="Case CPU" name="Case CPU" value="Case CPU">
+                            <label for="Case CPU">Case CPU </label>&nbsp;&nbsp;
+                            <input type="checkbox" class="checkbox" id="Power Supply" name="Power Supply"
+                              value="Power Supply">
+                            <label for="Power Supply">Power Supply </label>&nbsp;&nbsp;
+                            <input type="checkbox" class="checkbox" id="Keyboard" name="Keyboard" value="Keyboard">
+                            <label for="Keyboard">Keyboard </label>&nbsp;&nbsp;
+                            <input type="checkbox" class="checkbox" id="Mouse" name="Mouse" value="Mouse">
+                            <label for="Mouse">Mouse </label>&nbsp;&nbsp;
+                            <input type="checkbox" class="checkbox" id="Printer" name="Printer" value="Printer">
+                            <label for="Printer">Printer </label>&nbsp;&nbsp;
+                            <input type="checkbox" class="checkbox" id="Notebook" name="Notebook" value="Notebook">
+                            <label for="Notebook">Notebook </label>
+                          </div>
+                          <div class="form-group">
+                            <label for="libraryAnswerIndustryType" class="form-label">โปรแกรม : </label>
+                            <input type="checkbox" class="checkbox" id="Windows" name="Windows" value="Windows">
+                            <label for="Windows">Windows </label>&nbsp;&nbsp;
+                            <input type="checkbox" class="checkbox" id="MS Office" name="MS Office" value="MS Office">
+                            <label for="MS Office">MS Office </label>&nbsp;&nbsp;
+                            <input type="checkbox" class="checkbox" id="Ecount" name="Ecount" value="Ecount">
+                            <label for="Ecount">Ecount </label>&nbsp;&nbsp;
+                            <input type="checkbox" class="checkbox" id="Email" name="Email" value="Email">
+                            <label for="Email">Email </label>&nbsp;&nbsp;
+                            <input type="checkbox" class="checkbox" id="App Sheet" name="App Sheet" value="App Sheet">
+                            <label for="App Sheet">App Sheet </label>
+                          </div>
+                          <div class="form-group">
+                            <label for="itHelpdeskOther" class="form-label">อื่นๆ : </label>
+                            <input type="checkbox" class="checkbox" id="Other" name="Other" value="Other">
+                            <label for="Other">Other </label>
+                          </div>
+                          <div class="form-group">
+                            <label for="itHelpdeskSolveA" class="form-label">แก้ปัญหา</label>
+                            <textarea type="textarea" rows="3" class="form-control" name="itHelpdeskSolveA"></textarea>
+                          </div>
+                          <div class="form-group row">
+                            <div class="col-sm-4">
+                              <label for="itHelpdeskEmITA" class="form-label">ไอที</label>
+                              <select name="itHelpdeskEmITA" class="form-control form-select"
+                                aria-label="Default select example">
+                                <option value="">--- Select IT ---</option>
+                                <option value="พงศ์ธร จันทร์ธร">พงศ์ธร จันทร์ธร</option>
+                                <option value="พรหมมินทร์ มโนรัตน์">พรหมมินทร์ มโนรัตน์</option>
+                              </select>
+                            </div>
+                            <div class="col-sm-4">
+                              <label for="itHelpdeskITDatetimeA" class="form-label">วันที่ เวลา รับเรื่อง</label>
+                              <input type="datetime-local" class="form-control" name="itHelpdeskITDatetimeA"
+                                value="<%= timestamp %>">
+                            </div>
+                            <div class="col-sm-4">
+                              <label for="itHelpdeskStatusA" class="form-label">สถานะ </label><br>
+                              &nbsp;&nbsp;<input type="radio" name="itHelpdeskStatusA" value="สำเร็จ">
+                              <label for="status">สำเร็จ </label>&nbsp;&nbsp;
+                              <input type="radio" name="itHelpdeskStatusA" value="รอ">
+                              <label for="status">รอ </label>&nbsp;&nbsp;
+                              <input type="radio" name="itHelpdeskStatusA" value="ดำเนินการ">
+                              <label for="status">ดำเนินการ </label>&nbsp;&nbsp;
+                              <input type="radio" name="itHelpdeskStatusA" value="ไม่สำเร็จ">
+                              <label for="status">ไม่สำเร็จ </label>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="tagValueA" class="form-label">เกี่ยวข้อง</label>
+                            <textarea type="textarea" rows="2" class="form-control tagValueA" name="tagValueA"
+                              id="tagValueA" readonly></textarea>
+                          </div>
+                          <button type="submit" class="btn btn-success btn-block">
+                            <i class="fas fa-save fa-fw"></i>
+                            <span class="text">Save</span></button>
+
+                        </form>
+                        <hr>
+                        <div class="text-center">
+                          <a class="small" href="/itHelpdesk/admin">Back to ...</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <%- include('../partials/footer'); %>
+          <!-- End of Footer -->
+
+      </div>
+      <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="/js/sb-admin-2.min.js"></script>
+
+  <!-- Page level plugins -->
+  <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="/js/demo/datatables-demo.js"></script>
+  <script>
+    let docQtnNo = "<%= maxNo.maxNo %>";
+    if (docQtnNo.length = 1) { docQtnNo = "00" + docQtnNo; }
+    else if (docQtnNo.length = 2) { docQtnNo = "0" + docQtnNo; }
+    document.getElementById('itHelpdeskDocumentA').value = "ITH" + new Date().toLocaleString("en-US", { year: "2-digit" }) + "-" + new Date().toLocaleString("en-US", { month: "2-digit" }) + "-" + docQtnNo
+
+    const value = document.querySelector('.tagValueA');
+    let listArray = [];
+
+    const checkboxes = document.querySelectorAll('.checkbox');
+
+    checkboxes.forEach((checkbox) => {
+      checkbox.addEventListener('click', function () {
+        if (this.checked === true) {
+          listArray.push(this.value);
+          value.textContent = listArray.join(';')
+        } else {
+          listArray = listArray.filter((e) => e !== this.value)
+          value.textContent = listArray.join(';')
+        }
+      })
+    })
+
+  </script>
+</body>
+
+</html>

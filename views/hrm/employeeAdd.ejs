@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>PAC APP - <%= title %>
+  </title>
+
+  <!-- Custom fonts for this template -->
+  <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this page -->
+  <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <%- include('../partials/sidebar'); %>
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+
+
+        <!-- Main Content -->
+        <div id="content">
+
+          <!-- Topbar -->
+          <%- include('../partials/topbar'); %>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+              <div class="card o-hidden border-0 shadow-lg ">
+
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-address-card fa-fw"></i> Employee
+                    Management - <%= title %>
+                  </h6>
+
+                </div>
+
+                <div class="card-body p-0">
+                  <!-- Nested Row within Card Body -->
+                  <div class="row">
+                    <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
+                    <div class="col-lg-12">
+                      <div class="p-4">
+                        <form class="user" action="/employee/Add" method="POST" enctype="multipart/form-data"
+                          id="emAdd">
+                          <div class="form-group row">
+                            <div class="col-sm-9">
+                              <div class="form-group row">
+                                <div class="col-sm-4">
+                                  <label for="employeeCode" class="form-label">Code</label>
+                                  <input type="text" class="form-control" name="employeeCode" required>
+                                </div>
+                                <div class="col-sm-4">
+                                  <label for="serialNumber" class="form-label">Serial Number</label>
+                                  <input type="text" class="form-control" name="serialNumber" required>
+                                </div>
+                                <div class="col-sm-4">
+                                  <label for="internalTelephone" class="form-label">Internal Telephone</label>
+                                  <input type="text" class="form-control" name="internalTelephone">
+                                </div>
+
+                              </div>
+                              <div class="form-group row">
+                                <div class="col-sm-4">
+                                  <label for="nickname" class="form-label">Nickname</label>
+                                  <input type="text" class="form-control" name="nickname">
+                                </div>
+                                <div class="col-sm-4">
+                                  <label for="mobile" class="form-label">Mobile</label>
+                                  <input type="text" class="form-control" name="mobile">
+                                </div>
+                                <div class="col-sm-4">
+                                  <label for="userLogin" class="form-label">Email Login</label>
+                                  <select name="userLogin" class="form-control form-select"
+                                    aria-label="Default select example">
+                                    <option value="">--- Select User Login ---</option>
+                                    <% users.forEach(users=> { %>
+                                      <option value="<%= users.id %>">
+                                        <%= users.email %>
+                                      </option>
+                                      <% }) %>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                              <div class="col-sm-12">
+                                <label for="image" class="form-label">Image</label>
+                                <input type="file" name="image" class="form-control">
+                              </div>
+                            </div>
+
+
+
+                          </div>
+                          <div class="form-group row">
+                            <div class="col-sm-6">
+                              <label for="nameTH" class="form-label">Full name thai</label>
+                              <input type="text" class="form-control" name="nameTH" required>
+                            </div>
+                            <div class="col-sm-6">
+                              <label for="nameEN" class="form-label">Full name english</label>
+                              <input type="text" class="form-control" name="nameEN" required>
+                            </div>
+                          </div>
+
+                          <div class="form-group row">
+                            <div class="col-sm-6">
+                              <label for="departmentID" class="form-label">Department</label>
+                              <select name="departmentID" class="form-control form-select"
+                                aria-label="Default select example" onchange="runDocNumber();">
+                                <option value="">--- Select Department ---</option>
+                                <% departments.forEach(departments=> { %>
+                                  <option value="<%= departments.id %>">
+                                    <%= departments.nameEN %>
+                                  </option>
+                                  <% }) %>
+                              </select>
+                            </div>
+                            <div class="col-sm-6">
+                              <label for="positionID" class="form-label">Position</label>
+                              <select name="positionID" class="form-control form-select"
+                                aria-label="Default select example">
+                                <option value="">--- Select Position ---</option>
+                                <% positions.forEach(positions=> { %>
+                                  <option value="<%= positions.id %>">
+                                    <%= positions.nameEN %>
+                                  </option>
+                                  <% }) %>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <div class="col-sm-6">
+                              <label for="workLevelID" class="form-label">Work Level</label>
+                              <select name="workLevelID" class="form-control form-select"
+                                aria-label="Default select example">
+                                <option value="">--- Select Work Level ---</option>
+                                <% workLevel.forEach(workLevel=> { %>
+                                  <option value="<%= workLevel.id %>">
+                                    <%= workLevel.nameEN %>
+                                  </option>
+                                  <% }) %>
+                              </select>
+                            </div>
+                            <div class="col-sm-6">
+                              <label for="employmentType" class="form-label">Employment Type</label>
+                              <select name="employmentType" class="form-control form-select"
+                                aria-label="Default select example">
+                                <option value="">--- Select Employment Type ---</option>
+                                <option value="Casual">Casual</option>
+                                <option value="Contract">Contract</option>
+                                <option value="Full-time">Full-time</option>
+                                <option value="Part-time">Part-time</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <div class="col-sm-3">
+                              <label for="startDate" class="form-label">Start Date</label>
+                              <input type="date" class="form-control" name="startDate" value="<%= dateDefault %>">
+                            </div>
+                            <div class="col-sm-2">
+                              <label for="resignation" class="form-label">Status Employee</label><br>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="checkbox"
+                                name="resignation" value="1">
+                              <label for="resignation">
+                                &nbsp;&nbsp; ลาออก
+                              </label>
+                            </div>
+                            <div class="col-sm-3">
+                              <label for="endDate" class="form-label">End Date</label>
+                              <input type="date" class="form-control" name="endDate">
+                            </div>
+                            <div class="col-sm-4">
+                              <label for="ReasonForLeaving" class="form-label">Reason for leaving</label>
+                              <input type="text" class="form-control" name="ReasonForLeaving">
+                            </div>
+                          </div>
+
+                          <hr class="sidebar-divider">
+                          <h6 class="m-0 font-weight-bold text-primary mb-3"><i class="fas fa-address-book fa-fw"></i>
+                            Personal information</h6>
+                          <div class="form-group row">
+                            <div class="col-sm-3">
+                              <label for="dateOfBirth" class="form-label">Date of birth</label>
+                              <input type="date" class="form-control" name="dateOfBirth">
+                            </div>
+                            <div class="col-sm-3">
+                              <label for="nameTitle" class="form-label">Name Title</label>
+                              <select name="nameTitle" class="form-control form-select"
+                                aria-label="Default select example">
+                                <option value="">--- Select Name Title ---</option>
+                                <option value="Miss">Miss</option>
+                                <option value="Mrs.">Mrs.</option>
+                                <option value="MR.">MR.</option>
+                              </select>
+                            </div>
+                            <div class="col-sm-3">
+                              <label for="gender" class="form-label">Gender</label>
+                              <select name="gender" class="form-control form-select"
+                                aria-label="Default select example">
+                                <option value="">--- Select Name Title ---</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Not specified">Not specified</option>
+                              </select>
+                            </div>
+                            <div class="col-sm-3">
+                              <label for="bloodGroup" class="form-label">Blood Group</label>
+                              <select name="bloodGroup" class="form-control form-select"
+                                aria-label="Default select example">
+                                <option value="">--- Select Blood Group ---</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="AB">AB</option>
+                                <option value="O">O</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <div class="col-sm-3">
+                              <label for="maritalStatus" class="form-label">Marital Status</label>
+                              <select name="maritalStatus" class="form-control form-select"
+                                aria-label="Default select example">
+                                <option value="">--- Select Marital Status ---</option>
+                                <option value="Single">Single</option>
+                                <option value="Married">Married</option>
+                                <option value="Divorced">Divorced</option>
+                                <option value="Widowed">Widowed</option>
+                              </select>
+                            </div>
+                            <div class="col-sm-3">
+                              <label for="religion" class="form-label">Religion</label>
+                              <select name="religion" class="form-control form-select"
+                                aria-label="Default select example">
+                                <option value="">--- Select Religion ---</option>
+                                <option value="Buddhism">Buddhism</option>
+                                <option value="Islam">Islam</option>
+                                <option value="Christianity">Christianity</option>
+                                <option value="Brahmin-Hinduism">Brahmin-Hinduism</option>
+                                <option value="Sikhism">Sikhism</option>
+                                <option value="Not specified">Not specified</option>
+                              </select>
+                            </div>
+                            <div class="col-sm-3">
+                              <label for="nationality" class="form-label">Nationality</label>
+                              <input type="text" class="form-control" name="nationality" value="Thai">
+                            </div>
+                            <div class="col-sm-3">
+                              <label for="ethnicity" class="form-label">Ethnicity</label>
+                              <input type="text" class="form-control" name="ethnicity" value="Thai">
+                            </div>
+                          </div>
+
+                          <div class="form-group row">
+                            <div class="col-sm-6">
+                              <label for="taxID" class="form-label">Tax ID</label>
+                              <input type="text" class="form-control" name="taxID">
+                            </div>
+                            <div class="col-sm-3">
+                              <label for="bank" class="form-label">Bank</label>
+                              <select name="bank" class="form-control form-select" aria-label="Default select example">
+                                <option value="">--- Select Bank ---</option>
+                                <option value="BANGKOK BANK">BANGKOK BANK</option>
+                                <option value="BANK OF AYUDHYA">BANK OF AYUDHYA</option>
+                                <option value="KASIKORNBANK">KASIKORNBANK</option>
+                                <option value="KRUNG THAI BANK">KRUNG THAI BANK</option>
+                                <option value="SIAM COMMERCIAL BANK">SIAM COMMERCIAL BANK</option>
+                                <option value="TMB BANK">TMB BANK</option>
+                                <option value="GOVERNMENT SAVINGS BANK">GOVERNMENT SAVINGS BANK</option>
+                              </select>
+                            </div>
+                            <div class="col-sm-3">
+                              <label for="bankNumber" class="form-label">Bank Number</label>
+                              <input type="text" class="form-control" name="bankNumber">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="address" class="form-label">Address</label>
+                            <input type="text" class="form-control" name="address">
+                          </div>
+                          <div class="form-group row">
+                            <div class="col-sm-3">
+                              <label for="subdistrict" class="form-label">Subdistrict</label>
+                              <input type="text" class="form-control" name="subdistrict">
+                            </div>
+                            <div class="col-sm-3">
+                              <label for="district" class="form-label">District</label>
+                              <input type="text" class="form-control" name="district">
+                            </div>
+                            <div class="col-sm-3">
+                              <label for="province" class="form-label">Province</label>
+                              <input type="text" class="form-control" name="province">
+                            </div>
+                            <div class="col-sm-3">
+                              <label for="postcode" class="form-label">Postcode</label>
+                              <input type="text" class="form-control" name="postcode">
+                            </div>
+
+                          </div>
+                          <hr class="sidebar-divider">
+
+                          <button type="submit" class="btn btn-success btn-block">
+                            <i class="fas fa-save fa-fw"></i>
+                            <span class="text">Save</span></button>
+
+                        </form>
+                        <hr>
+                        <div class="text-center">
+                          <a class="small" href="/employee">Back to ...</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <%- include('../partials/footer'); %>
+          <!-- End of Footer -->
+
+      </div>
+      <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="/js/sb-admin-2.min.js"></script>
+
+  <!-- Page level plugins -->
+  <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="/js/demo/datatables-demo.js"></script>
+  <script>
+    function runDocNumber() {
+      let departmentID = document.forms['emAdd']['departmentID'];
+
+      if (departmentID.value === "04c2f03c-40bc-4af3-bb61-e0c2f60782be") {
+        document.forms['emAdd']['serialNumber'].value = (new Date().toLocaleDateString('th-TH', { year: '2-digit' })).substr(5) + "02"
+      } else if (departmentID.value === "5cd4e191-7274-4e8d-a16e-94618c038369") {
+        document.forms['emAdd']['serialNumber'].value = (new Date().toLocaleDateString('th-TH', { year: '2-digit' })).substr(5) + "04"
+      } else if (departmentID.value === "e5b07568-584b-4708-bd85-a40f63156c90") {
+        document.forms['emAdd']['serialNumber'].value = (new Date().toLocaleDateString('th-TH', { year: '2-digit' })).substr(5) + "05"
+      } else if (departmentID.value === "9d27bb4f-23b2-4ca2-aec1-089411815631") {
+        document.forms['emAdd']['serialNumber'].value = (new Date().toLocaleDateString('th-TH', { year: '2-digit' })).substr(5) + "06"
+      } else if (departmentID.value === "ffac12a5-c846-4512-95ca-6f91b1c9ab39") {
+        document.forms['emAdd']['serialNumber'].value = (new Date().toLocaleDateString('th-TH', { year: '2-digit' })).substr(5) + "08"
+      } else if (departmentID.value === "0114178b-5b7e-453a-bd04-2e3eb4c60097") {
+        document.forms['emAdd']['serialNumber'].value = (new Date().toLocaleDateString('th-TH', { year: '2-digit' })).substr(5) + "08"
+      } else {
+        document.forms['emAdd']['serialNumber'].value = (new Date().toLocaleDateString('th-TH', { year: '2-digit' })).substr(5)
+      }
+
+
+    }
+  </script>
+
+</body>
+
+</html>

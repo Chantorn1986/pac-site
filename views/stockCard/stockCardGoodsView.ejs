@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>PAC APP - <%= title %>
+  </title>
+
+  <!-- Custom fonts for this template -->
+  <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this page -->
+  <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <%- include('../partials/sidebar'); %>
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+          <!-- Topbar -->
+          <%- include('../partials/topbar'); %>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+              <div class="card o-hidden border-0 shadow-lg ">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-fw fa-archive"></i> Goods Management -
+                    <%= title %>
+                  </h6>
+                </div>
+                <div class="card-body p-0">
+                  <!-- Nested Row within Card Body -->
+                  <div class="row">
+                    <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
+                    <div class="col-lg-12">
+                      <div class="p-4">
+                        <div class="form-group row">
+                          <div class="col-sm-4 mb-3 mb-sm-0">
+                            <label for="stockCardGoodsNoE" class="form-label">stockCardGoods No.</label>
+                            <input type="text" class="form-control" name="stockCardGoodsNoE"
+                              value="<%= stockCardGoods.no %>" readonly>
+                          </div>
+                          <div class="col-sm-4 mb-3 mb-sm-0">
+                            <label for="stockCardGoodsCodeE" class="form-label">stockCardGoods Code</label>
+                            <input type="text" class="form-control" name="stockCardGoodsCodeE"
+                              value="<%= stockCardGoods.code %>" readonly>
+                          </div>
+                          <div class="col-sm-4 mb-3 mb-sm-0">
+                            <label for="stockCardGoodsLengthE" class="form-label">Length (m.)</label>
+                            <input type="number" class="form-control text-right" name="stockCardGoodsLengthE"
+                              value="<%= stockCardGoods.length %>" readonly>
+                          </div>
+                        </div>
+
+                        <div class="form-group row">
+                          <div class="col-sm-6">
+                            <label for="stockCardGoodsModelE" class="form-label">Model</label>
+                            <input type="text" class="form-control" name="stockCardGoodsModelE"
+                              value="<%= stockCardGoods.model %>" readonly>
+                          </div>
+                          <div class="col-sm-6">
+                            <label for="stockCardGoodsBrandE" class="form-label">Brand</label>
+                            <input type="text" class="form-control" name="stockCardGoodsBrandE"
+                              value="<%= stockCardGoods.brand %>" readonly>
+                          </div>
+                        </div>
+
+
+                        <div class="form-group">
+                          <label for="stockCardGoodsKeywordE" class="form-label">Full Keyword</label>
+                          <input type="text" class="form-control" name="stockCardGoodsKeywordE"
+                            value="<%= stockCardGoods.keyword %>" readonly>
+                        </div>
+                        <div class="form-group row">
+                          <div class="col-sm-3">
+                            <label for="stockCardGoodsPriceE" class="form-label">Price</label>
+                            <input type="number" class="form-control text-right" name="stockCardGoodsPriceE"
+                              value="<%= stockCardGoods.price %>" readonly>
+                          </div>
+                          <div class="col-sm-3">
+                            <label for="stockCardGoodsLimitPriceE" class="form-label">Limit Price</label>
+                            <input type="number" class="form-control text-right" name="stockCardGoodsLimitPriceE"
+                              value="<%= stockCardGoods.limitPrice %>" readonly>
+                          </div>
+                          <div class="col-sm-3">
+                            <label for="stockCardGoodsRemainE" class="form-label">Remain</label>
+                            <input type="text" class="form-control" name="stockCardGoodsRemainE"
+                              value="<%= stockCardGoods.remain %>" readonly>
+                          </div>
+                          <div class="col-sm-3">
+                            <label for="stockCardGoodsShelfE" class="form-label">Shelf</label>
+                            <input type="text" class="form-control" name="stockCardGoodsShelfE"
+                              value="<%= stockCardGoods.shelf %>" readonly>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <div class="col-sm-6">
+                            <label for="stockCardGoodsRemarkPurchaseE" class="form-label">Remark for Purchase</label>
+                            <input type="text" class="form-control" name="stockCardGoodsRemarkPurchaseE"
+                              value="<%= stockCardGoods.remarkPurchase %>" readonly>
+                          </div>
+                          <div class="col-sm-6">
+                            <label for="stockCardGoodsRemarkSaleE" class="form-label">Remark for Sale</label>
+                            <input type="text" class="form-control" name="stockCardGoodsRemarkSaleE"
+                              value="<%= stockCardGoods.remarkSale %>" readonly>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <div class="col-sm-6">
+                            <label for="stockCardGoodsCreatedAt" class="form-label">CreatedAt</label>
+                            <input type="text" class="form-control" name="stockCardBrandsCreatedAt"
+                              value="<%= stockCardGoods.createdAt %>" readonly>
+                          </div>
+                          <div class="col-sm-6">
+                            <label for="stockCardGoodsUpdatedAt" class="form-label">Updated At</label>
+                            <input type="text" class="form-control" name="stockCardBrandsUpdatedAt"
+                              value="<%= stockCardGoods.updatedAt %>" readonly>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="text-center">
+                          <a class="small" href="/stockCard/good">Back to ...</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <%- include('../partials/footer'); %>
+          <!-- End of Footer -->
+
+      </div>
+      <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="/js/sb-admin-2.min.js"></script>
+
+  <!-- Page level plugins -->
+  <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="/js/demo/datatables-demo.js"></script>
+
+</body>
+
+</html>

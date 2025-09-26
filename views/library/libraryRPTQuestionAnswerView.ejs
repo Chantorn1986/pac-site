@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>PAC APP - <%= title %>
+  </title>
+
+  <!-- Custom fonts for this template -->
+  <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this page -->
+  <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <%- include('../partials/sidebar'); %>
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+          <!-- Topbar -->
+          <%- include('../partials/topbar'); %>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+              <div class="card o-hidden border-0 shadow-lg ">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-fw fa-book"></i> Library PAC - <%=
+                      title %>
+                  </h6>
+                </div>
+
+                <div class="card-body p-0">
+                  <!-- Nested Row within Card Body -->
+                  <div class="row">
+                    <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
+                    <div class="col-lg-12">
+                      <div class="p-4">
+
+
+                        <h6 class="m-0 font-weight-bold text-primary mb-3"><i class="fa-fw fas fa-file-alt"></i>
+                          <%= title %>
+                        </h6>
+                        <div class="form-group row">
+                          <div class="col-sm-4">
+                            <label for="libraryAnswerDateE" class="form-label">วันที่ถามคำถาม
+                              :</label>
+                            <span>
+                              <%= results.dateF %>
+                            </span>
+
+                          </div>
+                          <div class="col-sm-4">
+                            <label for="libraryAnswerDocQTNE" class="form-label">Doc No. </label>
+                            <span>
+                              <%= results.docQTN %>
+                            </span>
+                          </div>
+                          <div class="col-sm-4">
+                            <label for="libraryAnswerQuestionerE" class="form-label">ผู้ถาม :</label>
+                            <span>
+                              <%= results.questioner %>
+                            </span>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="libraryAnswerTitleE" class="form-label">คำถาม
+                            :</label><br>
+                          <span>
+                            <%= results.title %>
+                          </span>
+
+                        </div>
+                        <div class="form-group">
+                          <label for="tagValueAE" class="form-label">Tag :</label>
+                          <span>
+                            <%= results.tagContent %>
+                          </span>
+                        </div>
+                        <hr class="sidebar-divider">
+                        <h6 class="m-0 font-weight-bold text-primary mb-3"><i class="fas fa-user-edit fa-fw"></i>
+                          Answerer</h6>
+                        <div class="form-group row">
+                          <div class="col-sm-4">
+                            <label for="libraryAnswerAnswerDateE" class="form-label">วันที่ตอบคำถาม :</label>
+                            <% if( results.answerDate){%>
+                              <span>
+                                <%= results.answerDateF %>
+                              </span>
+                              <% } else { %>
+                                <span></span>
+                                <%}%>
+                          </div>
+                          <div class="col-sm-4">
+                            <label for="libraryAnswerAnswererE" class="form-label">LBL No. </label>
+                            <% if(results.docLBL!==null) { %>
+                              <span>
+                                <%= results.docLBL %>
+                              </span>
+                              <% }else{ %>
+                                <span> - </span>
+                                <% } %>
+                          </div>
+                          <div class="col-sm-4">
+                            <label for="libraryAnswerAnswererE" class="form-label">ผู้ตอบคำถาม :</label>
+                            <span>
+                              <%= results.answerer %>
+                            </span>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="libraryAnswerAnswerE" class="form-label">คำตอบ
+                            :</label><br>
+                          <span>
+                            <%= results.content %>
+                          </span>
+                        </div>
+
+
+                        <hr>
+                        <div class="text-center">
+                          <a class="small" href="/library/rptQuestionAnswer">Back to ...</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <%- include('../partials/footer'); %>
+          <!-- End of Footer -->
+
+      </div>
+      <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="/js/sb-admin-2.min.js"></script>
+
+  <!-- Page level plugins -->
+  <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="/js/demo/datatables-demo.js"></script>
+  <script>
+    const value = document.querySelector('.tagValueAE');
+    let listArray = [];
+
+    const checkboxes = document.querySelectorAll('.checkbox');
+    if (value.value) {
+      listArray = value.value.split(";");
+    }
+
+    checkboxes.forEach((checkbox) => {
+      checkbox.addEventListener('click', function () {
+        if (this.checked === true) {
+          listArray.push(this.value);
+          value.textContent = listArray.join(';')
+        } else {
+          listArray = listArray.filter((e) => e !== this.value)
+          value.textContent = listArray.join(';')
+        }
+      })
+    })
+
+  </script>
+</body>
+
+</html>
