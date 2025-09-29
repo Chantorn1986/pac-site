@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const session = require('express-session');
-const {isAuthenticated} = require('./middlewares/authCheck')
+// const {isAuthenticated} = require('./middlewares/authCheck')
 
 app.set('view engine', 'ejs');
 
@@ -41,21 +41,6 @@ app.use('/leave', require('./routes/leave'));
 app.use('/itHelpdesk', require('./routes/itHelpdesk'));
 
 app.use('/stockCard', require('./routes/stockCard'));
-
-
-// app.get('/about', isAuthenticated, (req, res) => {
-//   res.render('about', {
-//     title: 'About',
-//     user: req.session.user
-//   });
-// });
-
-// app.get('/contact', isAuthenticated, (req, res) => {
-//   res.render('contact', {
-//     title: 'Contact',
-//     user: req.session.user
-//   });
-// });
 
 app.listen(3000, () => {
   console.log("Server is running...");
