@@ -98,3 +98,17 @@ exports.timeline = async (req, res) => {
     res.status(500).json({ error: 'List departments invalid.' })
   }
 }
+
+exports.indexAdmin = async (req, res) => {
+  try {
+    // const results = await db.findAll();
+    res.render('pacEcatalog/adminEcatalog/indexAdmin', {
+      title: 'Admin Catalog',
+      // departments: results,
+      // user: req.session.user
+    })
+  } catch (err) {
+    console.error('Error list data :', err)
+    res.status(500).json({ error: 'List departments invalid.' })
+  }
+}

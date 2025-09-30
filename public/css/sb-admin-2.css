@@ -9941,7 +9941,7 @@ a:focus {
 }
 
 .topbar {
-  height: 4.375rem;
+  height: 4rem;
 }
 
 .topbar #sidebarToggleTop {
@@ -11002,3 +11002,15 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
+
+  .image-container {
+    vertical-align: middle;
+    border-style: none;
+    /* กำหนดการเปลี่ยนผ่าน (transition) เพื่อให้การซูมดูนุ่มนวล */
+    transition: transform 0.3s ease;
+  }
+
+  .image-container:hover {
+    /* ซูมภาพให้ใหญ่ขึ้น 1.2 เท่า (หรือตามค่าที่คุณต้องการ) */
+    transform: scale(1.1);
+  }

@@ -9,14 +9,16 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title><%= title %></title>
+  <title>
+    <%= title %>
+  </title>
 
   <!-- Custom fonts for this template-->
   <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link
     href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
     rel="stylesheet">
-    <!-- Tailwind CSS -->
+  <!-- Tailwind CSS -->
   <!-- <link href="/src/output.css" rel="stylesheet"> -->
   <!-- Custom styles for this template-->
   <link href="/css/sb-admin-2.min.css" rel="stylesheet">
@@ -28,8 +30,6 @@
   <!-- Page Wrapper -->
   <div id="wrapper">
 
-    <%- include('../partials/sidebarEcatalog'); %>
-
       <!-- Content Wrapper -->
       <div id="content-wrapper" class="d-flex flex-column">
         <!-- Topbar -->
@@ -38,132 +38,124 @@
           <!-- Main Content -->
           <div id="content">
 
-
+            <%- include('../partials/sidebarEcatalog'); %>
             <!-- Begin Page Content -->
             <div class="container-fluid">
 
               <!-- Page Heading -->
               <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <!-- <h1 class="h3 mb-0 text-blue-600 underline">Dashboard</h1> -->
-                  <!-- <h1 class="text-3xl">Hello world!</h1> -->
+                <!-- <h1 class="text-3xl">Hello world!</h1> -->
                 <!--<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>-->
               </div>
 
               <!-- Content Row -->
 
-              <div class="row">
-
-                <!-- Area Chart -->
-                <div class="col-xl-8 col-lg-7">
-                  <div class="card shadow mb-4">
-                    <!-- Card Header - Dropdown -->
-                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                      <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
-                      <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                          aria-haspopup="true" aria-expanded="false">
-                          <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                          aria-labelledby="dropdownMenuLink">
-                          <div class="dropdown-header">Dropdown Header:</div>
-                          <a class="dropdown-item" href="#">Action</a>
-                          <a class="dropdown-item" href="#">Another action</a>
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- Card Body -->
-                    <div class="card-body">
-                      <div class="chart-area">
-                        <canvas id="myAreaChart"></canvas>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Pie Chart -->
-                <div class="col-xl-4 col-lg-5">
-                  <div class="card shadow mb-4">
-                    <!-- Card Header - Dropdown -->
-                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                      <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-                      <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                          aria-haspopup="true" aria-expanded="false">
-                          <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                          aria-labelledby="dropdownMenuLink">
-                          <div class="dropdown-header">Dropdown Header:</div>
-                          <a class="dropdown-item" href="#">Action</a>
-                          <a class="dropdown-item" href="#">Another action</a>
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- Card Body -->
-                    <div class="card-body">
-                      <div class="chart-pie pt-4 pb-2">
-                        <canvas id="myPieChart"></canvas>
-                      </div>
-                      <div class="mt-4 text-center small">
-                        <span class="mr-2">
-                          <i class="fas fa-circle text-primary"></i> Direct
-                        </span>
-                        <span class="mr-2">
-                          <i class="fas fa-circle text-success"></i> Social
-                        </span>
-                        <span class="mr-2">
-                          <i class="fas fa-circle text-info"></i> Referral
-                        </span>
-                      </div>
-                    </div>
+              <div class="card shadow mb-3">
+                <!-- Card Header - Accordion -->
+                <a href="#collapseProfile" class="d-block card-header py-3" data-toggle="collapse" role="button"
+                  aria-expanded="true" aria-controls="collapseProfile">
+                  <h6 class="m-0 font-weight-bold text-primary">Profile</h6>
+                </a>
+                <!-- Card Content - Collapse -->
+                <div class="collapse show" id="collapseProfile">
+                  <div class="card-body">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    บริษัท พรีเมียร์ ออโตเมชั่น เซนเตอร์ จำกัด ก่อตั้งเมื่อปี 2544
+                    ร่วมทุนระหว่างผู้บริหารชาวไทยและชาวญี่ปุ่นดำเนินกิจการเป็นตัวแทนจำหน่าย ผู้นำเข้า
+                    สินค้าชั้นนำด้านออโตเมชั่น พร้อมให้การสนับสนุน ดูแล ซ่อมบำรุง
+                    และปรับปรุงเครื่องจักรให้มีสมรรถนะที่สูงขึ้น รวมถึงการให้คำปรึกษา แนะนำลูกค้า ทั้งก่อนและหลังการขาย
+                    เรามุ่งเน้นเรื่องความรู้ความสามารถที่จะแก้ปัญหาให้กับลูกค้า
+                    เพื่อให้ลูกค้าสามารถใช้สินค้าของเราได้อย่างถูกต้อง เหมาะสม และเต็มประสิทธิภาพ
+                    เพื่อสร้างความมั่นใจและเชื่อมั่นให้กับลูกค้าอย่างดีที่สุด
                   </div>
                 </div>
               </div>
+
+              <div class="card shadow mb-3">
+                <!-- Card Header - Accordion -->
+                <a href="#collapseVision" class="d-block card-header py-3" data-toggle="collapse" role="button"
+                  aria-expanded="true" aria-controls="collapseVision">
+                  <h6 class="m-0 font-weight-bold text-primary">Vision</h6>
+                </a>
+                <!-- Card Content - Collapse -->
+                <div class="collapse show" id="collapseVision">
+                  <div class="card-body">
+                    ลูกค้า คือ เพื่อนและครอบครัว<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    เราดำเนินธุรกิจภายใต้การสร้างความสัมพันธ์กับลูกค้าในทัศนคติเชิงสร้างสรรค์ที่ไม่เน้นการขาย
+                    แต่ให้ความสำคัญกับปัญหาของลูกค้า โดยมีทีมงานให้คำปรึกษา
+                    และพร้อมเข้ารับฟังปัญหาเพื่อร่วมมือหาแนวทางแก้ไข นำส่งสินค้าที่มีคุณภาพให้ทันตามกำหนดเวลา
+                    รับประกันสินค้าทุกชิ้นตามเงื่อนไขสากล พร้อมทั้งมีบริการก่อนและหลังการขาย
+                    โดยทีมงานวิศวกรที่มีความชำนาญเฉพาะด้าน มีความเป็นมืออาชีพที่ทำงานด้วยแรงขับเคลื่อนภายใน
+                    มุ่งมั่นสร้างความพึงพอใจสูงสุดให้กับลูกค้าในทุกๆ ด้าน
+                    เราดำเนินธุรกิจภายใต้แนวคิดการสร้างปัญญาให้แก่เยาวชน นักศึกษา
+                    ให้ทักษะความรู้ด้านนวัตกรรมที่จะส่งเสริม ความก้าวหน้าในวิชาชีพเชิงวิศวกรรม
+                    จัดอบรมสัมมนาเชิงวิซาการด้านเทคโนโลยีหุ่นยนต์แขนกล ทั้งในส่วนวิทยาลัยอาชีวะศึกษา
+                    สถาบันการศึกษาด้านวิศวกรรมศาสตร์ ตลอดจนมหาวิทยาลัยทั้งภาครัฐและเอกชน ภายใต้แนวคิด
+                    “สร้างชีวิตเด็กไทยให้ก้าวไกลไปทันนวัตกรรมโลก” </div>
+                </div>
+              </div>
+
+              <div class="card shadow mb-3">
+                <!-- Card Header - Accordion -->
+                <a href="#collapseMission" class="d-block card-header py-3" data-toggle="collapse" role="button"
+                  aria-expanded="true" aria-controls="collapseMission">
+                  <h6 class="m-0 font-weight-bold text-primary">Mission</h6>
+                </a>
+                <!-- Card Content - Collapse -->
+                <div class="collapse show" id="collapseMission">
+                  <div class="card-body">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;มุ่งมั่นเป็นตัวแทนจำหน่ายมืออาชีพ
+                    นำเข้าผลิตภัณฑ์ระบบอัตโนมัติจากทั่วเอเชีย และสร้างบุคลากรจากแรงบันดาลใจภายใน
+                    เพื่อสร้างผลงานนวัตกรรมทันสมัยแก่สังคม </div>
+                </div>
+              </div>
+
+
             </div>
             <!-- End of Main Content -->
 
-
-
           </div>
-          <!-- End of Content Wrapper -->
+          <!-- End of Main Content -->
 
           <!-- Footer -->
           <%- include('../partials/footerEcatalog'); %>
             <!-- End of Footer -->
 
-      </div>
-      <!-- End of Page Wrapper -->
+        </div>
+        <!-- End of Content Wrapper -->
 
-      <!-- Scroll to Top Button-->
-      <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-      </a>
 
-      <!-- Bootstrap core JavaScript-->
-      <script src="/vendor/jquery/jquery.min.js"></script>
-      <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-      <!-- Core plugin JavaScript-->
-      <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+    </div>
+    <!-- End of Page Wrapper -->
 
-      <!-- Custom scripts for all pages-->
-      <script src="/js/sb-admin-2.min.js"></script>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
 
-      <!-- Page level plugins -->
-      <script src="/vendor/chart.js/Chart.min.js"></script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-      <!-- Page level custom scripts -->
-      <script src="/js/demo/chart-area-demo.js"></script>
-      <script src="/js/demo/chart-pie-demo.js"></script>
-      <script>
+    <!-- Core plugin JavaScript-->
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-      </script>
+    <!-- Custom scripts for all pages-->
+    <script src="/js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="/vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="/js/demo/chart-area-demo.js"></script>
+    <script src="/js/demo/chart-pie-demo.js"></script>
+    <script>
+
+    </script>
 
 </body>
 

@@ -16,10 +16,10 @@
   <link
     href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
     rel="stylesheet">
-    <!-- Tailwind CSS -->
+  <!-- Tailwind CSS -->
   <!-- <link href="/src/output.css" rel="stylesheet"> -->
   <!-- Custom styles for this template-->
-  <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="/css/sb-admin-2.css" rel="stylesheet">
 
 </head>
 
@@ -27,17 +27,15 @@
 
   <!-- Page Wrapper -->
   <div id="wrapper">
-
     <%- include('partials/sidebarEcatalog'); %>
-
       <!-- Content Wrapper -->
       <div id="content-wrapper" class="d-flex flex-column">
-        <!-- Topbar -->
-        <%- include('partials/topbarEcatalog'); %>
-          <!-- End of Topbar -->
-          <!-- Main Content -->
-          <div id="content">
 
+
+        <!-- Main Content -->
+
+        <div id="content">
+          <%- include('partials/topbarEcatalog'); %>
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
@@ -45,7 +43,7 @@
               <!-- Page Heading -->
               <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <!-- <h1 class="h3 mb-0 text-blue-600 underline">Dashboard</h1> -->
-                  <!-- <h1 class="text-3xl">Hello world!</h1> -->
+                <!-- <h1 class="text-3xl">Hello world!</h1> -->
                 <!--<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>-->
               </div>
@@ -127,18 +125,16 @@
               </div>
             </div>
             <!-- End of Main Content -->
+            
+        </div>
+        <!-- End of Content Wrapper -->
 
-          <!-- Footer -->
-          <%- include('partials/footerEcatalog'); %>
-            <!-- End of Footer -->
-
-          </div>
-          <!-- End of Content Wrapper -->
-
+        <%- include('partials/footerEcatalog'); %>
 
 
       </div>
       <!-- End of Page Wrapper -->
+
 
       <!-- Scroll to Top Button-->
       <a class="scroll-to-top rounded" href="#page-top">
