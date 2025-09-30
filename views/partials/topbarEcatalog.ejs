@@ -1,5 +1,5 @@
 <!-- Topbar -->
-<nav class="navbar navbar-expand  navbar-light bg-white topbar mb-3 p-1 static-top shadow">
+<nav class="navbar navbar-expand  navbar-light bg-white topbar mb-0 p-1 static-top shadow">
 
   <!-- Sidebar Toggle (Topbar) -->
   <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -47,32 +47,106 @@
     <!-- Nav Item - type -->
     <li class="nav-item dropdown no-arrow mx-1">
       <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false">
-        <i class="fab fa-laravel fa-fw"></i>
+        aria-haspopup="true" aria-expanded="false" title="Trading">
+        <i class="fas fa-briefcase fa-fw text-primary"></i>
+      </a>
+    </li>
+    <li class="nav-item dropdown no-arrow mx-1">
+      <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false" title="Solutions">
+        <i class="fas fa-city fa-fw text-primary"></i>
+        <!-- <span>Solutions</span> -->
+      </a>
+    </li>
+    <li class="nav-item dropdown no-arrow mx-1">
+      <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false" title="B2G">
+        <i class="fas fa-university fa-fw text-primary"></i>
         <!-- <span class="badge badge-danger badge-counter">3+</span> -->
       </a>
     </li>
     <li class="nav-item dropdown no-arrow mx-1">
       <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false">
-        <i class="fab fa-connectdevelop fa-fw"></i>
+        aria-haspopup="true" aria-expanded="false" title="Service">
+        <i class="fas fa-toolbox fa-fw text-primary"></i>
         <!-- <span class="badge badge-danger badge-counter">3+</span> -->
       </a>
     </li>
     <li class="nav-item dropdown no-arrow mx-1">
       <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false">
-        <i class="fab fa-codepen fa-fw"></i>
+        aria-haspopup="true" aria-expanded="false" title="Product Automation">
+        <i class="fas fa-fw fa-archive text-primary"></i>
         <!-- <span class="badge badge-danger badge-counter">3+</span> -->
       </a>
+      <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+        aria-labelledby="alertsDropdown">
+        <h6 class="dropdown-header text-center">
+          Product Automation
+        </h6>
+        <a class="dropdown-item d-flex align-items-center" href="#">
+          <div class="mr-3">
+            <div class="icon-circle bg-primary">
+              <i class="fas fa-file-alt text-white"></i>
+            </div>
+          </div>
+          <div>
+            <div class="small text-gray-500">Mechanic part</div>
+            <span class="font-weight-bold">Nabtesco , Apex dynamics , Hiwin</span>
+          </div>
+        </a>
+
+        <a class="dropdown-item d-flex align-items-center" href="#">
+          <div class="mr-3">
+            <div class="icon-circle bg-primary">
+              <i class="fas fa-file-alt text-white"></i>
+            </div>
+          </div>
+          <div>
+            <div class="small text-gray-500">Electric part</div>
+            <span class="font-weight-bold">Panasonic, Nidec, Muscle, Toshiba, Air Major, Weintek</span>
+          </div>
+        </a>
+        <a class="dropdown-item d-flex align-items-center" href="#">
+          <div class="mr-3">
+            <div class="icon-circle bg-primary">
+              <i class="fas fa-file-alt text-white"></i>
+            </div>
+          </div>
+          <div>
+            <div class="small text-gray-500">Robot part</div>
+            <span class="font-weight-bold">Hiwin, Yamaha, Shibaura, TM Robot</span>
+          </div>
+        </a>
+        <a class="dropdown-item d-flex align-items-center" href="#">
+          <div class="mr-3">
+            <div class="icon-circle bg-primary">
+              <i class="fas fa-file-alt text-white"></i>
+            </div>
+          </div>
+          <div>
+            <div class="small text-gray-500">Other part</div>
+            <span class="font-weight-bold">Troax, Secomea, IO Link</span>
+          </div>
+        </a>
+        <a class="dropdown-item d-flex align-items-center" href="#">
+          <div class="mr-3">
+            <div class="icon-circle bg-primary">
+              <i class="fas fa-file-alt text-white"></i>
+            </div>
+          </div>
+          <div>
+            <div class="small text-gray-500">Recent Product</div>
+            <span class="font-weight-bold">AMR Smart Forklift</span>
+          </div>
+        </a>
     </li>
 
     <!-- Nav Item - Alerts -->
     <li class="nav-item dropdown no-arrow mx-1">
       <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
-        <!-- <i class="fas fa-bell fa-fw"></i> -->
-        <img class="img-profile size-fit" src="/img/iconEcatalog/iconBrand.svg" title="Brands">
+        <i class="fas fa-shopping-bag fa-fw text-primary" title="Brands"></i>
+        <!-- <img class="img-profile size-fit" src="/img/iconEcatalog/iconBrand.svg" title="Brands"> -->
         <!-- <span class="badge badge-danger badge-counter">3+</span> -->
       </a>
       <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in bg-none"
@@ -83,62 +157,62 @@
         <div class="row">
           <div class="col p-0">
             <a class="dropdown-item border-left-0 border-bottom-0" href="/#">
-              <img class="img-profile size-fit" src="/img/iconBrand/b100/panasonic100x55.svg" title="Panasonic">
+              <img class="img" src="/img/iconBrand/b100/panasonic100x55.svg" title="Panasonic">
             </a>
             <a class="dropdown-item border-left-0 border-bottom-0" href="/#">
-              <img class="img-profile size-fit" src="/img/iconBrand/b100/mitsubishiElectric100x55.svg" title="Mitsubishi Electric">
+              <img class="img" src="/img/iconBrand/b100/mitsubishiElectric100x55.svg" title="Mitsubishi Electric">
             </a>
             <a class="dropdown-item border-left-0 border-bottom-0" href="/#">
-              <img class="img-profile size-fit" src="/img/iconBrand/b100/nidec100x55.svg" title="Nidec">
+              <img class="img" src="/img/iconBrand/b100/nidec100x55.svg" title="Nidec">
             </a>
             <a class="dropdown-item border-left-0 border-bottom-0" href="/#">
-              <img class="img-profile size-fit" src="/img/iconBrand/b100/toshiba100x55.svg" title="Toshiba">
+              <img class="img" src="/img/iconBrand/b100/toshiba100x55.svg" title="Toshiba">
             </a>
             <a class="dropdown-item border-left-0 border-bottom-0" href="/#">
-              <img class="img-profile size-fit" src="/img/iconBrand/b100/muscle100x55.svg" title="Cool Muscle">
+              <img class="img" src="/img/iconBrand/b100/muscle100x55.svg" title="Cool Muscle">
             </a>
             <a class="dropdown-item border-left-0" href="/#">
-              <img class="img-profile size-fit" src="/img/iconBrand/b100/weintek100x55.svg" title="Weintek">
+              <img class="img" src="/img/iconBrand/b100/weintek100x55.svg" title="Weintek">
             </a>
           </div>
           <div class="col p-0">
             <a class="dropdown-item border-left-0 border-bottom-0" href="/#">
-              <img class="img-profile size-fit" src="/img/iconBrand/b100/secomea100x55.svg" title="Seacomea">
+              <img class="img" src="/img/iconBrand/b100/secomea100x55.svg" title="Seacomea">
             </a>
             <a class="dropdown-item border-left-0 border-bottom-0" href="/#">
-              <img class="img-profile size-fit" src="/img/iconBrand/b100/hiwin100x55.svg" title="Hiwin">
+              <img class="img" src="/img/iconBrand/b100/hiwin100x55.svg" title="Hiwin">
             </a>
             <a class="dropdown-item border-left-0 border-bottom-0" href="/#">
-              <img class="img-profile size-fit" src="/img/iconBrand/b100/apex100x55.svg" title="Apex">
+              <img class="img" src="/img/iconBrand/b100/apex100x55.svg" title="Apex">
             </a>
             <a class="dropdown-item border-left-0 border-bottom-0" href="/#">
-              <img class="img-profile size-fit" src="/img/iconBrand/b100/nabtesco100x55.svg" title="Nabtesco">
+              <img class="img" src="/img/iconBrand/b100/nabtesco100x55.svg" title="Nabtesco">
             </a>
             <a class="dropdown-item border-left-0 border-bottom-0" href="/#">
-              <img class="img-profile size-fit" src="/img/iconBrand/b100/yamaha100x55.svg" title="Yamaha">
+              <img class="img" src="/img/iconBrand/b100/yamaha100x55.svg" title="Yamaha">
             </a>
             <a class="dropdown-item border-left-0" href="/#">
-              <img class="img-profile size-fit" src="/img/iconBrand/b100/shibaura100x55.svg" title="Shibaura">
+              <img class="img" src="/img/iconBrand/b100/shibaura100x55.svg" title="Shibaura">
             </a>
           </div>
           <div class="col p-0">
             <a class="dropdown-item border-left-0 border-bottom-0" href="/#">
-              <img class="img-profile size-fit" src="/img/iconBrand/b100/tmRobot100x55.svg" title="TM Robot">
+              <img class="img" src="/img/iconBrand/b100/tmRobot100x55.svg" title="TM Robot">
             </a>
             <a class="dropdown-item border-left-0 border-bottom-0" href="/#">
-              <img class="img-profile size-fit" src="/img/iconBrand/b100/troax100x55.svg" title="Troax">
+              <img class="img" src="/img/iconBrand/b100/troax100x55.svg" title="Troax">
             </a>
             <a class="dropdown-item border-left-0 border-bottom-0" href="/#">
-              <img class="img-profile size-fit" src="/img/iconBrand/b100/convum100x55.svg" title="Covum">
+              <img class="img" src="/img/iconBrand/b100/convum100x55.svg" title="Covum">
             </a>
             <a class="dropdown-item border-left-0 border-bottom-0" href="/#">
-              <img class="img-profile size-fit" src="/img/iconBrand/b100/ioLink100x55.svg" title="IO Link">
+              <img class="img" src="/img/iconBrand/b100/ioLink100x55.svg" title="IO Link">
             </a>
-            <a class="dropdown-item border-left-0 border-bottom-0" >
-              <img class="img-profile size-fit" src="/img/iconBrand/b100/blank100x55.svg">
+            <a class="dropdown-item border-left-0 border-bottom-0">
+              <img class="img" src="/img/iconBrand/b100/blank100x55.svg">
             </a>
-            <a class="dropdown-item border-left-0" >
-              <img class="img-profile size-fit" src="/img/iconBrand/b100/blank100x55.svg">
+            <a class="dropdown-item border-left-0">
+              <img class="img" src="/img/iconBrand/b100/blank100x55.svg">
             </a>
           </div>
         </div>
@@ -187,11 +261,25 @@
         <!-- <span class="mr-2 d-none d-lg-inline text-gray-600 small">
             kkky
           </span> -->
-        <img class="img-profile" src="/img/LogoPAC_inDoc.svg">
+        <img class="img-profile" src="/img/logoPACinDoc.svg" title="PAC">
       </a>
       <!-- Dropdown - User Information -->
       <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-        <a class="dropdown-item" href="/#">
+        <a class="dropdown-item" href="/pacEcatalog/aboutUs">
+          <i class="fas fa-exclamation-triangle"></i>&nbsp;&nbsp;&nbsp;&nbsp;About Us</a>
+        <a class="dropdown-item" href="/pacEcatalog/vision">
+          <i class="fas fa-eye"></i>&nbsp;&nbsp;&nbsp;&nbsp;Vision</a>
+        <a class="dropdown-item" href="/pacEcatalog/mission">
+          <i class="fas fa-bullseye"></i>&nbsp;&nbsp;&nbsp;&nbsp;Mission</a>
+        <a class="dropdown-item" href="/pacEcatalog/partner">
+          <i class="fas fa-handshake"></i>&nbsp;&nbsp;&nbsp;&nbsp;Partner</a>
+        <a class="dropdown-item" href="/pacEcatalog/timeline">
+          <i class="fas fa-clock"></i>&nbsp;&nbsp;&nbsp;&nbsp;Timeline</a>
+        <a class="dropdown-item" href="/pacEcatalog/certificate">
+          <i class="fas fa-certificate"></i>&nbsp;&nbsp;&nbsp;&nbsp;Certificate</a>
+        <a class="dropdown-item" href="/pacEcatalog/contact">
+          <i class="fas fa-envelope"></i>&nbsp;&nbsp;&nbsp;&nbsp;Contact</a>
+        <!-- <a class="dropdown-item" href="/#">
           <img class="img-profile size-fit" src="/img/iconBrand/b100/panasonic100x55.svg">
         </a>
         <a class="dropdown-item" href="/#">
@@ -208,10 +296,10 @@
         </a>
         <a class="dropdown-item" href="/#">
           <img class="img-profile size-fit" src="/img/iconBrand/b100/weintek100x55.svg">
-        </a>
+        </a> -->
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="/#" data-toggle="modal" data-target="#logoutModal">
-          <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+          <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-600"></i>
           Go to PAC APP<sup>2</sup>
         </a>
       </div>

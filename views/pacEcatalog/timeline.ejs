@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>PAC APP - Dashboard</title>
+  <title><%= title %></title>
 
   <!-- Custom fonts for this template-->
   <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -28,12 +28,12 @@
   <!-- Page Wrapper -->
   <div id="wrapper">
 
-    <%- include('partials/sidebarEcatalog'); %>
+    <%- include('../partials/sidebarEcatalog'); %>
 
       <!-- Content Wrapper -->
       <div id="content-wrapper" class="d-flex flex-column">
         <!-- Topbar -->
-        <%- include('partials/topbarEcatalog'); %>
+        <%- include('../partials/topbarEcatalog'); %>
           <!-- End of Topbar -->
           <!-- Main Content -->
           <div id="content">
@@ -128,14 +128,14 @@
             </div>
             <!-- End of Main Content -->
 
-          <!-- Footer -->
-          <%- include('partials/footerEcatalog'); %>
-            <!-- End of Footer -->
+
 
           </div>
           <!-- End of Content Wrapper -->
 
-
+          <!-- Footer -->
+          <%- include('../partials/footerEcatalog'); %>
+            <!-- End of Footer -->
 
       </div>
       <!-- End of Page Wrapper -->

@@ -204,6 +204,12 @@ figure {
 img {
   vertical-align: middle;
   border-style: none;
+  transition: transform 0.3s ease;
+}
+
+img:hover {
+  /* ซูมภาพให้ใหญ่ขึ้น 1.2 เท่า (หรือตามค่าที่คุณต้องการ) */
+  transform: scale(1.2);
 }
 
 svg {

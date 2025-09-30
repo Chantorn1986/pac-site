@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const session = require('express-session');
-// const {isAuthenticated} = require('./middlewares/authCheck')
 
 app.set('view engine', 'ejs');
 
@@ -42,6 +41,8 @@ app.use('/itHelpdesk', require('./routes/itHelpdesk'));
 
 app.use('/stockCard', require('./routes/stockCard'));
 
+app.use('/pacEcatalog', require('./routes/pacEcatalog'));
+
 app.listen(3000, () => {
-  console.log("Server is running...");
+  console.log("Server is running... http://localhost:3000");
 });
