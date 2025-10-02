@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../db/sequelize');
+const sequelize = require('../../db/sequelize');
 
-const LinearGuideways = sequelize.define('linearGuideways', {
+const ECatalogProducts = sequelize.define('eCatalogProducts', {
   // Model attributes are defined here
   id: {
     type: DataTypes.STRING,
@@ -15,19 +15,46 @@ const LinearGuideways = sequelize.define('linearGuideways', {
   code: {
     type: DataTypes.STRING,
   },
-  series: {
+  name: {
     type: DataTypes.STRING,
   },
-  name: {
+  series: {
     type: DataTypes.STRING,
   },
   shortKeyword: {
     type: DataTypes.STRING,
   },
-  Keyword: {
+  keyword: {
     type: DataTypes.STRING,
   },
-  detail: {
+  feature: {
+    type: DataTypes.STRING,
+  },
+  productTypeID: {
+    type: DataTypes.STRING,
+  },
+  brandsID: {
+    type: DataTypes.STRING,
+  },
+  boxA: {
+    type: DataTypes.STRING,
+  },
+  boxSubA: {
+    type: DataTypes.STRING,
+  },
+  boxB: {
+    type: DataTypes.STRING,
+  },
+  boxSubB: {
+    type: DataTypes.STRING,
+  },
+  boxC: {
+    type: DataTypes.STRING,
+  },
+  boxSubC: {
+    type: DataTypes.STRING,
+  },
+  img: {
     type: DataTypes.STRING,
   }
 }, {
@@ -39,4 +66,4 @@ const LinearGuideways = sequelize.define('linearGuideways', {
 // `sequelize.sync()` will create the table if it doesn't exist
 // await User.sync(); 
 
-module.exports = LinearGuideways;
+module.exports = ECatalogProducts;

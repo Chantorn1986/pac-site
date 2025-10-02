@@ -27,18 +27,16 @@
 </head>
 
 <body id="page-top">
+  <!-- Topbar -->
+  <%- include('../../partials/topbarEcatalog'); %>
+    <!-- End of Topbar -->
+    <!-- Page Wrapper -->
+    <div id="wrapper">
 
-  <!-- Page Wrapper -->
-  <div id="wrapper">
+      <%- include('../../partials/sidebarEcatalog'); %>
 
-    <%- include('../partials/sidebar'); %>
-
-      <!-- Content Wrapper -->
-      <div id="content-wrapper" class="d-flex flex-column">
-
-        <!-- Topbar -->
-        <%- include('../partials/topbar'); %>
-          <!-- End of Topbar -->
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
 
           <!-- Main Content -->
           <div id="content">
@@ -53,58 +51,75 @@
                             href="https://datatables.net">official DataTables documentation</a>.</p>-->
 
               <!-- DataTales Example -->
-              <div class="card shadow mb-4">
+              <div class="card shadow mb-4 mt-4">
                 <div class="card-header py-3 d-flex">
-                  <h6 class="m-0 font-weight-bold text-primary align-content-center"><i class="fas fa-user fa-fw"></i>
-                    <%= title %>
+                  <h6 class="m-0 font-weight-bold text-primary align-content-center">E-Catalog - <%= title %>
                   </h6>
                   <!--<a href="/tablesAdd" class="btn btn-info btn-circle btn-sm ml-auto"><i class="fas fa-plus"></i></a>-->
-                  <a href="/user/Add" class="btn btn-primary btn-icon-split ml-auto btn-sm">
+                  <a href="/pacEcatalog/Brands/Add" class="btn btn-primary btn-icon-split ml-auto btn-sm">
                     <span class="icon text-white-50">
                       <i class="fas fa-plus-circle"></i>
                     </span>
                     <span class="text">Create</span>
                   </a>
-
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                       <thead>
                         <tr>
-                          <th>Name</th>
-                          <th>Email</th>
-                          <th>Role</th>
+                          <th>No</th>
+                          <th>Code</th>
+                          <th>Name thai</th>
+                          <th>Name English</th>
+                          <th>Keyword</th>
+                          <th>Image</th>
                           <th class="text-center">Action</th>
                         </tr>
                       </thead>
                       <tfoot>
                         <tr>
-                          <th>Name</th>
-                          <th>Email</th>
-                          <th>Role</th>
+                          <th>No</th>
+                          <th>Code</th>
+                          <th>Name thai</th>
+                          <th>Name English</th>
+                          <th>Keyword</th>
+                          <th>Image</th>
                           <th class="text-center">Action</th>
                         </tr>
                       </tfoot>
                       <tbody>
-                        <% users.forEach(users=> { %>
+                        <% brands.forEach(brand=> { %>
                           <tr>
                             <td>
-                              <%= users.name %>
+                              <%= brand.no %>
                             </td>
                             <td>
-                              <%= users.email %>
+                              <%= brand.code %>
                             </td>
                             <td>
-                              <%= users.role %>
+                              <%= brand.nameTH %>
                             </td>
                             <td>
-                              <a href="/user/View/<%= users.id %>" class="btn btn-info btn-circle btn-sm">
+                              <%= brand.nameEN %>
+                            </td>
+                            <td>
+                              <%= brand.keyword %>
+                            </td>
+                            <td>
+                              <% if (brand.img) { %>
+                                <img src="/uploads/<%= brand.img %>" width="100" />
+                                <% } else { %>
+                                  <p>No image</p>
+                                  <% } %>
+                            </td>
+                            <td class="align-middle text-center">
+                              <a href="/pacEcatalog/Brands/View/<%= brand.id %>" class="btn btn-info btn-circle btn-sm">
                                 <i class="fas fa-eye"></i></a>
-                              <a href="/user/Edit/<%= users.id %>" class="btn btn-warning btn-circle btn-sm">
+                              <a href="/pacEcatalog/Brands/Edit/<%= brand.id %>" class="btn btn-warning btn-circle btn-sm">
                                 <i class="fas fa-pen"></i></a>
-                              <a href="/user/Del/<%= users.id %>" class="btn btn-danger btn-circle btn-sm"
-                                onclick="return confirm('Are you sure ?');">
+                              <a href="/pacEcatalog/Brands/Del/<%= brand.id %>" class="btn btn-danger btn-circle btn-sm"
+                                onclick="return confirm('Do you want to delete the data?');">
                                 <i class="fas fa-trash-alt"></i></a>
 
                             </td>
@@ -121,39 +136,38 @@
 
           </div>
           <!-- End of Main Content -->
-          <!-- Footer -->
-          <%- include('../partials/footer'); %>
-            <!-- End of Footer -->
-
-      </div>
-      <!-- End of Content Wrapper -->
-
+        <!-- Footer -->
+        <%- include('../../partials/footerEcatalog'); %>
+          <!-- End of Footer -->
+        </div>
+        <!-- End of Content Wrapper -->
 
 
-  </div>
-  <!-- End of Page Wrapper -->
 
-  <!-- Scroll to Top Button-->
-  <a class="scroll-to-top rounded" href="#">
-    <i class="fas fa-angle-up"></i>
-  </a>
+    </div>
+    <!-- End of Page Wrapper -->
 
-  <!-- Bootstrap core JavaScript-->
-  <script src="/vendor/jquery/jquery.min.js"></script>
-  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#">
+      <i class="fas fa-angle-up"></i>
+    </a>
 
-  <!-- Core plugin JavaScript-->
-  <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Custom scripts for all pages-->
-  <script src="/js/sb-admin-2.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-  <!-- Page level plugins -->
-  <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
-  <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="/js/sb-admin-2.min.js"></script>
 
-  <!-- Page level custom scripts -->
-  <script src="/js/demo/datatables-demo.js"></script>
+    <!-- Page level plugins -->
+    <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="/js/demo/datatables-demo.js"></script>
 
 </body>
 
