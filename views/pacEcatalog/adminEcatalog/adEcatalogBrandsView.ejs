@@ -54,44 +54,64 @@
                     <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
                     <div class="col-lg-12">
                       <div class="p-4">
-                        <form class="user" action="#" method="#">
                           <div class="form-group row">
-                            <div class="col-sm-3 mb-3 mb-sm-0">
-                              <label for="departmentNoV" class="form-label">Department No.</label>
-                              <input type="text" class="form-control" name="departmentNoV" value="<%= department.no %>"
+                            <div class="col-sm-4 mb-3 mb-sm-0">
+                              <label for="brandsNoE" class="form-label">Brands No.</label>
+                              <input type="text" class="form-control" name="brandsNoE" value="<%= brands.no %>" readonly>
+                            </div>
+                            <div class="col-sm-4 mb-3 mb-sm-0">
+                              <label for="brandsCodeE" class="form-label">Brands Code</label>
+                              <input type="text" class="form-control" name="brandsCodeE" value="<%= brands.code %>" readonly>
+                            </div>
+                            <div class="col-sm-4 mb-3 mb-sm-0">
+                              <div class="col-sm-12">
+                              <% if (brands.img) { %>
+                                <img class="img mb-1" src="/uploads/brands/<%= brands.img %>"  width="100"/>
+                                <% } else { %>
+                                  <img class="img mb-1" src="/img/NoPic.svg"  width="100"/>
+                                  <% } %>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <div class="col-sm-4">
+                              <label for="brandsYearE" class="form-label">Date</label>
+                              <input type="date" class="form-control" name="brandsYearE" value="<%= coverDate.year %>" readonly>
+                            </div>
+                            <div class="col-sm-4">
+                              <label for="brandsCreatedAtE" class="form-label">Created at</label>
+                              <input type="text" class="form-control" name="brandsCreatedAtE" value="<%= coverDate.createdAt %>"
                                 readonly>
                             </div>
-                            <div class="col-sm-3 mb-3 mb-sm-0">
-                              <label for="departmentCodeV" class="form-label">Department No.</label>
-                              <input type="text" class="form-control" name="departmentCodeV"
-                                value="<%= department.code %>" readonly>
+                            <div class="col-sm-4">
+                              <label for="brandsUpdatedAtE" class="form-label">Updated at</label>
+                              <input type="text" class="form-control" name="brandsUpdatedAtE" value="<%= coverDate.updatedAt %>"
+                                readonly>
                             </div>
-                            <div class="col-sm-3 mb-3 mb-sm-0">
-                              <label for="departmentCreatedAt" class="form-label">Created at</label>
-                              <input type="text" class="form-control" name="departmentCreatedAt"
-                                value="<%= coverDate.createdAt %>" readonly>
+                          </div>
+                          <div class="form-group row">
+                            <div class="col-sm-6">
+                              <label for="brandsNameTHE" class="form-label">Brands name thai</label>
+                              <input type="text" class="form-control" name="brandsNameTHE" value="<%= brands.nameTH %>" readonly>
                             </div>
-                            <div class="col-sm-3 mb-3 mb-sm-0">
-                              <label for="departmentUpdatedAt" class="form-label">Updated at</label>
-                              <input type="text" class="form-control" name="departmentUpdatedAt"
-                                value="<%= coverDate.updatedAt %>" readonly>
+                            <div class="col-sm-6">
+                              <label for="brandsNameENE" class="form-label">Brands name english</label>
+                              <input type="text" class="form-control" name="brandsNameENE" value="<%= brands.nameEN %>" readonly>
                             </div>
-
                           </div>
                           <div class="form-group">
-                            <label for="departmentNameTHV" class="form-label">Department name thai</label>
-                            <input type="text" class="form-control" name="departmentNameTHV"
-                              value="<%= department.nameTH %>" readonly>
+                            <label for="shortKeywordE" class="form-label">Short Keyword</label>
+                            <input type="text" class="form-control" name="shortKeywordE" value="<%= brands.shortKeyword %>" readonly>
                           </div>
                           <div class="form-group">
-                            <label for="departmentNameENV" class="form-label">Department name english</label>
-                            <input type="text" class="form-control" name="departmentNameENV"
-                              value="<%= department.nameEN %>" readonly>
+                            <label for="keywordE" class="form-label">Keyword</label>
+                            <input type="text" class="form-control" name="keywordE" value="<%= brands.keyword %>" readonly>
                           </div>
-
-
-                          <!--<button type="submit" class="btn btn-success btn-user btn-block"><i class="fas fa-save fa-fw"></i>Save</button>-->
-                        </form>
+                          <div class="form-group">
+                            <label for="linkMainE" class="form-label">Link Website (URL http://...)</label>
+                            <input type="text" class="form-control" name="linkMainE" value="<%= brands.linkMain %>" readonly>
+                          </div>
+                          <br>
                         <hr>
                         <div class="text-center">
                           <a class="small" href="/pacEcatalog/Brands/">Back to ...</a>

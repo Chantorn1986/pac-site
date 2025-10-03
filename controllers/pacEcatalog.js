@@ -135,16 +135,16 @@ exports.listBrands = async (req, res) => {
 exports.getCreateBrands = async (req, res) => {
   try {
     let maxNo = await dbEbrand.max('no');
-    if(maxNo === undefined || maxNo === null) {
+    if (maxNo === undefined || maxNo === null) {
       maxNo = 0
     }
     res.render('pacEcatalog/adminEcatalog/adEcatalogBrandsAdd', {
       title: 'Brands Create',
-      maxNo: maxNo+1,
+      maxNo: maxNo + 1,
       updatedAt: moment(new Date()).format('DD/MM/YYYY HH:mm:ss'),
       // user: req.session.user
     })
-  } catch (err){
+  } catch (err) {
     console.error('Error get data :', err)
     res.status(500).json({ error: 'Get create brands invalid.' })
   }
@@ -152,24 +152,22 @@ exports.getCreateBrands = async (req, res) => {
 
 exports.postCreateBrands = async (req, res) => {
   try {
-    const { brandsNo, brandsCode, brandsCreatedAt,brandsNameTH,brandsNameEN,shortKeyword,keyword,linkMain,brandsYear,imgBrand } = req.body;
+    const { brandsNo, brandsCode, brandsCreatedAt, brandsNameTH, brandsNameEN, shortKeyword, keyword, linkMain, brandsYear } = req.body;
     // upload.single('imgBrand')
     const image = req.file ? req.file.filename : null;
-    console.log('Image file:', req.file);
-    console.log('Image filename:', image);
-    // const newResults = await dbEbrand.create({
-    //   id: uuidv4(),
-    //   no: brandsNo,
-    //   code: brandsCode,
-    //   createdAt: brandsCreatedAt,
-    //   nameTH: brandsNameTH,
-    //   nameEN: brandsNameEN,
-    //   shortKeyword: shortKeyword,
-    //   keyword: keyword,
-    //   linkMain: linkMain,
-    //   year: brandsYear,
-    //   img: image
-    // })
+    const newResults = await dbEbrand.create({
+      id: uuidv4(),
+      no: brandsNo,
+      code: brandsCode,
+      createdAt: brandsCreatedAt,
+      nameTH: brandsNameTH,
+      nameEN: brandsNameEN,
+      shortKeyword: shortKeyword,
+      keyword: keyword,
+      linkMain: linkMain,
+      year: brandsYear,
+      img: image
+    })
 
     const results = await dbEbrand.findAll();
     res.render('pacEcatalog/adminEcatalog/adEcatalogBrands', {
@@ -185,7 +183,29 @@ exports.postCreateBrands = async (req, res) => {
 
 exports.getUpdateBrands = async (req, res) => {
   try {
+    const result = await dbEbrand.findOne({ where: { id: req.params.id } });
+    const coverDate = {
+      createdAt: null,
+      updatedAt: null,
+      year: null,
+      timestamp: moment(new Date()).format('DD/MM/YYYY HH:mm:ss'),
+    }
+    if (result.createdAt !== undefined || result.createdAt !== null) {
+      coverDate.createdAt = moment(result.createdAt).format('DD/MM/YYYY HH:mm:ss');
+    }
+    if (result.updatedAt !== undefined || result.updatedAt !== null) {
+      coverDate.updatedAt = moment(result.updatedAt).format('DD/MM/YYYY HH:mm:ss');
+    }
+    if (result.year !== undefined || result.year !== null) {
+      coverDate.year = moment(result.year).format('YYYY-MM-DD');
+    }
 
+    res.render('pacEcatalog/adminEcatalog/adEcatalogBrandsEdit', {
+      title: 'Brands Edit',
+      brands: result,
+      coverDate: coverDate,
+      user: req.session.user
+    })
   } catch (err) {
     console.error('Error get data :', err)
     res.status(500).json({ error: 'Get update brands invalid.' })
@@ -194,7 +214,48 @@ exports.getUpdateBrands = async (req, res) => {
 
 exports.putUpdateBrands = async (req, res) => {
   try {
-
+    const { brandsNoE, brandsCodeE, brandsNameTHE, brandsNameENE, shortKeywordE, keywordE, linkMainE, brandsYearE } = req.body;
+    const image = req.file ? req.file.filename : null;
+    if (image === undefined || image === null) {
+      await dbEbrand.update({
+        no: brandsNoE,
+        code: brandsCodeE,
+        nameTH: brandsNameTHE,
+        nameEN: brandsNameENE,
+        shortKeyword: shortKeywordE,
+        keyword: keywordE,
+        linkMain: linkMainE,
+        year: brandsYearE,
+        updatedAt: moment(new Date()).format()
+      }, {
+        where: {
+          id: req.params.id
+        }
+      });
+    } else {
+      await dbEbrand.update({
+        no: brandsNoE,
+        code: brandsCodeE,
+        nameTH: brandsNameTHE,
+        nameEN: brandsNameENE,
+        shortKeyword: shortKeywordE,
+        keyword: keywordE,
+        linkMain: linkMainE,
+        year: brandsYearE,
+        img: image,
+        updatedAt: moment(new Date()).format()
+      }, {
+        where: {
+          id: req.params.id
+        }
+      });
+    }
+    console.log(image);
+    const results = await dbEbrand.findAll();
+    res.render('pacEcatalog/adminEcatalog/adEcatalogBrands', {
+      title: 'Brands Management',
+      brands: results,
+    })
   } catch (err) {
     console.error('Error put data :', err);
     res.status(500).json({ error: 'Put update brands invalid.' })
@@ -222,7 +283,28 @@ exports.getRemoveBrands = async (req, res) => {
 
 exports.getViewBrands = async (req, res) => {
   try {
+    const result = await dbEbrand.findOne({ where: { id: req.params.id } });
+    const coverDate = {
+      createdAt: null,
+      updatedAt: null,
+      year: null
+    }
+    if (result.createdAt !== undefined || result.createdAt !== null) {
+      coverDate.createdAt = moment(result.createdAt).format('DD/MM/YYYY HH:mm:ss');
+    }
+    if (result.updatedAt !== undefined || result.updatedAt !== null) {
+      coverDate.updatedAt = moment(result.updatedAt).format('DD/MM/YYYY HH:mm:ss');
+    }
+    if (result.year !== undefined || result.year !== null) {
+      coverDate.year = moment(result.year).format('YYYY-MM-DD');
+    }
 
+    res.render('pacEcatalog/adminEcatalog/adEcatalogBrandsView', {
+      title: 'Brands View',
+      brands: result,
+      coverDate: coverDate,
+      user: req.session.user
+    })
   } catch (err) {
     console.error('Error get data:', err)
     res.status(500).json({ error: 'Get view brands invalid.' })

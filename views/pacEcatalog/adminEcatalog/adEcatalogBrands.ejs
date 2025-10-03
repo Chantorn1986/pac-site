@@ -106,11 +106,11 @@
                             <td>
                               <%= brand.keyword %>
                             </td>
-                            <td>
+                            <td class="align-middle text-center">
                               <% if (brand.img) { %>
-                                <img src="/uploads/<%= brand.img %>" width="100" />
+                                <img class="img" src="/uploads/brands/<%= brand.img %>"  width="100"/>
                                 <% } else { %>
-                                  <p>No image</p>
+                                  <img class="img" src="/img/NoPic.svg"  width="100"/>
                                   <% } %>
                             </td>
                             <td class="align-middle text-center">

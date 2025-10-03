@@ -33,7 +33,7 @@ router.get('/Brands', listBrands)
 router.get('/Brands/Add', getCreateBrands)
 router.post('/Brands/Add',upload, postCreateBrands)
 router.get('/Brands/Edit/:id', getUpdateBrands)
-router.post('/Brands/Edit/:id', putUpdateBrands)
+router.post('/Brands/Edit/:id',upload, putUpdateBrands)
 router.get('/Brands/Del/:id', getRemoveBrands)
 router.get('/Brands/View/:id', getViewBrands)
 
