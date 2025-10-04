@@ -108,20 +108,23 @@
                             </td>
                             <td class="align-middle text-center">
                               <% if (brand.img) { %>
-                                <img class="img" src="/uploads/brands/<%= brand.img %>"  width="100"/>
+                                <img class="img" src="/uploads/brands/<%= brand.img %>" width="100" />
                                 <% } else { %>
-                                  <img class="img" src="/img/NoPic.svg"  width="100"/>
+                                  <img class="img" src="/img/NoPic.svg" width="100" />
                                   <% } %>
                             </td>
                             <td class="align-middle text-center">
-                              <a href="/pacEcatalog/Brands/View/<%= brand.id %>" class="btn btn-info btn-circle btn-sm">
-                                <i class="fas fa-eye"></i></a>
-                              <a href="/pacEcatalog/Brands/Edit/<%= brand.id %>" class="btn btn-warning btn-circle btn-sm">
+                              <!-- <a href="/pacEcatalog/Brands/View/<%= brand.id %>" data-toggle="modal" data-target="#logoutModal" class="btn btn-info btn-circle btn-sm">
+                                <i class="fas fa-eye"></i></a> -->
+                              <button data-id="<%= brand.id %>" data-toggle="modal" data-target="#dataModal"
+                                class="btn btn-info btn-circle btn-sm view-btn">
+                                <i class="fas fa-eye"></i></button>
+                              <a href="/pacEcatalog/Brands/Edit/<%= brand.id %>"
+                                class="btn btn-warning btn-circle btn-sm">
                                 <i class="fas fa-pen"></i></a>
                               <a href="/pacEcatalog/Brands/Del/<%= brand.id %>" class="btn btn-danger btn-circle btn-sm"
                                 onclick="return confirm('Do you want to delete the data?');">
                                 <i class="fas fa-trash-alt"></i></a>
-
                             </td>
                           </tr>
                           <% }) %>
@@ -134,41 +137,96 @@
             </div>
             <!-- /.container-fluid -->
 
+            <!-- Logout Modal-->
+            <div class="modal fade" id="dataModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="brandsNameEN">Brand Name (EN)</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-6">
+                          <strong>Brand No</strong> : <label id="brandsNo">Brand No</label><br>
+                          <strong>Brand Code</strong> : <label id="brandsCode">Brand Code</label><br>
+                        </div>
+                        <div class="col-6">
+                          <strong>Image</strong> : <img id="brandsImg" class="img" src="" width="100" /><br>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12">
+                          <strong>Brand Name (TH)</strong> : <label id="brandsNameTH">Brand Name (TH)</label><br>
+                          <strong>Keyword</strong> : <label id="brandsKeyword">Keyword</label><br>
+                          <strong>Short Keyword</strong> : <label id="brandsShortKeyword">Short Keyword</label><br>
+                          <strong>Link Website</strong> : <label id="brandsLinkMain">Link Website</label>
+                        </div>
+                      </div>
+                      <br>
+                    </div>
+                    <div class="modal-footer">
+                      <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                      <!-- <a class="btn btn-primary" href="/pacEcatalog/Brands">Go to PAC APP<sup>2</sup></a> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <!-- End of Main Content -->
+            <!-- Footer -->
+            <%- include('../../partials/footerEcatalog'); %>
+              <!-- End of Footer -->
           </div>
-          <!-- End of Main Content -->
-        <!-- Footer -->
-        <%- include('../../partials/footerEcatalog'); %>
-          <!-- End of Footer -->
+          <!-- End of Content Wrapper -->
+
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Page Wrapper -->
 
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#">
+          <i class="fas fa-angle-up"></i>
+        </a>
 
+        <!-- Bootstrap core JavaScript-->
+        <script src="/vendor/jquery/jquery.min.js"></script>
+        <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    </div>
-    <!-- End of Page Wrapper -->
+        <!-- Core plugin JavaScript-->
+        <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#">
-      <i class="fas fa-angle-up"></i>
-    </a>
+        <!-- Custom scripts for all pages-->
+        <script src="/js/sb-admin-2.min.js"></script>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="/vendor/jquery/jquery.min.js"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Page level plugins -->
+        <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+        <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="/js/sb-admin-2.min.js"></script>
-
-    <!-- Page level plugins -->
-    <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="/js/demo/datatables-demo.js"></script>
-
+        <!-- Page level custom scripts -->
+        <script src="/js/demo/datatables-demo.js"></script>
+        <script>
+          $(document).on('click', '.view-btn', function () {
+            const dataId = $(this).data('id');
+            const brandsDataSet = `<%- JSON.stringify(brands) %>`;
+            const dataSet = JSON.parse(brandsDataSet);
+            const data = dataSet.find(d => d.id === dataId);
+            if (data) {
+              document.getElementById('brandsNameEN').innerText = data.nameEN;
+              document.getElementById('brandsNameTH').innerText = data.nameTH;
+              document.getElementById('brandsCode').innerText = data.code;
+              document.getElementById('brandsKeyword').innerText = data.keyword;
+              document.getElementById('brandsShortKeyword').innerText = data.shortKeyword;
+              document.getElementById('brandsLinkMain').innerText = data.linkMain;
+              document.getElementById('brandsNo').innerText = data.no;
+              document.getElementById('brandsImg').src = data.img ? `/uploads/brands/${data.img}` : '/img/NoPic.svg';
+            }
+          });
+        </script>
 </body>
 
 </html>

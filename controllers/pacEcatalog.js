@@ -121,10 +121,23 @@ exports.indexAdmin = async (req, res) => {
 exports.listBrands = async (req, res) => {
   try {
     const results = await dbEbrand.findAll();
+        const brand = {
+      id: null,
+      no: null,
+      code: null,
+      createdAt: null,
+      nameTH: null,
+      nameEN: null,
+      shortKeyword: null,
+      keyword: null,
+      linkMain: null,
+      year: null,
+      img: null
+    }
     res.render('pacEcatalog/adminEcatalog/adEcatalogBrands', {
       title: 'Brands Management',
       brands: results,
-      // user: req.session.user
+      brand: brand,
     })
   } catch (err) {
     console.error('Error list data :', err)
@@ -298,13 +311,16 @@ exports.getViewBrands = async (req, res) => {
     if (result.year !== undefined || result.year !== null) {
       coverDate.year = moment(result.year).format('YYYY-MM-DD');
     }
-
-    res.render('pacEcatalog/adminEcatalog/adEcatalogBrandsView', {
+    res.render('pacEcatalog/adminEcatalog/adEcatalogBrands', {
       title: 'Brands View',
-      brands: result,
-      coverDate: coverDate,
-      user: req.session.user
+      brand: result,
+      coverDate: coverDate
     })
+    // res.render('pacEcatalog/adminEcatalog/adEcatalogBrandsView', {
+    //   title: 'Brands View',
+    //   brands: result,
+    //   coverDate: coverDate
+    // })
   } catch (err) {
     console.error('Error get data:', err)
     res.status(500).json({ error: 'Get view brands invalid.' })
