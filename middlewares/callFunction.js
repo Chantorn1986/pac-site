@@ -20,5 +20,5 @@ const storageTypeProducts = multer.diskStorage({
   }
 })
 
-exports.uploadBrands = multer({ storageBrands: storageBrands }).single('file')
-exports.uploadTypeProducts = multer({ storageTypeProducts: storageTypeProducts }).single('file')
+exports.uploadBrands = multer({ storage: storageBrands }).single('file')
+exports.uploadTypeProducts = multer({ storage: storageTypeProducts }).single('file')
