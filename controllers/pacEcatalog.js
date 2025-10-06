@@ -108,7 +108,7 @@ exports.indexAdmin = async (req, res) => {
   try {
     // const results = await db.findAll();
     res.render('pacEcatalog/adminEcatalog/indexAdmin', {
-      title: 'Admin Catalog',
+      title: 'Admin Catalog'
       // departments: results,
       // user: req.session.user
     })
@@ -121,23 +121,10 @@ exports.indexAdmin = async (req, res) => {
 exports.listBrands = async (req, res) => {
   try {
     const results = await dbEbrand.findAll();
-        const brand = {
-      id: null,
-      no: null,
-      code: null,
-      createdAt: null,
-      nameTH: null,
-      nameEN: null,
-      shortKeyword: null,
-      keyword: null,
-      linkMain: null,
-      year: null,
-      img: null
-    }
     res.render('pacEcatalog/adminEcatalog/adEcatalogBrands', {
       title: 'Brands Management',
       brands: results,
-      brand: brand,
+      brandJson: JSON.stringify(results)
     })
   } catch (err) {
     console.error('Error list data :', err)
@@ -166,7 +153,6 @@ exports.getCreateBrands = async (req, res) => {
 exports.postCreateBrands = async (req, res) => {
   try {
     const { brandsNo, brandsCode, brandsCreatedAt, brandsNameTH, brandsNameEN, shortKeyword, keyword, linkMain, brandsYear } = req.body;
-    // upload.single('imgBrand')
     const image = req.file ? req.file.filename : null;
     const newResults = await dbEbrand.create({
       id: uuidv4(),

@@ -3,7 +3,7 @@ const router = express.Router();
 router.use(express.urlencoded({ extended: true }));
 // const {isAuthenticated} = require('../middlewares/authCheck')
 const {aboutUs,vision,mission,certificate,contact,partner,timeline,indexAdmin,
-  listBrands,getCreateBrands,postCreateBrands,getUpdateBrands,putUpdateBrands,getRemoveBrands,getViewBrands
+  listBrands,getCreateBrands,postCreateBrands,getUpdateBrands,putUpdateBrands,getRemoveBrands
 } = require('../controllers/pacEcatalog')
 
 const { upload }= require('../middlewares/callFunction');
@@ -29,12 +29,11 @@ router.get('/partner', partner)
 router.get('/timeline', timeline)
 router.get('/indexAdmin', indexAdmin)
 
-router.get('/Brands', listBrands)
-router.get('/Brands/Add', getCreateBrands)
-router.post('/Brands/Add',upload, postCreateBrands)
-router.get('/Brands/Edit/:id', getUpdateBrands)
-router.post('/Brands/Edit/:id',upload, putUpdateBrands)
-router.get('/Brands/Del/:id', getRemoveBrands)
-router.get('/Brands/View/:id', getViewBrands)
+router.get('/brands', listBrands)
+router.get('/brands/Add', getCreateBrands)
+router.post('/brands/Add',upload, postCreateBrands)
+router.get('/brands/Edit/:id', getUpdateBrands)
+router.post('/brands/Edit/:id',upload, putUpdateBrands)
+router.get('/brands/Del/:id', getRemoveBrands)
 
 module.exports = router;
