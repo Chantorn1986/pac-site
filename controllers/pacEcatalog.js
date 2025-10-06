@@ -106,11 +106,8 @@ exports.timeline = async (req, res) => {
 
 exports.indexAdmin = async (req, res) => {
   try {
-    // const results = await db.findAll();
     res.render('pacEcatalog/adminEcatalog/indexAdmin', {
       title: 'Admin Catalog'
-      // departments: results,
-      // user: req.session.user
     })
   } catch (err) {
     console.error('Error list data :', err)
@@ -141,8 +138,7 @@ exports.getCreateBrands = async (req, res) => {
     res.render('pacEcatalog/adminEcatalog/adEcatalogBrandsAdd', {
       title: 'Brands Create',
       maxNo: maxNo + 1,
-      updatedAt: moment(new Date()).format('DD/MM/YYYY HH:mm:ss'),
-      // user: req.session.user
+      updatedAt: moment(new Date()).format('DD/MM/YYYY HH:mm:ss')
     })
   } catch (err) {
     console.error('Error get data :', err)
@@ -172,7 +168,7 @@ exports.postCreateBrands = async (req, res) => {
     res.render('pacEcatalog/adminEcatalog/adEcatalogBrands', {
       title: 'Brands Management',
       brands: results,
-      // user: req.session.user
+      brandJson: JSON.stringify(results)
     })
   } catch (err) {
     console.error('Error post data :', err)
@@ -202,8 +198,7 @@ exports.getUpdateBrands = async (req, res) => {
     res.render('pacEcatalog/adminEcatalog/adEcatalogBrandsEdit', {
       title: 'Brands Edit',
       brands: result,
-      coverDate: coverDate,
-      user: req.session.user
+      coverDate: coverDate
     })
   } catch (err) {
     console.error('Error get data :', err)
@@ -254,6 +249,7 @@ exports.putUpdateBrands = async (req, res) => {
     res.render('pacEcatalog/adminEcatalog/adEcatalogBrands', {
       title: 'Brands Management',
       brands: results,
+      brandJson: JSON.stringify(results)
     })
   } catch (err) {
     console.error('Error put data :', err);
@@ -272,7 +268,7 @@ exports.getRemoveBrands = async (req, res) => {
     res.render('pacEcatalog/adminEcatalog/adEcatalogBrands', {
       title: 'Brands Management',
       brands: results,
-      // user: req.session.user
+      brandJson: JSON.stringify(results)
     })
   } catch (err) {
     console.error('Error get remove data :', err)
@@ -280,13 +276,71 @@ exports.getRemoveBrands = async (req, res) => {
   }
 }
 
-exports.getViewBrands = async (req, res) => {
+exports.listTypeProducts = async (req, res) => {
   try {
-    const result = await dbEbrand.findOne({ where: { id: req.params.id } });
+    const results = await dbEtypeProduct.findAll();
+    res.render('pacEcatalog/adminEcatalog/adEcatalogTypeProducts', {
+      title: 'Type Products Management',
+      typeProducts: results,
+      typeProductJson: JSON.stringify(results)
+    })
+  } catch (err) {
+    console.error('Error list data :', err)
+    res.status(500).json({ error: 'List type products invalid.' })
+  }
+}
+
+exports.getCreateTypeProducts = async (req, res) => {
+  try {
+    let maxNo = await dbEtypeProduct.max('no');
+    if (maxNo === undefined || maxNo === null) {
+      maxNo = 0
+    }
+    res.render('pacEcatalog/adminEcatalog/adEcatalogTypeProductsAdd', {
+      title: 'Type Products Create',
+      maxNo: maxNo + 1,
+      updatedAt: moment(new Date()).format('DD/MM/YYYY HH:mm:ss'),
+    })
+  } catch (err) {
+    console.error('Error get data :', err)
+    res.status(500).json({ error: 'Get create type products invalid.' })
+  }
+}
+
+exports.postCreateTypeProducts = async (req, res) => {
+  try {
+    const { typeProductsNo, typeProductsCode, typeProductsCreatedAt, typeProductsNameTH, typeProductsNameEN, shortKeyword, keyword } = req.body;
+    const image = req.file ? req.file.filename : null;
+    const newResults = await dbEtypeProduct.create({
+      id: uuidv4(),
+      no: typeProductsNo,
+      code: typeProductsCode,
+      createdAt: typeProductsCreatedAt,
+      nameTH: typeProductsNameTH,
+      nameEN: typeProductsNameEN,
+      shortKeyword: shortKeyword,
+      keyword: keyword,
+      img: image
+    })
+    const results = await dbEtypeProduct.findAll();
+    res.render('pacEcatalog/adminEcatalog/adEcatalogTypeProducts', {
+      title: 'Type Products Management',
+      typeProducts: results,
+      typeProductJson: JSON.stringify(results)
+    })
+  } catch (err) {
+    console.error('Error post data :', err)
+    res.status(500).json({ error: 'Post create type products invalid.' })
+  }
+}
+
+exports.getUpdateTypeProducts = async (req, res) => {
+  try {
+    const result = await dbEtypeProduct.findOne({ where: { id: req.params.id } });
     const coverDate = {
       createdAt: null,
       updatedAt: null,
-      year: null
+      timestamp: moment(new Date()).format('DD/MM/YYYY HH:mm:ss'),
     }
     if (result.createdAt !== undefined || result.createdAt !== null) {
       coverDate.createdAt = moment(result.createdAt).format('DD/MM/YYYY HH:mm:ss');
@@ -294,21 +348,80 @@ exports.getViewBrands = async (req, res) => {
     if (result.updatedAt !== undefined || result.updatedAt !== null) {
       coverDate.updatedAt = moment(result.updatedAt).format('DD/MM/YYYY HH:mm:ss');
     }
-    if (result.year !== undefined || result.year !== null) {
-      coverDate.year = moment(result.year).format('YYYY-MM-DD');
-    }
-    res.render('pacEcatalog/adminEcatalog/adEcatalogBrands', {
-      title: 'Brands View',
-      brand: result,
-      coverDate: coverDate
+
+    res.render('pacEcatalog/adminEcatalog/adEcatalogTypeProductsEdit', {
+      title: 'Type Products Edit',
+      typeProducts: result,
+      coverDate: coverDate,
     })
-    // res.render('pacEcatalog/adminEcatalog/adEcatalogBrandsView', {
-    //   title: 'Brands View',
-    //   brands: result,
-    //   coverDate: coverDate
-    // })
   } catch (err) {
-    console.error('Error get data:', err)
-    res.status(500).json({ error: 'Get view brands invalid.' })
+    console.error('Error get data :', err)
+    res.status(500).json({ error: 'Get update type products invalid.' })
+  }
+}
+
+exports.putUpdateTypeProducts = async (req, res) => {
+  try {
+    const { typeProductsNoE, typeProductsCodeE, typeProductsNameTHE, typeProductsNameENE, shortKeywordE, keywordE } = req.body;
+    const image = req.file ? req.file.filename : null;
+    if (image === undefined || image === null) {
+      await dbEtypeProduct.update({
+        no: typeProductsNoE,
+        code: typeProductsCodeE,
+        nameTH: typeProductsNameTHE,
+        nameEN: typeProductsNameENE,
+        shortKeyword: shortKeywordE,
+        keyword: keywordE,
+        updatedAt: moment(new Date()).format()
+      }, {
+        where: {
+          id: req.params.id
+        }
+      });
+    } else {
+      await dbEtypeProduct.update({
+        no: typeProductsNoE,
+        code: typeProductsCodeE,
+        nameTH: typeProductsNameTHE,
+        nameEN: typeProductsNameENE,
+        shortKeyword: shortKeywordE,
+        keyword: keywordE,
+        img: image,
+        updatedAt: moment(new Date()).format()
+      }, {
+        where: {
+          id: req.params.id
+        }
+      });
+    }
+    console.log(image);
+    const results = await dbEtypeProduct.findAll();
+    res.render('pacEcatalog/adminEcatalog/adEcatalogTypeProducts', {
+      title: 'Type Products Management',
+      typeProducts: results,
+      typeProductJson: JSON.stringify(results)
+    })
+  } catch (err) {
+    console.error('Error put data :', err);
+    res.status(500).json({ error: 'Put update type products invalid.' })
+  }
+}
+
+exports.getRemoveTypeProducts = async (req, res) => {
+  try {
+    await dbEtypeProduct.destroy({
+      where: {
+        id: req.params.id
+      }
+    });
+    const results = await dbEtypeProduct.findAll();
+    res.render('pacEcatalog/adminEcatalog/adEcatalogTypeProducts', {
+      title: 'Type Products Management',
+      typeProducts: results,
+      typeProductJson: JSON.stringify(results)
+    })
+  } catch (err) {
+    console.error('Error get remove data :', err)
+    res.status(500).json({ error: 'Get remove type products invalid.' })
   }
 }
