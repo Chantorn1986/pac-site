@@ -15,7 +15,7 @@
   },
   "production": {
     "username": "premier_sa",
-    "password": "Premier@021812299",
+    "password": "Premier021812299",
     "database": "pac_system",
     "host": "103.30.127.30",
     "dialect": "mysql"

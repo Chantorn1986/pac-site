@@ -111,7 +111,6 @@ exports.timeline = async (req, res) => {
 
 exports.indexAdmin = async (req, res) => {
   try {
-    console.log(results)
     res.render('pacEcatalog/adminEcatalog/indexAdmin', {
       title: 'Admin Catalog'
     })
