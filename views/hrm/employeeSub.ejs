@@ -62,33 +62,33 @@
                             <div class="col-sm-4">
                               <label for="employeeCode" class="form-label">Code</label>
                               <input type="text" class="form-control" name="employeeCode"
-                                value="<%= employeeFull.code %>" readonly>
+                                value="<%= employee.code %>" readonly>
                             </div>
                             <div class="col-sm-4">
                               <label for="serialNumber" class="form-label">Serial Number</label>
                               <input type="text" class="form-control" name="serialNumber"
-                                value="<%= employeeFull.serialNumber %>" readonly>
+                                value="<%= employee.serialNumber %>" readonly>
                             </div>
                             <div class="col-sm-4">
                               <label for="internalTelephone" class="form-label">Internal Telephone</label>
                               <input type="text" class="form-control" name="internalTelephone"
-                                value="<%= employeeFull.InternalTelephone %>" readonly>
+                                value="<%= employee.InternalTelephone %>" readonly>
                             </div>
                           </div>
                           <div class="form-group row">
                             <div class="col-sm-4">
                               <label for="nickname" class="form-label">Nickname</label>
                               <input type="text" class="form-control" name="nickname"
-                                value="<%= employeeFull.nickname %>" readonly>
+                                value="<%= employee.nickname %>" readonly>
                             </div>
                             <div class="col-sm-4">
                               <label for="mobile" class="form-label">Mobile</label>
-                              <input type="text" class="form-control" name="mobile" value="<%= employeeFull.mobile %>"
+                              <input type="text" class="form-control" name="mobile" value="<%= employee.mobile %>"
                                 readonly>
                             </div>
                             <div class="col-sm-4">
                               <label for="userLogin" class="form-label">Email Login</label>
-                              <input type="text" class="form-control" name="userLogin" value="<%= employeeFull.email %>"
+                              <input type="text" class="form-control" name="userLogin" value="<%= emUser.email %>"
                                 readonly>
 
                             </div>
@@ -97,9 +97,9 @@
                         <div class="col-sm-3">
                           <div class="col-sm-12">
                             <label for="imageE" class="form-label">Image</label>
-                            <% if (employeeFull.image) { %>
-                              <img src="/uploads/<%= employeeFull.image %>" height="119" />
-                              <input type="hidden" name="oldImage" value="<%= employeeFull.image %>">
+                            <% if (employee.image) { %>
+                              <img src="/uploads/<%= employee.image %>" height="119" />
+                              <input type="hidden" name="oldImage" value="<%= employee.image %>">
                               <% } %>
                                 <input type="text" name="imageE" class="form-control" readonly>
                           </div>
@@ -108,12 +108,12 @@
                       <div class="form-group row">
                         <div class="col-sm-6">
                           <label for="nameTH" class="form-label">Full name thai</label>
-                          <input type="text" class="form-control" name="nameTH" value="<%= employeeFull.nameTH %>"
+                          <input type="text" class="form-control" name="nameTH" value="<%= employee.nameTH %>"
                             readonly>
                         </div>
                         <div class="col-sm-6">
                           <label for="nameEN" class="form-label">Full name english</label>
-                          <input type="text" class="form-control" name="nameEN" value="<%= employeeFull.nameEN %>"
+                          <input type="text" class="form-control" name="nameEN" value="<%= employee.nameEN %>"
                             readonly>
                         </div>
 
@@ -121,25 +121,25 @@
                       <div class="form-group row">
                         <div class="col-sm-6">
                           <label for="departmentID" class="form-label">Department</label>
-                          <input type="text" class="form-control" name="departmentID" value="<%= employeeFull.depEN %>"
+                          <input type="text" class="form-control" name="departmentID" value="<%= emDepartment.nameEN %>"
                             readonly>
                         </div>
                         <div class="col-sm-6">
                           <label for="positionID" class="form-label">Position</label>
-                          <input type="text" class="form-control" name="positionID" value="<%= employeeFull.posEN %>"
+                          <input type="text" class="form-control" name="positionID" value="<%= emWPositions.nameEN %>"
                             readonly>
                         </div>
                       </div>
                       <div class="form-group row">
                         <div class="col-sm-6">
                           <label for="workLevelID" class="form-label">Work Level</label>
-                          <input type="text" class="form-control" name="workLevelID" value="<%= employeeFull.wleEN %>"
+                          <input type="text" class="form-control" name="workLevelID" value="<%= emWorkLevel.nameEN %>"
                             readonly>
                         </div>
                         <div class="col-sm-6">
                           <label for="employmentType" class="form-label">Employment Type</label>
                           <input type="text" class="form-control" name="employmentType"
-                            value="<%= employeeFull.employmentType %>" readonly>
+                            value="<%= employee.employmentType %>" readonly>
                         </div>
                       </div>
                       <div class="form-group row">
@@ -164,7 +164,7 @@
                         <div class="col-sm-6">
                           <label for="ReasonForLeaving" class="form-label">Reason for leaving</label>
                           <input type="text" class="form-control" name="ReasonForLeaving"
-                            value="<%= employeeFull.reasonForLeaving %>" readonly>
+                            value="<%= employee.reasonForLeaving %>" readonly>
                         </div>
                       </div>
                       <hr class="sidebar-divider">
@@ -182,89 +182,89 @@
                         </div>
                         <div class="col-sm-3">
                           <label for="nameTitle" class="form-label">Name Title</label>
-                          <input type="text" class="form-control" name="nameTitle" value="<%= employeeFull.nameTitle %>"
+                          <input type="text" class="form-control" name="nameTitle" value="<%= emInfo.nameTitle %>"
                             readonly>
                         </div>
                         <div class="col-sm-3">
                           <label for="gender" class="form-label">Gender</label>
-                          <input type="text" class="form-control" name="gender" value="<%= employeeFull.gender %>"
+                          <input type="text" class="form-control" name="gender" value="<%= emInfo.gender %>"
                             readonly>
                         </div>
                         <div class="col-sm-3">
                           <label for="bloodGroup" class="form-label">Blood Group</label>
                           <input type="text" class="form-control" name="bloodGroup"
-                            value="<%= employeeFull.bloodGroup %>" readonly>
+                            value="<%= emInfo.bloodGroup %>" readonly>
                         </div>
                       </div>
                       <div class="form-group row">
                         <div class="col-sm-3">
                           <label for="maritalStatus" class="form-label">Marital Status</label>
                           <input type="text" class="form-control" name="maritalStatus"
-                            value="<%= employeeFull.maritalStatus %>" readonly>
+                            value="<%= emInfo.maritalStatus %>" readonly>
                         </div>
                         <div class="col-sm-3">
                           <label for="religion" class="form-label">Religion</label>
-                          <input type="text" class="form-control" name="religion" value="<%= employeeFull.religion %>"
+                          <input type="text" class="form-control" name="religion" value="<%= emInfo.religion %>"
                             readonly>
                         </div>
                         <div class="col-sm-3">
                           <label for="nationality" class="form-label">Nationality</label>
                           <input type="text" class="form-control" name="nationality"
-                            value="<%= employeeFull.nationality %>" readonly>
+                            value="<%= emInfo.nationality %>" readonly>
                         </div>
                         <div class="col-sm-3">
                           <label for="ethnicity" class="form-label">Ethnicity</label>
-                          <input type="text" class="form-control" name="ethnicity" value="<%= employeeFull.ethnicity %>"
+                          <input type="text" class="form-control" name="ethnicity" value="<%= emInfo.ethnicity %>"
                             readonly>
                         </div>
                       </div>
                       <div class="form-group row">
                         <div class="col-sm-6">
                           <label for="taxID" class="form-label">Tax ID</label>
-                          <input type="text" class="form-control" name="taxID" value="<%= employeeFull.taxID %>"
+                          <input type="text" class="form-control" name="taxID" value="<%= emInfo.taxID %>"
                             readonly>
                         </div>
                         <div class="col-sm-3">
                           <label for="bank" class="form-label">Bank</label>
-                          <input type="text" class="form-control" name="bank" value="<%= employeeFull.bank %>" readonly>
+                          <input type="text" class="form-control" name="bank" value="<%= emInfo.bank %>" readonly>
 
                         </div>
                         <div class="col-sm-3">
                           <label for="bankNumber" class="form-label">Bank Number</label>
                           <input type="text" class="form-control" name="bankNumber"
-                            value="<%= employeeFull.bankNumber %>" readonly>
+                            value="<%= emInfo.bankNumber %>" readonly>
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="Address" class="form-label">Address</label>
-                        <input type="text" class="form-control" name="Address" value="<%= employeeFull.address %>"
+                        <input type="text" class="form-control" name="Address" value="<%= emInfo.address %>"
                           readonly>
                       </div>
                       <div class="form-group row">
                         <div class="col-sm-3">
                           <label for="subdistrict" class="form-label">Subdistrict</label>
                           <input type="text" class="form-control" name="subdistrict"
-                            value="<%= employeeFull.subdistrict %>" readonly>
+                            value="<%= emInfo.subdistrict %>" readonly>
                         </div>
                         <div class="col-sm-3">
                           <label for="district" class="form-label">District</label>
-                          <input type="text" class="form-control" name="district" value="<%= employeeFull.district %>"
+                          <input type="text" class="form-control" name="district" value="<%= emInfo.district %>"
                             readonly>
                         </div>
                         <div class="col-sm-3">
                           <label for="province" class="form-label">Province</label>
-                          <input type="text" class="form-control" name="province" value="<%= employeeFull.province %>"
+                          <input type="text" class="form-control" name="province" value="<%= emInfo.province %>"
                             readonly>
                         </div>
                         <div class="col-sm-3">
                           <label for="postcode" class="form-label">Postcode</label>
-                          <input type="text" class="form-control" name="postcode" value="<%= employeeFull.postcode %>"
+                          <input type="text" class="form-control" name="postcode" value="<%= emInfo.postcode %>"
                             readonly>
                         </div>
 
                       </div>
                       <div class="align-items-center text-right">
-                        <a href="/employee/Edit/<%= employeeFull.id %>"
+                        <a href="/employee/Edit/<%= employee.id %>"
                           class="btn btn-warning btn-icon-split ml-auto btn-sm">
                           <span class="icon text-white-50">
                             <i class="fas fa-pen"></i>
@@ -288,7 +288,7 @@
                   <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-graduation-cap fa-fw"></i> Education
                     information</h6>
                   <!--<a href="/tablesAdd" class="btn btn-info btn-circle btn-sm ml-auto"><i class="fas fa-plus"></i></a>-->
-                  <a href="/employee/SubAdd/<%= employeeFull.id %>"
+                  <a href="/employee/SubAdd/<%= employee.id %>"
                     class="btn btn-primary btn-icon-split ml-auto btn-sm">
                     <span class="icon text-white-50">
                       <i class="fas fa-plus-circle"></i>
@@ -364,7 +364,7 @@
                   <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-address-card fa-fw"></i> Employee Card
                   </h6>
                   <!--<a href="/tablesAdd" class="btn btn-info btn-circle btn-sm ml-auto"><i class="fas fa-plus"></i></a>-->
-                  <a href="/employee/SubZAdd/<%= employeeFull.id %>"
+                  <a href="/employee/SubZAdd/<%= employee.id %>"
                     class="btn btn-primary btn-icon-split ml-auto btn-sm">
                     <span class="icon text-white-50">
                       <i class="fas fa-plus-circle"></i>
@@ -434,7 +434,7 @@
                   <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-car-side fa-fw"></i> / <i
                       class="fas fa-motorcycle fa-fw"></i> Conveyance </h6>
                   <!--<a href="/tablesAdd" class="btn btn-info btn-circle btn-sm ml-auto"><i class="fas fa-plus"></i></a>-->
-                  <a href="/employee/SubZzAdd/<%= employeeFull.id %>"
+                  <a href="/employee/SubZzAdd/<%= employee.id %>"
                     class="btn btn-primary btn-icon-split ml-auto btn-sm">
                     <span class="icon text-white-50">
                       <i class="fas fa-plus-circle"></i>

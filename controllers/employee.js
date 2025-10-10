@@ -7,7 +7,7 @@ const dbInfo = require('../models/employeeInfo');
 const dbEM = require('../models/employee');
 const dbEMEdu = require('../models/employeeEducation');
 const dbViewEmSub = require('../models/viewEmSub');
-const dbViewEmFull = require('../models/viewEmFull');
+// const dbViewEmFull = require('../models/viewEmFull');
 const dbDepartment = require('../models/departments');
 const dbWorkLevel = require('../models/workLevel');
 const dbPositions = require('../models/positions');
@@ -15,19 +15,10 @@ const dbUser = require('../models/user');
 
 exports.list = async (req, res) => {
   try {
-    // const users = await User.findAll({
-    //     attributes: [
-    //         'name',
-    //         [
-    //             Sequelize.literal(`TIMESTAMPDIFF(YEAR, date_of_birth, CURDATE())`),
-    //             'age'
-    //         ]
-    //     ]
-    // });
     const results = await dbViewEmSub.findAll({ where: { resignation: 0 } });
     res.render('hrm/employee', {
       title: 'Employee Management',
-      employee: results[0],
+      employee: results,
       user: req.session.user
     })
   } catch (err) {
@@ -39,18 +30,32 @@ exports.list = async (req, res) => {
 exports.getSub = async (req, res) => {
   try {
     const paramID = req.params.id;
-    const results = await dbViewEmFull.findAll({
-      where: {
-        [Op.and]: [
-          { resignation: 0 },
-          { id: paramID }
-        ]
-      }
-    });
-    // const results = await dbViewEmFull.findAll({ where: { id: paramID } });
+    const employee = await dbEM.findAll({ where: { id: paramID } });
+    const emInfo = await dbInfo.findAll({ where: { emID: paramID } });
+    // const results = await dbViewEmFull.findAll({
+    //   where: {
+    //     [Op.and]: [
+    //       { resignation: 0 },
+    //       { id: paramID },
+    //     ]
+    //   }
+    // });
+    // const result = await dbEM.findAll({
+    //   where: { id: paramID },
+    //   include: {
+    //     model: Address,
+    //   },
+    //   raw: true,
+    // });
+    // const results = await dbViewEmSub.findAll({ where: { id: paramID } });
+
     const emEducation = await dbEMEdu.findAll({ where: { empID: paramID } });
     const emCard = await dbCard.findAll({ where: { emID: paramID } });
     const emCar = await dbVehicle.findAll({ where: { emID: paramID } });
+    const emDepartment = await dbDepartment.findAll({ where: { id: employee[0].departmentID } });
+    const emWorkLevel = await dbWorkLevel.findAll({ where: { id: employee[0].workLevelID } });
+    const emWPositions = await dbPositions.findAll({ where: { id: employee[0].positionID } });
+    const emUser = await dbUser.findAll({ where: { id: employee[0].userID } });
 
     const coverDate = {
       startDate: null,
@@ -60,28 +65,34 @@ exports.getSub = async (req, res) => {
       graduationDate: null
     }
 
-    if (results[0].startDate) {
-      coverDate.startDate = moment(results[0].startDate).format('YYYY-MM-DD');
+    if (results.startDate) {
+      coverDate.startDate = moment(employee[0].startDate).format('YYYY-MM-DD');
     }
-    if (results[0].endDate) {
-      coverDate.endDate = moment(results[0].endDate).format('YYYY-MM-DD');
+    if (results.endDate) {
+      coverDate.endDate = moment(employee[0].endDate).format('YYYY-MM-DD');
     }
-    if (results[0].dateOfBirth) {
-      coverDate.dateOfBirth = moment(results[0].dateOfBirth).format('YYYY-MM-DD');
+    if (results.dateOfBirth) {
+      coverDate.dateOfBirth = moment(emInfo[0].dateOfBirth).format('YYYY-MM-DD');
     }
-    if (results[0].registrationDate) {
-      coverDate.registrationDate = moment(results[0].registrationDate).format('YYYY-MM-DD');
+    if (results.registrationDate) {
+      coverDate.registrationDate = moment(emEducation[0].registrationDate).format('YYYY-MM-DD');
     }
-    if (results[0].graduationDate) {
-      coverDate.graduationDate = moment(results[0].graduationDate).format('YYYY-MM-DD');
+    if (results.graduationDate) {
+      coverDate.graduationDate = moment(emEducation[0].graduationDate).format('YYYY-MM-DD');
     }
+// console.log(emEducation)
     res.render('hrm/employeeSub', {
       title: 'Employee Management',
       emEducation: emEducation,
       emCard: emCard,
       emCar: emCar,
-      employeeFull: results[0],
+      employee:employee,
+      emInfo:emInfo,
       coverDate: coverDate,
+      emDepartment:emDepartment,
+      emWorkLevel:emWorkLevel,
+      emWPositions:emWPositions,
+      emUser:emUser,
       user: req.session.user
     })
 

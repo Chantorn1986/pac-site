@@ -6,7 +6,7 @@ const sequelizetest = new Sequelize('pac_system', 'root', 'admin', {
   dialect: 'mysql' // 'postgres' | 'sqlite' | 'mssql'
 });
 
-const sequelize = new Sequelize('pac_system', 'premier_sa', 'Premier@021812299', {
+const sequelize = new Sequelize('pac_system', 'premier_sa', 'Premier021812299', {
   host: '103.30.127.30',
   dialect: 'mysql' // 'postgres' | 'sqlite' | 'mssql'
 });

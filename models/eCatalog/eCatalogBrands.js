@@ -10,36 +10,45 @@ const ECatalogBrands = sequelize.define('eCatalogBrands', {
     primaryKey: true
   },
   no: {
-    type: DataTypes.INTEGER
+    type: DataTypes.INTEGER,
+    allowNull: true
   },
   code: {
     type: DataTypes.STRING,
+    allowNull: true
   },
   nameTH: {
     type: DataTypes.STRING,
+    allowNull: true
   },
   nameEN: {
     type: DataTypes.STRING,
+    allowNull: true
   },
   shortKeyword: {
     type: DataTypes.STRING,
+    allowNull: true
   },
   keyword: {
     type: DataTypes.STRING,
+    allowNull: true
   },
   img: {
     type: DataTypes.STRING,
+    allowNull: true
   },
-    year: {
+  year: {
     type: DataTypes.DATE,
+    allowNull: true
   },
-    linkMain: {
+  linkMain: {
     type: DataTypes.STRING,
+    allowNull: true
   }
 }, {
   // Other model options go here
-    createdAt : "createdAt",
-    updatedAt : "updatedAt"
+  createdAt: "createdAt",
+  updatedAt: "updatedAt"
 });
 
 // `sequelize.sync()` will create the table if it doesn't exist

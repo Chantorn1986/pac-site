@@ -5,6 +5,11 @@ const moment = require('moment');
 const dbEproduct = require('../models/eCatalog/eCatalogProducts');
 const dbEtypeProduct = require('../models/eCatalog/eCatalogBTypeProducts');
 const dbEbrand = require('../models/eCatalog/eCatalogBrands');
+// const PrismaClient= require('/node_modules/@prisma/client');
+
+// const prisma = new PrismaClient();
+
+
 
 exports.aboutUs = async (req, res) => {
   try {
@@ -106,6 +111,7 @@ exports.timeline = async (req, res) => {
 
 exports.indexAdmin = async (req, res) => {
   try {
+    console.log(results)
     res.render('pacEcatalog/adminEcatalog/indexAdmin', {
       title: 'Admin Catalog'
     })

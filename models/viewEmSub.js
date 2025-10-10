@@ -186,10 +186,6 @@ const View_employeeSubs = sequelize.define('view_employeeSubs', {
   startDateFM: {
     type: DataTypes.STRING,
   }
-
-
-}, {
-  // Other model options go here
 });
 
 // `sequelize.sync()` will create the table if it doesn't exist

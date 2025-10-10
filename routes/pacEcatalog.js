@@ -9,18 +9,6 @@ const {aboutUs,vision,mission,certificate,contact,partner,timeline,indexAdmin,
 
 const { uploadBrands ,uploadTypeProducts}= require('../middlewares/callFunction');
 
-// const path = require('path');
-// const multer = require('multer');
-// const storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, '../public/uploads/brands');
-//   },
-//   filename: (req, file, cb) => {
-//     cb(null, Date.now() + path.extname(file.originalname));
-//   }
-// })
-// const upload = multer({ storage });
-
 router.get('/aboutUs', aboutUs)
 router.get('/vision', vision)
 router.get('/mission', mission)

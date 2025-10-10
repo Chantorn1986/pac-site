@@ -7,46 +7,48 @@ const {list,getCreate,postCreate,getUpdate,putUpdate,getRemove,getView,getSub,ge
 getSubZCreate,postSubZCreate,getSubZUpdate,putSubZUpdate,getSubZRemove,getSubZView,getSubZzCreate,postSubZzCreate,getSubZzUpdate,putSubZzUpdate,getSubZzRemove,getSubZzView,
 getRptContact,getRptInformation,geRptEducation,getRptWorkPeriod,getRptCard,getRptVehicle,getRptProfile} = require('../controllers/employee')
 
-const path = require('path');
-const multer = require('multer');
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'public/uploads/');
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname));
-  }
-})
-const upload = multer({ storage });
+const { uploadEmployee ,uploadEmployeeCard}= require('../middlewares/callFunction');
+
+// const path = require('path');
+// const multer = require('multer');
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, 'public/uploads/');
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, Date.now() + path.extname(file.originalname));
+//   }
+// })
+// const upload = multer({ storage });
 
 router.get('/', isAuthenticated,list)
 router.get('/Sub/:id', isAuthenticated,getSub)
 // router.get('/Add/:id', isAuthenticated,getSub)
 router.get('/Add', isAuthenticated,getCreate)
-router.post('/Add', isAuthenticated,postCreate,upload.single('image'))
+router.post('/Add',isAuthenticated,uploadEmployee,postCreate)
 router.get('/Edit/:id', isAuthenticated,getUpdate)
-router.put('/Edit/:id', isAuthenticated,putUpdate,upload.single('imageE'))
+router.post('/Edit/:id', isAuthenticated,uploadEmployee,putUpdate)
 router.get('/Del/:id', isAuthenticated,getRemove)
 router.get('/View/:id', isAuthenticated,getView)
 // Education
 router.get('/SubAdd/:id', isAuthenticated,getSubCreate)
 router.post('/SubAdd/:id', isAuthenticated,postSubCreate)
 router.get('/SubEdit/:id', isAuthenticated,getSubUpdate)
-router.put('/SubEdit/:id', isAuthenticated,putSubUpdate)
+router.post('/SubEdit/:id', isAuthenticated,putSubUpdate)
 router.get('/SubDel/:id', isAuthenticated,getSubRemove)
 router.get('/SubView/:id', isAuthenticated,getSubView)
 // Card
 router.get('/SubZAdd/:id', isAuthenticated,getSubZCreate)
-router.post('/SubZAdd/:id', isAuthenticated,postSubZCreate,upload.single('card'))
+router.post('/SubZAdd/:id', isAuthenticated,uploadEmployeeCard,postSubZCreate)
 router.get('/SubZEdit/:id', isAuthenticated,getSubZUpdate)
-router.put('/SubZEdit/:id', isAuthenticated,putSubZUpdate,upload.single('cardE'))
+router.post('/SubZEdit/:id', isAuthenticated,uploadEmployeeCard,putSubZUpdate)
 router.get('/SubZDel/:id', isAuthenticated,getSubZRemove)
 router.get('/SubZView/:id', isAuthenticated,getSubZView)
 // Conveyance
 router.get('/SubZzAdd/:id', isAuthenticated,getSubZzCreate)
 router.post('/SubZzAdd/:id', isAuthenticated,postSubZzCreate)
 router.get('/SubZzEdit/:id', isAuthenticated,getSubZzUpdate)
-router.put('/SubZzEdit/:id', isAuthenticated,putSubZzUpdate)
+router.post('/SubZzEdit/:id', isAuthenticated,putSubZzUpdate)
 router.get('/SubZzDel/:id', isAuthenticated,getSubZzRemove)
 router.get('/SubZzView/:id', isAuthenticated,getSubZzView)
 // Report

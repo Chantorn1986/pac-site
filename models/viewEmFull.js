@@ -222,8 +222,6 @@ const View_employeeFulls = sequelize.define('view_employeeFulls', {
   startDateFM: {
     type: DataTypes.STRING,
   }
-}, {
-  // Other model options go here
 });
 
 // `sequelize.sync()` will create the table if it doesn't exist
