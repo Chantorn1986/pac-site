@@ -2,9 +2,9 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const session = require('express-session');
-const morgan = require('morgan');
+// const morgan = require('morgan');
 
-app.use(morgan('dev'));
+// app.use(morgan('dev'));
 app.use(express.json());
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
