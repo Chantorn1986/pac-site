@@ -17,7 +17,6 @@
     "bcryptjs": "^2.4.3",
     "buffer": "^6.0.3",
     "cors": "^2.8.5",
-    "drizzle-orm": "^0.44.6",
     "ejs": "^3.1.10",
     "express": "^4.21.1",
     "express-session": "^1.18.1",
@@ -38,8 +37,5 @@
     "url": "https://github.com/Chantorn1986/pac-site/issues"
   },
   "homepage": "https://github.com/Chantorn1986/pac-site#readme",
-  "description": "",
-  "devDependencies": {
-    "drizzle-kit": "^0.31.5"
-  }
+  "description": ""
 }

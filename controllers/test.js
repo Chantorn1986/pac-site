@@ -7,7 +7,7 @@ exports.list = async (req, res) => {
     const results = await db.findAll();
       res.json({
         title: 'Users Management',
-        users: results
+        users: null
       })
   } catch (err) {
     console.error('Error list data :', err)
