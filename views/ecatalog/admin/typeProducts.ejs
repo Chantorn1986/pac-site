@@ -54,7 +54,7 @@
                   <h6 class="m-0 font-weight-bold text-primary align-content-center">E-Catalog - <%= title %>
                   </h6>
                   <!--<a href="/tablesAdd" class="btn btn-info btn-circle btn-sm ml-auto"><i class="fas fa-plus"></i></a>-->
-                  <a href="/pacEcatalog/typeProducts/Add" class="btn btn-primary btn-icon-split ml-auto btn-sm">
+                  <a href="/ecatalog/typeProducts/Add" class="btn btn-primary btn-icon-split ml-auto btn-sm">
                     <span class="icon text-white-50">
                       <i class="fas fa-plus-circle"></i>
                     </span>
@@ -115,10 +115,10 @@
                               <button data-id="<%= typeProduct.id %>" data-toggle="modal" data-target="#typeProductsModal"
                                 class="btn btn-info btn-circle btn-sm view-btn">
                                 <i class="fas fa-eye"></i></button>
-                              <a href="/pacEcatalog/typeProducts/Edit/<%= typeProduct.id %>"
+                              <a href="/ecatalog/typeProducts/Edit/<%= typeProduct.id %>"
                                 class="btn btn-warning btn-circle btn-sm">
                                 <i class="fas fa-pen"></i></a>
-                              <a href="/pacEcatalog/typeProducts/Del/<%= typeProduct.id %>" class="btn btn-danger btn-circle btn-sm"
+                              <a href="/ecatalog/typeProducts/Del/<%= typeProduct.id %>" class="btn btn-danger btn-circle btn-sm"
                                 onclick="return confirm('Do you want to delete the data?');">
                                 <i class="fas fa-trash-alt"></i></a>
                             </td>
@@ -182,12 +182,12 @@
 
             </div>
             <!-- End of Main Content -->
+
+          </div>
+          <!-- End of Content Wrapper -->
             <!-- Footer -->
             <%- include('../../partials/footerEcatalog'); %>
               <!-- End of Footer -->
-          </div>
-          <!-- End of Content Wrapper -->
-
         </div>
         <!-- End of Page Wrapper -->
 

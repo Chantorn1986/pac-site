@@ -45,7 +45,7 @@ app.use('/itHelpdesk', require('./routes/itHelpdesk'));
 
 app.use('/stockCard', require('./routes/stockCard'));
 
-app.use('/pacEcatalog', require('./routes/pacEcatalog'));
+app.use('/ecatalog', require('./routes/ecatalog'));
 
 
 

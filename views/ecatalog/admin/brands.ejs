@@ -27,17 +27,17 @@
 </head>
 
 <body id="page-top">
-    <div id="wrapper">
+  <div id="wrapper">
 
-      <%- include('../../partials/sidebarEcatalog'); %>
+    <%- include('../../partials/sidebarEcatalog'); %>
 
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
 
-          <!-- Main Content -->
-          <div id="content">
+        <!-- Main Content -->
+        <div id="content">
 
-            <%- include('../../partials/topbarEcatalog'); %>
+          <%- include('../../partials/topbarEcatalog'); %>
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
@@ -54,7 +54,7 @@
                   <h6 class="m-0 font-weight-bold text-primary align-content-center">E-Catalog - <%= title %>
                   </h6>
                   <!--<a href="/tablesAdd" class="btn btn-info btn-circle btn-sm ml-auto"><i class="fas fa-plus"></i></a>-->
-                  <a href="/pacEcatalog/brands/Add" class="btn btn-primary btn-icon-split ml-auto btn-sm">
+                  <a href="/ecatalog/brands/Add" class="btn btn-primary btn-icon-split ml-auto btn-sm">
                     <span class="icon text-white-50">
                       <i class="fas fa-plus-circle"></i>
                     </span>
@@ -117,10 +117,9 @@
                               <button data-id="<%= brand.id %>" data-toggle="modal" data-target="#dataModal"
                                 class="btn btn-info btn-circle btn-sm view-btn">
                                 <i class="fas fa-eye"></i></button>
-                              <a href="/pacEcatalog/brands/Edit/<%= brand.id %>"
-                                class="btn btn-warning btn-circle btn-sm">
+                              <a href="/ecatalog/brands/Edit/<%= brand.id %>" class="btn btn-warning btn-circle btn-sm">
                                 <i class="fas fa-pen"></i></a>
-                              <a href="/pacEcatalog/brands/Del/<%= brand.id %>" class="btn btn-danger btn-circle btn-sm"
+                              <a href="/ecatalog/brands/Del/<%= brand.id %>" class="btn btn-danger btn-circle btn-sm"
                                 onclick="return confirm('Do you want to delete the data?');">
                                 <i class="fas fa-trash-alt"></i></a>
                             </td>
@@ -186,76 +185,77 @@
 
             </div>
             <!-- End of Main Content -->
-            <!-- Footer -->
-            <%- include('../../partials/footerEcatalog'); %>
-              <!-- End of Footer -->
-          </div>
-          <!-- End of Content Wrapper -->
 
         </div>
-        <!-- End of Page Wrapper -->
+        <!-- End of Content Wrapper -->
+        <!-- Footer -->
+        <%- include('../../partials/footerEcatalog'); %>
+          <!-- End of Footer -->
 
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#">
-          <i class="fas fa-angle-up"></i>
-        </a>
+      </div>
+      <!-- End of Page Wrapper -->
 
-        <!-- Bootstrap core JavaScript-->
-        <script src="/vendor/jquery/jquery.min.js"></script>
-        <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <!-- Scroll to Top Button-->
+      <a class="scroll-to-top rounded" href="#">
+        <i class="fas fa-angle-up"></i>
+      </a>
 
-        <!-- Core plugin JavaScript-->
-        <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+      <!-- Bootstrap core JavaScript-->
+      <script src="/vendor/jquery/jquery.min.js"></script>
+      <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <!-- Custom scripts for all pages-->
-        <script src="/js/sb-admin-2.min.js"></script>
+      <!-- Core plugin JavaScript-->
+      <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-        <!-- Page level plugins -->
-        <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
-        <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+      <!-- Custom scripts for all pages-->
+      <script src="/js/sb-admin-2.min.js"></script>
 
-        <!-- Page level custom scripts -->
-        <script src="/js/demo/datatables-demo.js"></script>
-        <script>
-          $(document).on('click', '.view-btn', function () {
-            let dataId = $(this).data('id');
-            let jsonDataSet = `<%- brandJson %>`;
-            let dataSet = JSON.parse(jsonDataSet);
-            let data = dataSet.find(d => d.id === dataId);
-            if (data) {
-              document.getElementById('brandsNameEN').innerText = data.nameEN;
-              document.getElementById('brandsNameTH').innerText = data.nameTH;
-              document.getElementById('brandsCode').innerText = data.code;
-              document.getElementById('brandsKeyword').innerText = data.keyword;  
-              document.getElementById('brandsShortKeyword').innerText = data.shortKeyword;
-              document.getElementById('brandsLinkMain').innerText = data.linkMain;
-              document.getElementById('brandsNo').innerText = data.no;
-              document.getElementById('brandsImg').src = data.img ? `/uploads/brands/${data.img}` : '/img/NoPic.svg';
-              document.getElementById('brandsCreatedAt').innerText = data.createdAt ? formatForDatetimeLocal(data.createdAt) : '-';
-              document.getElementById('brandsUpdatedAt').innerText = data.updatedAt ? formatForDatetimeLocal(data.updatedAt) : '-';
-              document.getElementById('brandsDate').innerText = data.year ? formatForDate(data.year) : '-';
-            }
-          });
+      <!-- Page level plugins -->
+      <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+      <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-          function formatForDatetimeLocal(date) {
-            let length = date.length;
-            const yyyy = date.substring(0,4)
-            const mm = date.substring(5,7) // Bulan dimulai dari 0
-            const dd = date.substring(8,10);
-            const hh = date.substring(11,13);
-            const min = date.substring(14,16);
-            return `${dd}/${mm}/${yyyy} , ${hh}:${min}`;
+      <!-- Page level custom scripts -->
+      <script src="/js/demo/datatables-demo.js"></script>
+      <script>
+        $(document).on('click', '.view-btn', function () {
+          let dataId = $(this).data('id');
+          let jsonDataSet = `<%- brandJson %>`;
+          let dataSet = JSON.parse(jsonDataSet);
+          let data = dataSet.find(d => d.id === dataId);
+          if (data) {
+            document.getElementById('brandsNameEN').innerText = data.nameEN;
+            document.getElementById('brandsNameTH').innerText = data.nameTH;
+            document.getElementById('brandsCode').innerText = data.code;
+            document.getElementById('brandsKeyword').innerText = data.keyword;
+            document.getElementById('brandsShortKeyword').innerText = data.shortKeyword;
+            document.getElementById('brandsLinkMain').innerText = data.linkMain;
+            document.getElementById('brandsNo').innerText = data.no;
+            document.getElementById('brandsImg').src = data.img ? `/uploads/brands/${data.img}` : '/img/NoPic.svg';
+            document.getElementById('brandsCreatedAt').innerText = data.createdAt ? formatForDatetimeLocal(data.createdAt) : '-';
+            document.getElementById('brandsUpdatedAt').innerText = data.updatedAt ? formatForDatetimeLocal(data.updatedAt) : '-';
+            document.getElementById('brandsDate').innerText = data.year ? formatForDate(data.year) : '-';
           }
+        });
 
-          function formatForDate(date) {
-            let length = date.length;
-            const yyyy = date.substring(0,4)
-            const mm = date.substring(5,7) // Bulan dimulai dari 0
-            const dd = date.substring(8,10);
-            return `${dd}/${mm}/${yyyy}`;
-          }
+        function formatForDatetimeLocal(date) {
+          let length = date.length;
+          const yyyy = date.substring(0, 4)
+          const mm = date.substring(5, 7) // Bulan dimulai dari 0
+          const dd = date.substring(8, 10);
+          const hh = date.substring(11, 13);
+          const min = date.substring(14, 16);
+          return `${dd}/${mm}/${yyyy} , ${hh}:${min}`;
+        }
 
-        </script>
+        function formatForDate(date) {
+          let length = date.length;
+          const yyyy = date.substring(0, 4)
+          const mm = date.substring(5, 7) // Bulan dimulai dari 0
+          const dd = date.substring(8, 10);
+          return `${dd}/${mm}/${yyyy}`;
+        }
+
+      </script>
 </body>
 
 </html>

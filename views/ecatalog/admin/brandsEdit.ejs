@@ -28,17 +28,17 @@
 
 <body id="page-top">
   <!-- Topbar -->
-    <div id="wrapper">
+  <div id="wrapper">
 
-      <%- include('../../partials/sidebarEcatalog'); %>
+    <%- include('../../partials/sidebarEcatalog'); %>
 
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
 
-          <!-- Main Content -->
-          <div id="content">
+        <!-- Main Content -->
+        <div id="content">
 
-            <%- include('../../partials/topbarEcatalog'); %>
+          <%- include('../../partials/topbarEcatalog'); %>
 
             <!-- Begin Page Content -->
             <div class="container-fluid mt-4 mb-4">
@@ -53,7 +53,8 @@
                     <!--<div class="col-lg-2 d-none d-lg-block"></div>-->
                     <div class="col-lg-12">
                       <div class="p-4">
-                        <form class="user" action="/pacEcatalog/brands/Edit/<%= brands.id %>" enctype="multipart/form-data" method="post">
+                        <form class="user" action="/ecatalog/brands/Edit/<%= brands.id %>" enctype="multipart/form-data"
+                          method="post">
                           <div class="form-group row">
                             <div class="col-sm-4 mb-3 mb-sm-0">
                               <label for="brandsNoE" class="form-label">Brands No.</label>
@@ -61,17 +62,18 @@
                             </div>
                             <div class="col-sm-4 mb-3 mb-sm-0">
                               <label for="brandsCodeE" class="form-label">Brands Code</label>
-                              <input type="text" class="form-control" name="brandsCodeE" value="<%= brands.code %>" required>
+                              <input type="text" class="form-control" name="brandsCodeE" value="<%= brands.code %>"
+                                required>
                             </div>
                             <div class="col-sm-4 mb-3 mb-sm-0">
                               <div class="col-sm-12">
-                              <% if (brands.img) { %>
-                                <img class="img mb-1" src="/uploads/brands/<%= brands.img %>"  width="100"/>
-                                <% } else { %>
-                                  <img class="img mb-1" src="/img/NoPic.svg"  width="100"/>
-                                  <% } %>
-                                <label for="file" class="form-label">Image</label>
-                                <input type="file" name="file" class="form-control-file">
+                                <% if (brands.img) { %>
+                                  <img class="img mb-1" src="/uploads/brands/<%= brands.img %>" width="100" />
+                                  <% } else { %>
+                                    <img class="img mb-1" src="/img/NoPic.svg" width="100" />
+                                    <% } %>
+                                      <label for="file" class="form-label">Image</label>
+                                      <input type="file" name="file" class="form-control-file">
                               </div>
                             </div>
                           </div>
@@ -82,28 +84,31 @@
                             </div>
                             <div class="col-sm-4">
                               <label for="brandsCreatedAtE" class="form-label">Created at</label>
-                              <input type="text" class="form-control" name="brandsCreatedAtE" value="<%= coverDate.createdAt %>"
-                                readonly>
+                              <input type="text" class="form-control" name="brandsCreatedAtE"
+                                value="<%= coverDate.createdAt %>" readonly>
                             </div>
                             <div class="col-sm-4">
                               <label for="brandsUpdatedAtE" class="form-label">Updated at</label>
-                              <input type="text" class="form-control" name="brandsUpdatedAtE" value="<%= coverDate.timestamp %>"
-                                readonly>
+                              <input type="text" class="form-control" name="brandsUpdatedAtE"
+                                value="<%= coverDate.timestamp %>" readonly>
                             </div>
                           </div>
                           <div class="form-group row">
                             <div class="col-sm-6">
                               <label for="brandsNameTHE" class="form-label">Brands name thai</label>
-                              <input type="text" class="form-control" name="brandsNameTHE" value="<%= brands.nameTH %>" required>
+                              <input type="text" class="form-control" name="brandsNameTHE" value="<%= brands.nameTH %>"
+                                required>
                             </div>
                             <div class="col-sm-6">
                               <label for="brandsNameENE" class="form-label">Brands name english</label>
-                              <input type="text" class="form-control" name="brandsNameENE" value="<%= brands.nameEN %>" required>
+                              <input type="text" class="form-control" name="brandsNameENE" value="<%= brands.nameEN %>"
+                                required>
                             </div>
                           </div>
                           <div class="form-group">
                             <label for="shortKeywordE" class="form-label">Short Keyword</label>
-                            <input type="text" class="form-control" name="shortKeywordE" value="<%= brands.shortKeyword %>">
+                            <input type="text" class="form-control" name="shortKeywordE"
+                              value="<%= brands.shortKeyword %>">
                           </div>
                           <div class="form-group">
                             <label for="keywordE" class="form-label">Keyword</label>
@@ -121,7 +126,7 @@
                         </form>
                         <hr>
                         <div class="text-center">
-                          <a class="small" href="/pacEcatalog/brands/">Back to ...</a>
+                          <a class="small" href="/ecatalog/brands/">Back to ...</a>
                         </div>
                       </div>
                     </div>
@@ -132,38 +137,39 @@
             </div>
             <!-- /.container-fluid -->
 
-          </div>
-          <!-- End of Main Content -->
-        <!-- Footer -->
-        <%- include('../../partials/footerEcatalog'); %>
-          <!-- End of Footer -->
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Main Content -->
+      <!-- Footer -->
+      <%- include('../../partials/footerEcatalog'); %>
+        <!-- End of Footer -->
+      </div>
+      <!-- End of Content Wrapper -->
 
-    </div>
-    <!-- End of Page Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#">
-      <i class="fas fa-angle-up"></i>
-    </a>
+  </div>
+  <!-- End of Page Wrapper -->
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="/vendor/jquery/jquery.min.js"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#">
+    <i class="fas fa-angle-up"></i>
+  </a>
 
-    <!-- Core plugin JavaScript-->
-    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <!-- Bootstrap core JavaScript-->
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="/js/sb-admin-2.min.js"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+  <!-- Custom scripts for all pages-->
+  <script src="/js/sb-admin-2.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="/js/demo/datatables-demo.js"></script>
+  <!-- Page level plugins -->
+  <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="/js/demo/datatables-demo.js"></script>
 
 </body>
 

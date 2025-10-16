@@ -5,7 +5,7 @@ router.use(express.urlencoded({ extended: true }));
 const {aboutUs,vision,mission,certificate,contact,partner,timeline,indexAdmin,
   listBrands,getCreateBrands,postCreateBrands,getUpdateBrands,putUpdateBrands,getRemoveBrands,
   listTypeProducts,getCreateTypeProducts,postCreateTypeProducts,getUpdateTypeProducts,putUpdateTypeProducts,getRemoveTypeProducts
-} = require('../controllers/pacEcatalog')
+} = require('../controllers/ecatalog')
 
 const { uploadBrands ,uploadTypeProducts}= require('../middlewares/callFunction');
 

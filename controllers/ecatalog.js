@@ -2,19 +2,17 @@ const db = require("../db/db.js");
 const { v4: uuidv4 } = require("uuid");
 const moment = require('moment');
 
-const dbEproduct = require('../models/eCatalog/eCatalogProducts');
-const dbEtypeProduct = require('../models/eCatalog/eCatalogBTypeProducts');
-const dbEbrand = require('../models/eCatalog/eCatalogBrands');
+const dbEproduct = require('../models/eCatalog/eCatalogProducts.js');
+const dbEtypeProduct = require('../models/eCatalog/eCatalogBTypeProducts.js');
+const dbEbrand = require('../models/eCatalog/eCatalogBrands.js');
 // const PrismaClient= require('/node_modules/@prisma/client');
 
 // const prisma = new PrismaClient();
 
-
-
 exports.aboutUs = async (req, res) => {
   try {
     // const results = await db.findAll();
-    res.render('pacEcatalog/aboutUs', {
+    res.render('ecatalog/aboutUs', {
       title: 'About Us',
       // departments: results,
       // user: req.session.user
@@ -28,7 +26,7 @@ exports.aboutUs = async (req, res) => {
 exports.vision = async (req, res) => {
   try {
     // const results = await db.findAll();
-    res.render('pacEcatalog/vision', {
+    res.render('ecatalog/vision', {
       title: 'Vision',
       // departments: results,
       // user: req.session.user
@@ -42,7 +40,7 @@ exports.vision = async (req, res) => {
 exports.mission = async (req, res) => {
   try {
     // const results = await db.findAll();
-    res.render('pacEcatalog/mission', {
+    res.render('ecatalog/mission', {
       title: 'Mission',
       // departments: results,
       // user: req.session.user
@@ -56,7 +54,7 @@ exports.mission = async (req, res) => {
 exports.certificate = async (req, res) => {
   try {
     // const results = await db.findAll();
-    res.render('pacEcatalog/certificate', {
+    res.render('ecatalog/certificate', {
       title: 'Certificate',
       // departments: results,
       // user: req.session.user
@@ -70,7 +68,7 @@ exports.certificate = async (req, res) => {
 exports.contact = async (req, res) => {
   try {
     // const results = await db.findAll();
-    res.render('pacEcatalog/contact', {
+    res.render('ecatalog/contact', {
       title: 'Contact',
       // departments: results,
       // user: req.session.user
@@ -84,7 +82,7 @@ exports.contact = async (req, res) => {
 exports.partner = async (req, res) => {
   try {
     // const results = await db.findAll();
-    res.render('pacEcatalog/partner', {
+    res.render('ecatalog/partner', {
       title: 'Partner',
       // departments: results,
       // user: req.session.user
@@ -98,7 +96,7 @@ exports.partner = async (req, res) => {
 exports.timeline = async (req, res) => {
   try {
     // const results = await db.findAll();
-    res.render('pacEcatalog/timeline', {
+    res.render('ecatalog/timeline', {
       title: 'Timeline',
       // departments: results,
       // user: req.session.user
@@ -111,7 +109,7 @@ exports.timeline = async (req, res) => {
 
 exports.indexAdmin = async (req, res) => {
   try {
-    res.render('pacEcatalog/adminEcatalog/indexAdmin', {
+    res.render('ecatalog/admin/indexAdmin', {
       title: 'Admin Catalog'
     })
   } catch (err) {
@@ -123,7 +121,7 @@ exports.indexAdmin = async (req, res) => {
 exports.listBrands = async (req, res) => {
   try {
     const results = await dbEbrand.findAll();
-    res.render('pacEcatalog/adminEcatalog/adEcatalogBrands', {
+    res.render('ecatalog/admin/brands', {
       title: 'Brands Management',
       brands: results,
       brandJson: JSON.stringify(results)
@@ -140,7 +138,7 @@ exports.getCreateBrands = async (req, res) => {
     if (maxNo === undefined || maxNo === null) {
       maxNo = 0
     }
-    res.render('pacEcatalog/adminEcatalog/adEcatalogBrandsAdd', {
+    res.render('ecatalog/admin/brandsAdd', {
       title: 'Brands Create',
       maxNo: maxNo + 1,
       updatedAt: moment(new Date()).format('DD/MM/YYYY HH:mm:ss')
@@ -170,7 +168,7 @@ exports.postCreateBrands = async (req, res) => {
     })
 
     const results = await dbEbrand.findAll();
-    res.render('pacEcatalog/adminEcatalog/adEcatalogBrands', {
+    res.render('ecatalog/admin/brands', {
       title: 'Brands Management',
       brands: results,
       brandJson: JSON.stringify(results)
@@ -200,7 +198,7 @@ exports.getUpdateBrands = async (req, res) => {
       coverDate.year = moment(result.year).format('YYYY-MM-DD');
     }
 
-    res.render('pacEcatalog/adminEcatalog/adEcatalogBrandsEdit', {
+    res.render('ecatalog/admin/brandsEdit', {
       title: 'Brands Edit',
       brands: result,
       coverDate: coverDate
@@ -251,7 +249,7 @@ exports.putUpdateBrands = async (req, res) => {
     }
     console.log(image);
     const results = await dbEbrand.findAll();
-    res.render('pacEcatalog/adminEcatalog/adEcatalogBrands', {
+    res.render('ecatalog/admin/brands', {
       title: 'Brands Management',
       brands: results,
       brandJson: JSON.stringify(results)
@@ -270,7 +268,7 @@ exports.getRemoveBrands = async (req, res) => {
       }
     });
     const results = await dbEbrand.findAll();
-    res.render('pacEcatalog/adminEcatalog/adEcatalogBrands', {
+    res.render('ecatalog/admin/brands', {
       title: 'Brands Management',
       brands: results,
       brandJson: JSON.stringify(results)
@@ -284,7 +282,7 @@ exports.getRemoveBrands = async (req, res) => {
 exports.listTypeProducts = async (req, res) => {
   try {
     const results = await dbEtypeProduct.findAll();
-    res.render('pacEcatalog/adminEcatalog/adEcatalogTypeProducts', {
+    res.render('ecatalog/admin/typeProducts', {
       title: 'Type Products Management',
       typeProducts: results,
       typeProductJson: JSON.stringify(results)
@@ -301,7 +299,7 @@ exports.getCreateTypeProducts = async (req, res) => {
     if (maxNo === undefined || maxNo === null) {
       maxNo = 0
     }
-    res.render('pacEcatalog/adminEcatalog/adEcatalogTypeProductsAdd', {
+    res.render('ecatalog/admin/typeProductsAdd', {
       title: 'Type Products Create',
       maxNo: maxNo + 1,
       updatedAt: moment(new Date()).format('DD/MM/YYYY HH:mm:ss'),
@@ -328,7 +326,7 @@ exports.postCreateTypeProducts = async (req, res) => {
       img: image
     })
     const results = await dbEtypeProduct.findAll();
-    res.render('pacEcatalog/adminEcatalog/adEcatalogTypeProducts', {
+    res.render('ecatalog/admin/typeProducts', {
       title: 'Type Products Management',
       typeProducts: results,
       typeProductJson: JSON.stringify(results)
@@ -354,7 +352,7 @@ exports.getUpdateTypeProducts = async (req, res) => {
       coverDate.updatedAt = moment(result.updatedAt).format('DD/MM/YYYY HH:mm:ss');
     }
 
-    res.render('pacEcatalog/adminEcatalog/adEcatalogTypeProductsEdit', {
+    res.render('ecatalog/admin/typeProductsEdit', {
       title: 'Type Products Edit',
       typeProducts: result,
       coverDate: coverDate,
@@ -401,7 +399,7 @@ exports.putUpdateTypeProducts = async (req, res) => {
     }
     console.log(image);
     const results = await dbEtypeProduct.findAll();
-    res.render('pacEcatalog/adminEcatalog/adEcatalogTypeProducts', {
+    res.render('ecatalog/admin/typeProducts', {
       title: 'Type Products Management',
       typeProducts: results,
       typeProductJson: JSON.stringify(results)
@@ -420,7 +418,7 @@ exports.getRemoveTypeProducts = async (req, res) => {
       }
     });
     const results = await dbEtypeProduct.findAll();
-    res.render('pacEcatalog/adminEcatalog/adEcatalogTypeProducts', {
+    res.render('ecatalog/admin/typeProducts', {
       title: 'Type Products Management',
       typeProducts: results,
       typeProductJson: JSON.stringify(results)
