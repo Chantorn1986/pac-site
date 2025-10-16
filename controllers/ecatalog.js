@@ -11,12 +11,7 @@ const dbEbrand = require('../models/eCatalog/eCatalogBrands.js');
 
 exports.aboutUs = async (req, res) => {
   try {
-    // const results = await db.findAll();
-    res.render('ecatalog/aboutUs', {
-      title: 'About Us',
-      // departments: results,
-      // user: req.session.user
-    })
+    res.render('ecatalog/aboutUs', { title: 'About Us' })
   } catch (err) {
     console.error('Error list data :', err)
     res.status(500).json({ error: 'List departments invalid.' })
@@ -25,12 +20,7 @@ exports.aboutUs = async (req, res) => {
 
 exports.vision = async (req, res) => {
   try {
-    // const results = await db.findAll();
-    res.render('ecatalog/vision', {
-      title: 'Vision',
-      // departments: results,
-      // user: req.session.user
-    })
+    res.render('ecatalog/vision', { title: 'Vision' })
   } catch (err) {
     console.error('Error list data :', err)
     res.status(500).json({ error: 'List departments invalid.' })
@@ -39,12 +29,7 @@ exports.vision = async (req, res) => {
 
 exports.mission = async (req, res) => {
   try {
-    // const results = await db.findAll();
-    res.render('ecatalog/mission', {
-      title: 'Mission',
-      // departments: results,
-      // user: req.session.user
-    })
+    res.render('ecatalog/mission', { title: 'Mission'})
   } catch (err) {
     console.error('Error list data :', err)
     res.status(500).json({ error: 'List departments invalid.' })
@@ -53,12 +38,7 @@ exports.mission = async (req, res) => {
 
 exports.certificate = async (req, res) => {
   try {
-    // const results = await db.findAll();
-    res.render('ecatalog/certificate', {
-      title: 'Certificate',
-      // departments: results,
-      // user: req.session.user
-    })
+    res.render('ecatalog/certificate', { title: 'Certificate' })
   } catch (err) {
     console.error('Error list data :', err)
     res.status(500).json({ error: 'List departments invalid.' })
@@ -67,12 +47,7 @@ exports.certificate = async (req, res) => {
 
 exports.contact = async (req, res) => {
   try {
-    // const results = await db.findAll();
-    res.render('ecatalog/contact', {
-      title: 'Contact',
-      // departments: results,
-      // user: req.session.user
-    })
+    res.render('ecatalog/contact', { title: 'Contact' })
   } catch (err) {
     console.error('Error list data :', err)
     res.status(500).json({ error: 'List departments invalid.' })
@@ -81,12 +56,7 @@ exports.contact = async (req, res) => {
 
 exports.partner = async (req, res) => {
   try {
-    // const results = await db.findAll();
-    res.render('ecatalog/partner', {
-      title: 'Partner',
-      // departments: results,
-      // user: req.session.user
-    })
+    res.render('ecatalog/partner', { title: 'Partner' })
   } catch (err) {
     console.error('Error list data :', err)
     res.status(500).json({ error: 'List departments invalid.' })
@@ -95,12 +65,7 @@ exports.partner = async (req, res) => {
 
 exports.timeline = async (req, res) => {
   try {
-    // const results = await db.findAll();
-    res.render('ecatalog/timeline', {
-      title: 'Timeline',
-      // departments: results,
-      // user: req.session.user
-    })
+    res.render('ecatalog/timeline', { title: 'Timeline' })
   } catch (err) {
     console.error('Error list data :', err)
     res.status(500).json({ error: 'List departments invalid.' })
@@ -109,16 +74,14 @@ exports.timeline = async (req, res) => {
 
 exports.indexAdmin = async (req, res) => {
   try {
-    res.render('ecatalog/admin/indexAdmin', {
-      title: 'Admin Catalog'
-    })
+    res.render('ecatalog/admin/indexAdmin', { title: 'Admin Catalog' })
   } catch (err) {
     console.error('Error list data :', err)
     res.status(500).json({ error: 'List departments invalid.' })
   }
 }
 
-exports.listBrands = async (req, res) => {
+exports.getBrands = async (req, res) => {
   try {
     const results = await dbEbrand.findAll();
     res.render('ecatalog/admin/brands', {
@@ -132,7 +95,7 @@ exports.listBrands = async (req, res) => {
   }
 }
 
-exports.getCreateBrands = async (req, res) => {
+exports.getAddBrands = async (req, res) => {
   try {
     let maxNo = await dbEbrand.max('no');
     if (maxNo === undefined || maxNo === null) {
@@ -141,7 +104,8 @@ exports.getCreateBrands = async (req, res) => {
     res.render('ecatalog/admin/brandsAdd', {
       title: 'Brands Create',
       maxNo: maxNo + 1,
-      updatedAt: moment(new Date()).format('DD/MM/YYYY HH:mm:ss')
+      updatedAt: moment(new Date()).format('DD/MM/YYYY HH:mm:ss'),
+      year: moment(new Date()).format('YYYY')
     })
   } catch (err) {
     console.error('Error get data :', err)
@@ -149,23 +113,36 @@ exports.getCreateBrands = async (req, res) => {
   }
 }
 
-exports.postCreateBrands = async (req, res) => {
+exports.postAddBrands = async (req, res) => {
   try {
     const { brandsNo, brandsCode, brandsCreatedAt, brandsNameTH, brandsNameEN, shortKeyword, keyword, linkMain, brandsYear } = req.body;
     const image = req.file ? req.file.filename : null;
-    const newResults = await dbEbrand.create({
-      id: uuidv4(),
-      no: brandsNo,
-      code: brandsCode,
-      createdAt: brandsCreatedAt,
-      nameTH: brandsNameTH,
-      nameEN: brandsNameEN,
-      shortKeyword: shortKeyword,
-      keyword: keyword,
-      linkMain: linkMain,
-      year: brandsYear,
-      img: image
-    })
+    if (image) {
+      await dbEbrand.create({
+        id: uuidv4(),
+        no: brandsNo,
+        code: brandsCode,
+        nameTH: brandsNameTH,
+        nameEN: brandsNameEN,
+        shortKeyword: shortKeyword,
+        keyword: keyword,
+        linkMain: linkMain,
+        year: brandsYear,
+        img: image
+      })
+    } else {
+      await dbEbrand.create({
+        id: uuidv4(),
+        no: brandsNo,
+        code: brandsCode,
+        nameTH: brandsNameTH,
+        nameEN: brandsNameEN,
+        shortKeyword: shortKeyword,
+        keyword: keyword,
+        linkMain: linkMain,
+        year: brandsYear,
+      })
+    }
 
     const results = await dbEbrand.findAll();
     res.render('ecatalog/admin/brands', {
@@ -179,25 +156,14 @@ exports.postCreateBrands = async (req, res) => {
   }
 }
 
-exports.getUpdateBrands = async (req, res) => {
+exports.getEditBrands = async (req, res) => {
   try {
     const result = await dbEbrand.findOne({ where: { id: req.params.id } });
     const coverDate = {
-      createdAt: null,
-      updatedAt: null,
-      year: null,
+      createdAt: result.createdAt ? moment(result.createdAt).format('DD/MM/YYYY HH:mm:ss') : undefined,
+      updatedAt: result.updatedAt ? moment(result.updatedAt).format('DD/MM/YYYY HH:mm:ss') : undefined,
       timestamp: moment(new Date()).format('DD/MM/YYYY HH:mm:ss'),
     }
-    if (result.createdAt !== undefined || result.createdAt !== null) {
-      coverDate.createdAt = moment(result.createdAt).format('DD/MM/YYYY HH:mm:ss');
-    }
-    if (result.updatedAt !== undefined || result.updatedAt !== null) {
-      coverDate.updatedAt = moment(result.updatedAt).format('DD/MM/YYYY HH:mm:ss');
-    }
-    if (result.year !== undefined || result.year !== null) {
-      coverDate.year = moment(result.year).format('YYYY-MM-DD');
-    }
-
     res.render('ecatalog/admin/brandsEdit', {
       title: 'Brands Edit',
       brands: result,
@@ -209,11 +175,11 @@ exports.getUpdateBrands = async (req, res) => {
   }
 }
 
-exports.putUpdateBrands = async (req, res) => {
+exports.postEditBrands = async (req, res) => {
   try {
     const { brandsNoE, brandsCodeE, brandsNameTHE, brandsNameENE, shortKeywordE, keywordE, linkMainE, brandsYearE } = req.body;
     const image = req.file ? req.file.filename : null;
-    if (image === undefined || image === null) {
+    if (image) {
       await dbEbrand.update({
         no: brandsNoE,
         code: brandsCodeE,
@@ -223,6 +189,7 @@ exports.putUpdateBrands = async (req, res) => {
         keyword: keywordE,
         linkMain: linkMainE,
         year: brandsYearE,
+        img: image,
         updatedAt: moment(new Date()).format()
       }, {
         where: {
@@ -239,7 +206,6 @@ exports.putUpdateBrands = async (req, res) => {
         keyword: keywordE,
         linkMain: linkMainE,
         year: brandsYearE,
-        img: image,
         updatedAt: moment(new Date()).format()
       }, {
         where: {
@@ -260,7 +226,7 @@ exports.putUpdateBrands = async (req, res) => {
   }
 }
 
-exports.getRemoveBrands = async (req, res) => {
+exports.delBrands = async (req, res) => {
   try {
     await dbEbrand.destroy({
       where: {
@@ -279,7 +245,7 @@ exports.getRemoveBrands = async (req, res) => {
   }
 }
 
-exports.listTypeProducts = async (req, res) => {
+exports.getTypeProducts = async (req, res) => {
   try {
     const results = await dbEtypeProduct.findAll();
     res.render('ecatalog/admin/typeProducts', {
@@ -293,7 +259,7 @@ exports.listTypeProducts = async (req, res) => {
   }
 }
 
-exports.getCreateTypeProducts = async (req, res) => {
+exports.getAddTypeProducts = async (req, res) => {
   try {
     let maxNo = await dbEtypeProduct.max('no');
     if (maxNo === undefined || maxNo === null) {
@@ -310,21 +276,32 @@ exports.getCreateTypeProducts = async (req, res) => {
   }
 }
 
-exports.postCreateTypeProducts = async (req, res) => {
+exports.postAddTypeProducts = async (req, res) => {
   try {
     const { typeProductsNo, typeProductsCode, typeProductsCreatedAt, typeProductsNameTH, typeProductsNameEN, shortKeyword, keyword } = req.body;
     const image = req.file ? req.file.filename : null;
-    const newResults = await dbEtypeProduct.create({
-      id: uuidv4(),
-      no: typeProductsNo,
-      code: typeProductsCode,
-      createdAt: typeProductsCreatedAt,
-      nameTH: typeProductsNameTH,
-      nameEN: typeProductsNameEN,
-      shortKeyword: shortKeyword,
-      keyword: keyword,
-      img: image
-    })
+    if (image) {
+      await dbEtypeProduct.create({
+        id: uuidv4(),
+        no: typeProductsNo,
+        code: typeProductsCode,
+        nameTH: typeProductsNameTH,
+        nameEN: typeProductsNameEN,
+        shortKeyword: shortKeyword,
+        keyword: keyword,
+        img: image
+      })
+    } else {
+      await dbEtypeProduct.create({
+        id: uuidv4(),
+        no: typeProductsNo,
+        code: typeProductsCode,
+        nameTH: typeProductsNameTH,
+        nameEN: typeProductsNameEN,
+        shortKeyword: shortKeyword,
+        keyword: keyword
+      })
+    }
     const results = await dbEtypeProduct.findAll();
     res.render('ecatalog/admin/typeProducts', {
       title: 'Type Products Management',
@@ -337,21 +314,14 @@ exports.postCreateTypeProducts = async (req, res) => {
   }
 }
 
-exports.getUpdateTypeProducts = async (req, res) => {
+exports.getEditTypeProducts = async (req, res) => {
   try {
     const result = await dbEtypeProduct.findOne({ where: { id: req.params.id } });
     const coverDate = {
-      createdAt: null,
-      updatedAt: null,
+      createdAt: result.createdAt ? moment(result.createdAt).format('DD/MM/YYYY HH:mm:ss') : undefined,
+      updatedAt: result.updatedAt ? moment(result.updatedAt).format('DD/MM/YYYY HH:mm:ss') : undefined,
       timestamp: moment(new Date()).format('DD/MM/YYYY HH:mm:ss'),
     }
-    if (result.createdAt !== undefined || result.createdAt !== null) {
-      coverDate.createdAt = moment(result.createdAt).format('DD/MM/YYYY HH:mm:ss');
-    }
-    if (result.updatedAt !== undefined || result.updatedAt !== null) {
-      coverDate.updatedAt = moment(result.updatedAt).format('DD/MM/YYYY HH:mm:ss');
-    }
-
     res.render('ecatalog/admin/typeProductsEdit', {
       title: 'Type Products Edit',
       typeProducts: result,
@@ -363,11 +333,11 @@ exports.getUpdateTypeProducts = async (req, res) => {
   }
 }
 
-exports.putUpdateTypeProducts = async (req, res) => {
+exports.postEditTypeProducts = async (req, res) => {
   try {
     const { typeProductsNoE, typeProductsCodeE, typeProductsNameTHE, typeProductsNameENE, shortKeywordE, keywordE } = req.body;
     const image = req.file ? req.file.filename : null;
-    if (image === undefined || image === null) {
+    if (image) {
       await dbEtypeProduct.update({
         no: typeProductsNoE,
         code: typeProductsCodeE,
@@ -375,6 +345,7 @@ exports.putUpdateTypeProducts = async (req, res) => {
         nameEN: typeProductsNameENE,
         shortKeyword: shortKeywordE,
         keyword: keywordE,
+        img: image,
         updatedAt: moment(new Date()).format()
       }, {
         where: {
@@ -389,7 +360,6 @@ exports.putUpdateTypeProducts = async (req, res) => {
         nameEN: typeProductsNameENE,
         shortKeyword: shortKeywordE,
         keyword: keywordE,
-        img: image,
         updatedAt: moment(new Date()).format()
       }, {
         where: {
@@ -410,7 +380,7 @@ exports.putUpdateTypeProducts = async (req, res) => {
   }
 }
 
-exports.getRemoveTypeProducts = async (req, res) => {
+exports.delTypeProducts = async (req, res) => {
   try {
     await dbEtypeProduct.destroy({
       where: {
