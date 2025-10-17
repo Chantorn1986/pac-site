@@ -30,71 +30,76 @@ exports.list = async (req, res) => {
 exports.getSub = async (req, res) => {
   try {
     const paramID = req.params.id;
-    const employee = await dbEM.findAll({ where: { id: paramID } });
-    const emInfo = await dbInfo.findAll({ where: { emID: paramID } });
-    // const results = await dbViewEmFull.findAll({
-    //   where: {
-    //     [Op.and]: [
-    //       { resignation: 0 },
-    //       { id: paramID },
-    //     ]
-    //   }
-    // });
-    // const result = await dbEM.findAll({
-    //   where: { id: paramID },
-    //   include: {
-    //     model: Address,
-    //   },
-    //   raw: true,
-    // });
-    // const results = await dbViewEmSub.findAll({ where: { id: paramID } });
-
     const emEducation = await dbEMEdu.findAll({ where: { empID: paramID } });
     const emCard = await dbCard.findAll({ where: { emID: paramID } });
     const emCar = await dbVehicle.findAll({ where: { emID: paramID } });
-    const emDepartment = await dbDepartment.findAll({ where: { id: employee[0].departmentID } });
-    const emWorkLevel = await dbWorkLevel.findAll({ where: { id: employee[0].workLevelID } });
-    const emWPositions = await dbPositions.findAll({ where: { id: employee[0].positionID } });
-    const emUser = await dbUser.findAll({ where: { id: employee[0].userID } });
 
-    const coverDate = {
-      startDate: null,
-      endDate: null,
-      dateOfBirth: null,
-      registrationDate: null,
-      graduationDate: null
-    }
+    const sqlEm = "SELECT * FROM `view_employeeFull` WHERE id = ? and `resignation`=0"
+    await db.execute(sqlEm, [paramID], (err, result) => {
+      if (err) {
+        return;
+      }
+      const coverDate = {
+        startDate: result[0].startDate ? moment(result[0].startDate).format('DD/MM/YYYY HH:mm:ss') : undefined,
+        endDate: result[0].endDate ? moment(result[0].endDate).format('DD/MM/YYYY HH:mm:ss') : undefined,
+        dateOfBirth: result[0].dateOfBirth ? moment(result[0].dateOfBirth).format('DD/MM/YYYY HH:mm:ss') : undefined,
+        registrationDate: result[0].registrationDate ? moment(result[0].registrationDate).format('DD/MM/YYYY HH:mm:ss') : undefined,
+        graduationDate: result[0].graduationDate ? moment(result[0].graduationDate).format('DD/MM/YYYY HH:mm:ss') : undefined
+      }
+      res.render('hrm/employeeSub', {
+        title: 'Employee Management',
+        emEducation: emEducation,
+        emCard: emCard,
+        emCar: emCar,
+        employeeFull: result[0],
+        coverDate: coverDate,
+        user: req.session.user
+      })
+    });
 
-    if (results.startDate) {
-      coverDate.startDate = moment(employee[0].startDate).format('YYYY-MM-DD');
-    }
-    if (results.endDate) {
-      coverDate.endDate = moment(employee[0].endDate).format('YYYY-MM-DD');
-    }
-    if (results.dateOfBirth) {
-      coverDate.dateOfBirth = moment(emInfo[0].dateOfBirth).format('YYYY-MM-DD');
-    }
-    if (results.registrationDate) {
-      coverDate.registrationDate = moment(emEducation[0].registrationDate).format('YYYY-MM-DD');
-    }
-    if (results.graduationDate) {
-      coverDate.graduationDate = moment(emEducation[0].graduationDate).format('YYYY-MM-DD');
-    }
-// console.log(emEducation)
-    res.render('hrm/employeeSub', {
-      title: 'Employee Management',
-      emEducation: emEducation,
-      emCard: emCard,
-      emCar: emCar,
-      employee:employee,
-      emInfo:emInfo,
-      coverDate: coverDate,
-      emDepartment:emDepartment,
-      emWorkLevel:emWorkLevel,
-      emWPositions:emWPositions,
-      emUser:emUser,
-      user: req.session.user
-    })
+    // const emDepartment = await dbDepartment.findAll({ where: { id: employee[0].departmentID } });
+    // const emWorkLevel = await dbWorkLevel.findAll({ where: { id: employee[0].workLevelID } });
+    // const emWPositions = await dbPositions.findAll({ where: { id: employee[0].positionID } });
+    // const emUser = await dbUser.findAll({ where: { id: employee[0].userID } });
+
+    //     const coverDate = {
+    //       startDate: null,
+    //       endDate: null,
+    //       dateOfBirth: null,
+    //       registrationDate: null,
+    //       graduationDate: null
+    //     }
+
+    //     if (results.startDate) {
+    //       coverDate.startDate = moment(employee[0].startDate).format('YYYY-MM-DD');
+    //     }
+    //     if (results.endDate) {
+    //       coverDate.endDate = moment(employee[0].endDate).format('YYYY-MM-DD');
+    //     }
+    //     if (results.dateOfBirth) {
+    //       coverDate.dateOfBirth = moment(emInfo[0].dateOfBirth).format('YYYY-MM-DD');
+    //     }
+    //     if (results.registrationDate) {
+    //       coverDate.registrationDate = moment(emEducation[0].registrationDate).format('YYYY-MM-DD');
+    //     }
+    //     if (results.graduationDate) {
+    //       coverDate.graduationDate = moment(emEducation[0].graduationDate).format('YYYY-MM-DD');
+    //     }
+    // // console.log(emEducation)
+    //     res.render('hrm/employeeSub', {
+    //       title: 'Employee Management',
+    //       emEducation: emEducation,
+    //       emCard: emCard,
+    //       emCar: emCar,
+    //       employee:employee,
+    //       emInfo:emInfo,
+    //       coverDate: coverDate,
+    //       emDepartment:emDepartment,
+    //       emWorkLevel:emWorkLevel,
+    //       emWPositions:emWPositions,
+    //       emUser:emUser,
+    //       user: req.session.user
+    //     })
 
     // const sql1 = "SELECT * FROM `view_employeeFull` WHERE id = ? and `resignation`=0";
     // const sql2 = "SELECT * FROM `employeeEducation` WHERE empID = ? "
