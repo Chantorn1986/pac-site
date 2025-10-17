@@ -7,7 +7,6 @@ const dbInfo = require('../models/employeeInfo');
 const dbEM = require('../models/employee');
 const dbEMEdu = require('../models/employeeEducation');
 const dbViewEmSub = require('../models/viewEmSub');
-// const dbViewEmFull = require('../models/viewEmFull');
 const dbDepartment = require('../models/departments');
 const dbWorkLevel = require('../models/workLevel');
 const dbPositions = require('../models/positions');

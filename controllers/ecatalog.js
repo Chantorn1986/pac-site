@@ -5,9 +5,6 @@ const moment = require('moment');
 const dbEproduct = require('../models/eCatalog/eCatalogProducts.js');
 const dbEtypeProduct = require('../models/eCatalog/eCatalogBTypeProducts.js');
 const dbEbrand = require('../models/eCatalog/eCatalogBrands.js');
-// const PrismaClient= require('/node_modules/@prisma/client');
-
-// const prisma = new PrismaClient();
 
 exports.aboutUs = async (req, res) => {
   try {
